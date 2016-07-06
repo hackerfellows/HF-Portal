@@ -1,4 +1,4 @@
-# Git ignore
-
-# Ignore Vagrant virtual environment
 .vagrant
+.vagrant
+node_modules
+npm-debug.log
