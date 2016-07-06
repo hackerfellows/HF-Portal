@@ -1,10 +1,22 @@
 #!/bin/sh -e
 
+# Provisions Postgres and NodeJs
+# Postgres: https://github.com/jackdb/pg-app-dev-vm/blob/master/Vagrant-setup/bootstrap.sh
+# NodeJs: https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
+
+echo "Provisioning..."
+
+# POSTGRES
+echo "Provisioning Postgres..."
+
 APP_DB_USER=hf
 APP_DB_PASS=hunter.2
 APP_DB_NAME=hfportal
 
 PG_VERSION=9.4
+PG_CONF="/etc/postgresql/$PG_VERSION/main/postgresql.conf"
+PG_HBA="/etc/postgresql/$PG_VERSION/main/pg_hba.conf"
+PG_DIR="/var/lib/postgresql/$PG_VERSION/main"
 
 print_db_usage () {
   echo "Your PostgreSQL database has been setup and can be accessed on your local machine on the forwarded port (default: 15432)"
@@ -30,8 +42,10 @@ print_db_usage () {
   echo "  PGUSER=$APP_DB_USER PGPASSWORD=$APP_DB_PASS psql -h localhost -p 15432 $APP_DB_NAME"
 }
 
+# don't prompt on debian
 export DEBIAN_FRONTEND=noninteractive
 
+# if postgres already provisioned, exit the script here
 PROVISIONED_ON=/etc/vm_provision_on_timestamp
 if [ -f "$PROVISIONED_ON" ]
 then
@@ -42,6 +56,7 @@ then
   exit
 fi
 
+# download postgres
 PG_REPO_APT_SOURCE=/etc/apt/sources.list.d/pgdg.list
 if [ ! -f "$PG_REPO_APT_SOURCE" ]
 then
@@ -56,11 +71,8 @@ fi
 apt-get update
 apt-get -y upgrade
 
+# install postgres
 apt-get -y install "postgresql-$PG_VERSION" "postgresql-contrib-$PG_VERSION"
-
-PG_CONF="/etc/postgresql/$PG_VERSION/main/postgresql.conf"
-PG_HBA="/etc/postgresql/$PG_VERSION/main/pg_hba.conf"
-PG_DIR="/var/lib/postgresql/$PG_VERSION/main"
 
 # Edit postgresql.conf to change listen address to '*':
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" "$PG_CONF"
@@ -86,14 +98,23 @@ CREATE DATABASE $APP_DB_NAME WITH OWNER=$APP_DB_USER
                                   TEMPLATE=template0;
 EOF
 
-echo "Done DB"
-
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
 # Tag the provision time:
 date > "$PROVISIONED_ON"
 
-echo "Successfully created PostgreSQL dev virtual machine."
-echo ""
 print_db_usage
+
+echo "Postgres provisioned."
+
+
+# NODEJS
+
+echo "Provisioning NodeJs..."
+
+# install nodejs
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+echo "NodeJs provisioned."
+
+echo "Successfully created hfportal Vagrant virtual machine."
+echo ""
