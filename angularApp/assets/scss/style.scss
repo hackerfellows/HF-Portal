@@ -1,0 +1,58 @@
+$green: #4ABDAC;
+$orange: purple;
+$yellow: #F7B733;
+$gray: #DFDCE3;
+$white: #FFFFFF;
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background-color: $green;
+  color: $white;
+}
+
+nav {
+  width: 10em;
+  margin: 0em auto;
+  display: inline;
+  h1 {
+    margin: 0 auto;
+    font-size: 3.5em;
+    color: $yellow;
+  }
+  input {
+    margin: 1.5em 0.5em;
+    font-size: 1.3em;
+    border: solid 0.25em $orange;
+  }
+  button {
+    font-size: 1em;
+    border-radius: 0.75em;
+    border: solid 0.5em $orange;
+    background-color: $orange;
+    color: $white;
+  }
+}
+
+.centered {
+  text-align: center;
+}
+
+.redditPost {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  .votes {
+    margin: 0em 1em 0em 2em;
+    font-size: 1.5em;
+    width: 2em;
+  }
+  .post {
+    margin-left: 2em;
+  }
+}
+
+a {
+  color: $white;
+  text-decoration: none;
+}

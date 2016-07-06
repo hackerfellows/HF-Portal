@@ -27,10 +27,11 @@ Vagrant::Config.run do |config|
 	config.vm.provision "shell", inline: <<SCRIPT
 		cd /srv/hf
 		npm install
+		./node_modules/.bin/gulp
 SCRIPT
 
-	config.vm.provision :shell, inline: "cd /srv/hf; ./node_modules/.bin/nodemon -L",
-		run: "always"
+	#config.vm.provision :shell, inline: "cd /srv/hf; ./node_modules/.bin/nodemon -L",
+#		run: "always"
 
 
 
