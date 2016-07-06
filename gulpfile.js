@@ -17,7 +17,6 @@ gulp.task('browser-sync', ['nodemon'], function() {
         server: {
 			proxy: "http://localhost:5000",
             baseDir: "public",
-			port: 7000,
         }
     });
 });
