@@ -13,13 +13,23 @@ from spending time provisioning databases, servers, etc.
 ```
 vagrant up
 ```
-#### Log in to Vagrant virtual machine
+Vagrant provisioning scripts will run and set up the Vagrant virtual machine.
+If Vagrant times out, open Virtualbox and try starting the virtual machine manually.
+If an error is thrown about "vt-x" or "amd-v" then ask operations.
+
+## Start Developing
+### Start Vagrant virtual machine
+```
+vagrant up
+```
+
+### Log in to Vagrant virtual machine
 ```
 vagrant ssh
 ```
 The command prompt should show you are logged in as 'vagrant' user to the guest virtual machine.
 
-#### Change into directory synced between host and guest (Vagrant virtual machine)
+### Change into directory synced between host and guest (Vagrant virtual machine)
 ```
 cd /srv/hf
 ```
@@ -28,17 +38,11 @@ will be synced with the github repository in the host machine. This allows devel
 use their favorite editor on the host machine. Files created in the Vagrant environment
 not in this synced folder might NOT be saved!
 
-#### Halt Vagrant virtual machine
+### Run [Expressjs server](http://expressjs.com/) for backend and [Browsersync](https://www.browsersync.io/) for frontend.
 ```
-vagrant halt
+gulp watch
 ```
-Shutdown the virtual machine to stop it from consuming resources on the host machine.
-
-
-## Development
-
-### Github
-Version control will be done from the host machine, not from the guest Vagrant virtual machine.
+Open browser to `http://localhost:3000` to see frontend.
 
 ### Postgres
 #### Log into Postgres from host machine
@@ -47,7 +51,17 @@ psql -U hf -h localhost -p 15432 -d hfportal
 ```
 Password is `hunter.2`
 
-### Gulp
-#### Run Gulp
+### Github
+Version control will be done from the host machine, not from the guest Vagrant virtual machine.
+
+### Halt Vagrant virtual machine
 ```
+vagrant halt
 ```
+Shutdown the virtual machine to stop it from consuming resources on the host machine.
+
+### Destroy Vagrant virtual machine
+```
+vagrant destroy
+```
+Destroy the virtual machine and start over by running `vagrant up`
