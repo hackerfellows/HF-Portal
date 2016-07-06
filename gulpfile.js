@@ -53,14 +53,15 @@ gulp.task('nodemon', function (cb) {
 	var started = false;
 
 	return nodemon({
-		script: 'server.js'
+		script: 'server.js',
+		legacyWatch: true
 	}).on('start', function () {
 		// to avoid nodemon being started multiple times
 		if (!started) {
 			cb();
 			started = true; 
 		} 
-	});
+	}).on('restart', 'default');
 });
 
 // move html files into public

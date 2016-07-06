@@ -25,6 +25,7 @@ SCRIPT
     
     # install project npm dependencies and gulp globally
     config.vm.provision "shell", inline: <<SCRIPT
+		apt-get install g++ -y
 		npm install -g gulp
 		cd /srv/hf
 		npm install
