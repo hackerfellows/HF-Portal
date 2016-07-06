@@ -39,7 +39,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
     browserSync.init({
         server: {
             // ExpressJs server runs in Vagrant virtual machine on localhost:5000 
-			proxy: "http://localhost:5000",
+	    proxy: "http://localhost:5000",
             // "Compiled" web application will be published here
             baseDir: "public",
             // Browsersync defaults to running on port 3000 
