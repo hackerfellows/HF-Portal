@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Reddit Clone</title>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- Styling -->
+    <link href="assets/css/style.css" rel="stylesheet">
+  </head>
+  <body ng-app="mainModule" ng-controller="mainController">
+    <nav>
+        <h1 class="centered"><a href="https://www.reddit.com" target="_blank">Reddit Clone</a></h1>
+        <div class="centered">
+          <input type="text" placeholder="Subreddit name..." ng-model="subReddit">
+          <button type="button" ng-click="loadReddit(subReddit)">Clone it.</button>
+        </div>
+    </nav>
+    <section>
+        <reddit-post ng-repeat="post in posts" info="post"></reddit-post>
+    </section
+
+    <!-- Load scripts -->
+    <!-- Dependencies -->
+    <script src="assets/bower_components/angular/angular.min.js"></script>
+    <!--<script src="assets/bower_components/angular-route/angular-route.min.js"></script>-->
+    <!-- App -->
+    <script src="dist/js/index.js"></script>
+  </body>
+</html>
