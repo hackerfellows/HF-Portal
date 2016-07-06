@@ -4,6 +4,7 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
+var nodemon = require('gulp-nodemon');
 
 // run 'gulp' which runs 'watch' first, which in itself run 'browser-sync' first
 gulp.task('default', ['js', 'sass', 'html', 'img'], function() {
@@ -11,14 +12,29 @@ gulp.task('default', ['js', 'sass', 'html', 'img'], function() {
 });
 
 // browser-sync server
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', ['nodemon'], function() {
     browserSync.init({
         server: {
-			proxy: "http://localhost:3000",
+			proxy: "http://localhost:5000",
             baseDir: "public",
-			port: 5000,
+			port: 7000,
         }
     });
+});
+gulp.task('nodemon', function (cb) {
+
+	var started = false;
+
+	return nodemon({
+		script: 'server.js'
+	}).on('start', function () {
+		// to avoid nodemon being started multiple times
+		// thanks @matthisk
+		if (!started) {
+			cb();
+			started = true; 
+		} 
+	});
 });
 
 // watch files for changes and reload browser

@@ -19,6 +19,7 @@
     "gulp-jshint": "^1.11.2",
     "gulp-karma": "0.0.4",
     "gulp-ng-annotate": "^2.0.0",
+    "gulp-nodemon": "^2.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
@@ -34,6 +35,8 @@
     "pg": "^4.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.5.1"
+    "browser-sync": "^2.13.0",
+    "nodemon": "^1.9.2"
   },
   "repository": {
     "type": "git",
@@ -44,8 +47,4 @@
     "start": "node server.js",
     "postinstall": "gulp"
   },
-  "devDependencies": {
-    "browser-sync": "^2.13.0",
-    "nodemon": "^1.9.2"
-  }
 }
