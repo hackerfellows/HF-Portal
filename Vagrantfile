@@ -15,6 +15,7 @@ SCRIPT
 
 	config.vm.network "forwarded_port", guest: 5432, host: 15432
 	config.vm.network "forwarded_port", guest: 3000, host: 3000
+	config.vm.network "private_network", type: "dhcp"
 end
 
 

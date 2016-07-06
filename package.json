@@ -34,7 +34,7 @@
     "passport-local": "^1.0.0",
     "pg": "^4.4.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.5.1"
+    "sequelize": "^3.5.1",
     "browser-sync": "^2.13.0",
     "nodemon": "^1.9.2"
   },
@@ -46,5 +46,5 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "postinstall": "gulp"
-  },
+  }
 }
