@@ -1,5 +1,12 @@
+# Git ignore
+
+# Compiled distribution
+public
+
+# Vagrant
 .vagrant
-.vagrant
+
+# NPM
 node_modules
 npm-debug.log
-public
+
