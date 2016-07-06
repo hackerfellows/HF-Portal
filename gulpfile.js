@@ -38,7 +38,7 @@ gulp.task('nodemon', function (cb) {
 });
 
 // watch files for changes and reload browser
-gulp.task('watch', ['browser-sync'], function () {
+gulp.task('watch', ['default', 'browser-sync'], function () {
 
     // watch for any js file changes in app and run 'js' gulp task and browserSync reload
     gulp.watch("angularApp/**/*.js", ['js']);
