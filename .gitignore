@@ -1,0 +1,4 @@
+# Git ignore
+
+# Ignore Vagrant virtual environment
+.vagrant
