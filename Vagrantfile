@@ -26,6 +26,7 @@ Vagrant::Config.run do |config|
 	#install postgres and node, then do npm install in the project root
 	config.vm.provision :shell, :path => "vagrantInstallNodePostgres.sh"
 	config.vm.provision "shell", inline: <<SCRIPT
+		apt-get install g++ -y
 		cd /srv/hf
 		npm install
 		npm install -g gulp
