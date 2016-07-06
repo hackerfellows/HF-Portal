@@ -25,10 +25,9 @@ SCRIPT
     
     # install project npm dependencies and gulp globally
     config.vm.provision "shell", inline: <<SCRIPT
+		npm install -g gulp
 		cd /srv/hf
 		npm install
-		npm install -g gulp
-		gulp
 SCRIPT
 
     # forward postgres and browsersync port

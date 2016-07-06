@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "server.js",
-  "author": "Some nerds",
+  "author": "Hacker Fellows 2016 Fellows",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "*",
