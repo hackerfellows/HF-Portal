@@ -21,9 +21,9 @@ The command prompt should show you are logged in as 'vagrant' user to the guest 
 
 #### Change into directory synced between host and guest (Vagrant virtual machine)
 ```
-cd /mnt/bootstrap
+cd /srv/hf
 ```
-Any files changed in the `/mnt/bootstrap` directory in the guest Vagrant virtual machine
+Any files changed in the `/srv/hf` directory in the guest Vagrant virtual machine
 will be synced with the github repository in the host machine. This allows developers to 
 use their favorite editor on the host machine. Files created in the Vagrant environment
 not in this synced folder might NOT be saved!
