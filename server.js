@@ -10,7 +10,8 @@ app.get('/file', function (req, res) {
 	res.sendFile('/srv/hf/public/index.html');
 });
 
-app.listen(5000, function () {
-	console.log('Example app listening on port 3000!');
+var port = 5000;
+app.listen(port, function () {
+	console.log('Example app listening on port' + port);
 });
 

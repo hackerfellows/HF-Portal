@@ -41,9 +41,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
             // ExpressJs server runs in Vagrant virtual machine on localhost:5000 
 			proxy: "http://localhost:5000",
             // "Compiled" web application will be published here
-            baseDir: "public",
-            // Host machine can access guest port of 5000 through port 7000
-			port: 7000,
+            baseDir: "public"
         }
     });
 });
