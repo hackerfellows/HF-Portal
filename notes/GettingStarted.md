@@ -40,9 +40,9 @@ not in this synced folder might NOT be saved!
 
 ### Run [Expressjs server](http://expressjs.com/) for backend and [Browsersync](https://www.browsersync.io/) for frontend.
 ```
-gulp watch
+gulp 
 ```
-Open browser to `http://localhost:3000` to see frontend.
+Open browser to `http://localhost:7000` to see frontend.
 
 ### Postgres
 #### Log into Postgres from host machine
