@@ -56,7 +56,7 @@ app.controller('mainCtrl', function($scope, $http) {
       $scope.spreadsheet = data;
       var entry_array = data.feed.entry;
 
-
+      var idCounter = 0;
       // Loop through the entries from the spreadsheet JSON
       for (var entry in entry_array) {
 
@@ -67,8 +67,9 @@ app.controller('mainCtrl', function($scope, $http) {
         var time        = entry_array[entry].gsx$time.$t;
         var icon        = entry_array[entry].gsx$icon.$t;
         var dot_color   = entry_array[entry].gsx$dotcolor.$t;
-        var information   = entry_array[entry].gsx$information.$t;
-
+        var information = entry_array[entry].gsx$information.$t;
+        var id          = idCounter++;
+        console.log(information)
         // Replace icon spaces with underscores
         var icon        = icon.replace(/ /g,"_");
 
@@ -95,7 +96,8 @@ app.controller('mainCtrl', function($scope, $http) {
             "datetime":datetime,
             "icon":icon,
             "dot_color":dot_color,
-            "information":information
+            "information":information,
+            "id":id
           });
         }
 
