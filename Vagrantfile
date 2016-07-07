@@ -35,10 +35,6 @@ SCRIPT
 	config.vm.provision :shell, inline: "cd /srv/hf; npm install",
 		run: "always"
 
-	# forward postgres and browsersync port
-	config.vm.network "forwarded_port", guest: 5432, host: 15432
-	config.vm.network "forwarded_port", guest: 3000, host: 3000
-
 	# use virtual private network
 	config.vm.network "private_network", type: "dhcp"
 end
