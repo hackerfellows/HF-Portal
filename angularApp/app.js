@@ -4,21 +4,21 @@
  */
 // Note from JW: We're only using app.profile, so I don't know if we need tags, 
 // votes, alert, home, and config. We should delete what we don't need
- var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bootstrap', 'ui.select',
-    'app.config', 'app.home', 'app.profile', 'app.tags', 'app.votes', 'app.alert' ])
-    .run(run);
+var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bootstrap', 'ui.select',
+        'app.config', 'app.home', 'app.profile', 'app.tags', 'app.votes', 'app.alert' ])
+.run(run);
 
 /**
  *   * @name config
  *     * @desc Define valid application routes
  *       */
- app.config(function($routeProvider, $locationProvider){
+app.config(function($routeProvider, $locationProvider){
 
     $routeProvider
-    .when('/', {
-        controller  : 'HomeController',
-        templateUrl : 'index.html'
-    })
+        .when('/', {
+            controller  : 'HomeController',
+            templateUrl : 'index.html'
+        })
     //Profile team changed here VVV
     .when('/fellows', {
         controller: 'FellowsController',
@@ -46,56 +46,47 @@
         templateUrl: 'source/app/tags/tags.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when('/profile', {
         controller: 'ProfileController',
         templateUrl: 'source/app/profile/profile.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when('/profile/admin', {
         controller: 'AdminProfileController',
         templateUrl: 'source/app/profile/partials/admin-profile.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when('/profile/fellow', {
         controller: 'FellowsProfileController',
         templateUrl: 'source/app/profile/partials/fellow-profile.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when('/profile/company', {
         controller: 'CompanyProfileController',
         templateUrl: 'source/app/profile/partials/company-profile.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when( '/votes', {
         controller: 'VotesController',
         templateUrl: 'source/app/votes/partials/votes.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when( '/votes/fellow', {
         controller: 'FellowVotesController',
         templateUrl: 'source/app/votes/partials/fellow-votes.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .when( '/votes/company', {
         controller: 'CompanyVotesController',
         templateUrl: 'source/app/votes/partials/company-votes.html',
         resolve: { loggedIn: checkLoggedin }
     })
-
     .otherwise({ redirectTo: '/' });
 
 });
 
 // On paths that require login, make sure the login is confirmed before the route is loaded.
 var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, CONFIG, User){
-
     // Initialize a new promise
     var deferred = $q.defer();
 
@@ -103,22 +94,15 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, CONFIG,
     // Check backend for existing user in session and update User Service
     $http.get( CONFIG.SERVICE_URL + '/api/v1/users/confirm-login' )
         .success(function (user) {
-
-            //console.log( user );
-
             if (user && user.id) {
-
                 User.SetCredentials( user.id, user.email, user.userType );
                 deferred.resolve();
             }
             else{
-
                 deferred.reject();
                 $location.url('/');
             }
-
         });
-
     return deferred.promise;
 };
 
@@ -129,18 +113,14 @@ RoutingController.$inject = ['$scope', '$modal', '$window', 'User', '$location',
 LoginModalInstanceController.$inject = ['$scope', '$modalInstance', 'User'];
 
 function RoutingController($scope, $modal, $window, User, $location, $anchorScroll) {
-
     $scope.isUserLoggedIn = false;
     updateLoginStatus();
-
     $scope.scrollTo = function(id){
-
         $location.hash(id);
         $anchorScroll();
     };
 
     function updateLoginStatus(){
-
         $scope.isUserLoggedIn = User.isUserLoggedIn();
         $scope.isUserAdmin = User.isUserAdmin();
         $scope.isUserFellow = User.isUserFellow();
@@ -155,7 +135,6 @@ function RoutingController($scope, $modal, $window, User, $location, $anchorScro
         });
 
         modalInstance.result.then(function(){
-
             updateLoginStatus();
         });
     };
@@ -163,52 +142,37 @@ function RoutingController($scope, $modal, $window, User, $location, $anchorScro
     $scope.$on('loginStatusChanged', updateLoginStatus);
 
     $scope.logoutUser = function(){
-
         User.ClearCredentials();
-
         $scope.isUserLoggedIn = false;
         $scope.isUserAdmin = false;
         $scope.isUserFellow = false;
         $scope.isUserCompany = false;
-
         $window.location.reload();
     };
 }
 
 function LoginModalInstanceController ($scope, $modalInstance, User) {
-
     // save this through a refresh
     $scope.loginForm = {
-
         email: "",
         password: "",
         errors: []
     };
 
     $scope.login = function(loginForm) {
-
         $scope.loginForm.errors = [];
-
         User.login(loginForm).success(function( data ){
-
             if( data.success ){
-
                 var user = data.user;
-
                 $modalInstance.close();
-
                 User.SetCredentials( user.id, user.email, user.userType );
             }
             else{
-
                 $scope.loginForm.errors.push( "Invalid user credentials" );
             }
-
         }).error( function(error){
-
             $scope.loginForm.errors.push( "Invalid user credentials" );
         });
-
     };
 
     $scope.cancel = function () {
@@ -218,12 +182,7 @@ function LoginModalInstanceController ($scope, $modalInstance, User) {
 
 
 run.$inject = ['$http', 'User', 'CONFIG'];
-function run($http, User, CONFIG ){
-
-
-
-}
-
+function run($http, User, CONFIG ){}
 
 /**
  * Helper Functions
@@ -232,9 +191,7 @@ function run($http, User, CONFIG ){
 var HFHelpers = HFHelpers || {};
 
 HFHelpers.helpers = {
-
     slugify: function(str) {
-        
         return str.toString().toLowerCase()
             .replace(/\s+/g, '-')           // Replace spaces with -
             .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
@@ -244,32 +201,24 @@ HFHelpers.helpers = {
     },
 
     paragraphize: function( str ) {
-
         if( typeof str !== 'string' ) return '';
-
         var parts = str.split( "\n" );
         return ( parts.length > 0 ? '<p>' + parts.join('</p><p>') + '</p>' : '' );
     }
 };
 
 app.filter("sanitize", ['$sce', function($sce) {
-
     return function(htmlCode){
-
         return $sce.trustAsHtml(htmlCode);
     };
 }]);
 
 app.filter('propsFilter', function() {
-
     return function(items, props) {
-
         var out = [];
-
         if (angular.isArray(items)) {
             items.forEach(function(item) {
                 var itemMatches = false;
-
                 var keys = Object.keys(props);
                 for (var i = 0; i < keys.length; i++) {
                     var prop = keys[i];
@@ -279,7 +228,6 @@ app.filter('propsFilter', function() {
                         break;
                     }
                 }
-
                 if (itemMatches) {
                     out.push(item);
                 }
@@ -288,7 +236,6 @@ app.filter('propsFilter', function() {
             // Let the output be the input untouched
             out = items;
         }
-
         return out;
     };
 });
