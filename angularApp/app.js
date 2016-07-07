@@ -5,7 +5,7 @@
 // Note from JW: We're only using app.profile, so I don't know if we need tags, 
 // votes, alert, home, and config. We should delete what we don't need
  var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bootstrap', 'ui.select',
-    'app.config', 'app.home', 'app.profile', 'app.tags', 'app.votes', 'app.alert' ])
+    'app.config', 'app.home', 'app.profile', 'app.profileGrid', 'app.tags', 'app.votes', 'app.alert' ])
     .run(run);
 
 /**
@@ -19,28 +19,26 @@
         controller  : 'HomeController',
         templateUrl : 'index.html'
     })
-    //Profile team changed here VVV
     .when('/fellows', {
-        controller: 'FellowsController',
+        controller: 'ProfileGridController',
         templateUrl: 'components/profileGrid/profileGrid.html',
         resolve: { loggedIn: checkLoggedin }
     })
     .when('/fellows/:fellow_id/:fellow_name', {
-        controller: 'FellowController',
+        controller: 'ProfileController',
         templateUrl: 'components/profileSingle/profileSingle.html',
         resolve: { loggedIn: checkLoggedin }
     })
     .when('/companies', {
-        controller: 'CompaniesController',
+        controller: 'ProfileGridController',
         templateUrl: 'components/profileGrid/profileGrid.html',
         resolve: { loggedIn: checkLoggedin }
     })
     .when('/companies/:company_id/:company_name', {
-        controller: 'CompanyController',
+        controller: 'ProfileController',
         templateUrl: 'components/profileSingle/profileSingle.html',
         resolve: { loggedIn: checkLoggedin }
     })
-    //Profile team changes end here ^^^
     .when('/tags', {
         controller: 'TagsController',
         templateUrl: 'source/app/tags/tags.html',

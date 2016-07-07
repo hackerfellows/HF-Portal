@@ -1,26 +1,22 @@
 /**
- * CompaniesController
- * @namespace app.companies.controllers
+ * ProfileGridController
+ * @namespace app.profileGrid.controllers
  */
 (function () {
     'use strict';
 
     angular
-        .module('app.companies.controllers')
-        .controller('CompaniesController', CompaniesController);
+        .module('app.profileGrid.controllers')
+        .controller('ProfileGridController', ProfileGridController);
 
-    CompaniesController.$inject = ['$scope', '$modal', 'Companies'];
+    ProfileGridController.$inject = ['$scope', '$modal', 'Companies'];
 
     /**
      * @namespace CompaniesController
      */
-    function CompaniesController($scope, $modal, Companies) {
-
-        activate();
-
-        function activate() {
-            //console.log('activated companies controller!');
-        }
+    function ProfileGridController($scope, $modal, Companies) {
+        console.log("HEYYY CONTROLLER");
+        
 
         Companies.all().success(function (companies) {
 
