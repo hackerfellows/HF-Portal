@@ -85,27 +85,6 @@ app.config(function($routeProvider, $locationProvider){
 
 });
 
-// On paths that require login, make sure the login is confirmed before the route is loaded.
-var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, CONFIG, User){
-    // Initialize a new promise
-    var deferred = $q.defer();
-
-    // keep user logged in after page refresh
-    // Check backend for existing user in session and update User Service
-    $http.get( CONFIG.SERVICE_URL + '/api/v1/users/confirm-login' )
-        .success(function (user) {
-            if (user && user.id) {
-                User.SetCredentials( user.id, user.email, user.userType );
-                deferred.resolve();
-            }
-            else{
-                deferred.reject();
-                $location.url('/');
-            }
-        });
-    return deferred.promise;
-};
-
 app.controller('RoutingController', RoutingController)
 .controller('LoginModalInstanceController', LoginModalInstanceController);
 
