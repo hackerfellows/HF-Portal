@@ -29,8 +29,11 @@ SCRIPT
 	npm install -g gulp
 	cd /srv/hf
 	rm -rf node_modules/
-	npm install
 SCRIPT
+
+	# This will be run every time the server is up up
+	config.vm.provision :shell, inline: "cd /srv/hf; npm install",
+		run: "always"
 
 	# forward postgres and browsersync port
 	config.vm.network "forwarded_port", guest: 5432, host: 15432
