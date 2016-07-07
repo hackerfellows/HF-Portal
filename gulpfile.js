@@ -13,6 +13,7 @@ var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var proxy = require('proxy-middleware');
 var url = require('url');
+const exec = require('child_process').exec;
 
 
 gulp.task('default', ['full-reload']);
@@ -38,15 +39,29 @@ gulp.task('browser-sync', function() {
 	var proxyOptions = url.parse('http://localhost:5000/api');
 	proxyOptions.route = '/api';
 
-	browserSync.init({
-		open: false,//Don't try to open a browser window
-		//Set browsersync port to 4000
-		port: 4000,
-		server: {
-			baseDir: "public",
-			//Middleware does proxy stuff, so it will redirect all :3000/api calls to :5000/api
-			middleware: [proxy(proxyOptions)]
+
+	//We want the ip of the server.
+	var ipCommand = "ifconfig eth1 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'";
+	//That command will get it.
+	//Exec will run it, and give us a callback.
+	exec(ipCommand, (error, stdout, stderr) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			return;
 		}
+		var ip = stdout.replace(/[^0-9]*$/, '');//Remove newline
+		//Now we have hte IP.
+		browserSync.init({
+			open: false,//Don't try to open a browser window
+			//Set browsersync port to 4000
+			port: 4000,
+			host: ip,//Set external IP
+			server: {
+				baseDir: "public",
+				//Middleware does proxy stuff, so it will redirect all :3000/api calls to :5000/api
+				middleware: [proxy(proxyOptions)]
+			}
+		});
 	});
 });
 
