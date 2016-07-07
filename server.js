@@ -2,11 +2,15 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 
+//Import handelers for each thing
+var users = require('./nodeCode/users.js');
+
+
 
 var app = express();
 
 
-
+//Set app port
 console.log("Setting port: ");
 app.set('port', (process.env.PORT || 5000));
 console.log('Port set: ' + app.get('port'));
@@ -20,12 +24,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+//Set api route handelers
+app.use('/api/v2/users', users);
 
+
+//Also serve static files
 app.use(express.static('public'));
 
-app.get('/api', function (req, res) {
-	res.send('Hello World! With double fancy. and new things');
-});
 
 
 /** Server Startup **/
