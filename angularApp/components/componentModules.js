@@ -2,6 +2,15 @@
 
 (function () {
   'use strict';
+  //Home
+  angular
+    .module('app.home', [
+        'app.home.controllers'
+        ]);
+
+  angular
+    .module('app.home.controllers', []);
+  //End Home
 
   //ProfileGrid
   angular
