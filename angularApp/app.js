@@ -43,4 +43,13 @@ app.config(function($routeProvider, $locationProvider){
     //                   that runs if the user is logged in and editing    
     .otherwise({ redirectTo: '/' });
 
+    app.controller('NavbarController', NavbarController);
+
+    NavbarController.$inject = ['$scope', '$modal', '$window', '$location', '$anchorScroll', 'User', 'Account'];
+    function NavbarController($scope, $modal, $window, $location, $anchorScroll, User, Account) {
+        console.log("NavbarController Ran");
+        $scope.openLoginModal = function() {
+            Account.startLogin();
+        };
+    }
 });

@@ -15,7 +15,8 @@
     angular
         .module('app.shared.accounts.controllers', []);
 
-    //declare the directives module
+    //declare the services module
     angular
-        .module('app.shared.accounts.directives', []);
+        .module('app.shared.accounts.services', []);
+
 })();
