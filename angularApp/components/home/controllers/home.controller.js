@@ -24,7 +24,7 @@
     //});
 
     activate();
-
+    contole.log("HomeController ran");
     function activate() {
       //console.log('activated home controller!');
       //Home.all();

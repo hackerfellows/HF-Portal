@@ -28,7 +28,13 @@
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
         <script src="app.js"></script>
         <script src="components/componentModules.js"></script>
-        <script src="shared/accounts/accounts.module.js"></script>
+        <script src="shared/serviceModules.js"></script>
+        <script src="shared/navbar/navbar.controller.js"></script>
+        <script src="shared/accounts/services/accounts.service.js"></script>
+        <script src="shared/accounts/services/user.service.js"></script>
+        <script src="shared/accounts/controllers/login.controller.js"></script>
+        <script src="shared/accounts/controllers/register.controller.js"></script>
+
 
         <!-- 
         <link rel="stylesheet" href="public/assets/stylesheets/vendor/bootstrap-switch.min.css">
@@ -39,7 +45,6 @@
 
     <body>
         <div ng-app="app">
-            <div class="container main-content" ng-view=""></div>
             <div ng-controller="NavbarController">
                 <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container">

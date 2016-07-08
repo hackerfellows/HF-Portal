@@ -11,7 +11,7 @@
 //NOTE: Make sure these modules (app.moduleName) are defined in 
 //      components/componentModules.js otherwise the page will not run
 var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 
-    'app.profileGrid', 'app.shared.accounts']);
+    'app.profileGrid', 'app.navbar']);
 
 /**
  *   * @name config
@@ -42,14 +42,4 @@ app.config(function($routeProvider, $locationProvider){
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
     //                   that runs if the user is logged in and editing    
     .otherwise({ redirectTo: '/' });
-
-    app.controller('NavbarController', NavbarController);
-
-    NavbarController.$inject = ['$scope', '$modal', '$window', '$location', '$anchorScroll', 'User', 'Account'];
-    function NavbarController($scope, $modal, $window, $location, $anchorScroll, User, Account) {
-        console.log("NavbarController Ran");
-        $scope.openLoginModal = function() {
-            Account.startLogin();
-        };
-    }
 });
