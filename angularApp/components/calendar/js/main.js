@@ -58,6 +58,7 @@ app.controller('mainCtrl', function($scope, $http) {
 
       var idCounter = 0;
       $scope.showMoreInfo = [];
+      $scope.hasOutsideLink = [];
       // Loop through the entries from the spreadsheet JSON
       for (var entry in entry_array) {
 
@@ -69,6 +70,7 @@ app.controller('mainCtrl', function($scope, $http) {
         var icon        = entry_array[entry].gsx$icon.$t;
         var dot_color   = entry_array[entry].gsx$dotcolor.$t;
         var information = entry_array[entry].gsx$information.$t;
+        var outsideLink = entry_array[entry].gsx$outsidelink.$t;
         var id          = idCounter++;
         console.log(information)
         // Replace icon spaces with underscores
@@ -86,8 +88,8 @@ app.controller('mainCtrl', function($scope, $http) {
         curDate = new Date(curDateString);
         var eventDate = new Date(date[0] + date[1]);
 
-
         $scope.showMoreInfo.push(information != "");
+        $scope.hasOutsideLink.push(outsideLink != "");
         console.log(entry_array[entry]);
         console.log($scope.showMoreInfo[id]);
 
@@ -103,20 +105,11 @@ app.controller('mainCtrl', function($scope, $http) {
             "dot_color":dot_color,
             "information":information,
             "id":id,
-            "eventDate":eventDate
+            "eventDate":eventDate,
+            "outsideLink":outsideLink
           });
 
-          // Sorts the items by date
-          $scope.events.sort(function (a, b) {
-            if (a.eventDate > b.eventDate) {
-              return 1;
-            }
-            if (a.eventDate < b.eventDate) {
-              return -1;
-            }
-            // a must be equal to b
-            return 0;
-          });
+
         }
 
 
@@ -126,6 +119,17 @@ app.controller('mainCtrl', function($scope, $http) {
 
       } /* end of for loop*/
 
+      // Sorts the items by date
+      $scope.events.sort(function (a, b) {
+        if (a.eventDate > b.eventDate) {
+          return 1;
+        }
+        if (a.eventDate < b.eventDate) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
 
     }) /*end of getJSON function */
 
