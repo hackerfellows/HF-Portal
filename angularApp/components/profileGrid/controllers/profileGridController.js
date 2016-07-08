@@ -9,15 +9,15 @@
         .module('app.profileGrid.controllers')
         .controller('ProfileGridController', ProfileGridController);
 
-    ProfileGridController.$inject = ['$scope', '$modal', 'Companies'];
+    ProfileGridController.$inject = ['$scope'];
 
     /**
      * @namespace CompaniesController
      */
-    function ProfileGridController($scope, $modal, Companies) {
+    function ProfileGridController($scope) {
         console.log("HEYYY CONTROLLER");
-        
-
+        $scope.entity = "fellows/companies";
+/*
         Companies.all().success(function (companies) {
 
             $scope.companies = companies;
@@ -43,14 +43,14 @@
             });
 
         };
-
+*/
     }
 
     /**
      * Companies Modal Instance Controller
      * @namespace app.fellows.controllers
      */
-
+/*
     angular
         .module('app.companies.controllers')
         .controller('CompaniesModalInstanceController', CompaniesModalInstanceController);
@@ -72,5 +72,5 @@
 
 
     }
-
+*/
 })();
