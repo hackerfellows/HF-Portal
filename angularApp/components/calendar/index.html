@@ -39,9 +39,11 @@
           <p>{{  event.description }}</p>
 
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-md " data-toggle="modal" data-target="#myModal{{event.id}}">
-            More Info
-          </button>
+          <div ng-show="showMoreInfo[{{event.id}}]">
+            <button type="button" class="btn btn-primary btn-md " data-toggle="modal" data-target="#myModal{{event.id}}">
+              More Info
+            </button>
+          </div>
 
           <!-- Modal -->
           <div class="modal fade" id="myModal{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
