@@ -4,13 +4,13 @@
         .module('app.navbar.controllers')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$scope', 'Account'];
+    NavbarController.$inject = ['$scope', 'Accounts'];
 
-    function NavbarController($scope) {
+    function NavbarController($scope, Accounts) {
         console.log("NavbarController Ran");
         $scope.openLoginModal = function() {
             console.log("Open login");
-            Account.startLogin();
+            Accounts.startLogin();
         };
     }
 })();

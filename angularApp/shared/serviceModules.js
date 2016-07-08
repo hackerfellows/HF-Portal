@@ -1,4 +1,4 @@
-/**
+/*
  * accounts module
  */
 
@@ -17,9 +17,8 @@
 
     //declare the services module
     angular
-        .module('app.accounts.services', []);
+        .module('app.accounts.services', ['ui.bootstrap']);
     
-    console.log("tryin to make an import :/");
     angular
         .module('app.navbar', [
                 'app.navbar.controllers'
