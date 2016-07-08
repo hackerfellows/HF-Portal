@@ -67,8 +67,22 @@ then
   wget --quiet -O - https://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
 fi
 
+####################################changes to postgres file#####################################Vd
+# NODEJS
+
+#So we install nodejs here now, because it will apt-get update. This will allow us to not run it twice.
+echo "Provisioning NodeJs..."
+
+# install nodejs
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+echo "NodeJs provisioned."
+
+
+####################################Back to postgres file#####################################Vd
 # Update package list and upgrade all packages
-apt-get update
+#apt-get update
 apt-get -y upgrade
 
 # install postgres
@@ -106,15 +120,6 @@ print_db_usage
 echo "Postgres provisioned."
 
 
-# NODEJS
-
-echo "Provisioning NodeJs..."
-
-# install nodejs
-curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-echo "NodeJs provisioned."
 
 echo "Successfully created hfportal Vagrant virtual machine."
 echo ""

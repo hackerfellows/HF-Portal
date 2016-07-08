@@ -1,0 +1,19 @@
+	<!--
+	File name: 		profileGrid.html
+	Author: 			Jessica Wu
+	Description: 	The outer container that will be populated with tiles containing
+								fellows or companies. 
+	Notes:				{{entity}} will be "fellows" or "companies"
+	-->
+
+<div class="grid-container fellow-container">
+	<h1>Fellows</h1>
+
+	<p class="empty-message" ng-hide="{{entity}}.length">There are no {{entity}} just yet. We are working on adding the to the system. Please check back soon.</p>
+
+	<div class="list" ng-show="{{entity}}.length">
+		<profile-grid-tile ng-repeat="{{entity}} in {{entity}} track by $index" ng-if="{{entity}}.first_name && {{entity}}.last_name" />
+	</div>
+
+</div>
+
