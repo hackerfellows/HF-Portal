@@ -11,14 +11,13 @@
 //NOTE: Make sure these modules (app.moduleName) are defined in 
 //      components/componentModules.js otherwise the page will not run
 var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 
-    'app.profileGrid', ]);
+    'app.profileGrid', 'app.shared.accounts']);
 
 /**
  *   * @name config
  *     * @desc Define valid application routes
  *       */
- app.config(function($routeProvider, $locationProvider){
-
+app.config(function($routeProvider, $locationProvider){
     $routeProvider
     .when('/', {
         controller  : 'HomeController',

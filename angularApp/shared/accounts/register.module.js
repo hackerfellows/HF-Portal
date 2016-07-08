@@ -6,16 +6,16 @@
     'use strict';
 
     angular
-        .module('app.accounts', [
-                'app.accounts.controllers',
-                //'app.accounts.services'
+        .module('app.shared.accounts', [
+                'app.shared.accounts.controllers',
+                'app.shared.accounts.services'
         ]);
 
     //declare the controllers module
     angular
-        .module('app.accounts.controllers', []);
+        .module('app.shared.accounts.controllers', []);
 
     //declare the directives module
     angular
-        .module('app.accounts.directives', []);
+        .module('app.shared.accounts.directives', []);
 })();

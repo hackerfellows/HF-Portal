@@ -33,6 +33,7 @@
             });
             loginModal.result.then(function(){
                 updateLoginStatus();
+                self.endLogin();
             });
         }
 

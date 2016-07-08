@@ -43,7 +43,7 @@
         }
 
         // On paths that require login, make sure the login is confirmed before the route is loaded.
-        var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, CONFIG, User){
+        var routeLoginCheck = function($q, $timeout, $http, $location, $rootScope, CONFIG, User){
 
             // Initialize a new promise
             var deferred = $q.defer();
@@ -52,26 +52,25 @@
             // Check backend for existing user in session and update User Service
             $http.get( CONFIG.SERVICE_URL + '/api/v1/users/confirm-login' )
                 .success(function (user) {
-
                     //console.log( user );
-
                     if (user && user.id) {
-
                         self.SetCredentials( user.id, user.email, user.userType );
                         deferred.resolve();
                     }
                     else{
-
                         deferred.reject();
                         $location.url('/');
                     }
-
                 });
-
             return deferred.promise;
         };
 
-
+        var updateLoginStatus = function(){
+            $scope.isUserLoggedIn = User.isUserLoggedIn();
+            $scope.isUserAdmin = User.isUserAdmin();
+            $scope.isUserFellow = User.isUserFellow();
+            $scope.isUserCompany = User.isUserCompany();
+        }
 
         /**
          * @name all
@@ -184,6 +183,8 @@
             isUserLoggedIn: isUserLoggedIn,
             isUserAdmin: isUserAdmin,
             isUserFellow: isUserFellow,
+            routeLoginCheck: routeLoginCheck,
+            updateLoginStatus: updateLoginStatus,
             isUserCompany: isUserCompany
         };
     }
