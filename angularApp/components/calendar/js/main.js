@@ -69,6 +69,7 @@ app.controller('mainCtrl', function($scope, $http) {
         var dot_color   = entry_array[entry].gsx$dotcolor.$t;
         var information = entry_array[entry].gsx$information.$t;
         var id          = idCounter++;
+        console.log(information)
         // Replace icon spaces with underscores
         var icon        = icon.replace(/ /g,"_");
 
@@ -113,7 +114,6 @@ app.controller('mainCtrl', function($scope, $http) {
           });
         }
 
-        /* events.sort(function(a, b){return b-a}); */
 
         $scope.render = function(time) {
           return condition ? "This is rendered when condition == TRUE" : "This is rendered when condition == FALSE";
