@@ -69,7 +69,6 @@ app.controller('mainCtrl', function($scope, $http) {
         var dot_color   = entry_array[entry].gsx$dotcolor.$t;
         var information = entry_array[entry].gsx$information.$t;
         var id          = idCounter++;
-        console.log(information)
         // Replace icon spaces with underscores
         var icon        = icon.replace(/ /g,"_");
 
