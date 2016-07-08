@@ -35,8 +35,8 @@ app.controller('mainCtrl', function($scope, $http) {
     //{'title':'Second Round Interviews', 'description':'Roll on the ground and ask for a job trust me'}
   ];
 
-  var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/od6/public/values?alt=json';
-
+  //var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/od6/public/values?alt=json';
+  var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
   $http({
     method: 'GET',
     url: url
@@ -57,6 +57,7 @@ app.controller('mainCtrl', function($scope, $http) {
       var entry_array = data.feed.entry;
 
       var idCounter = 0;
+      $scope.showMoreInfo = [];
       // Loop through the entries from the spreadsheet JSON
       for (var entry in entry_array) {
 
@@ -78,14 +79,18 @@ app.controller('mainCtrl', function($scope, $http) {
             datetime += " at " + time ;
           }
 
+        // Get the current Date and the event date for comparison
         var curDate = new Date();
         var curDateString = (curDate.getMonth()+1) + " " + curDate.getDate() + " " + curDate.getFullYear();
         curDate = new Date(curDateString);
         var eventDate = new Date(date[0] + date[1]);
 
-        console.log(entry_array[entry]);
 
-        // Push elements to JS array for angular to use
+        $scope.showMoreInfo.push(information != "");
+        console.log(entry_array[entry]);
+        console.log($scope.showMoreInfo[id]);
+
+        // Only show events that are happening today or later
         if (curDate <= eventDate)
         {
           // Push elements to JS array for angular to use

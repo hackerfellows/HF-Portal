@@ -13,10 +13,10 @@
           type='text/css'>-->
     <!-- Header Font -->
     <link href='https://fonts.googleapis.com/css?family=Dosis:400,600,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="public/assets/stylesheets/vendor/select.min.css">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
-<link rel="stylesheet" href="public/assets/stylesheets/vendor/bootstrap-switch.min.css">
-<link rel="stylesheet" href="public/assets/stylesheets/style.css" type="text/css"/>
+    <link rel="stylesheet" href="public/assets/stylesheets/vendor/select.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
+    <link rel="stylesheet" href="public/assets/stylesheets/vendor/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="public/assets/stylesheets/style.css" type="text/css"/>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,9 +57,11 @@
           <p>{{  event.description }}</p>
 
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-md " data-toggle="modal" data-target="#myModal{{event.id}}">
-            More Info
-          </button>
+          <div ng-show="showMoreInfo[{{event.id}}]">
+            <button type="button" class="btn btn-primary btn-md " data-toggle="modal" data-target="#myModal{{event.id}}">
+              More Info
+            </button>
+          </div>
 
           <!-- Modal -->
           <div class="modal fade" id="myModal{{event.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
