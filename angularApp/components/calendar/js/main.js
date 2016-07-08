@@ -101,11 +101,24 @@ app.controller('mainCtrl', function($scope, $http) {
             "icon":icon,
             "dot_color":dot_color,
             "information":information,
-            "id":id
+            "id":id,
+            "eventDate":eventDate
+          });
+
+          // Sorts the items by date
+          $scope.events.sort(function (a, b) {
+            if (a.eventDate > b.eventDate) {
+              return 1;
+            }
+            if (a.eventDate < b.eventDate) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
           });
         }
 
-
+        /* events.sort(function(a, b){return b-a}); */
 
         $scope.render = function(time) {
           return condition ? "This is rendered when condition == TRUE" : "This is rendered when condition == FALSE";
