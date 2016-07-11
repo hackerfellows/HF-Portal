@@ -15,22 +15,22 @@
      * @namespace CompaniesController
      */
     function ProfileGridController($scope, $location, Entities) {
-        
+
         var whichEntity = "";
 
         //Decide if the path is /fellows or /companies
         if($location.path() === "/fellows"){
-            $scope.entitySingular = "Fellow";    
+            $scope.entitySingular = "Fellow";
             $scope.entityPlural = "Fellows";
-            whichEntity = "fellows";
+            whichEntity = "Fellows";
         } else if ($location.path() === "/companies"){
-            $scope.entitySingular = "Company";    
+            $scope.entitySingular = "Company";
             $scope.entityPlural = "Companies";
-            whichEntity = "companies";
+            whichEntity = "Companies";
         } else {
             //Throw an error
         }
-        
+
 //////////////////////////////////////////////////////////////////////////
 
         Entities.allWithUser(whichEntity).success(function (result) {
