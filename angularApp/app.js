@@ -11,14 +11,14 @@
 //NOTE: Make sure these modules (app.moduleName) are defined in
 //      components/componentModules.js otherwise the page will not run
 var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile',
-    'app.profileGrid', 'app.calendar']);
+    'app.profileGrid',  'app.navbar', 'app.accounts', 'app.calendar']);
+
 
 /**
  *   * @name config
  *     * @desc Define valid application routes
  *       */
- app.config(function($routeProvider, $locationProvider){
-
+app.config(function($routeProvider, $locationProvider){
     $routeProvider
     .when('/', {
         controller  : 'HomeController',
@@ -47,5 +47,8 @@ var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile',
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
     //                   that runs if the user is logged in and editing
     .otherwise({ redirectTo: '/' });
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 });
