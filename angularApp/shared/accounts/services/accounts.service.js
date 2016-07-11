@@ -11,7 +11,7 @@
 
     Accounts.$inject = ['$http', '$uibModal'];
     
-    console.log("tryin to make an Accounts :/")
+    console.log("tryin to make an Accounts :/");
     /**
      * @namespace Accounts
      * @returns {Service}
@@ -29,7 +29,8 @@
 
         function startLogin() {
             loginModal = $uibModal.open({
-                templateUrl: '/source/app/accounts/partials/login.html',
+                replace: true,
+                templateUrl: '/shared/accounts/partials/login.html',
                 controller: 'LoginController'
             });
             loginModal.result.then(function(){
@@ -40,7 +41,8 @@
 
         function startRegistration() {
             registerModal = $uibModal.open({
-                templateUrl: '/source/app/accounts/partials/register.html',
+                replace: true,
+                templateUrl: '/shared/accounts/partials/register.html',
                 controller: 'RegisterController'
             });
         }

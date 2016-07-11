@@ -9,8 +9,8 @@
         .module('app.accounts.controllers')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$scope', '$modalInstance', 'User', 'Fellows', 'Companies' ];
-    function RegisterController ($scope, $modalInstance, User, Fellows, Companies) {
+    RegisterController.$inject = ['$scope', '$uibModalInstance', 'User', 'Fellows', 'Companies' ];
+    function RegisterController ($scope, $uibModalInstance, User, Fellows, Companies) {
 
         $scope.verify_password = "";
 
@@ -72,7 +72,7 @@
 
                             // create fellow success callback
                             console.log( fellow );
-                            $modalInstance.close( fellow );
+                            $uibModalInstance.close( fellow );
 
                         }, function( response ){
 
@@ -91,7 +91,7 @@
                         Companies.create(company_post).then( function( company ){
 
                             // create company success callback
-                            $modalInstance.close( company );
+                            $uibModalInstance.close( company );
 
                         }, function( response ){
 
@@ -113,7 +113,7 @@
 
         $scope.cancel = function cancel() {
 
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
 
 

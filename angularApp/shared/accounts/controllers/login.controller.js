@@ -9,8 +9,8 @@
         .module('app.accounts.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$modalInstance', 'User'];
-    function LoginController($scope, $modalInstance, User) {
+    LoginController.$inject = ['$scope', '$uibModalInstance', 'User'];
+    function LoginController($scope, $uibModalInstance, User) {
 
         // save this through a refresh
         $scope.loginForm = {
@@ -28,7 +28,7 @@
 
                     var user = data.user;
 
-                    $modalInstance.close();
+                    $uibModalInstance.close();
 
                     User.SetCredentials( user.id, user.email, user.userType );
                 }
