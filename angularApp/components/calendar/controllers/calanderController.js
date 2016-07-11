@@ -44,7 +44,7 @@ jQuery(document).ready(function($){
 
       console.log('after controller call');
 
-    CalendarController.$inject = ['$scope'];
+    CalendarController.$inject = ['$scope', '$http'];
 
     /**
      * @namespace CompaniesController
