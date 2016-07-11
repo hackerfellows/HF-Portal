@@ -9,39 +9,35 @@
         .module('app.accounts.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$modalInstance', 'User'];
-    function LoginController($scope, $modalInstance, User) {
-
+    LoginController.$inject = ['$scope', '$uibModalInstance', 'User', 'Accounts'];
+    function LoginController($scope, $uibModalInstance, User, Accounts) {
         // save this through a refresh
         $scope.loginForm = {
-
             email: "",
             password: "",
             errors: []
         };
+        $scope.cancel = function() {
+            $uibModalInstance.dismiss();
+        };
+        $scope.beginRegistration = function() {
+           $uibModalInstance.dismiss();
+           Accounts.startRegistration();
+        };
         $scope.login = function(loginForm) {
             $scope.loginForm.errors = [];
-
             User.login(loginForm).success(function( data ){
-
                 if( data.success ){
-
                     var user = data.user;
-
-                    $modalInstance.close();
-
+                    $uibModalInstance.close();
                     User.SetCredentials( user.id, user.email, user.userType );
                 }
                 else{
-
                     $scope.loginForm.errors.push( "Invalid user credentials" );
                 }
-
             }).error( function(error){
-
                 $scope.loginForm.errors.push( "Invalid user credentials" );
             });
-
         };
     }
 })();

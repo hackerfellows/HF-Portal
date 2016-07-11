@@ -2,28 +2,29 @@
  * app.routes
  * @desc    contains the routes for the app
  */
-// Note from JW: We're only using app.profile, so I don't know if we need tags, 
+// Note from JW: We're only using app.profile, so I don't know if we need tags,
 // // votes, alert, home, and config. We should delete what we don't need
 //  var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.select',
 //     'app.config', 'app.home', 'app.profile', 'app.profileGrid', 'app.tags', 'app.votes', 'app.alert' ])
 //     .run(run);
 
-//NOTE: Make sure these modules (app.moduleName) are defined in 
-//      components/componentModules.js otherwise the page will not run
-var app = angular.module('app', ['ngRoute',  'app.home', /*'app.profile',*/ 
-    'app.profileGrid']);
 
-/**
- *   * @name config
- *     * @desc Define valid application routes
- *       */
- app.config(function($routeProvider, $locationProvider){
+(function () {
+    //NOTE: Make sure these modules (app.moduleName) are defined in
+    //      components/componentModules.js otherwise the page will not run
+    var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
+        'app.profileGrid', 'app.navbar', 'app.accounts']);
 
-    $routeProvider
-    .when('/', {
-        controller  : 'HomeController',
-        templateUrl : 'components/home/home.html'
-    })
+    /**
+     * @name config
+     * @desc Define valid application routes
+     **/
+    app.config(function($routeProvider, $locationProvider){
+        $routeProvider
+        .when('/', {
+            controller  : 'HomeController',
+            templateUrl : 'components/home/home.html'
+        })
     .when('/fellows', {
         controller: 'ProfileGridController',
         templateUrl: 'components/profileGrid/profileGrid.html',
@@ -43,5 +44,5 @@ var app = angular.module('app', ['ngRoute',  'app.home', /*'app.profile',*/
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
     //                   that runs if the user is logged in and editing    
     .otherwise({ redirectTo: '/' });
-
-});
+    });
+})();
