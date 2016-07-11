@@ -10,7 +10,6 @@
         .service('Accounts', Accounts);
 
     Accounts.$inject = ['$http', '$uibModal'];
-    
     /**
      * @namespace Accounts
      * @returns {Service}

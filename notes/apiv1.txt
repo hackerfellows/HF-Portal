@@ -1,0 +1,68 @@
+/api/v1/fellows
+	/
+		GET:	get all fellows with tags
+		POST:	create a new fellow, returns that user's json to client
+	/users
+		GET: 	get all fellows plus information from Users (email, user type, and votes)
+	/:id
+		GET: 	get one fellow with tags
+		PUT:	updates an existing fellow's record
+		DELETE:	deletes an existing fellow's record
+	/user_id/:user_id
+		GET: 	get one fellow with tags plus their Users row
+
+
+
+/api/v1/companies
+	/
+		GET:	get all companies with tags
+		POST:	create a new company, returns that user's json to client
+	/users
+		GET: 	get all fellows plus information from Users (email, user type, and votes)
+	/:id
+		GET:	get one company with Tags and Users row (why does this return Users row?)
+		PUT:	updates an existing company's record
+		DELETE:	deletes an existing company's record
+	/user_id/:user_id
+		GET:	literally the same as a GET on /:id (/:id probably shouldn't return Users stuff)
+
+
+/api/v1/tags
+	/
+		GET:	gets all tags
+		POST:	creates a tag if one doesn't already exist
+	/:id
+		PUT:	updates a tag name
+		GET:	gets a specific tag. NOT IMPLEMENTED, BUT REFERENCED
+	/:tag_id
+		DELETE:	deletes a tag
+
+
+/api/v1/votes
+	/
+		POST:	pass voter and votee id in body and enforces voting rules
+	/:voter_id
+		GET:	gets votes of user by voter_id
+	/:vote_id
+		DELETE:	deletes a fellows vote
+
+
+/api/v1/users
+	/:user_id/votes
+		GET:	gets votes for a specific user	
+	/login
+		POST:	attempts login, redirects to /login/success or /login/failure
+	/confirm-login
+		GET:	returns user if logged in, null if not
+	/login/success
+		GET:	allows login, returns user session info
+	/login/failure
+		GET:	denies login, returns error message
+	/logout
+		GET:	logs out
+	/create
+		POST:	creates a new user
+	/:id
+		PUT:	updates a user
+	/:user_id
+		DELETE:	deletes a user
