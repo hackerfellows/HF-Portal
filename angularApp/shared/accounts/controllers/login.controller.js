@@ -17,6 +17,9 @@
             password: "",
             errors: []
         };
+        $scope.cancel = function() {
+            $uibModalInstance.dismiss();
+        };
         $scope.beginRegistration = function() {
            $uibModalInstance.dismiss();
            Accounts.startRegistration();
