@@ -5,7 +5,7 @@
 // Note from JW: We're only using app.profile, so I don't know if we need tags,
 // votes, alert, home, and config. We should delete what we don't need
 var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bootstrap', 'ui.select',
-        'app.config', 'app.home', 'app.profile', 'app.tags', 'app.votes', 'app.alert' ])
+        'app.config', 'app.home', 'app.profile', 'app.tags', 'app.votes', 'app.alert', 'app.dash' ])
 .run(run);
 
 /**
@@ -15,10 +15,10 @@ var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bo
 app.config(function($routeProvider, $locationProvider){
 
     $routeProvider
-        .when('/', {
-            controller  : 'HomeController',
-            templateUrl : 'index.html'
-        })
+    .when('/', {
+        controller  : 'HomeController',
+        templateUrl : 'index.html'
+    })
     .when('/dash', {
        controller: 'DashController',
        templateUrl: 'components/dash/dash.html',

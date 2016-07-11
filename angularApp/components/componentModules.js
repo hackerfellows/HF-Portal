@@ -12,6 +12,17 @@
     .module('app.home.controllers', []);
   //End Home
 
+  //Home
+  angular
+    .module('app.dash', [
+        'app.dash.controllers'
+        ]);
+
+  angular
+    .module('app.dash.controllers', []);
+  //End Home
+
+
   //ProfileGrid
   angular
     .module('app.profileGrid', [
