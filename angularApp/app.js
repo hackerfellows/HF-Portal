@@ -2,15 +2,15 @@
  * app.routes
  * @desc    contains the routes for the app
  */
-// Note from JW: We're only using app.profile, so I don't know if we need tags, 
+// Note from JW: We're only using app.profile, so I don't know if we need tags,
 // // votes, alert, home, and config. We should delete what we don't need
 //  var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.select',
 //     'app.config', 'app.home', 'app.profile', 'app.profileGrid', 'app.tags', 'app.votes', 'app.alert' ])
 //     .run(run);
 
-//NOTE: Make sure these modules (app.moduleName) are defined in 
+//NOTE: Make sure these modules (app.moduleName) are defined in
 //      components/componentModules.js otherwise the page will not run
-var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 
+var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile',
     'app.profileGrid', ]);
 
 /**
@@ -40,8 +40,12 @@ var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile',
         controller: 'ProfileController',
         templateUrl: 'components/profileSingle/profileSingle.html',
     })
+    .when('/calendar', {
+        controller: 'CalendarController',
+        templateUrl: 'components/calendar/calendar.html',
+    })
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
-    //                   that runs if the user is logged in and editing    
+    //                   that runs if the user is logged in and editing
     .otherwise({ redirectTo: '/' });
 
 });

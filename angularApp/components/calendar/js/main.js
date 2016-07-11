@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
 
 var app = angular.module('myModule', []);
 
-app.controller('mainCtrl', function($scope, $http) {
+app.controller('CalendarController', function($scope, $http) {
   $scope.events = [
     //{'title':'Application Deadline', 'description':'Complete the online application by today or you will likely die'},
     //{'title':'0st Round Interviews', 'description':'Plead with Sam and Brad for a spot it will work'},

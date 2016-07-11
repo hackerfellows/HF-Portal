@@ -24,7 +24,7 @@
     <title>Responsive Vertical Timeline</title>
   </head>
 
-  <body ng-app="myModule" ng-controller="mainCtrl as main" ng-init="getSpreadsheetData()">
+  <body ng-app="myModule" ng-controller="CalendarController as main" ng-init="getSpreadsheetData()">
 
     <section id="cd-timeline" class="cd-container">
       <div ng-cloak ng-repeat="event in events track by $index" class="cd-timeline-block">
