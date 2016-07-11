@@ -2,7 +2,7 @@
  * app.routes
  * @desc    contains the routes for the app
  */
-// Note from JW: We're only using app.profile, so I don't know if we need tags, 
+// Note from JW: We're only using app.profile, so I don't know if we need tags,
 // votes, alert, home, and config. We should delete what we don't need
 var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bootstrap', 'ui.select',
         'app.config', 'app.home', 'app.profile', 'app.tags', 'app.votes', 'app.alert' ])
@@ -19,6 +19,14 @@ app.config(function($routeProvider, $locationProvider){
             controller  : 'HomeController',
             templateUrl : 'index.html'
         })
+    .when('/dash', {
+       controller: 'DashController',
+       templateUrl: 'components/dash/dash.html',
+    })
+    .when('/calendar', {
+       controller: 'CalendarController',
+       templateUrl: 'components/calendar/calendar.html',
+    })
     //Profile team changed here VVV
     .when('/fellows', {
         controller: 'FellowsController',

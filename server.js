@@ -5,8 +5,6 @@ var bodyParser = require('body-parser');
 //Import handelers for each thing
 var users = require('./nodeCode/users.js');
 
-
-
 var app = express();
 
 
@@ -14,7 +12,6 @@ var app = express();
 console.log("Setting port: ");
 app.set('port', (process.env.PORT || 5000));
 console.log('Port set: ' + app.get('port'));
-
 
 
 /** This makes getting Posted Data from req.body work */
