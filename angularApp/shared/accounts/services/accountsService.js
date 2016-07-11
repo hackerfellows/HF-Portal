@@ -11,7 +11,6 @@
 
     Accounts.$inject = ['$http', '$uibModal'];
     
-    console.log("tryin to make an Accounts :/");
     /**
      * @namespace Accounts
      * @returns {Service}
