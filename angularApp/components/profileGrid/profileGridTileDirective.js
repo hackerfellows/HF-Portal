@@ -9,10 +9,9 @@
     function profileGridTile() {
         console.log("profileGridTile");
         return {
-            restrict: 'AE',
-            replace: true,
-            scope: true,
-            templateUrl: 'profileGridTile.html'
+            restrict: 'E',
+            //scope: true,
+            templateUrl: '/components/profileGrid/profileGridTile.html'
         };
     }
 

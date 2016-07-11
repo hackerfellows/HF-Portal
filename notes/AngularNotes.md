@@ -1,6 +1,8 @@
 ##Hello Michael
 
 [Helpful Info Here](https://docs.angularjs.org/guide/di)
+- http://www.undefinednull.com/2014/02/11/mastering-the-scope-of-a-directive-in-angularjs/
+- http://stackoverflow.com/questions/15285635/how-to-use-replace-of-directive-definition
 
 In angularApp/components/home/controllers/homeController.js:
 
