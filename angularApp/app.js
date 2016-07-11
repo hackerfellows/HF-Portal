@@ -23,10 +23,6 @@ app.config(function($routeProvider, $locationProvider){
        controller: 'DashController',
        templateUrl: 'components/dash/dash.html',
     })
-    .when('/calendar', {
-       controller: 'CalendarController',
-       templateUrl: 'components/calendar/calendar.html',
-    })
     //Profile team changed here VVV
     .when('/fellows', {
         controller: 'FellowsController',
