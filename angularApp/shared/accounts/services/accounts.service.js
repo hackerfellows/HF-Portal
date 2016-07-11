@@ -29,19 +29,14 @@
 
         function startLogin() {
             loginModal = $uibModal.open({
-                replace: true,
+                backdrop: false,
                 templateUrl: '/shared/accounts/partials/login.html',
                 controller: 'LoginController'
-            });
-            loginModal.result.then(function(){
-                updateLoginStatus();
-                self.endLogin();
             });
         }
 
         function startRegistration() {
             registerModal = $uibModal.open({
-                replace: true,
                 templateUrl: '/shared/accounts/partials/register.html',
                 controller: 'RegisterController'
             });
