@@ -48,4 +48,8 @@
     .module('app.profile.directives', []);
   //End Profile
 
+  //Calendar
+  angular
+    .module('app.calendar', []);
+
 })();
