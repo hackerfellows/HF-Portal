@@ -9,13 +9,14 @@
         .module('app.accounts.services')
         .service('Accounts', Accounts);
 
-    Accounts.$inject = ['$http'];
-
+    Accounts.$inject = ['$http', '$uibModal'];
+    
+    console.log("tryin to make an Accounts :/");
     /**
      * @namespace Accounts
      * @returns {Service}
      */
-    function Accounts($http) {
+    function Accounts($http, $uibModal) {
         var loginModal = null;
         var registerModal = null;
 
@@ -27,18 +28,16 @@
         };
 
         function startLogin() {
-            loginModal = $modal.open({
-                templateUrl: '/source/app/accounts/partials/login.html',
+            loginModal = $uibModal.open({
+                backdrop: false,
+                templateUrl: '/shared/accounts/partials/login.html',
                 controller: 'LoginController'
-            });
-            loginModal.result.then(function(){
-                updateLoginStatus();
             });
         }
 
         function startRegistration() {
-            registerModal = $modal.open({
-                templateUrl: '/source/app/accounts/partials/register.html',
+            registerModal = $uibModal.open({
+                templateUrl: '/shared/accounts/partials/register.html',
                 controller: 'RegisterController'
             });
         }
