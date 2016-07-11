@@ -11,7 +11,7 @@
 //NOTE: Make sure these modules (app.moduleName) are defined in
 //      components/componentModules.js otherwise the page will not run
 var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile',
-    'app.profileGrid', 'app.calendar',]);
+    'app.profileGrid', 'app.calendar']);
 
 /**
  *   * @name config
