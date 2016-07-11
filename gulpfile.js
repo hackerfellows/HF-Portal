@@ -72,6 +72,7 @@ gulp.task('nodemon', function (cb) {
 
 	return nodemon({
 		script: 'server.js',
+		watch: ['server.js', 'nodeCode/*'],
 		legacyWatch: true
 	}).on('start', function () {
 		// to avoid nodemon being started multiple times
