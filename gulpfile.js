@@ -21,7 +21,8 @@ gulp.task('default', ['full-reload']);
 
 // after compiling web app and starting browser-sync,
 // watch for file changes and reload browser
-gulp.task('server', ['full-reload', 'nodemon', 'browser-sync'], function () {
+gulp.task('server', ['watch', 'nodemon', 'browser-sync']);
+gulp.task('watch', ['full-reload'], function () {
 	// watch for js file changes in app and run 'js' gulp task
 	gulp.watch("angularApp/**/*.js", ['js']);
 
