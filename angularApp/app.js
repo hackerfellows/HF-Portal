@@ -8,8 +8,6 @@
 //     'app.config', 'app.home', 'app.profile', 'app.profileGrid', 'app.tags', 'app.votes', 'app.alert' ])
 //     .run(run);
 
-
-
 (function () {
     //NOTE: Make sure these modules (app.moduleName) are defined in
     //      components/componentModules.js otherwise the page will not run
