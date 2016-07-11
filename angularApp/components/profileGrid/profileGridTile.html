@@ -6,29 +6,29 @@
 	Notes:				{{entity}} will be "fellows" or "companies"
 	-->
 
-<div class="grid-box fellow">
+<div class="grid-box ">
 	
 	<div class="photo">
-		<img class="img" ng-src={{fellow.image_url}} /><!--maybe use a $scope.image type thing?-->
+		<img class="img" ng-src={{item.image_url}} /><!--maybe use a $scope.image type thing?-->
 	</div>
 
 	<div class="info">
 		<!--some form of conditional that asks for first and last name if fellow, 
 		and just company.name otherwise-->
-		<h3 class="name">{{fellow.first_name +" "+ fellow.last_name}}</h3>
-		<p class="tagline">{{ entity.description }} | {{ entity.developer_type }}</p>
-		<div class="bio" ng-bind-html="helpers.paragraphize( entity.bio.substr(0, 350) ) | sanitize"></div>
+		<h3 class="name">{{item.first_name +" "+ item.last_name}}</h3>
+		<p class="tagline">{{ item.description }} | {{ item.developer_type }}</p>
+		<div class="bio" ng-bind-html="helpers.paragraphize( item.bio.substr(0, 350) ) | sanitize"></div>
 	</div>
 	
 	<div class="foot">
 		<div class="tagwrap">
-			<div class="tag fellow_tag " ng-repeat='tag in entity.tags | limitTo:6'>
+			<div class="tag fellow_tag " ng-repeat='tag in item.tags | limitTo:6'>
 				{{ tag.name }}
 			</div>
 		</div>
 		<div class="details-button">
 			<!--again, conditional for company name or fellow fname and lname-->
-			<a type="button" class="detButton"  ng-href="/#/entity/{{ entity.id }}/{{ helpers.slugify( entity.first_name + ' ' + entity.last_name ) }}">
+			<a type="button" class="detButton"  ng-href="/#/item/{{ item.id }}/{{ helpers.slugify( item.first_name + ' ' + item.last_name ) }}">
 				<i class="fa fa-plus fa-lg"></i> full profile
 			</a>
 		</div>

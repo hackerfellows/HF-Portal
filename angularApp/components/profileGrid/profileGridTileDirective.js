@@ -2,11 +2,12 @@
     'use strict';
 
     angular
-        .module('app.profile.directives')
+        .module('app.profileGrid.directives')
         .directive('profileGridTile', profileGridTile);
 
 
     function profileGridTile() {
+        console.log("profileGridTile");
         return {
             restrict: 'AE',
             replace: true,
