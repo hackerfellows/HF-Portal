@@ -11,3 +11,4 @@ process between fellows and startups.
 ## Contributing
 - [Getting Started](notes/GettingStarted.md)
 - [File Structure](notes/FileLayout.md)
+- [Running the Application](notes/Running.md)
