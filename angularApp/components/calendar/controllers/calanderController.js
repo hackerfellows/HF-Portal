@@ -1,5 +1,7 @@
 jQuery(document).ready(function($){
 
+  console.log("we are here, we are here, we are here");
+
   var timelineBlocks = $('.cd-timeline-block'),
   offset = 0.8;
 
@@ -28,13 +30,19 @@ jQuery(document).ready(function($){
 
 // var app = angular.module('CalendarController', []);
 
-console.log('will this show up');
+
 (function () {
+
     'use strict';
+    //console.log('inside "function"');
+
+    console.log('before controller call');
 
     angular
-      .module('app.calendar')
+      .module('app.calendar.controllers')
       .controller('CalendarController', CalendarController);
+
+      console.log('after controller call');
 
     CalendarController.$inject = ['$scope'];
 
@@ -42,6 +50,10 @@ console.log('will this show up');
      * @namespace CompaniesController
      */
     function CalendarController($scope, $http) {
+
+
+        console.log('inside function CalendarController');
+
         console.log("oh hai");
         $scope.events = [];
 
@@ -57,6 +69,8 @@ console.log('will this show up');
           // or server returns response with an error status.
         });
 
+
+        console.log('will this show up too');
 
         $scope.getSpreadsheetData = function() {
           console.log("Hello World");

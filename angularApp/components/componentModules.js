@@ -50,11 +50,14 @@
 
   //Calendar
   angular
-    .module('app.calander', [
-        'app.calander.controllers'
+    .module('app.calendar', [
+        'app.calendar.controllers'
         ]);
 
   angular
-    .module('app.calander.controllers', []);
+    .module('app.calendar.controllers', []);
+  //End Calendar
+
+
 
 })();
