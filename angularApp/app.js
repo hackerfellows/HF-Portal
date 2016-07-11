@@ -8,22 +8,24 @@
 //     'app.config', 'app.home', 'app.profile', 'app.profileGrid', 'app.tags', 'app.votes', 'app.alert' ])
 //     .run(run);
 
-//NOTE: Make sure these modules (app.moduleName) are defined in
-//      components/componentModules.js otherwise the page will not run
-var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile',
-    'app.profileGrid',  'app.navbar', 'app.accounts', 'app.calendar']);
 
 
-/**
- *   * @name config
- *     * @desc Define valid application routes
- *       */
-app.config(function($routeProvider, $locationProvider){
-    $routeProvider
-    .when('/', {
-        controller  : 'HomeController',
-        templateUrl : 'components/home/home.html'
-    })
+(function () {
+    //NOTE: Make sure these modules (app.moduleName) are defined in
+    //      components/componentModules.js otherwise the page will not run
+    var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
+        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar']);
+
+    /**
+     * @name config
+     * @desc Define valid application routes
+     **/
+    app.config(function($routeProvider, $locationProvider){
+        $routeProvider
+        .when('/', {
+            controller  : 'HomeController',
+            templateUrl : 'components/home/home.html'
+        })
     .when('/fellows', {
         controller: 'ProfileGridController',
         templateUrl: 'components/profileGrid/profileGrid.html',
@@ -47,8 +49,6 @@ app.config(function($routeProvider, $locationProvider){
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
     //                   that runs if the user is logged in and editing
     .otherwise({ redirectTo: '/' });
-<<<<<<< HEAD
 
-=======
->>>>>>> master
-});
+    });
+})();
