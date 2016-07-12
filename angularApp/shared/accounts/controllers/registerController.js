@@ -43,7 +43,6 @@
                             last_name: "",
                             user_id: user_id
                         };
-
                         //Insert user
                     }
                     else if( user.userType === "Company" ){

@@ -43,27 +43,42 @@
         }
 
         // On paths that require login, make sure the login is confirmed before the route is loaded.
-        var routeLoginCheck = function($q, $timeout, $http, $location, $rootScope, User){
+        var ensureLoggedIn = function($q, $timeout, $http, $location, $rootScope, User){
 
-            // Initialize a new promise
             var deferred = $q.defer();
 
-            // keep user logged in after page refresh
-            // Check backend for existing user in session and update User Service
             $http.get( '/api/v2/users/confirm-login' )
                 .success(function (user) {
-                    //console.log( user );
                     if (user && user.id) {
                         self.SetCredentials( user.id, user.email, user.userType );
                         deferred.resolve();
                     }
                     else{
-                        deferred.reject();
                         $location.url('/');
+                        deferred.reject();
                     }
                 });
             return deferred.promise;
         };
+
+        var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope, User){
+
+            var deferred = $q.defer();
+
+            $http.get( '/api/v2/users/confirm-login' )
+                .success(function (user) {
+                    if (user && user.id) {
+                        self.SetCredentials( user.id, user.email, user.userType );
+                        deferred.resolve();
+                    }
+                    else{
+                        currentUser = {};
+                        deferred.resolve();
+                    }
+                });
+            return deferred.promise;
+        };
+
 
         var updateLoginStatus = function(){
             $scope.isUserLoggedIn = User.isUserLoggedIn();
@@ -183,7 +198,9 @@
             isUserLoggedIn: isUserLoggedIn,
             isUserAdmin: isUserAdmin,
             isUserFellow: isUserFellow,
-            routeLoginCheck: routeLoginCheck,
+            ensureLoggedIn: ensureLoggedIn,
+            checkLoggedIn: checkLoggedIn,
+            //routeLoginCheck: routeLoginCheck,
             updateLoginStatus: updateLoginStatus,
             isUserCompany: isUserCompany
         };
