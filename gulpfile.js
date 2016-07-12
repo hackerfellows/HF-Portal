@@ -9,6 +9,7 @@ var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
+var order = require('gulp-order');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var proxy = require('proxy-middleware');
@@ -120,6 +121,11 @@ gulp.task('sass', function() {
 // annotating properly for angularjs, minifying
 gulp.task('js', function() {
 	return gulp.src(['angularApp/**/*.js', '!angularApp/assets/**'])
+		.pipe(order([
+			'app.js',
+			'**/*Modules.js',
+			'**/*.js'
+		]))
 		.pipe(concat('bundle.js'))
 		//.pipe(ngAnnotate())
 		//.pipe(uglify())

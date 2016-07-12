@@ -1,8 +1,3 @@
-/**
- * Fellows
- * @namespace app.fellows.services
- */
-
 /*  File name:      profileGridService.js
     Author:         Jessica Wu, Michael "The cool kid" Baldwin
     Description:    wraps all API calls in a class of helper functions

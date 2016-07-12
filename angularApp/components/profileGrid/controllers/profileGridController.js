@@ -39,8 +39,8 @@
            // console.log("List:", result);
         });
 
-        /*$scope.helpers = HFHelpers.helpers;
-
+        //$scope.helpers = HFHelpers;
+/*
         $scope.openModal = function (company) {
 
             $scope.company = company;
