@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.accounts.services')
+        .module('app.profile.services')
         .factory('User', User);
 
     User.$inject = ['$rootScope', '$http'];
@@ -17,7 +17,7 @@
      */
     function User($rootScope, $http) {
 
-        var rootUrl = '';
+        var rootUrl = ''; 
 
         // Will hold info for the currently logged in user
         var currentUser = {};

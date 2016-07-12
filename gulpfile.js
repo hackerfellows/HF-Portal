@@ -21,8 +21,7 @@ gulp.task('default', ['full-reload']);
 
 // after compiling web app and starting browser-sync,
 // watch for file changes and reload browser
-gulp.task('server', ['watch', 'nodemon', 'browser-sync']);
-gulp.task('watch', ['full-reload'], function () {
+gulp.task('server', ['full-reload', 'nodemon', 'browser-sync'], function () {
 	// watch for js file changes in app and run 'js' gulp task
 	gulp.watch("angularApp/**/*.js", ['js']);
 
@@ -110,7 +109,7 @@ gulp.task('img', function() {
 
 // compile  files into css and stream so that reloads
 gulp.task('sass', function() {
-	return gulp.src("angularApp/assets//*.")
+	return gulp.src("angularApp/assets/scss/*.scss")
     .pipe(sass({
       includePaths: require('node-bourbon').includePaths
     }))

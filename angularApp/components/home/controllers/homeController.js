@@ -5,7 +5,6 @@
 (function () {
   'use strict';
 
-
   angular
     .module('app.home.controllers')
     .controller('HomeController', HomeController);

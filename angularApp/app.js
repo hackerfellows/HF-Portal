@@ -11,7 +11,6 @@
 (function () {
     //NOTE: Make sure these modules (app.moduleName) are defined in
     //      components/componentModules.js otherwise the page will not run
-
     var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
         'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar']);
 
