@@ -19,6 +19,7 @@
      * @desc Define valid application routes
      **/
     app.config(function($routeProvider, $locationProvider){
+
         $routeProvider
         .when('/', {
             controller  : 'HomeController',

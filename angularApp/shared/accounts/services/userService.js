@@ -17,7 +17,7 @@
      */
     function User($rootScope, $http) {
 
-        var rootUrl = ''; 
+        var rootUrl = 'http://172.28.128.3:4000'; 
 
         // Will hold info for the currently logged in user
         var currentUser = {};
@@ -31,7 +31,7 @@
         }
 
         function getVotes( user_id ){
-            return $http.get(rootUrl + '/api/v1/users/' + user_id + '/votes' );
+            return $http.get(rootUrl + '/api/v2/users/' + user_id + '/votes' );
         }
 
         /**
@@ -39,7 +39,7 @@
          * @desc login a new user record
          */
         function login(user) {
-            return $http.post(rootUrl + '/api/v1/users/login', user);
+            return $http.post(rootUrl + '/api/v2/users/login', user);
         }
 
         // On paths that require login, make sure the login is confirmed before the route is loaded.
@@ -50,7 +50,7 @@
 
             // keep user logged in after page refresh
             // Check backend for existing user in session and update User Service
-            $http.get( '/api/v1/users/confirm-login' )
+            $http.get( '/api/v2/users/confirm-login' )
                 .success(function (user) {
                     //console.log( user );
                     if (user && user.id) {
@@ -80,7 +80,7 @@
         //
         //    return [];
         //
-        //    //return $http.get(rootUrl + '/api/v1/companies/');
+        //    //return $http.get(rootUrl + '/api/v2/companies/');
         //}
 
         /**
@@ -88,7 +88,7 @@
          * @desc get just one user
          */
         //function get(id) {
-        //    return $http.get(rootUrl + '/api/v1/users/' + parseInt(id) );
+        //    return $http.get(rootUrl + '/api/v2/users/' + parseInt(id) );
         //}
 
         /**
@@ -96,7 +96,7 @@
          * @desc create a new user record
          */
         function create(user) {
-            return $http.post(rootUrl + '/api/v1/users/create', user);
+            return $http.post(rootUrl + '/api/v2/users/create', user);
         }
 
         /**
@@ -104,7 +104,7 @@
          * @desc updatea a user record
          */
         function update(user) {
-            return $http.put(rootUrl + '/api/v1/users/' + user.id, user);
+            return $http.put(rootUrl + '/api/v2/users/' + user.id, user);
         }
 
         /**
@@ -112,7 +112,7 @@
          * @desc destroy a user record
          */
         function destroy(id) {
-            return $http.delete(rootUrl + rootUrl + '/api/v1/users/' + id);
+            return $http.delete(rootUrl + rootUrl + '/api/v2/users/' + id);
         }
 
         function isUserLoggedIn(){
@@ -156,7 +156,7 @@
         }
 
         function ClearCredentials() {
-            $http.get( rootUrl + '/api/v1/users/logout' ).then( function(){
+            $http.get( rootUrl + '/api/v2/users/logout' ).then( function(){
                 currentUser = {};
             });
             loginStatusChanged();

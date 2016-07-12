@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var pg = require('pg');
 var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt');
+var passport = require('passport');
 
 
 //Import handelers for each thing
@@ -17,6 +18,13 @@ var users = require('./nodeCode/routes/users');
 var models = require('./nodeCode/models');
 
 var app = express();
+
+// This must be done before passport is initialized
+app.use(require('express-session')({
+   secret: 'keyboard cat'
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 //Set app port

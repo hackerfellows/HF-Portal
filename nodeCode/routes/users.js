@@ -101,15 +101,29 @@ app.get( '/:user_id/votes', Middleware.isLoggedIn, function( req, res ){
 
 });
 
-// POST /users/login - try to login a user
-app.post('/login',
+app.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
 
-	passport.authenticate('local', {
-		successRedirect: '/api/v1/users/login/success',
-		failureRedirect: '/api/v1/users/login/failure'
-	})
+        var errJSON = {
+            success: false,
+            message: 'Invalid username or password.'
+        };
 
-);
+        if (err || !user) {
+            return res.json(errJSON);
+        };
+        req.logIn(user, function(err) {
+            if (err) {
+                return res.json(errJSON);
+            }
+            return res.json({
+                success: true,
+                user: req.session.passport.user
+            });
+        });
+    })(req, res, next);
+});
+
 
 // Check to see if a user is currently logged in, if so return their info
 app.get('/confirm-login', function (req, res) {
@@ -127,7 +141,6 @@ app.get('/confirm-login', function (req, res) {
 app.get( '/login/success', function( req, res ){
 
 	res.json({
-
 		success: true,
 		user: req.session.passport.user
 	});
