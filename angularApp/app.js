@@ -35,12 +35,7 @@
         .when('/', {
             controller  : 'HomeController',
             templateUrl : 'components/home/home.html',
-            resolve: {
-                checkLoggedIn: function(User){
-                    console.log('sdf');
-                    return User.checkLoggedIn();
-                },
-            },
+            resolve: { loggedIn: checkLoggedInWrapper },
         })
         .when('/fellows', {
             controller: 'ProfileGridController',
@@ -62,4 +57,10 @@
         //                   that runs if the user is logged in and editing
         .otherwise({ redirectTo: '/' });
     }]);
+
+    var checkLoggedInWrapper = function (User) {
+        console.log(User);
+        User.checkLoggedIn();
+    }
+
 })();

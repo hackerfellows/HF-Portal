@@ -9,13 +9,13 @@
         .module('app.profile.services')
         .factory('User', User);
 
-    User.$inject = ['$rootScope', '$http'];
+    User.$inject = ['$rootScope', '$http', '$q'];
 
     /**
      * @namespace User
      * @returns {Service}
      */
-    function User($rootScope, $http) {
+    function User($rootScope, $http, $q) {
         var provides = {
             //all: all,
             //get: get,
@@ -62,7 +62,7 @@
         }
 
         // On paths that require login, make sure the login is confirmed before the route is loaded.
-        var ensureLoggedIn = function($q, $timeout, $http, $location, $rootScope, User){
+        function ensureLoggedIn ($q, $timeout, $http, $location, $rootScope, User){
 
             var deferred = $q.defer();
 
@@ -78,16 +78,15 @@
                     }
                 });
             return deferred.promise;
-        };
+        }
 
-        var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope, User){
+        function checkLoggedIn (){
 
             var deferred = $q.defer();
-
             $http.get( '/api/v2/users/confirm-login' )
                 .success(function (user) {
                     if (user && user.id) {
-                        self.SetCredentials( user.id, user.email, user.userType );
+                        //self.SetCredentials( user.id, user.email, user.userType );
                         deferred.resolve();
                     }
                     else{
@@ -96,15 +95,15 @@
                     }
                 });
             return deferred.promise;
-        };
+        }
 
 
-        var updateLoginStatus = function(){
+        function updateLoginStatus(){
             $scope.isUserLoggedIn = User.isUserLoggedIn();
             $scope.isUserAdmin = User.isUserAdmin();
             $scope.isUserFellow = User.isUserFellow();
             $scope.isUserCompany = User.isUserCompany();
-        };
+        }
 
         /**
          * @name all
