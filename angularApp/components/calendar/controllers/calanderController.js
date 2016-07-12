@@ -27,6 +27,7 @@ jQuery(document).ready(function($){
   }
 });
 
+
 // Setup CalendarController
 (function () {
 
