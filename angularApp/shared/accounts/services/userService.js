@@ -17,8 +17,6 @@
      */
     function User($rootScope, $http) {
 
-        var rootUrl = 'http://172.28.128.3:4000'; 
-
         // Will hold info for the currently logged in user
         var currentUser = {};
 
@@ -31,7 +29,7 @@
         }
 
         function getVotes( user_id ){
-            return $http.get(rootUrl + '/api/v2/users/' + user_id + '/votes' );
+            return $http.get('/api/v2/users/' + user_id + '/votes' );
         }
 
         /**
@@ -39,7 +37,7 @@
          * @desc login a new user record
          */
         function login(user) {
-            return $http.post(rootUrl + '/api/v2/users/login', user);
+            return $http.post('/api/v2/users/login', user);
         }
 
         // On paths that require login, make sure the login is confirmed before the route is loaded.
@@ -95,7 +93,7 @@
         //
         //    return [];
         //
-        //    //return $http.get(rootUrl + '/api/v2/companies/');
+        //    //return $http.get('/api/v2/companies/');
         //}
 
         /**
@@ -103,7 +101,7 @@
          * @desc get just one user
          */
         //function get(id) {
-        //    return $http.get(rootUrl + '/api/v2/users/' + parseInt(id) );
+        //    return $http.get('/api/v2/users/' + parseInt(id) );
         //}
 
         /**
@@ -111,7 +109,7 @@
          * @desc create a new user record
          */
         function create(user) {
-            return $http.post(rootUrl + '/api/v2/users/create', user);
+            return $http.post('/api/v2/users/create', user);
         }
 
         /**
@@ -119,7 +117,7 @@
          * @desc updatea a user record
          */
         function update(user) {
-            return $http.put(rootUrl + '/api/v2/users/' + user.id, user);
+            return $http.put('/api/v2/users/' + user.id, user);
         }
 
         /**
@@ -127,7 +125,7 @@
          * @desc destroy a user record
          */
         function destroy(id) {
-            return $http.delete(rootUrl + rootUrl + '/api/v2/users/' + id);
+            return $http.delete('/api/v2/users/' + id);
         }
 
         function isUserLoggedIn(){
@@ -171,7 +169,7 @@
         }
 
         function ClearCredentials() {
-            $http.get( rootUrl + '/api/v2/users/logout' ).then( function(){
+            $http.get( '/api/v2/users/logout' ).then( function(){
                 currentUser = {};
             });
             loginStatusChanged();
