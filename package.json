@@ -17,6 +17,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^1.2.0",
     "multer": "^1.1.0",
+    "node-bourbon": "^4.2.8",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pg": "^6.0.2",

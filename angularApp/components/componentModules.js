@@ -46,6 +46,17 @@
 //    .module('app.profile.directives', []);
   //End Profile
 
+
+  //Calendar
+  angular
+    .module('app.calendar', [
+        'app.calendar.controllers'
+        ]);
+
+  angular
+    .module('app.calendar.controllers', []);
+  //End Calendar
+
   //Entities
    // angular
    //  .module('app.entities', [
@@ -53,6 +64,7 @@
    //    ]);
    //  angular
    //  .module('app.entities.services', []);
+
 
 
 })();

@@ -8,12 +8,12 @@
 //     'app.config', 'app.home', 'app.profile', 'app.profileGrid', 'app.tags', 'app.votes', 'app.alert' ])
 //     .run(run);
 
-
 (function () {
     //NOTE: Make sure these modules (app.moduleName) are defined in
     //      components/componentModules.js otherwise the page will not run
-    var app = angular.module('app', ['ngRoute', 'app.home', 'ui.bootstrap',
-        'app.profileGrid', 'app.navbar', 'app.accounts']);
+
+    var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
+        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar']);
 
     /**
      * @name config
@@ -41,8 +41,13 @@
         controller: 'ProfileController',
         templateUrl: 'components/profileSingle/profileSingle.html',
     })
+    .when('/calendar', {
+        controller: 'CalendarController',
+        templateUrl: 'components/calendar/calendar.html',
+    })
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
     //                   that runs if the user is logged in and editing
     .otherwise({ redirectTo: '/' });
+
     });
 })();
