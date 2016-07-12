@@ -107,9 +107,9 @@ gulp.task('img', function() {
 			.pipe(browserSync.stream());
 });
 
-// compile  files into css and stream so that reloads
+// compile scss files into css and stream so that reloads
 gulp.task('sass', function() {
-	return gulp.src("angularApp/assets//*.")
+  return gulp.src("angularApp/assets/scss/*.scss")
     .pipe(sass({
       includePaths: require('node-bourbon').includePaths
     }))
