@@ -14,35 +14,52 @@
     var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
         'app.profileGrid', 'app.navbar', 'app.accounts']);
 
+
+
+
+    //We use hashbangs here, not your terrible html5 urls
+    //app.config(['$locationProvider', function($locationProvider){
+    //    $locationProvider.html5Mode(false);
+    //    $locationProvider.hashPrefix('!');
+    //}]);
+
+
+
     /**
      * @name config
      * @desc Define valid application routes
      **/
-    app.config(function($routeProvider, $locationProvider){
+    app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         $routeProvider
         .when('/', {
             controller  : 'HomeController',
-            templateUrl : 'components/home/home.html'
+            templateUrl : 'components/home/home.html',
+            resolve: {
+                checkLoggedIn: function(User){
+                    console.log('sdf');
+                    return User.checkLoggedIn();
+                },
+            },
         })
-    .when('/fellows', {
-        controller: 'ProfileGridController',
-        templateUrl: 'components/profileGrid/profileGrid.html',
-    })
-    .when('/fellows/:fellow_id/:fellow_name', {
-        controller: 'ProfileController',
-        templateUrl: 'components/profileSingle/profileSingle.html',
-    })
-    .when('/companies', {
-        controller: 'ProfileGridController',
-        templateUrl: 'components/profileGrid/profileGrid.html',
-    })
-    .when('/companies/:company_id/:company_name', {
-        controller: 'ProfileController',
-        templateUrl: 'components/profileSingle/profileSingle.html',
-    })
-    //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
-    //                   that runs if the user is logged in and editing    
-    .otherwise({ redirectTo: '/' });
-    });
+        .when('/fellows', {
+            controller: 'ProfileGridController',
+            templateUrl: 'components/profileGrid/profileGrid.html',
+        })
+        .when('/fellows/:fellow_id/:fellow_name', {
+            controller: 'ProfileController',
+            templateUrl: 'components/profileSingle/profileSingle.html',
+        })
+        .when('/companies', {
+            controller: 'ProfileGridController',
+            templateUrl: 'components/profileGrid/profileGrid.html',
+        })
+        .when('/companies/:company_id/:company_name', {
+            controller: 'ProfileController',
+            templateUrl: 'components/profileSingle/profileSingle.html',
+        })
+        //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
+        //                   that runs if the user is logged in and editing
+        .otherwise({ redirectTo: '/' });
+    }]);
 })();

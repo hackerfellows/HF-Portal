@@ -16,7 +16,7 @@
      * @returns {Service}
      */
     function User($rootScope, $http) {
-		var provides = {
+        var provides = {
             //all: all,
             //get: get,
             getVotes: getVotes,
