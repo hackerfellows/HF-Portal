@@ -1,6 +1,11 @@
+<link rel="stylesheet" href="assets/css/calendar.css" type="text/css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
 
   <div ng-init="getSpreadsheetData()">
-hello world
     <section id="cd-timeline" class="cd-container">
       <div ng-cloak ng-repeat="event in events track by $index" class="cd-timeline-block">
         <div class='cd-timeline-img cd-picture' style="background:{{event.dot_color}}">
@@ -48,4 +53,28 @@ hello world
       </div> <!-- cd-timeline-block -->
 
     </section> <!-- cd-timeline -->
+  </div>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
