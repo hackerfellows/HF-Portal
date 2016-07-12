@@ -16,6 +16,27 @@
      * @returns {Service}
      */
     function User($rootScope, $http) {
+		var provides = {
+            //all: all,
+            //get: get,
+            getVotes: getVotes,
+            create: create,
+            login: login,
+            update: update,
+            destroy: destroy,
+            SetCredentials: SetCredentials,
+            ClearCredentials: ClearCredentials,
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser,
+            isUserLoggedIn: isUserLoggedIn,
+            isUserAdmin: isUserAdmin,
+            isUserFellow: isUserFellow,
+            ensureLoggedIn: ensureLoggedIn,
+            checkLoggedIn: checkLoggedIn,
+            //routeLoginCheck: routeLoginCheck,
+            updateLoginStatus: updateLoginStatus,
+            isUserCompany: isUserCompany
+        };
 
         // Will hold info for the currently logged in user
         var currentUser = {};
@@ -181,27 +202,7 @@
             $rootScope.$broadcast('loginStatusChanged');
         }
 
-        return {
-            //all: all,
-            //get: get,
-            getVotes: getVotes,
-            create: create,
-            login: login,
-            update: update,
-            destroy: destroy,
-            SetCredentials: SetCredentials,
-            ClearCredentials: ClearCredentials,
-            getCurrentUser: getCurrentUser,
-            setCurrentUser: setCurrentUser,
-            isUserLoggedIn: isUserLoggedIn,
-            isUserAdmin: isUserAdmin,
-            isUserFellow: isUserFellow,
-            ensureLoggedIn: ensureLoggedIn,
-            checkLoggedIn: checkLoggedIn,
-            //routeLoginCheck: routeLoginCheck,
-            updateLoginStatus: updateLoginStatus,
-            isUserCompany: isUserCompany
-        };
+		return provides;
     }
 
     // Base64 encoding service used by AuthenticationService
