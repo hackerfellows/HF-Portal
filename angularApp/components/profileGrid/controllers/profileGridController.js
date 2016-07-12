@@ -9,12 +9,12 @@
         .module('app.profileGrid.controllers')
         .controller('ProfileGridController', ProfileGridController);
 
-    ProfileGridController.$inject = ['$scope', '$location', 'Entities'];
+    ProfileGridController.$inject = ['$scope', '$location', 'Entities', 'HFHelpers'];
 
     /**
      * @namespace CompaniesController
      */
-    function ProfileGridController($scope, $location, Entities) {
+    function ProfileGridController($scope, $location, Entities, HFHelpers) {
 
         var whichEntity = "";
 
@@ -39,7 +39,7 @@
            // console.log("List:", result);
         });
 
-        //$scope.helpers = HFHelpers;
+        $scope.helpers = HFHelpers;
 /*
         $scope.openModal = function (company) {
 

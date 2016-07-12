@@ -22,7 +22,7 @@
 
 
         function slugify(str) {
-            return str.toString().toLowerCase()
+            return String(str).toLowerCase()
                 .replace(/\s+/g, '-')           // Replace spaces with -
                 .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
                 .replace(/\-\-+/g, '-')         // Replace multiple - with single -
