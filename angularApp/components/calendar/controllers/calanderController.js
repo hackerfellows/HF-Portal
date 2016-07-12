@@ -1,6 +1,5 @@
+// This jQuery comes from 'vertical-timeline' implementation by Sebastiano Guerriero from https://codyhouse.co/gem/vertical-timeline/
 jQuery(document).ready(function($){
-
-  console.log("we are here, we are here, we are here");
 
   var timelineBlocks = $('.cd-timeline-block'),
   offset = 0.8;
@@ -28,254 +27,126 @@ jQuery(document).ready(function($){
   }
 });
 
-// var app = angular.module('CalendarController', []);
-
-
+// Setup CalendarController
 (function () {
 
-    'use strict';
-    //console.log('inside "function"');
+  'use strict';
 
-    console.log('before controller call');
+  angular
+    .module('app.calendar.controllers')
+    .controller('CalendarController', CalendarController);
 
-    angular
-      .module('app.calendar.controllers')
-      .controller('CalendarController', CalendarController);
+  CalendarController.$inject = ['$scope', '$http'];
 
-      console.log('after controller call');
+  /**
+   * @namespace CompaniesController
+   */
+  function CalendarController($scope, $http) {
 
-    CalendarController.$inject = ['$scope', '$http'];
+    $scope.events = [];
 
-    /**
-     * @namespace CompaniesController
-     */
-    function CalendarController($scope, $http) {
+    var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
+    $http({
+      method: 'GET',
+      url: url
+    }).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
 
+    // Grab the event JSON from our google spreadsheet URL
+    $scope.getSpreadsheetData = function() {
+      $scope.webjson = $.getJSON(url, function(data){
 
-        console.log('inside function CalendarController');
+        //grab spreadsheet data from google sheet
+        $scope.spreadsheet = data;
+        var entry_array = data.feed.entry;
 
-        console.log("oh hai");
-        $scope.events = [];
+        var idCounter = 0;
+        $scope.showMoreInfo = [];
+        $scope.hasOutsideLink = [];
+        // Loop through the entries from the spreadsheet JSON
+        for (var entry in entry_array) {
 
-        var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
-        $http({
-          method: 'GET',
-          url: url
-        }).then(function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
+          // Grab elements from JSON
+          var description = entry_array[entry].gsx$description.$t;
+          var title       = entry_array[entry].gsx$title.$t;
+          var date        = entry_array[entry].gsx$date.$t.split(",");
+          var time        = entry_array[entry].gsx$time.$t;
+          var icon        = entry_array[entry].gsx$icon.$t;
+          var dot_color   = entry_array[entry].gsx$dotcolor.$t;
+          var information = entry_array[entry].gsx$information.$t;
+          var outsideLink = entry_array[entry].gsx$outsidelink.$t;
+          var id          = idCounter++;
 
+          // Uncomment to show JSON from google sheet
+          //console.log(information)
 
-        console.log('will this show up too');
+          // Replace icon spaces with underscores
+          var icon        = icon.replace(/ /g,"_");
 
-        $scope.getSpreadsheetData = function() {
-          console.log("Hello World");
-          $scope.webjson = $.getJSON(url, function(data){
+          // Make datetime variable from concatnated date + time if time is listed
+          var datetime = date[0];
+          if (time != "") {
+            datetime += " at " + time ;
+          }
 
-            //grab spreadsheet data from google sheet
-            $scope.spreadsheet = data;
-            var entry_array = data.feed.entry;
+          // Get the current Date and the event date for comparison
+          var curDate = new Date();
+          var curDateString = (curDate.getMonth()+1) + " " + curDate.getDate() + " " + curDate.getFullYear();
+          curDate = new Date(curDateString);
+          var eventDate = new Date(date[0] + date[1]);
 
-            var idCounter = 0;
-            $scope.showMoreInfo = [];
-            $scope.hasOutsideLink = [];
-            // Loop through the entries from the spreadsheet JSON
-            for (var entry in entry_array) {
+          $scope.showMoreInfo.push(information != "");
+          $scope.hasOutsideLink.push(outsideLink != "");
 
-              // Grab elements from JSON
-              var description = entry_array[entry].gsx$description.$t;
-              var title       = entry_array[entry].gsx$title.$t;
-              var date        = entry_array[entry].gsx$date.$t.split(",");
-              var time        = entry_array[entry].gsx$time.$t;
-              var icon        = entry_array[entry].gsx$icon.$t;
-              var dot_color   = entry_array[entry].gsx$dotcolor.$t;
-              var information = entry_array[entry].gsx$information.$t;
-              var outsideLink = entry_array[entry].gsx$outsidelink.$t;
-              var id          = idCounter++;
-              console.log(information)
-              // Replace icon spaces with underscores
-              var icon        = icon.replace(/ /g,"_");
+          // Uncomment to show individual entries
+          //console.log(entry_array[entry]);
+          //console.log($scope.showMoreInfo[id]);
 
-              // Make datetime variable from concatnated date + time if time is listed
-              var datetime = date[0];
-                if (time != "") {
-                  datetime += " at " + time ;
-                }
-
-              // Get the current Date and the event date for comparison
-              var curDate = new Date();
-              var curDateString = (curDate.getMonth()+1) + " " + curDate.getDate() + " " + curDate.getFullYear();
-              curDate = new Date(curDateString);
-              var eventDate = new Date(date[0] + date[1]);
-
-              $scope.showMoreInfo.push(information != "");
-              $scope.hasOutsideLink.push(outsideLink != "");
-              console.log(entry_array[entry]);
-              console.log($scope.showMoreInfo[id]);
-
-              // Only show events that are happening today or later
-              if (curDate <= eventDate)
-              {
-                // Push elements to JS array for angular to use
-                $scope.events.push({
-                  "title":title,
-                  "description":description,
-                  "datetime":datetime,
-                  "icon":icon,
-                  "dot_color":dot_color,
-                  "information":information,
-                  "id":id,
-                  "eventDate":eventDate,
-                  "outsideLink":outsideLink
-                });
-
-
-              }
-
-
-              $scope.render = function(time) {
-                return condition ? "This is rendered when condition == TRUE" : "This is rendered when condition == FALSE";
-              };
-
-            } /* end of for loop*/
-
-            // Sorts the items by date
-            $scope.events.sort(function (a, b) {
-              if (a.eventDate > b.eventDate) {
-                return 1;
-              }
-              if (a.eventDate < b.eventDate) {
-                return -1;
-              }
-              // a must be equal to b
-              return 0;
+          // Only show events that are happening today or later
+          if (curDate <= eventDate)
+          {
+            // Push elements to JS array for angular to use
+            $scope.events.push({
+              "title":title,
+              "description":description,
+              "datetime":datetime,
+              "icon":icon,
+              "dot_color":dot_color,
+              "information":information,
+              "id":id,
+              "eventDate":eventDate,
+              "outsideLink":outsideLink
             });
 
-          }) /*end of getJSON function */
+
+          }
 
 
-          //console.log($scope.events);
+          $scope.render = function(time) {
+            return condition ? "This is rendered when condition == TRUE" : "This is rendered when condition == FALSE";
+          };
 
-        }
+        } /* end of for loop*/
 
-        //define dot colors
+        // Sorts the items by date
+        $scope.events.sort(function (a, b) {
+          if (a.eventDate > b.eventDate) {
+            return 1;
+          }
+          // Only show date-relevant events
+          if (a.eventDate < b.eventDate) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
 
-
-    }
-
-
+      }) /*end of getJSON function */
+    } /*end spreadsheetData function*/
+  } /*end function CalendarController()*/
 })();
-
-// app.controller('CalendarController', function($scope, $http) {
-//   $scope.events = [];
-//
-//   var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
-//   $http({
-//     method: 'GET',
-//     url: url
-//   }).then(function successCallback(response) {
-//     // this callback will be called asynchronously
-//     // when the response is available
-//   }, function errorCallback(response) {
-//     // called asynchronously if an error occurs
-//     // or server returns response with an error status.
-//   });
-//
-//
-//   $scope.getSpreadsheetData = function() {
-//     console.log("Hello World");
-//     $scope.webjson = $.getJSON(url, function(data){
-//
-//       //grab spreadsheet data from google sheet
-//       $scope.spreadsheet = data;
-//       var entry_array = data.feed.entry;
-//
-//       var idCounter = 0;
-//       $scope.showMoreInfo = [];
-//       $scope.hasOutsideLink = [];
-//       // Loop through the entries from the spreadsheet JSON
-//       for (var entry in entry_array) {
-//
-//         // Grab elements from JSON
-//         var description = entry_array[entry].gsx$description.$t;
-//         var title       = entry_array[entry].gsx$title.$t;
-//         var date        = entry_array[entry].gsx$date.$t.split(",");
-//         var time        = entry_array[entry].gsx$time.$t;
-//         var icon        = entry_array[entry].gsx$icon.$t;
-//         var dot_color   = entry_array[entry].gsx$dotcolor.$t;
-//         var information = entry_array[entry].gsx$information.$t;
-//         var outsideLink = entry_array[entry].gsx$outsidelink.$t;
-//         var id          = idCounter++;
-//         console.log(information)
-//         // Replace icon spaces with underscores
-//         var icon        = icon.replace(/ /g,"_");
-//
-//         // Make datetime variable from concatnated date + time if time is listed
-//         var datetime = date[0];
-//           if (time != "") {
-//             datetime += " at " + time ;
-//           }
-//
-//         // Get the current Date and the event date for comparison
-//         var curDate = new Date();
-//         var curDateString = (curDate.getMonth()+1) + " " + curDate.getDate() + " " + curDate.getFullYear();
-//         curDate = new Date(curDateString);
-//         var eventDate = new Date(date[0] + date[1]);
-//
-//         $scope.showMoreInfo.push(information != "");
-//         $scope.hasOutsideLink.push(outsideLink != "");
-//         console.log(entry_array[entry]);
-//         console.log($scope.showMoreInfo[id]);
-//
-//         // Only show events that are happening today or later
-//         if (curDate <= eventDate)
-//         {
-//           // Push elements to JS array for angular to use
-//           $scope.events.push({
-//             "title":title,
-//             "description":description,
-//             "datetime":datetime,
-//             "icon":icon,
-//             "dot_color":dot_color,
-//             "information":information,
-//             "id":id,
-//             "eventDate":eventDate,
-//             "outsideLink":outsideLink
-//           });
-//
-//
-//         }
-//
-//
-//         $scope.render = function(time) {
-//           return condition ? "This is rendered when condition == TRUE" : "This is rendered when condition == FALSE";
-//         };
-//
-//       } /* end of for loop*/
-//
-//       // Sorts the items by date
-//       $scope.events.sort(function (a, b) {
-//         if (a.eventDate > b.eventDate) {
-//           return 1;
-//         }
-//         if (a.eventDate < b.eventDate) {
-//           return -1;
-//         }
-//         // a must be equal to b
-//         return 0;
-//       });
-//
-//     }) /*end of getJSON function */
-//
-//
-//     //console.log($scope.events);
-//
-//   }
-//
-//   //define dot colors
-//
-// });
