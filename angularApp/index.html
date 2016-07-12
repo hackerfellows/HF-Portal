@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
     <head>
         <title>Hacker Fellows Portal</title>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
@@ -27,11 +28,16 @@
         <!-- Header Font -->
         <link href='https://fonts.googleapis.com/css?family=Dosis:400,600,700' rel='stylesheet' type='text/css'>
 
+        <!-- JQuery for calendar -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
         <!--link rel="stylesheet" href="public/assets/stylesheets/vendor/select.min.css"-->
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
 
         <!--TODO: bundle up all the stuff here VVVV -->
+
         <script src="assets/js/bundle.js"></script>
         <!--End bundle ^^^^^^^ -->
 
@@ -89,12 +95,13 @@
                     </div>
                 </nav>
             </div>
+            <div class="container main-content" ng-view=""></div>
         </div>
-        <div class="container main-content" ng-view=""></div>
 
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
 </html>
