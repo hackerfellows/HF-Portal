@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
 
+
+<html lang="en" ng-app="app">
     <head>
         <title>Hacker Fellows Portal</title>
 
@@ -11,10 +12,6 @@
 
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
-
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css"/>
@@ -28,17 +25,9 @@
         <!-- Header Font -->
         <link href='https://fonts.googleapis.com/css?family=Dosis:400,600,700' rel='stylesheet' type='text/css'>
 
-        <!-- JQuery for calendar -->
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script>
-
         <!--link rel="stylesheet" href="public/assets/stylesheets/vendor/select.min.css"-->
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
 
-        <!--TODO: bundle up all the stuff here VVVV -->
-
-        <script src="assets/js/bundle.js"></script>
-        <!--End bundle ^^^^^^^ -->
 
         <!--
         <link rel="stylesheet" href="public/assets/stylesheets/vendor/bootstrap-switch.min.css">
@@ -47,60 +36,85 @@
     </head>
 
     <body>
-        <div ng-app="app">
-            <div ng-controller="NavbarController">
-                <nav class="navbar navbar-inverse navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuitem"
+        <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavbarController">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuitem"
                                 aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div id="menuitem" class="collapse navbar-collapse ">
-                            <ul class="nav navbar-nav navbar-left">
-                                <li class="listitem" ng-hide="isUserLoggedIn">
-                                    <a href="/#/">Home</a>
-                                </li>
-                                <li class="listitem" ng-hide="isUserLoggedIn">
-                                    <a ng-href="/#/#apply-section" ng-click="scrollTo('apply-section')">Apply</a>
-                                </li>
-                                <li class="listitem" ng-hide="isUserLoggedIn">
-                                    <a ng-href="/#/#employers-section" ng-click="scrollTo('start-ups-section')">Start-Ups</a>
-                                </li>
-                                <li class="listitem" ng-hide="isUserLoggedIn">
-                                    <a ng-href="/#/#faq-section" ng-click="scrollTo('faq-section')">FAQ</a>
-                                </li>
-                                <li class="listitem" ng-hide="isUserLoggedIn">
-                                    <a ng-href="/#/#fellows-section" ng-click="scrollTo('fellows-section')">2015
-                                        Fellows</a>
-                                </li>
-                                <li class="listitem"><a href="/#/fellows" ng-show="isUserLoggedIn">2016 Fellows</a></li>
-                                <li class="listitem"><a href="/#/companies" ng-show="isUserLoggedIn">Companies</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right" class="navbar-collapse collapse">
-                                <li ng-hide="isUserLoggedIn"><a href="" ng-click="openLoginModal()">Login</a></li>
-                                <li ng-show="isUserLoggedIn && !isUserAdmin"><a href="/#/votes">Votes</a> </li>
-                                <li ng-show="isUserFellow"><a href="/#/profile/fellow">Profile</a></li>
-                                <li ng-show="isUserCompany"><a href="/#/profile/company">Profile</a></li>
-                                <li ng-show="isUserAdmin"><a href="/#/profile/admin">Users</a></li>
-                                <li ng-show="isUserAdmin"><a href="/#/tags">Tags</a></li>
-                                <li ng-show="isUserLoggedIn"><a href="" ng-click="logoutUser()">Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"/>
+                        <span class="icon-bar"/>
+                        <span class="icon-bar"/>
+                    </button>
+                </div>
+                <div id="menuitem" class="collapse navbar-collapse ">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="listitem" ng-hide="isUserLoggedIn">
+                            <a href="/#/">Home</a>
+                        </li>
+                        <li class="listitem" ng-hide="isUserLoggedIn">
+                            <a ng-href="/#/#apply-section" ng-click="scrollTo('apply-section')">Apply</a>
+                        </li>
+                        <li class="listitem" ng-hide="isUserLoggedIn">
+                            <a ng-href="/#/#employers-section" ng-click="scrollTo('start-ups-section')">Start-Ups</a>
+                        </li>
+                        <li class="listitem" ng-hide="isUserLoggedIn">
+                            <a ng-href="/#/#faq-section" ng-click="scrollTo('faq-section')">FAQ</a>
+                        </li>
+                        <li class="listitem" ng-hide="isUserLoggedIn">
+                            <a ng-href="/#/#fellows-section" ng-click="scrollTo('fellows-section')">2015
+                                            Fellows</a>
+                        </li>
+                        <li class="listitem">
+                            <a href="/#/fellows" ng-show="isUserLoggedIn">2016 Fellows</a>
+                        </li>
+                        <li class="listitem">
+                            <a href="/#/companies" ng-show="isUserLoggedIn">Companies</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" class="navbar-collapse collapse">
+                        <li ng-hide="isUserLoggedIn">
+                            <a href="" ng-click="openLoginModal()">Login</a>
+                        </li>
+                        <li ng-show="isUserLoggedIn && !isUserAdmin">
+                            <a href="/#/votes">Votes</a>
+                        </li>
+                        <li ng-show="isUserFellow">
+                            <a href="/#/profile/fellow">Profile</a>
+                        </li>
+                        <li ng-show="isUserCompany">
+                            <a href="/#/profile/company">Profile</a>
+                        </li>
+                        <li ng-show="isUserAdmin">
+                            <a href="/#/profile/admin">Users</a>
+                        </li>
+                        <li ng-show="isUserAdmin">
+                            <a href="/#/tags">Tags</a>
+                        </li>
+                        <li ng-show="isUserLoggedIn">
+                            <a href="" ng-click="logoutUser()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="container main-content" ng-view=""></div>
-        </div>
+        </nav>
+
+        <div class="container main-content" ng-view=""/>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"/>
+        <!--TODO: bundle up all the stuff here VVVV -->
+        <script src="assets/js/bundle.js"/>
+        <!--End bundle ^^^^^^^ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"/>
+        <!-- JQuery for calendar -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script>
 
     </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
 
 </html>
+
