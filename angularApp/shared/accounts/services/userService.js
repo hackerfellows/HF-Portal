@@ -6,18 +6,18 @@
     'use strict';
 
     angular
-        .module('app.profile.services')
+        .module('app.accounts.services')
         .factory('User', User);
 
-    User.$inject = ['$rootScope', '$http', 'CONFIG'];
+    User.$inject = ['$rootScope', '$http'];
 
     /**
      * @namespace User
      * @returns {Service}
      */
-    function User($rootScope, $http, CONFIG) {
+    function User($rootScope, $http) {
 
-        var rootUrl = CONFIG.SERVICE_URL;
+        var rootUrl = '';
 
         // Will hold info for the currently logged in user
         var currentUser = {};
@@ -43,35 +43,34 @@
         }
 
         // On paths that require login, make sure the login is confirmed before the route is loaded.
-        var checkLoggedin = function($q, $timeout, $http, $location, $rootScope, CONFIG, User){
+        var routeLoginCheck = function($q, $timeout, $http, $location, $rootScope, User){
 
             // Initialize a new promise
             var deferred = $q.defer();
 
             // keep user logged in after page refresh
             // Check backend for existing user in session and update User Service
-            $http.get( CONFIG.SERVICE_URL + '/api/v1/users/confirm-login' )
+            $http.get( '/api/v1/users/confirm-login' )
                 .success(function (user) {
-
                     //console.log( user );
-
                     if (user && user.id) {
-
                         self.SetCredentials( user.id, user.email, user.userType );
                         deferred.resolve();
                     }
                     else{
-
                         deferred.reject();
                         $location.url('/');
                     }
-
                 });
-
             return deferred.promise;
         };
 
-
+        var updateLoginStatus = function(){
+            $scope.isUserLoggedIn = User.isUserLoggedIn();
+            $scope.isUserAdmin = User.isUserAdmin();
+            $scope.isUserFellow = User.isUserFellow();
+            $scope.isUserCompany = User.isUserCompany();
+        };
 
         /**
          * @name all
@@ -184,6 +183,8 @@
             isUserLoggedIn: isUserLoggedIn,
             isUserAdmin: isUserAdmin,
             isUserFellow: isUserFellow,
+            routeLoginCheck: routeLoginCheck,
+            updateLoginStatus: updateLoginStatus,
             isUserCompany: isUserCompany
         };
     }

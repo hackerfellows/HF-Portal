@@ -85,6 +85,7 @@ app.config(function($routeProvider, $locationProvider){
         templateUrl: 'source/app/votes/partials/company-votes.html',
         resolve: { loggedIn: checkLoggedin }
     })
+<<<<<<< HEAD
     .otherwise({ redirectTo: '/' });
 
 });
@@ -222,3 +223,15 @@ app.filter('propsFilter', function() {
         return out;
     };
 });
+=======
+    .when('/calendar', {
+        controller: 'CalendarController',
+        templateUrl: 'components/calendar/calendar.html',
+    })
+    //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
+    //                   that runs if the user is logged in and editing
+    .otherwise({ redirectTo: '/' });
+
+    });
+})();
+>>>>>>> master

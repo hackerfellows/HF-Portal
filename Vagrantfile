@@ -11,6 +11,13 @@ Vagrant.configure("2") do |config|
 	# virtual machine name
 	config.vm.host_name = "hfportal"
 
+
+	#use more memory for mac npm issue
+	config.vm.provider "virtualbox" do |v|
+		v.memory = 1024
+	end
+
+
 	# start provisioning the virtual machine
 	config.vm.provision "shell", inline: <<SCRIPT
 		echo I am provisioning...
@@ -27,14 +34,16 @@ SCRIPT
 	config.vm.provision "shell", inline: <<SCRIPT
 	apt-get install g++ -y
 	npm install -g gulp
-	cd /srv/hf
-	rm -rf node_modules/
+	echo "done with provision chunk"
 SCRIPT
 
 	# This will be run every time the server is up up
-	config.vm.provision :shell, inline: "cd /srv/hf; npm install",
+	config.vm.provision :shell, inline: "echo 'installing npm things'; cd /srv/hf; npm install",
 		run: "always"
 
 	# use virtual private network
 	config.vm.network "private_network", type: "dhcp"
+	#config.vm.network "forwarded_port", guest: 5432, host: 15432
+	#config.vm.network "forwarded_port", guest: 4000, host: 4000
+	#config.vm.network "forwarded_port", guest: 5000, host: 5000
 end

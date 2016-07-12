@@ -5,29 +5,31 @@
 (function () {
   'use strict';
 
+
   angular
     .module('app.home.controllers')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', 'Fellows'];
+  HomeController.$inject = ['$scope'];
 
   /**
   * @namespace HomeController
   */
-  function HomeController($scope, Fellows) {
+  function HomeController($scope) {
 
-    var vm = this;
+//    var vm = this;
+  console.log("in the home controller");
 
     //Fellows.all().success(function(fellows){
     //
     //  $scope.fellows = fellows;
     //});
 
-    activate();
+    // activate();
 
-    function activate() {
-      //console.log('activated home controller!');
-      //Home.all();
-    }
+    // function activate() {
+    //   //console.log('activated home controller!');
+    //   //Home.all();
+    // }
   }
 })();

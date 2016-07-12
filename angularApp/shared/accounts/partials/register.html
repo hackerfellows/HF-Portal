@@ -1,19 +1,12 @@
-
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title">New User</h4>
-</div>
-
 <div class="modal-body box-modal hfmodal">
-
-    <div class="alert alert-danger" role="alert" ng-show="errors.length">
-
-        <p ng-repeat="error in errors">{{ error }}</p>
-
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">New User</h4>
     </div>
-
+    <div class="alert alert-danger" role="alert" ng-show="errors.length">
+        <p ng-repeat="error in errors">{{ error }}</p>
+    </div>
     <form name="newUserForm" ng-submit="submitForm(userForm.$valid)" novalidate>
-
         <div class="form-group">
             <label for="email">User Email:</label>
             <input type="email"
@@ -25,7 +18,6 @@
             ng-class="{ 'has-error' : newUserForm.email.$invalid && !newUserForm.email.$pristine }">
             <p ng-show="newUserForm.email.$invalid && !newUserForm.email.$pristine" class="text-danger">A valid email is required.</p>
         </div>
-
         <div class="form-group">
             <label for="password">User Password:</label>
             <input type="password"
@@ -37,7 +29,6 @@
             ng-class="{ 'has-error' : newUserForm.password.$invalid && !newUserForm.password.$pristine }">
             <p ng-show="newUserForm.password.$invalid && !newUserForm.password.$pristine" class="text-danger">A password is required.</p>
         </div>
-
         <div class="form-group">
             <label for="password">Verify Password:</label>
             <input type="password"
@@ -49,7 +40,6 @@
             ng-class="{ 'has-error' : newUserForm.password.$invalid && !newUserForm.password.$pristine }">
             <p ng-show="newUserForm.password.$invalid && !newUserForm.password.$pristine" class="text-danger">A password is required.</p>
         </div>
-
         <div class="radio">
             <label>
                 <input type="radio"
@@ -73,11 +63,9 @@
             </label>
         </div>
         <p ng-show="newUserForm.userType.$invalid && !newUserForm.userType.$pristine" class="text-danger">A user type is required.</p>
-
     </form>
-</div>
-
-<div class="modal-footer">
-    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-    <button class="btn btn-primary" ng-click="create(user)" ng-disabled="newUserForm.$invalid">Create Account</button>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="create(user)" ng-disabled="newUserForm.$invalid">Create Account</button>
+    </div>
 </div>

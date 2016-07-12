@@ -9,21 +9,37 @@
         .module('app.profileGrid.controllers')
         .controller('ProfileGridController', ProfileGridController);
 
-    ProfileGridController.$inject = ['$scope', '$modal', 'Companies'];
+    ProfileGridController.$inject = ['$scope', '$location', 'Entities'];
 
     /**
      * @namespace CompaniesController
      */
-    function ProfileGridController($scope, $modal, Companies) {
-        console.log("HEYYY CONTROLLER");
-        
+    function ProfileGridController($scope, $location, Entities) {
 
-        Companies.all().success(function (companies) {
+        var whichEntity = "";
 
-            $scope.companies = companies;
+        //Decide if the path is /fellows or /companies
+        if($location.path() === "/fellows"){
+            $scope.entitySingular = "Fellow";
+            $scope.entityPlural = "Fellows";
+            whichEntity = "Fellows";
+        } else if ($location.path() === "/companies"){
+            $scope.entitySingular = "Company";
+            $scope.entityPlural = "Companies";
+            whichEntity = "Companies";
+        } else {
+            //Throw an error
+        }
+
+//////////////////////////////////////////////////////////////////////////
+
+        Entities.allWithUser(whichEntity).success(function (result) {
+
+            $scope.entityList = result;
+           // console.log("List:", result);
         });
 
-        $scope.helpers = HFHelpers.helpers;
+        /*$scope.helpers = HFHelpers.helpers;
 
         $scope.openModal = function (company) {
 
@@ -43,14 +59,14 @@
             });
 
         };
-
+*/
     }
 
     /**
      * Companies Modal Instance Controller
      * @namespace app.fellows.controllers
      */
-
+/*
     angular
         .module('app.companies.controllers')
         .controller('CompaniesModalInstanceController', CompaniesModalInstanceController);
@@ -72,5 +88,5 @@
 
 
     }
-
+*/
 })();

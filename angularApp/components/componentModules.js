@@ -26,37 +26,56 @@
   //ProfileGrid
   angular
     .module('app.profileGrid', [
-        'app.profileGrid.controllers',
         'app.profileGrid.services',
+        'app.profileGrid.controllers',
         'app.profileGrid.directives'
         ]);
 
   angular
-    .module('app.profileGrid.controllers', []);
-
-  angular
     .module('app.profileGrid.services', []);
-
+  angular
+    .module('app.profileGrid.controllers', []);
   angular
     .module('app.profileGrid.directives', []);
   //End ProfileGrid
 
   //Profile
+  // angular
+  //   .module('app.profile', [
+  //       'app.profile.controllers',
+  //       'app.profile.services',
+  //       'app.profile.directives'
+  //       ]);
+
+  // angular
+  //   .module('app.profile.controllers', []);
+
+  // angular
+  //   .module('app.profile.services', []);
+
+  // angular
+//    .module('app.profile.directives', []);
+  //End Profile
+
+
+  //Calendar
   angular
-    .module('app.profile', [
-        'app.profile.controllers',
-        'app.profile.services',
-        'app.profile.directives'
+    .module('app.calendar', [
+        'app.calendar.controllers'
         ]);
 
   angular
-    .module('app.profile.controllers', []);
+    .module('app.calendar.controllers', []);
+  //End Calendar
 
-  angular
-    .module('app.profile.services', []);
+  //Entities
+   // angular
+   //  .module('app.entities', [
+   //    'app.entities.services'
+   //    ]);
+   //  angular
+   //  .module('app.entities.services', []);
 
-  angular
-    .module('app.profile.directives', []);
-  //End Profile
+
 
 })();
