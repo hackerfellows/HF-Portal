@@ -58,6 +58,18 @@
     .module('app.calendar.controllers', []);
   //End Calendar
 
+  //admin
+  angular
+    .module('app.admin', [
+        'app.admin.controllers',
+        'app.admin.services'
+        ]);
+
+  angular
+    .module('app.admin.controllers', []);
+  angular
+    .module('app.admin.services', []);
+  //End admin
 
 
 })();
