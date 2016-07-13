@@ -30,8 +30,6 @@
             User.clearCredentials().then(function () {
                 updateLoginStatus();
             });
-        }
+        };
     }
-
-
 })();
