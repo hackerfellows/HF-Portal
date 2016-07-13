@@ -17,8 +17,6 @@
      */
     function User($rootScope, $http, $q) {
         var provides = {
-            //all: all,
-            //get: get,
             getVotes: getVotes,
             create: create,
             login: login,
@@ -31,9 +29,9 @@
             isUserLoggedIn: isUserLoggedIn,
             isUserAdmin: isUserAdmin,
             isUserFellow: isUserFellow,
+            isUserAccepted: isUserAccepted,
             ensureLoggedIn: ensureLoggedIn,
             checkLoggedIn: checkLoggedIn,
-            //routeLoginCheck: routeLoginCheck,
             updateLoginStatus: updateLoginStatus,
             isUserCompany: isUserCompany
         };
