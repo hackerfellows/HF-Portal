@@ -52,6 +52,7 @@
                         };
                         //Insert company
                     }
+                    $uibModalInstance.dismiss('create');
                 }, function( response ){
                     // create user error callback
                     console.log( response );
