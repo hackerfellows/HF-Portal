@@ -4,7 +4,7 @@
 
 
 
-  <div ng-init="getSpreadsheetData()">
+  <div ng-init="getSpreadsheetData('1')">
     <section id="cd-timeline" class="cd-container">
       <div ng-cloak ng-repeat="event in events track by $index" class="cd-timeline-block">
         <div class='cd-timeline-img cd-picture' style="background:{{event.dot_color}}">

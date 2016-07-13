@@ -45,8 +45,8 @@ jQuery(document).ready(function($){
   function CalendarController($scope, $http) {
 
     $scope.events = [];
+  var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
 
-    var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
     $http({
       method: 'GET',
       url: url
@@ -59,7 +59,8 @@ jQuery(document).ready(function($){
     });
 
     // Grab the event JSON from our google spreadsheet URL
-    $scope.getSpreadsheetData = function() {
+    $scope.getSpreadsheetData = function(number) {
+      var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+number+'/public/values?alt=json';
       $scope.webjson = $.getJSON(url, function(data){
 
         //grab spreadsheet data from google sheet
