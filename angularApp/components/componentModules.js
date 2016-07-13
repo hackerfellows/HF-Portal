@@ -1,4 +1,7 @@
-// Each component's modules should be declared in this
+/*  File name:      componentModules.js
+    Author:         Jessica Wu, Michael Baldwin
+    Description:    Every component needs to declare its modules here
+*/
 
 (function () {
   'use strict';
@@ -74,20 +77,20 @@
 
   //Profile
   angular
-    .module('app.profile', [
-        'app.profile.controllers',
-        'app.profile.services',
-        'app.profile.directives'
+    .module('app.profileSingle', [
+        'app.profileSingle.controllers',
+        'app.profileSingle.services',
+        'app.profileSingle.directives'
         ]);
 
   angular
-    .module('app.profile.controllers', []);
+    .module('app.profileSingle.controllers', []);
 
   angular
-    .module('app.profile.services', []);
+    .module('app.profileSingle.services', []);
 
   angular
-    .module('app.profile.directives', []);
+   .module('app.profileSingle.directives', []);
   //End Profile
 
   //Calendar
@@ -100,6 +103,12 @@
     .module('app.calendar.controllers', []);
   //End Calendar
 
+  angular
+    .module('app.application', [
+        'app.application.controllers'
+    ]);
 
+  angular
+    .module('app.application.controllers', []);
 
 })();

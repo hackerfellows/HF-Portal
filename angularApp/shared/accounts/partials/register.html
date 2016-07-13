@@ -63,9 +63,9 @@
             </label>
         </div>
         <p ng-show="newUserForm.userType.$invalid && !newUserForm.userType.$pristine" class="text-danger">A user type is required.</p>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" ng-click="create(user)" ng-disabled="newUserForm.$invalid">Create Account</button>
+            <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
     </form>
-    <div class="modal-footer">
-        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-        <button class="btn btn-primary" ng-click="create(user)" ng-disabled="newUserForm.$invalid">Create Account</button>
-    </div>
 </div>

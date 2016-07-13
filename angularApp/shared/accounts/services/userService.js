@@ -1,6 +1,6 @@
 /**
  * Profile
- * @namespace app.profile.services
+ * @namespace app.accounts.services
  */
 (function () {
     'use strict';
@@ -9,15 +9,32 @@
         .module('app.accounts.services')
         .factory('User', User);
 
-    User.$inject = ['$rootScope', '$http'];
+    User.$inject = ['$rootScope', '$http', '$q'];
 
     /**
      * @namespace User
      * @returns {Service}
      */
-    function User($rootScope, $http) {
-
-        var rootUrl = '';
+    function User($rootScope, $http, $q) {
+        var provides = {
+            getVotes: getVotes,
+            create: create,
+            login: login,
+            update: update,
+            destroy: destroy,
+            SetCredentials: SetCredentials,
+            ClearCredentials: ClearCredentials,
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser,
+            isUserLoggedIn: isUserLoggedIn,
+            isUserAdmin: isUserAdmin,
+            isUserFellow: isUserFellow,
+            isUserAccepted: isUserAccepted,
+            ensureLoggedIn: ensureLoggedIn,
+            checkLoggedIn: checkLoggedIn,
+            updateLoginStatus: updateLoginStatus,
+            isUserCompany: isUserCompany
+        };
 
         // Will hold info for the currently logged in user
         var currentUser = {};
@@ -31,7 +48,7 @@
         }
 
         function getVotes( user_id ){
-            return $http.get(rootUrl + '/api/v1/users/' + user_id + '/votes' );
+            return $http.get('/api/v2/users/' + user_id + '/votes' );
         }
 
         /**
@@ -39,38 +56,52 @@
          * @desc login a new user record
          */
         function login(user) {
-            return $http.post(rootUrl + '/api/v1/users/login', user);
+            return $http.post('/api/v2/users/login', user);
         }
 
         // On paths that require login, make sure the login is confirmed before the route is loaded.
-        var routeLoginCheck = function($q, $timeout, $http, $location, $rootScope, User){
+        function ensureLoggedIn ($q, $timeout, $http, $location, $rootScope, User){
 
-            // Initialize a new promise
             var deferred = $q.defer();
 
-            // keep user logged in after page refresh
-            // Check backend for existing user in session and update User Service
-            $http.get( '/api/v1/users/confirm-login' )
+            $http.get( '/api/v2/users/confirm-login' )
                 .success(function (user) {
-                    //console.log( user );
                     if (user && user.id) {
                         self.SetCredentials( user.id, user.email, user.userType );
                         deferred.resolve();
                     }
                     else{
-                        deferred.reject();
                         $location.url('/');
+                        deferred.reject();
                     }
                 });
             return deferred.promise;
-        };
+        }
 
-        var updateLoginStatus = function(){
+        function checkLoggedIn (){
+
+            var deferred = $q.defer();
+            $http.get( '/api/v2/users/confirm-login' )
+                .success(function (user) {
+                    if (user && user.id) {
+                        //self.SetCredentials( user.id, user.email, user.userType );
+                        deferred.resolve();
+                    }
+                    else{
+                        currentUser = {};
+                        deferred.resolve();
+                    }
+                });
+            return deferred.promise;
+        }
+
+
+        function updateLoginStatus(){
             $scope.isUserLoggedIn = User.isUserLoggedIn();
             $scope.isUserAdmin = User.isUserAdmin();
             $scope.isUserFellow = User.isUserFellow();
             $scope.isUserCompany = User.isUserCompany();
-        };
+        }
 
         /**
          * @name all
@@ -80,7 +111,7 @@
         //
         //    return [];
         //
-        //    //return $http.get(rootUrl + '/api/v1/companies/');
+        //    //return $http.get('/api/v2/companies/');
         //}
 
         /**
@@ -88,7 +119,7 @@
          * @desc get just one user
          */
         //function get(id) {
-        //    return $http.get(rootUrl + '/api/v1/users/' + parseInt(id) );
+        //    return $http.get('/api/v2/users/' + parseInt(id) );
         //}
 
         /**
@@ -96,7 +127,7 @@
          * @desc create a new user record
          */
         function create(user) {
-            return $http.post(rootUrl + '/api/v1/users/create', user);
+            return $http.post('/api/v2/users/create', user);
         }
 
         /**
@@ -104,7 +135,7 @@
          * @desc updatea a user record
          */
         function update(user) {
-            return $http.put(rootUrl + '/api/v1/users/' + user.id, user);
+            return $http.put('/api/v2/users/' + user.id, user);
         }
 
         /**
@@ -112,7 +143,7 @@
          * @desc destroy a user record
          */
         function destroy(id) {
-            return $http.delete(rootUrl + rootUrl + '/api/v1/users/' + id);
+            return $http.delete('/api/v2/users/' + id);
         }
 
         function isUserLoggedIn(){
@@ -128,6 +159,11 @@
                 return true;
             }
             else return false;
+        }
+
+        function isUserAccepted(){
+            console.log("isUserAccepted is just a stub, returning true");
+            return true;
         }
 
         function isUserFellow(){
@@ -156,7 +192,7 @@
         }
 
         function ClearCredentials() {
-            $http.get( rootUrl + '/api/v1/users/logout' ).then( function(){
+            $http.get( '/api/v2/users/logout' ).then( function(){
                 currentUser = {};
             });
             loginStatusChanged();
@@ -168,25 +204,7 @@
             $rootScope.$broadcast('loginStatusChanged');
         }
 
-        return {
-            //all: all,
-            //get: get,
-            getVotes: getVotes,
-            create: create,
-            login: login,
-            update: update,
-            destroy: destroy,
-            SetCredentials: SetCredentials,
-            ClearCredentials: ClearCredentials,
-            getCurrentUser: getCurrentUser,
-            setCurrentUser: setCurrentUser,
-            isUserLoggedIn: isUserLoggedIn,
-            isUserAdmin: isUserAdmin,
-            isUserFellow: isUserFellow,
-            routeLoginCheck: routeLoginCheck,
-            updateLoginStatus: updateLoginStatus,
-            isUserCompany: isUserCompany
-        };
+		return provides;
     }
 
     // Base64 encoding service used by AuthenticationService

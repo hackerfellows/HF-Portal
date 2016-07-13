@@ -1,7 +1,11 @@
+<link rel="stylesheet" href="assets/css/calendar.css" type="text/css"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <div ng-init="getSpreadsheetData()">
-hello world
-    <section id="cd-timeline" class="cd-container">
+
+
+
+  <div ng-init="getSpreadsheetData()" >
+    <section id="cd-timeline" class="cd-container" ng-hide="invalidUser">
       <div ng-cloak ng-repeat="event in events track by $index" class="cd-timeline-block">
         <div class='cd-timeline-img cd-picture' style="background:{{event.dot_color}}">
           <!--<img src="img/cd-icon-picture.svg" alt="Picture">-->
@@ -48,4 +52,9 @@ hello world
       </div> <!-- cd-timeline-block -->
 
     </section> <!-- cd-timeline -->
+    <div ng-show="invalidUser">
+      <br><br><br><br>
+      <br><br><br><br>
+      The user is bad, and should feel bad
+    </div>
   </div>

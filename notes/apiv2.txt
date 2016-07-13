@@ -11,10 +11,14 @@ All other calls need user level authentication
 		POST:	create a new fellow, returns that user's json to client
 	/users
 		GET:	DEPRICATED
+	/applications
+		GET:	list all applications
+	/application/:id
+		GET:	Get specific application based on fellow id
 	/:id
 		GET: 	get one fellow with tags
-		PUT:$	updates an existing fellow's record
-		DEL:+	deletes an existing fellow's record
+		PUT:$	updates an existing fellow's record and application
+		DEL:+	deletes an existing fellow's record and application
 	/user_id/:user_id
 		GET: 	get one fellow with tags plus their Users row
 
@@ -26,10 +30,14 @@ All other calls need user level authentication
 		POST:	create a new company, returns that user's json to client
 	/users
 		GET:	DEPRICATED
+	/applications
+		GET:	list all applications
+	/application/:id
+		GET:	Get specific application based on compnay id
 	/:id
 		GET:	get one company with Tags and Users row TODO: Should this return users?
-		PUT:$	updates an existing company's record
-		DEL:+	deletes an existing company's record
+		PUT:$	updates an existing company's record and application
+		DEL:+	deletes an existing company's record and application
 	/user_id/:user_id
 		GET:	literally the same as a GET on /:id (/:id probably shouldn't return Users stuff)
 
