@@ -1,25 +1,29 @@
+<div class="grid-box " ng-if="item.enabled">
 	<!--
 	File name: 		profileGridTile.html
-	Author: 			Jessica Wu
+	Author: 		Jessica Wu, Michael Baldwin
+	Partial of:		profileGrid.html
 	Description: 	A tile containing a fellow or company's shortened profile.
-								Fills up the profileGrid
-	Notes:				{{entity}} will be "fellows" or "companies"
+					Fills up the profileGrid
+	Notes:			{{entity}} variables refer to "fellows" or "companies"
 	-->
 
 <div class="grid-box fellow">
-	
+
 	<div class="photo">
 		<img class="img" ng-src={{fellow.image_url}} /><!--maybe use a $scope.image type thing?-->
 	</div>
 
 	<div class="info">
-		<!--some form of conditional that asks for first and last name if fellow, 
+		<!--some form of conditional that asks for first and last name if fellow,
 		and just company.name otherwise-->
-		<h3 class="name">{{fellow.first_name +" "+ fellow.last_name}}</h3>
-		<p class="tagline">{{ entity.description }} | {{ entity.developer_type }}</p>
-		<div class="bio" ng-bind-html="helpers.paragraphize( entity.bio.substr(0, 350) ) | sanitize"></div>
+		<h3 class="name" ng-if="item.first_name">{{item.first_name +" "+ item.last_name}}</h3>
+		<h3 class="name" ng-if="item.name">{{item.name}}</h3>
+		<p class="tagline">{{ item.description }} <span ng-if="item.developer_type">| {{ item.developer_type }}</span></p>
+		<div class="bio"><p>{{ item.bio }}</p></div>
+
 	</div>
-	
+
 	<div class="foot">
 		<div class="tagwrap">
 			<div class="tag fellow_tag " ng-repeat='tag in entity.tags | limitTo:6'>
@@ -28,7 +32,11 @@
 		</div>
 		<div class="details-button">
 			<!--again, conditional for company name or fellow fname and lname-->
-			<a type="button" class="detButton"  ng-href="/#/entity/{{ entity.id }}/{{ helpers.slugify( entity.first_name + ' ' + entity.last_name ) }}">
+			<!--Only show if enabled-->
+			<a type="button" class="detButton" ng-if="item.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.id }}/{{ helpers.slugify( item.first_name + ' ' + item.last_name ) }}">
+				<i class="fa fa-plus fa-lg"></i> full profile
+			</a>
+			<a type="button" class="detButton" ng-if="item.enabled && item.name" ng-href="/#/{{whichEntity}}/{{ item.id }}/{{helpers.slugify(item.name)}}">
 				<i class="fa fa-plus fa-lg"></i> full profile
 			</a>
 		</div>

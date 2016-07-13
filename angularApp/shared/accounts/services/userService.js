@@ -1,6 +1,6 @@
 /**
  * Profile
- * @namespace app.profile.services
+ * @namespace app.accounts.services
  */
 (function () {
     'use strict';
