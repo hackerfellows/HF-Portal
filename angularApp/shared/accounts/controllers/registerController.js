@@ -43,7 +43,6 @@
                             last_name: "",
                             user_id: user_id
                         };
-
                         //Insert user
                     }
                     else if( user.userType === "Company" ){
@@ -53,6 +52,7 @@
                         };
                         //Insert company
                     }
+                    $uibModalInstance.dismiss('create');
                 }, function( response ){
                     // create user error callback
                     console.log( response );
