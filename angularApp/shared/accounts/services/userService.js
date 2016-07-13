@@ -160,6 +160,11 @@
             else return false;
         }
 
+        function isUserAccepted(){
+            console.log("isUserAccepted is just a stub, returning true");
+            return true;
+        }
+
         function isUserFellow(){
             if( currentUser.userType === 'Fellow' ){
                 return true;
