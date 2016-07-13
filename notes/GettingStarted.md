@@ -38,6 +38,12 @@ will be synced with the github repository in the host machine. This allows devel
 use their favorite editor on the host machine. Files created in the Vagrant environment
 not in this synced folder might NOT be saved!
 
+### Install Things Missing From Vagrant Box
+```
+npm install
+npm install --save gulp-sass
+```
+
 ### Run [Expressjs server](http://expressjs.com/) for backend and [Browsersync](https://www.browsersync.io/) for frontend.
 ```
 gulp watch
