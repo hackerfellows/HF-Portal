@@ -28,3 +28,24 @@
  * user.firstname
  *
  */
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('app.application.controllers')
+        .controller('FellowAppController', FellowAppController);
+
+    FellowAppController.$inject = ['$scope'];
+
+    function FellowAppController($scope) {
+        console.log("FellowAppController loaded");
+        function apply(fellow) {
+            console.log("Apply is a stub function");
+        }
+        function cancel() {
+            console.log("Cancel is a stub function");
+        }
+    }
+})();

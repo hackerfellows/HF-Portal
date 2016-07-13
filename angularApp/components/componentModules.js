@@ -61,6 +61,12 @@
     .module('app.calendar.controllers', []);
   //End Calendar
 
+  angular
+    .module('app.application', [
+        'app.application.controllers'
+    ]);
 
+  angular
+    .module('app.application.controllers', []);
 
 })();
