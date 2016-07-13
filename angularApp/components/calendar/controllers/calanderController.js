@@ -1,4 +1,4 @@
-// This jQuery comes from 'vertical-timeline' implementation by Sebastiano Guerriero from https://codyhouse.co/gem/vertical-timeline/
+ // This jQuery comes from 'vertical-timeline' implementation by Sebastiano Guerriero from https://codyhouse.co/gem/vertical-timeline/
 jQuery(document).ready(function($){
 
   var timelineBlocks = $('.cd-timeline-block'),
