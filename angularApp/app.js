@@ -22,8 +22,7 @@
     //    $locationProvider.html5Mode(false);
     //    $locationProvider.hashPrefix('!');
     //}]);
-
-
+    //
 
     /**
      * @name config
@@ -35,7 +34,7 @@
         .when('/', {
             controller  : 'HomeController',
             templateUrl : 'components/home/home.html',
-            resolve: { loggedIn: checkLoggedInWrapper },
+            resolve: { routePermission: Public },
         })
         .when('/fellows', {
             controller: 'ProfileGridController',
@@ -66,9 +65,30 @@
         .otherwise({ redirectTo: '/' });
     }]);
 
-    var checkLoggedInWrapper = function (User) {
-        console.log(User);
-        User.checkLoggedIn();
+        /**
+         * @name Public 
+         * @desc Checks if the user is logged in to allow them to continue, otherwise
+         *       redirects to the home page
+         */
+    var Public = function($location, $q, User) {
+        var deferred = $q.defer();
+        User.updateLoginStatus();
+        var type = User.getType();
+        deferred.resolve();
+        return deferred.promise; 
+    }
+
+    var Restricted = function($location, $q, User) {
+        var deferred = $q.defer();
+        User.updateLoginStatus();
+        var type = User.getType();
+        if (type !== undefined) {
+            deferred.resolve();
+        } else {
+            $location.path("/");
+            deferred.reject();
+        }
+        return deferred.promise; 
     }
 
 })();

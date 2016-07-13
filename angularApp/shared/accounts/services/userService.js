@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.profile.services')
+        .module('app.accounts.services')
         .factory('User', User);
 
     User.$inject = ['$rootScope', '$http', '$q'];
@@ -22,21 +22,19 @@
             login: login,
             update: update,
             destroy: destroy,
-            SetCredentials: SetCredentials,
-            ClearCredentials: ClearCredentials,
+            setCredentials: setCredentials,
+            clearCredentials: clearCredentials,
             getCurrentUser: getCurrentUser,
             setCurrentUser: setCurrentUser,
+            getType: getType,
             isUserLoggedIn: isUserLoggedIn,
             isUserAdmin: isUserAdmin,
             isUserFellow: isUserFellow,
             isUserAccepted: isUserAccepted,
-            ensureLoggedIn: ensureLoggedIn,
-            checkLoggedIn: checkLoggedIn,
             updateLoginStatus: updateLoginStatus,
             isUserCompany: isUserCompany
         };
 
-        // Will hold info for the currently logged in user
         var currentUser = {};
 
         function getCurrentUser() {
@@ -47,6 +45,10 @@
             currentUser = user;
         }
 
+        /**
+         * @name getVotes
+         * @desc calls the api and returns a list of votes for that user
+         */
         function getVotes( user_id ){
             return $http.get('/api/v2/users/' + user_id + '/votes' );
         }
@@ -59,68 +61,23 @@
             return $http.post('/api/v2/users/login', user);
         }
 
-        // On paths that require login, make sure the login is confirmed before the route is loaded.
-        function ensureLoggedIn ($q, $timeout, $http, $location, $rootScope, User){
 
-            var deferred = $q.defer();
-
+        /**
+         * @name updateLoginStatus
+         * @desc polls the api for the current login status of the user
+         *           and sets the local user object appropriatly 
+         */
+        function updateLoginStatus () {
             $http.get( '/api/v2/users/confirm-login' )
                 .success(function (user) {
                     if (user && user.id) {
-                        self.SetCredentials( user.id, user.email, user.userType );
-                        deferred.resolve();
-                    }
-                    else{
-                        $location.url('/');
-                        deferred.reject();
-                    }
-                });
-            return deferred.promise;
-        }
-
-        function checkLoggedIn (){
-
-            var deferred = $q.defer();
-            $http.get( '/api/v2/users/confirm-login' )
-                .success(function (user) {
-                    if (user && user.id) {
-                        //self.SetCredentials( user.id, user.email, user.userType );
-                        deferred.resolve();
+                        setCredentials( user.id, user.email, user.userType );
                     }
                     else{
                         currentUser = {};
-                        deferred.resolve();
                     }
                 });
-            return deferred.promise;
         }
-
-
-        function updateLoginStatus(){
-            $scope.isUserLoggedIn = User.isUserLoggedIn();
-            $scope.isUserAdmin = User.isUserAdmin();
-            $scope.isUserFellow = User.isUserFellow();
-            $scope.isUserCompany = User.isUserCompany();
-        }
-
-        /**
-         * @name all
-         * @desc get all the users
-         */
-        //function all() {
-        //
-        //    return [];
-        //
-        //    //return $http.get('/api/v2/companies/');
-        //}
-
-        /**
-         * @name get
-         * @desc get just one user
-         */
-        //function get(id) {
-        //    return $http.get('/api/v2/users/' + parseInt(id) );
-        //}
 
         /**
          * @name create
@@ -154,6 +111,10 @@
             else return false;
         }
 
+        function getType() {
+            return currentUser.userType;
+        }
+
         function isUserAdmin(){
             if( currentUser.userType === 'Admin' ){
                 return true;
@@ -180,28 +141,26 @@
             else return false;
         }
 
-        function SetCredentials(id, username, userType) {
-            var authdata = Base64.encode(id + ':' + username + ':' + userType);
+        function setCredentials(id, username, userType) {
             currentUser = {
                 id: id,
                 username: username,
                 userType: userType,
-                authdata: authdata
             };
-            loginStatusChanged();
         }
 
-        function ClearCredentials() {
-            $http.get( '/api/v2/users/logout' ).then( function(){
+        /**
+         * @name clearCredentials()
+         * @desc calls the api's logout endpoint for the current user and clears the local object
+         */
+        function clearCredentials() {
+            var toReturn = $http.get( '/api/v2/users/logout' );
+            
+            toReturn.then( function(){
                 currentUser = {};
             });
-            loginStatusChanged();
-        }
 
-
-        function loginStatusChanged() {
-
-            $rootScope.$broadcast('loginStatusChanged');
+            return toReturn;
         }
 
 		return provides;

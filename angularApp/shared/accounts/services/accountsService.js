@@ -21,8 +21,6 @@
         return {
             startLogin: startLogin,
             startRegistration: startRegistration,
-            endLogin: endLogin,
-            endRegistration: endRegistration
         };
 
         function startLogin() {
@@ -34,6 +32,8 @@
                 templateUrl: '/shared/accounts/partials/login.html',
                 controller: 'LoginController'
             });
+
+            return loginModal.result;
         }
 
         function startRegistration() {
@@ -44,19 +44,8 @@
                 templateUrl: '/shared/accounts/partials/register.html',
                 controller: 'RegisterController'
             });
-        }
-        function endLogin() {
-            if (loginModal !== null){
-                loginModal.close();
-            }
-            loginModal = null;
-        }
-        function endRegistration() {
-            if (registerModal !== null){
-                registerModal.close();
-            }
-            registerModal = null;
-        }
 
+            return registerModal.result;
+        }
     }
 })();
