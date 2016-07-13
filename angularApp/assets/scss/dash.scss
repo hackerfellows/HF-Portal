@@ -1,106 +1,152 @@
+footer{
+       font-size: 15px;
+       text-align: center;
+       padding-bottom: 10px;
+   }
 
 .leNavBar {
-    position:fixed;
-    font-family: 'Dosis', sans-serif;
-    font-size: 25px;
-    font-weight:300;
+   position:fixed;
+
+   font-family: 'Dosis', sans-serif;
+
+   font-size: 26px;
+   font-weight:300;
+
     height:50px;
-    width:100%;
-    background-color: black;
-    color: white;
-    padding-left: 5%;
-    padding-top: 5px;
-    z-index: 1000;
+   width:100%;
+
+   background-color: black;
+   color: white;
+   line-height: 200%;
+
+   padding-left: 5%;
+   padding-top: 10px;
+   padding-bottom: 53px;
+
+   margin-bottom: 15px;
+   z-index: 1000;
 }
+
+   .leDashBoard a{
+       position: fixed;
+       margin-top: -85px;
+   }
+
+
+
+   #menuname{
+       position: absolute;
+        color:white;
+        display: inline-block;
+      margin-top: -4px;
+
+   }
+
+
+   .leDashBoard p{
+       margin-left: 5%;
+   }
 
 .leDashBoard {
-    font-family: 'Dosis', sans-serif;
-    font-size: 70px;
-    height: 200px;
-    width:100%;
-    background-color: black;
-    color: white;
-    padding-top: 5%;
-    padding-left: 5%;
-    z-index: 1;
+
+   font-family: 'Dosis', sans-serif;
+    font-size: 6vh;
+
+    height: 30vh;
+   width:100%;
+   background-color: black;
+   color: white;
+   padding-top: 15vh;
+   padding-left: 5%;
+   z-index: 1;
 }
+   *{
+      pointer-events: fill;
+   }
 
-*{
-   pointer-events: fill;
-	}
+   .spacer5{
+       margin-top: 5%;
+   }
 
-.spacer5{
-    margin-top: 5%;
-}
+   .container{
+       z-index: 0;
+       margin-top: 100px;
+   }
 
-.container{
-    z-index: 0;
-}
+   .leNarBar svg{
+       margin-top: 100px;
+   }
 
-.suitcase h5{
-     padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-family: 'Fira Sans', sans-serif;
-     font-weight: 500;
-}
 
- .prof h5{
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-     font-family: 'Fira Sans', sans-serif;
-     font-weight: 500;
-}
+   .suitcase h5{
+        padding-top: 10px;
+       padding-left: 10px;
+       padding-right: 10px;
+       font-family: 'Fira Sans', sans-serif;
+        font-weight: 500;
+   }
 
- .thumbs h5{
-      padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-     font-family: 'Fira Sans', sans-serif;
-     font-weight: 500;
-}
+    .prof h5{
+       padding-top: 10px;
+       padding-left: 10px;
+       padding-right: 10px;
+        font-family: 'Fira Sans', sans-serif;
+        font-weight: 500;
+   }
 
- .calendar h5{
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 500;
-}
+    .thumbs h5{
+         padding-top: 10px;
+       padding-left: 10px;
+       padding-right: 10px;
+        font-family: 'Fira Sans', sans-serif;
+        font-weight: 500;
+   }
 
-.suitcase svg{
-   display: block;
+    .calendar h5{
+         padding-top: 10px;
+       padding-left: 10px;
+       padding-right: 10px;
+        font-family: 'Fira Sans', sans-serif;
+        font-weight: 500;
+   }
+
+
+   .suitcase svg{
+      display: block;
    margin: 0 auto;
-    fill: #ff6633;
-}
+       fill: #ff6633;
+   }
 
-.thumbs svg{
-  display: block;
-  margin: 0 auto;
-}
+   .thumbs svg{
+     display: block;
+     margin: 0 auto;
 
-.calendar svg{
-   display: block;
-   margin: 0 auto;
-   fill: #ff6633;
-}
+   }
 
-.prof svg{
-   display: block;
-margin: -15px auto;
 
-}
-#Layer_1 path{
-	-webkit-transition: fill .4s ease;
-	-moz-transition: fill .4s ease;
-	-o-transition: fill .4s ease;
-	transition: fill .4s ease;
-	fill:#333333;
 
-}
+   .calendar svg{
+      display: block;
+      margin: 0 auto;
+        fill: #ff6633;
+   }
 
-#Layer_1:hover path {
+   .prof svg{
+      display: block;
+      margin: 0px auto;
 
-     fill:#ff6633;
-}
+   }
+
+   #Layer_1 path{
+   -webkit-transition: fill .4s ease;
+   -moz-transition: fill .4s ease;
+   -o-transition: fill .4s ease;
+   transition: fill .4s ease;
+   fill:#333333;
+
+  }
+
+  #Layer_1:hover path {
+
+        fill:#ff6633;
+  }
