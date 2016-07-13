@@ -8,8 +8,10 @@
 	Notes:			{{entity}} variables refer to "fellows" or "companies"
 	-->
 
+<div class="grid-box fellow">
+
 	<div class="photo">
-		<img class="img" ng-src={{item.image_url}} /><!--maybe use a $scope.image type thing?-->
+		<img class="img" ng-src={{fellow.image_url}} /><!--maybe use a $scope.image type thing?-->
 	</div>
 
 	<div class="info">
@@ -19,12 +21,12 @@
 		<h3 class="name" ng-if="item.name">{{item.name}}</h3>
 		<p class="tagline">{{ item.description }} <span ng-if="item.developer_type">| {{ item.developer_type }}</span></p>
 		<div class="bio"><p>{{ item.bio }}</p></div>
-		
+
 	</div>
 
 	<div class="foot">
 		<div class="tagwrap">
-			<div class="tag fellow_tag " ng-repeat='tag in item.tags | limitTo:6'>
+			<div class="tag fellow_tag " ng-repeat='tag in entity.tags | limitTo:6'>
 				{{ tag.name }}
 			</div>
 		</div>

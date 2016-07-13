@@ -11,6 +11,13 @@ Vagrant.configure("2") do |config|
 	# virtual machine name
 	config.vm.host_name = "hfportal"
 
+
+	#use more memory for mac npm issue
+	config.vm.provider "virtualbox" do |v|
+		v.memory = 1024
+	end
+
+
 	# start provisioning the virtual machine
 	config.vm.provision "shell", inline: <<SCRIPT
 		echo I am provisioning...

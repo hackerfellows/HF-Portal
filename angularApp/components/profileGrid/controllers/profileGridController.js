@@ -37,12 +37,11 @@
 
         Entities.allWithUser($scope.entityPlural).success(function (result) {
 
-            $scope.entityList = result;
-           // console.log("List:", result);
+            $scope.companies = companies;
         });
 
         $scope.helpers = HFHelpers;
-/*
+        /*
         $scope.openModal = function (company) {
 
             $scope.company = company;

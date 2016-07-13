@@ -1,6 +1,6 @@
 /**
  * Profile
- * @namespace app.profile.services
+ * @namespace app.accounts.services
  */
 (function () {
     'use strict';
@@ -17,7 +17,7 @@
      */
     function User($rootScope, $http) {
 
-        var rootUrl = '';
+        var rootUrl = ''; 
 
         // Will hold info for the currently logged in user
         var currentUser = {};

@@ -18,15 +18,17 @@
   //ProfileGrid
   angular
     .module('app.profileGrid', [
-        'app.profileGrid.services',
         'app.profileGrid.controllers',
+        'app.profileGrid.services',
         'app.profileGrid.directives'
         ]);
 
   angular
-    .module('app.profileGrid.services', []);
-  angular
     .module('app.profileGrid.controllers', []);
+
+  angular
+    .module('app.profileGrid.services', []);
+
   angular
     .module('app.profileGrid.directives', []);
   //End ProfileGrid
@@ -49,13 +51,16 @@
    .module('app.profileSingle.directives', []);
   //End Profile
 
-  //Entities
-   // angular
-   //  .module('app.entities', [
-   //    'app.entities.services'
-   //    ]);
-   //  angular
-   //  .module('app.entities.services', []);
+  //Calendar
+  angular
+    .module('app.calendar', [
+        'app.calendar.controllers'
+        ]);
+
+  angular
+    .module('app.calendar.controllers', []);
+  //End Calendar
+
 
 
 })();
