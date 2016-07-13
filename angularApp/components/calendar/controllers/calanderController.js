@@ -60,6 +60,7 @@ jQuery(document).ready(function($){
 
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function(number) {
+      console.log('Printing Sheet #'+number)
       var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+number+'/public/values?alt=json';
       $scope.webjson = $.getJSON(url, function(data){
 
