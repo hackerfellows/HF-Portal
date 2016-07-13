@@ -1,4 +1,7 @@
-// Each component's modules should be declared in this
+/*  File name:      componentModules.js
+    Author:         Jessica Wu, Michael Baldwin
+    Description:    Every component needs to declare its modules here
+*/
 
 (function () {
   'use strict';

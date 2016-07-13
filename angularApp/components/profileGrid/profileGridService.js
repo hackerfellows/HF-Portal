@@ -1,8 +1,8 @@
 /*  File name:      profileGridService.js
-    Author:         Jessica Wu, Michael "The cool kid" Baldwin
+    Author:         Jessica Wu, Michael Baldwin
     Description:    wraps all API calls in a class of helper functions
-    Function:       Fellows($http, Upload, SETTINGS){ all(); allWithUser(); get(id);
-                    getByUserId(user_id); create(fellow); update(fellow) }*/
+    Function:       Returns an object containing the results of all API calls
+*/
 
 (function () {
     'use strict';
@@ -26,56 +26,44 @@
         return {
 
             allWithUser: allWithUser,
-            get: get,
-            getByUserId: getByUserId,
+            getById: getById,
             create: create,
             update: update,
             destroy: destroy
         };
 
-        ////////////////////
-        //DEPRECATED
-        // *
-        //  * @name all
-        //  * @desc get all the fellows
-        //  apiPath should be '/api/v1/fellows'
-
-        // function all(apiPath) {
-        //     return $http.get(rootUrl + '/api/v1/fellows');
-        // }
-
-        //Same as above but comes with email
-
         /**
          * @name all
-         * @desc get all the fellows with their user account info
+         * @desc get all the fellows/companies along with their user account 
+                 info (email)
          */
         function allWithUser(whichEntity) {
-            //console.log("api call:", rootUrl + '/api/v1/' + whichEntity + '/users');
-            //return $http.get(rootUrl + '/api/v1/' + whichEntity + '/users');
-
             //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
             return $http.get('test' + whichEntity + 'Get.json');
             // ^^^^^^^^^^^
-          //  return $http.get(rootUrl);
+            //return $http.get(rootUrl + '/api/v2/' + whichEntity);
         }
 
         /**
          * @name get
          * @desc get one entity (used in old code to view a profile)
+                 get one fellow/company with tags
          */
-        function get(whichEntity, id) {
-            return $http.get(rootUrl + '/api/v1/' + whichEntity + '/' + id);
+        function getById(whichEntity, id) {
+            //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
+            return $http.get('test' + whichEntity + 'Get' + id + '.json');
+            // ^^^^^^^^^^^
+            //return $http.get(rootUrl + '/api/v2/' + whichEntity + '/' + id);
         }
 
-        /**
-         * @name getByUserId
-         * @desc get one entity by user_id (used in old code to view profile
-                 (company OR fellow) of currently logged in user)
-         */
-        function getByUserId(whichEntity, userId) {
-            return $http.get(rootUrl + '/api/v1/' + whichEntity + '/user_id/' + userId);
-        }
+        // *
+        //  * @name getByUserId
+        //  * @desc get one entity by user_id (used in old code to view profile
+        //          (company OR fellow) of currently logged in user)
+         
+        // function getByUserId(whichEntity, userId) {
+        //     return $http.get(rootUrl + '/api/v1/' + whichEntity + '/user_id/' + userId);
+        // }
 ////////////////////////////////////////////////////////////////FIX AFTER
         /**
          * @name create

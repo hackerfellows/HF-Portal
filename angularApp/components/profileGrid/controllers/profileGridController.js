@@ -1,7 +1,9 @@
-/**
- * ProfileGridController
- * @namespace app.profileGrid.controllers
- */
+/*  File name:      profileGridController.js
+    Author:         Jessica Wu, Michael Baldwin
+    Description:    Checks location to determine whether or not to show fellows
+                    or companies
+*/
+
 (function () {
     'use strict';
 

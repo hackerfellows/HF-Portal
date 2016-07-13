@@ -1,0 +1,25 @@
+<div class="row">
+    <!--
+    File name:      profileSingleWrapper.html
+    Author:         Jessica Wu, Michael Baldwin
+    Partial of:     index
+    Description:    The outer container with shared functionality between fellow
+                    and company profiles. Will load up the directives of fellows
+                    or companies depending on the url.
+    Notes:          {{entity}} variables refer to "fellows" or "companies"
+    -->
+
+    <!-- shared stuff -->
+    <div class="col-md-8 col-md-offset-2">
+        <ul class="breadcrumb">
+            <li><a href="/#/{{whichEntityPlural}}">{{whichEntityPlural}}</a></li>
+            <li class="active">{{ entityObject.first_name }} {{ entityObject.last_name }}</li>
+        </ul>
+        
+        <!-- if fellow -->
+        <profile-single-fellow ng-if="whichEntity=='fellow'"></profile-single-fellow>
+
+
+    </div>
+     <p class="pagination"><a class="" href="/#/{{whichEntityPlural}}"><span class="glyphicon glyphicon-chevron-left"></span> Back to all {{whichEntityPlural}}</a></p>
+</div>
