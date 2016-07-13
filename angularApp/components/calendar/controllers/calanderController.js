@@ -39,25 +39,37 @@ jQuery(document).ready(function($){
 
   CalendarController.$inject = ['$scope', '$http', 'User'];
 
+
+
+
   /**
    * @namespace CompaniesController
+   * Pass in the User object so that we deliver them the corresonding calendar
    */
   function CalendarController($scope, $http, User) {
-    var sheetNumber = 1;
-    console.log(User);
-    //if(User.isUserAccepted())
-    //{sheetNumber = 2}
+
+    // Determine sheet number from user session information
+    var sheetNumber = assignSheetNumber();
+     sheetNumber = 1;
+    $scope.invalidUser = (sheetNumber == 0);
+
+    console.log(sheetNumber);
 
     $scope.events = [];
-  var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
+    var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
+
 
     $http({
       method: 'GET',
       url: url
     }).then(function successCallback(response) {
+      console.log("goooood")
+      console.log(response)
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
+      console.log("errrrrr")
+      console.log(response)
       // called asynchronously if an error occurs
       // or server returns response with an error status.
     });
@@ -65,9 +77,10 @@ jQuery(document).ready(function($){
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
       console.log('Printing Sheet #'+sheetNumber)
-      var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
-      $scope.webjson = $.getJSON(url, function(data){
 
+      $scope.webjson = $.getJSON(url, function(data,error){
+        console.log("hi")
+        console.log(error);
         //grab spreadsheet data from google sheet
         $scope.spreadsheet = data;
         var entry_array = data.feed.entry;
@@ -155,5 +168,43 @@ jQuery(document).ready(function($){
 
       }) /*end of getJSON function */
     } /*end spreadsheetData function*/
+
+    /* Assign the correct sheet number to the right user
+
+    Sheet Number:
+    1. Accepted Company
+    2. Non-Accepted Company
+    3. Accepted Fellow
+    4. Non-Accepted Fellow
+    0. ERROR - no conditions met
+    */
+    function assignSheetNumber() {
+      // Only provide calendar to logged in users
+      var toReturn = 0;
+      if( User.isUserLoggedIn() ){
+
+        // The User is a company
+        if ( User.isUserCompany() ) {
+
+          // Assign based on acceptance
+          User.isUserAccepted() ? toReturn = 1 : toReturn = 2;
+          return toReturn;
+        } // of Company
+
+        // The User is a Fellow
+        if ( User.isUserFellow() ) {
+
+          // Assign based on acceptance
+          User.isUserAccepted() ? toReturn = 3 : toReturn = 4;
+          return toReturn;
+        } // of Fellow
+
+      } // of isUserLoggedIn
+
+      // user failed to meet conditions, ERROR case
+      return toReturn;
+
+    } // of assignSheetNumber
+
   } /*end function CalendarController()*/
 })();
