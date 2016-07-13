@@ -29,21 +29,21 @@
   //End ProfileGrid
 
   //Profile
-  // angular
-  //   .module('app.profile', [
-  //       'app.profile.controllers',
-  //       'app.profile.services',
-  //       'app.profile.directives'
-  //       ]);
+  angular
+    .module('app.profileSingle', [
+        'app.profileSingle.controllers',
+        'app.profileSingle.services',
+        'app.profileSingle.directives'
+        ]);
 
-  // angular
-  //   .module('app.profile.controllers', []);
+  angular
+    .module('app.profileSingle.controllers', []);
 
-  // angular
-  //   .module('app.profile.services', []);
+  angular
+    .module('app.profileSingle.services', []);
 
-  // angular
-//    .module('app.profile.directives', []);
+  angular
+   .module('app.profileSingle.directives', []);
   //End Profile
 
   //Entities

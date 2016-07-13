@@ -22,18 +22,18 @@
         if($location.path() === "/fellows"){
             $scope.entitySingular = "Fellow";
             $scope.entityPlural = "Fellows";
-            whichEntity = "Fellows";
+            $scope.whichEntity = "fellows";
         } else if ($location.path() === "/companies"){
             $scope.entitySingular = "Company";
             $scope.entityPlural = "Companies";
-            whichEntity = "Companies";
+            $scope.whichEntity = "companies";
         } else {
             //Throw an error
         }
 
 //////////////////////////////////////////////////////////////////////////
 
-        Entities.allWithUser(whichEntity).success(function (result) {
+        Entities.allWithUser($scope.entityPlural).success(function (result) {
 
             $scope.entityList = result;
            // console.log("List:", result);

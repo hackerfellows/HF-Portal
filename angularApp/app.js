@@ -13,7 +13,7 @@
     //NOTE: Make sure these modules (app.moduleName) are defined in
     //      components/componentModules.js otherwise the page will not run
     var app = angular.module('app', ['ngRoute', 'app.home', 'ui.bootstrap',
-        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.helpers']);
+        'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 'app.helpers']);
 
     /**
      * @name config
@@ -30,7 +30,7 @@
         templateUrl: 'components/profileGrid/profileGrid.html',
     })
     .when('/fellows/:fellow_id/:fellow_name', {
-        controller: 'ProfileController',
+        controller: 'ProfileSingleController',
         templateUrl: 'components/profileSingle/profileSingle.html',
     })
     .when('/companies', {
@@ -38,7 +38,7 @@
         templateUrl: 'components/profileGrid/profileGrid.html',
     })
     .when('/companies/:company_id/:company_name', {
-        controller: 'ProfileController',
+        controller: 'ProfileSingleController',
         templateUrl: 'components/profileSingle/profileSingle.html',
     })
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
