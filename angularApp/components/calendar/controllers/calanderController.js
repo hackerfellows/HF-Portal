@@ -37,12 +37,16 @@ jQuery(document).ready(function($){
     .module('app.calendar.controllers')
     .controller('CalendarController', CalendarController);
 
-  CalendarController.$inject = ['$scope', '$http'];
+  CalendarController.$inject = ['$scope', '$http', 'User'];
 
   /**
    * @namespace CompaniesController
    */
-  function CalendarController($scope, $http) {
+  function CalendarController($scope, $http, User) {
+    var sheetNumber = 1;
+    console.log(User);
+    //if(User.isUserAccepted())
+    //{sheetNumber = 2}
 
     $scope.events = [];
   var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/1/public/values?alt=json';
@@ -59,9 +63,9 @@ jQuery(document).ready(function($){
     });
 
     // Grab the event JSON from our google spreadsheet URL
-    $scope.getSpreadsheetData = function(number) {
-      console.log('Printing Sheet #'+number)
-      var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+number+'/public/values?alt=json';
+    $scope.getSpreadsheetData = function() {
+      console.log('Printing Sheet #'+sheetNumber)
+      var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
       $scope.webjson = $.getJSON(url, function(data){
 
         //grab spreadsheet data from google sheet
