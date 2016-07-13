@@ -12,6 +12,10 @@ var companies = require('./nodeCode/routes/companies');
 var tags = require('./nodeCode/routes/tags');
 var votes = require('./nodeCode/routes/votes');
 var users = require('./nodeCode/routes/users');
+
+
+var models = require('./nodeCode/models');
+
 var app = express();
 
 
@@ -19,6 +23,7 @@ var app = express();
 console.log("Setting port: ");
 app.set('port', (process.env.PORT || 5000));
 console.log('Port set: ' + app.get('port'));
+
 
 
 /** This makes getting Posted Data from req.body work */

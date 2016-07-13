@@ -3,90 +3,53 @@
  * @desc    contains the routes for the app
  */
 // Note from JW: We're only using app.profile, so I don't know if we need tags,
-// votes, alert, home, and config. We should delete what we don't need
-var app = angular.module('app', ['ngRoute', 'ngFileUpload', 'ngSanitize', 'ui.bootstrap', 'ui.select',
-        'app.config', 'app.home', 'app.profile', 'app.tags', 'app.votes', 'app.alert', 'app.dash' ])
-.run(run);
+// // votes, alert, home, and config. We should delete what we don't need
+//  var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.select',
+//     'app.config', 'app.home', 'app.profile', 'app.profileGrid', 'app.tags', 'app.votes', 'app.alert' ])
+//     .run(run);
 
-/**
- *   * @name config
- *     * @desc Define valid application routes
- *       */
-app.config(function($routeProvider, $locationProvider){
+(function () {
+    //NOTE: Make sure these modules (app.moduleName) are defined in
+    //      components/componentModules.js otherwise the page will not run
+    var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
+        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar']);
 
-    $routeProvider
-    .when('/', {
-        controller  : 'HomeController',
-        templateUrl : 'index.html'
-    })
-    .when('/dash', {
-       controller: 'DashController',
-       templateUrl: 'components/dash/dash.html',
-    })
-    //Profile team changed here VVV
+    /**
+     * @name config
+     * @desc Define valid application routes
+     **/
+    app.config(function($routeProvider, $locationProvider){
+        $routeProvider
+        .when('/', {
+            controller  : 'HomeController',
+            templateUrl : 'components/home/home.html'
+        })
     .when('/fellows', {
-        controller: 'FellowsController',
+        controller: 'ProfileGridController',
         templateUrl: 'components/profileGrid/profileGrid.html',
-        resolve: { loggedIn: checkLoggedin }
     })
     .when('/fellows/:fellow_id/:fellow_name', {
-        controller: 'FellowController',
+        controller: 'ProfileController',
         templateUrl: 'components/profileSingle/profileSingle.html',
-        resolve: { loggedIn: checkLoggedin }
     })
     .when('/companies', {
-        controller: 'CompaniesController',
+        controller: 'ProfileGridController',
         templateUrl: 'components/profileGrid/profileGrid.html',
-        resolve: { loggedIn: checkLoggedin }
     })
     .when('/companies/:company_id/:company_name', {
-        controller: 'CompanyController',
-        templateUrl: 'components/profileSingle/profileSingle.html',
-        resolve: { loggedIn: checkLoggedin }
-    })
-    //Profile team changes end here ^^^
-    .when('/tags', {
-        controller: 'TagsController',
-        templateUrl: 'source/app/tags/tags.html',
-        resolve: { loggedIn: checkLoggedin }
-    })
-    .when('/profile', {
         controller: 'ProfileController',
-        templateUrl: 'source/app/profile/profile.html',
-        resolve: { loggedIn: checkLoggedin }
+        templateUrl: 'components/profileSingle/profileSingle.html',
     })
-    .when('/profile/admin', {
-        controller: 'AdminProfileController',
-        templateUrl: 'source/app/profile/partials/admin-profile.html',
-        resolve: { loggedIn: checkLoggedin }
+    .when('/calendar', {
+        controller: 'CalendarController',
+        templateUrl: 'components/calendar/calendar.html',
     })
-    .when('/profile/fellow', {
-        controller: 'FellowsProfileController',
-        templateUrl: 'source/app/profile/partials/fellow-profile.html',
-        resolve: { loggedIn: checkLoggedin }
-    })
-    .when('/profile/company', {
-        controller: 'CompanyProfileController',
-        templateUrl: 'source/app/profile/partials/company-profile.html',
-        resolve: { loggedIn: checkLoggedin }
-    })
-    .when( '/votes', {
-        controller: 'VotesController',
-        templateUrl: 'source/app/votes/partials/votes.html',
-        resolve: { loggedIn: checkLoggedin }
-    })
-    .when( '/votes/fellow', {
-        controller: 'FellowVotesController',
-        templateUrl: 'source/app/votes/partials/fellow-votes.html',
-        resolve: { loggedIn: checkLoggedin }
-    })
-    .when( '/votes/company', {
-        controller: 'CompanyVotesController',
-        templateUrl: 'source/app/votes/partials/company-votes.html',
-        resolve: { loggedIn: checkLoggedin }
-    })
-<<<<<<< HEAD
+    //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
+    //                   that runs if the user is logged in and editing
     .otherwise({ redirectTo: '/' });
+
+    });
+})();
 
 });
 
@@ -223,15 +186,3 @@ app.filter('propsFilter', function() {
         return out;
     };
 });
-=======
-    .when('/calendar', {
-        controller: 'CalendarController',
-        templateUrl: 'components/calendar/calendar.html',
-    })
-    //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
-    //                   that runs if the user is logged in and editing
-    .otherwise({ redirectTo: '/' });
-
-    });
-})();
->>>>>>> master

@@ -1,38 +1,4 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hacker Fellows Smortal</title>
-    <meta name="viewport" content="width = device-width, initial-scale = 1">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/dash.css">
-    <link href='https://fonts.googleapis.com/css?family=Dosis:400,500,300' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Fira+Sans:400,300,500' rel='stylesheet' type='text/css'>
-    <script>
-      var checkScroll = function() {
-        if ($('.leDashBoard')[0]) {
-            var el = $('.leDashBoard');
-            var top_of_object = el.offset().top;
-            var bottom_of_object = el.offset().top + el.outerHeight() - 100;
-            var top_of_window = $(window).scrollTop();
-            var bottom_of_window = $(window).scrollTop() + $(window).height();
-            if (top_of_window <= bottom_of_object && bottom_of_window >= top_of_object) {
-              $('.leNavBar').hide();
-            } else {
-              $('.leNavBar').show();
-            }
-        }
-      }
-      function hider(){
-           $('.leNavBar').hide();
-      }
-      $(window).on('scroll', function() {checkScroll()});
-    </script>
-</head>
-​
-<div class="leNavBar">Hacker Fellow Nav</div>
-<div class="leDashBoard">Hacker Fellows Nav</div>
 
 <html lang="en" ng-app="app">
     <head>
@@ -42,12 +8,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-        <!-- JQuery for calendar -->
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" type="text/css"/>
@@ -60,9 +23,9 @@
         <!-- Header Font -->
         <link href='https://fonts.googleapis.com/css?family=Dosis:400,600,700' rel='stylesheet' type='text/css'>
 
+
         <!--link rel="stylesheet" href="public/assets/stylesheets/vendor/select.min.css"-->
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
-
 
         <!--
         <link rel="stylesheet" href="public/assets/stylesheets/vendor/bootstrap-switch.min.css">
@@ -71,11 +34,12 @@
     </head>
 
     <body>
+
         <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavbarController">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuitem"
-                                aria-expanded="false" aria-controls="navbar">
+                            aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"/>
                         <span class="icon-bar"/>
@@ -98,7 +62,7 @@
                         </li>
                         <li class="listitem" ng-hide="isUserLoggedIn">
                             <a ng-href="/#/#fellows-section" ng-click="scrollTo('fellows-section')">2015
-                                            Fellows</a>
+                                        Fellows</a>
                         </li>
                         <li class="listitem">
                             <a href="/#/fellows" ng-show="isUserLoggedIn">2016 Fellows</a>
@@ -135,18 +99,17 @@
         </nav>
 
         <div class="container main-content" ng-view=""/>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
         <!--TODO: bundle up all the stuff here VVVV -->
-        <script src="assets/js/bundle.js"/>
+        <script src="assets/js/bundle.js"></script>
         <!--End bundle ^^^^^^^ -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"/>
-        <!-- JQuery for calendar -->
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-sanitize.min.js"></script>
-
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     </body>
+
+
 </html>
+
