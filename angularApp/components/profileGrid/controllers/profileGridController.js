@@ -35,9 +35,8 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-        Entities.allWithUser($scope.entityPlural).success(function (result) {
-
-            $scope.companies = companies;
+        Entities.allWithUser($scope.whichEntity).success(function (result) {
+            $scope.entityList = result;
         });
 
         $scope.helpers = HFHelpers;

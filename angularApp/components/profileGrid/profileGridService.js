@@ -19,10 +19,6 @@
      * @returns {Service}
      */
     function Entities($http) {
-        //TODO: GET RID OF THIS STUPID HARDCODED BS
-        var rootUrl = 'testCompaniesGet.json';//SETTINGS.SERVICE_URL;
-        //console.log("rootUrl:", rootUrl);
-
         return {
 
             allWithUser: allWithUser,
@@ -39,9 +35,9 @@
          */
         function allWithUser(whichEntity) {
             //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
-            return $http.get('test' + whichEntity + 'Get.json');
+            //return $http.get('test' + whichEntity + 'Get.json');
             // ^^^^^^^^^^^
-            //return $http.get(rootUrl + '/api/v2/' + whichEntity);
+            return $http.get('/api/v2/' + whichEntity);
         }
 
         /**
@@ -51,9 +47,9 @@
          */
         function getById(whichEntity, id) {
             //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
-            return $http.get('test' + whichEntity + 'Get' + id + '.json');
+            //return $http.get('test' + whichEntity + 'Get' + id + '.json');
             // ^^^^^^^^^^^
-            //return $http.get(rootUrl + '/api/v2/' + whichEntity + '/' + id);
+            return $http.get('/api/v2/' + whichEntity + '/' + id);
         }
 
         // *
@@ -62,7 +58,7 @@
         //          (company OR fellow) of currently logged in user)
          
         // function getByUserId(whichEntity, userId) {
-        //     return $http.get(rootUrl + '/api/v1/' + whichEntity + '/user_id/' + userId);
+        //     return $http.get('/api/v1/' + whichEntity + '/user_id/' + userId);
         // }
 ////////////////////////////////////////////////////////////////FIX AFTER
         /**
@@ -70,7 +66,7 @@
          * @desc creeate a new fellow record
          */
         function create(fellow) {
-            return $http.post(rootUrl + '/api/v1/fellows/', fellow);
+            return $http.post('/api/v1/fellows/', fellow);
         }
 
         /**
@@ -78,7 +74,7 @@
          * @desc updates a fellow record
          */
         function update(fellow) {
-            return $http.put(rootUrl + '/api/v1/fellows/' + fellow.id, fellow);
+            return $http.put('/api/v1/fellows/' + fellow.id, fellow);
         }
 
         /**
@@ -86,7 +82,7 @@
          * @desc destroy a fellow record
          */
          function destroy(id) {
-            return $http.delete(rootUrl + '/api/v1/fellows/' + id);
+            return $http.delete('/api/v1/fellows/' + id);
         }
     }
 })();
