@@ -12,7 +12,7 @@
     //NOTE: Make sure these modules (app.moduleName) are defined in
     //      components/componentModules.js otherwise the page will not run
     var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
-        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar']);
+        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar', 'app.admin', 'app.tags']);
 
     /**
      * @name config
@@ -43,6 +43,26 @@
     .when('/calendar', {
         controller: 'CalendarController',
         templateUrl: 'components/calendar/calendar.html',
+    })
+    .when('/admin', {
+        controller: 'AdminController',
+        templateUrl: 'components/admin/admin.html',
+    })
+    .when('/admin/tags', {
+        controller: 'TagsController',
+        templateUrl: 'components/admin/tags/tags.html',
+    })
+    .when('/admin/users', {
+        controller: 'AdminController',
+        templateUrl: 'components/admin/admin.html',
+    })
+    .when('/admin/applicants', {
+        controller: 'AdminController',
+        templateUrl: 'components/admin/admin.html',
+    })
+    .when('/admin/calendar', {
+        controller: 'AdminController',
+        templateUrl: 'components/admin/admin.html',
     })
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
     //                   that runs if the user is logged in and editing

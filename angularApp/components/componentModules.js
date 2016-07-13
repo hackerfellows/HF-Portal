@@ -71,5 +71,18 @@
     .module('app.admin.services', []);
   //End admin
 
+  //admin-tags
+  angular
+    .module('app.tags', [
+        'app.tags.controllers',
+        'app.tags.services'
+        ]);
+
+  angular
+    .module('app.tags.controllers', []);
+  angular
+    .module('app.tags.services', []);
+  //End admin-tags
+
 
 })();
