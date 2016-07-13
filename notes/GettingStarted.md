@@ -53,7 +53,7 @@ Open browser to `http://localhost:3000` to see frontend.
 ### Postgres
 #### Log into Postgres from host machine
 ```
-psql -U hf -h localhost -p 15432 -d hfportal
+psql -U hf -h localhost -p 5432 -d hfportal
 ```
 Password is `hunter.2`
 

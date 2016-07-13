@@ -1,7 +1,9 @@
-/**
- * ProfileGridController
- * @namespace app.profileGrid.controllers
- */
+/*  File name:      profileGridController.js
+    Author:         Jessica Wu, Michael Baldwin
+    Description:    Checks location to determine whether or not to show fellows
+                    or companies
+*/
+
 (function () {
     'use strict';
 
@@ -9,22 +11,36 @@
         .module('app.profileGrid.controllers')
         .controller('ProfileGridController', ProfileGridController);
 
-    ProfileGridController.$inject = ['$scope'];
+    ProfileGridController.$inject = ['$scope', '$location', 'Entities', 'HFHelpers'];
 
     /**
      * @namespace CompaniesController
      */
-    function ProfileGridController($scope) {
-        console.log("HEYYY CONTROLLER");
-        $scope.entity = "fellows/companies";
-/*
-        Companies.all().success(function (companies) {
+    function ProfileGridController($scope, $location, Entities, HFHelpers) {
 
-            $scope.companies = companies;
+        var whichEntity = "";
+
+        //Decide if the path is /fellows or /companies
+        if($location.path() === "/fellows"){
+            $scope.entitySingular = "Fellow";
+            $scope.entityPlural = "Fellows";
+            $scope.whichEntity = "fellows";
+        } else if ($location.path() === "/companies"){
+            $scope.entitySingular = "Company";
+            $scope.entityPlural = "Companies";
+            $scope.whichEntity = "companies";
+        } else {
+            //Throw an error
+        }
+
+//////////////////////////////////////////////////////////////////////////
+
+        Entities.allWithUser($scope.whichEntity).success(function (result) {
+            $scope.entityList = result;
         });
 
-        $scope.helpers = HFHelpers.helpers;
-
+        $scope.helpers = HFHelpers;
+        /*
         $scope.openModal = function (company) {
 
             $scope.company = company;
