@@ -2,6 +2,7 @@
 
 (function () {
   'use strict';
+
   //Home
   angular
     .module('app.home', [
@@ -11,6 +12,37 @@
   angular
     .module('app.home.controllers', []);
   //End Home
+
+  // Static Pages
+  angular
+    .module('app.static_about', [
+        'app.static_about.controllers'
+    ]);
+  angular
+    .module('app.static_about.controllers', []);
+
+  angular
+    .module('app.static_application', [
+        'app.static_application.controllers'
+    ]);
+  angular
+    .module('app.static_application.controllers', []);
+
+  angular
+    .module('app.static_contact', [
+        'app.static_contact.controllers'
+    ]);
+  angular
+    .module('app.static_contact.controllers', []);
+
+  angular
+    .module('app.static_groups', [
+        'app.static_groups.controllers'
+    ]);
+  angular
+    .module('app.static_groups.controllers', []);
+
+  //End Static Pages
 
   //Dash
   angular

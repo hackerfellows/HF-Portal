@@ -24,10 +24,27 @@
             controller  : 'HomeController',
             templateUrl : 'components/home/home.html'
         })
-        .when('/dash', {
-            controller  : 'DashController',
-            templateUrl : 'components/dash/dash.html'
+        .when('/about', {
+            controller  : 'static_aboutController',
+            templateUrl : 'components/static_about/static_about.html'
         })
+        .when('/application', {
+            controller  : 'static_applicationController',
+            templateUrl : 'components/static_application/static_application.html'
+        })
+        .when('/contact', {
+            controller  : 'static_contact',
+            templateUrl : 'components/static_contact/static_contact.html'
+        })
+        .when('/groups', {
+            controller  : 'static_groups',
+            templateUrl : 'components/static_groups/static_groups.html'
+        })
+
+    .when('/dash', {
+        controller  : 'DashController',
+        templateUrl : 'components/dash/dash.html'
+    })
     .when('/fellows', {
         controller: 'ProfileGridController',
         templateUrl: 'components/profileGrid/profileGrid.html',
