@@ -50,7 +50,7 @@ jQuery(document).ready(function($){
 
     // Determine sheet number from user session information
     var sheetNumber = assignSheetNumber();
-     sheetNumber = 1;
+    // sheetNumber = 1;
     $scope.invalidUser = (sheetNumber == 0);
 
     console.log(sheetNumber);
