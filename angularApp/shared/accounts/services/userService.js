@@ -29,6 +29,7 @@
             isUserLoggedIn: isUserLoggedIn,
             isUserAdmin: isUserAdmin,
             isUserFellow: isUserFellow,
+            isUserAccepted: isUserAccepted,
             ensureLoggedIn: ensureLoggedIn,
             checkLoggedIn: checkLoggedIn,
             updateLoginStatus: updateLoginStatus,
