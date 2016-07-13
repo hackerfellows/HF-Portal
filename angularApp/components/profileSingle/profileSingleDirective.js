@@ -10,7 +10,8 @@
 
     angular
         .module('app.profileSingle.directives')
-        .directive('profileSingleFellow', profileSingleFellow);
+        .directive('profileSingleFellow', profileSingleFellow)
+        .directive('profileSingleCompany', profileSingleCompany);
 
 
     //We're splitting up the fellow and company profiles because they're different enough

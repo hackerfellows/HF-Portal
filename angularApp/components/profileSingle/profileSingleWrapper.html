@@ -19,7 +19,15 @@
         <!-- if fellow -->
         <profile-single-fellow ng-if="whichEntity=='fellow'"></profile-single-fellow>
 
+        <!-- if company -->
+        <profile-single-company ng-if="whichEntity=='company'"></profile-single-company>
 
+     <p class="pagination">
+        <a class="" href="/#/{{whichEntityPlural}}">
+            <span class="glyphicon glyphicon-chevron-left"></span> 
+            Back to all {{whichEntityPlural}}
+        </a>
+    </p>
     </div>
-     <p class="pagination"><a class="" href="/#/{{whichEntityPlural}}"><span class="glyphicon glyphicon-chevron-left"></span> Back to all {{whichEntityPlural}}</a></p>
+    
 </div>

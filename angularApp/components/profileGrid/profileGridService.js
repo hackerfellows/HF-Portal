@@ -35,9 +35,9 @@
          */
         function allWithUser(whichEntity) {
             //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
-            //return $http.get('test' + whichEntity + 'Get.json');
+            return $http.get('test' + whichEntity + 'Get.json');
             // ^^^^^^^^^^^
-            return $http.get('/api/v2/' + whichEntity);
+            //return $http.get('/api/v2/' + whichEntity);
         }
 
         /**
@@ -47,9 +47,9 @@
          */
         function getById(whichEntity, id) {
             //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
-            //return $http.get('test' + whichEntity + 'Get' + id + '.json');
+            return $http.get('test' + whichEntity + 'Get' + id + '.json');
             // ^^^^^^^^^^^
-            return $http.get('/api/v2/' + whichEntity + '/' + id);
+            //return $http.get('/api/v2/' + whichEntity + '/' + id);
         }
 
         // *
