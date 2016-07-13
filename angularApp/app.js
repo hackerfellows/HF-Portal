@@ -48,6 +48,10 @@
         controller: 'CalendarController',
         templateUrl: 'components/calendar/calendarApplicationFellow.html',
     })
+    .when('/calendar3', {
+        controller: 'CalendarController',
+        templateUrl: 'components/calendar/calendarSwitch.html',
+    })
     //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
     //                   that runs if the user is logged in and editing
     .otherwise({ redirectTo: '/' });
