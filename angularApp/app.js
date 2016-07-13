@@ -53,6 +53,14 @@
             controller: 'ProfileController',
             templateUrl: 'components/profileSingle/profileSingle.html',
         })
+        .when('/application/fellow', {
+            controller: 'FellowAppController',
+            templateUrl: 'components/application/partials/fellowApplication.html',
+        })
+        .when('/application/company', {
+            controller: 'CompanyAppController',
+            templateUrl: 'components/application/partials/companyApplication.html',
+        })
         //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //                   that runs if the user is logged in and editing
         .otherwise({ redirectTo: '/' });

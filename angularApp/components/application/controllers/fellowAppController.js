@@ -40,6 +40,7 @@
     FellowAppController.$inject = ['$scope'];
 
     function FellowAppController($scope) {
+        console.log("FellowAppController loaded");
         function apply(fellow) {
             console.log("Apply is a stub function");
         }
