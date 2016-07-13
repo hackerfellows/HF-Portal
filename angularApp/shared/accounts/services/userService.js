@@ -1,12 +1,12 @@
 /**
  * Profile
- * @namespace app.profile.services
+ * @namespace app.accounts.services
  */
 (function () {
     'use strict';
 
     angular
-        .module('app.profile.services')
+        .module('app.accounts.services')
         .factory('User', User);
 
     User.$inject = ['$rootScope', '$http'];
