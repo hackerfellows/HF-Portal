@@ -51,211 +51,76 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
+
 // GET /fellows - get all fellows
 app.get('/', function getFellows(req, res) {
 
     Fellows.all({
 
-        where: {
-
-            first_name: {ne: null},
-            enabled: 1
-        },
         order: '"last_name" ASC',
-        include: [{
-            model: Tags
-        }]
-
-    }).then(function(fellows) {
-
-        res.send(fellows);
-    });
-
-});
-
-// GET /fellows - get all fellows
-app.get('/users', function getFellows(req, res) {
-
-    // @TODO - This eager loads
-    Fellows.all({
-
-        order: '"last_name" ASC',
-        include: [{
-
-            model: Tags
-        },{
-
-            model: Users,
-            attributes: ['id', 'email', 'userType'],
-            include: [{
-
-                model: Users,
-                as: 'VotesFor',
-                attributes: ['id', 'email', 'userType'],
-                include: [{
-
-                    model: Companies
-                }]
-            },
+        include: [
+            { model: Tags },
             {
-
                 model: Users,
-                as: 'VotesCast',
                 attributes: ['id', 'email', 'userType'],
-                include: [{
-
-                    model: Companies
+                include: [
+                     {
+                        model: Users,
+                        as: 'VotesFor',
+                        attributes: ['id', 'email', 'userType'],
+                        include: [{ model: Companies }]
+                    },
+                {
+                    model: Users,
+                    as: 'VotesCast',
+                    attributes: ['id', 'email', 'userType'],
+                    include: [{ model: Companies }]
                 }]
-            }]
-
-        }]
-
+            }
+        ]
     }).then(function(fellows) {
-
         res.send(fellows);
     });
-
 });
 
-// GET /fellows/:id - get one fellow
-app.get('/:id', function getFellow(req, res){
+// GET /fellows/:user_id - get one fellow by user_id
+app.get('/:user_id', function getFellow(req, res){
 
     //res.send('GET request - get a company record');
     Fellows.findOne({
-
         where: {
-            id: req.params.id
+            user_id: req.params.user_id
         },
         include: [{
             model: Tags
+        },{
+            model: Users
         }]
-
     }).then(function(fellow) {
-
         res.send(fellow);
     });
 });
 
-// GET /fellows/user_id/:id - get one fellow by user_id
-app.get('/user_id/:user_id', function getFellow(req, res){
 
-    //res.send('GET request - get a company record');
+// PUT /fellows/:user_id - updates an existing fellow record
+app.put('/:user_id', function putFellow(req, res) {
+
     Fellows.findOne({
 
         where: {
             user_id: req.params.user_id
         },
         include: [{
-
             model: Tags
-
-        },{
-            model: Users
         }]
 
     }).then(function(fellow) {
-
-        res.send(fellow);
-    });
-});
-
-// POST /fellows - create a new fellow record
-// ** Create a new fellow and fetch relations -- admin page expects certain data
-app.post('/', Middleware.isAdmin, function postFellow(req, res) {
-
-    Fellows.create({
-
-        user_id: req.body.user_id,
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        //university: req.body.university,
-        //major: req.body.major,
-        bio: req.body.bio,
-        interests: req.body.interests,
-        description: req.body.description,
-        git_hub: req.body.git_hub,
-        portfolio: req.body.portfolio,
-        developer_type: req.body.developer_type,
-        question: req.body.question,
-        answer: req.body.answer,
-        image_url: req.body.image_url,
-        enabled: req.body.enabled
-
-    }).then(function( fellow ) {
-
-        // get loaded fellow obj
-        Fellows.findOne({
-
-            where: {
-                id: fellow.id
-            },
-            include: [{
-                model: Tags
-            },{
-                model: Users,
-                attributes: ['id', 'email', 'userType'],
-                include: [{
-
-                    model: Users,
-                    as: 'VotesFor',
-                    attributes: ['id', 'email', 'userType'],
-                    include: [{
-
-                        model: Companies
-                    }]
-                },
-                {
-
-                    model: Users,
-                    as: 'VotesCast',
-                    attributes: ['id', 'email', 'userType'],
-                    include: [{
-
-                        model: Companies
-                    }]
-                }]
-            }]
-
-        }).then(function(fellow) {
-
-            res.send(fellow);
-        });
-
-    });
-
-});
-
-
-// PUT /fellows/:id - updates an existing fellow record
-app.put('/:id', Middleware.isLoggedIn, function putFellow(req, res) {
-
-    Fellows.findOne({
-
-        where: {
-            id: req.params.id
-        },
-        include: [{
-            model: Tags
-            //where: { state: Sequelize.col('project.state') }
-        }]
-
-    }).then(function(fellow) {
-
-        var currentUser = req.user;
-        if( currentUser.userType !== 'Admin' ) {
-
-            if (fellow.user_id !== currentUser.id) {
-
-                res.send('Unauthorized');
-                return;
-            }
-        }
 
         fellow.user_id = req.body.user_id;
         fellow.first_name = req.body.first_name;
         fellow.last_name = req.body.last_name;
-        //fellow.university = req.body.university;
-        //fellow.major = req.body.major;
+        fellow.university = req.body.university;
+        fellow.major = req.body.major;
         fellow.bio = req.body.bio;
         fellow.interests = req.body.interests;
         fellow.description = req.body.description;
@@ -271,43 +136,27 @@ app.put('/:id', Middleware.isLoggedIn, function putFellow(req, res) {
 
         fellow.save();
 
-        //console.log( req.body.tags );
-
         // remove all tags, then re-add currently posted tags
         fellow.setTags(null).then(function() {
-
-
             if (Array.isArray(req.body.tags)) {
-
                 req.body.tags.forEach(function ( tag ) {
-
                     if( typeof tag.name !== "undefined" ) {
-
                         Tags.findOne({
-
                             where: {
                                 name: {
-
                                     ilike: tag.name
                                 }
                             }
-
                         }).then(function (tagObj) {
-
                             // if tag found assign
                             if( tagObj ){
-
                                 fellow.addTag(tagObj);
                             }
                             // else create and assign
                             else{
-
                                 Tags.create({
-
                                     name: tag.name
-
                                 }).then( function( tagObj ){
-
                                     fellow.addTag(tagObj);
                                 });
                             }
@@ -315,7 +164,6 @@ app.put('/:id', Middleware.isLoggedIn, function putFellow(req, res) {
                     }
                 });
             }
-
         });
 
         res.send(fellow);
@@ -333,22 +181,17 @@ app.delete('/:id', Middleware.isAdmin, function deleteFellow(req, res) {
     });
 });
 
-
-// GET /fellows/applications - lists all application data
-app.get('/applications', function getFellows(req, res) {
+// GET /fellows/application - lists name and user_id of all applicants not accepted
+app.get('/application', function getFellows(req, res) {
 
     Fellows.all({
 
-        // change this so it only requests certain columnts
-        // (might have to just get all the columns but handle returning certain
-        // columns in the callback)
         where: {
-
             first_name: {ne: null},
-            enabled: 1
+            enabled: 0
         },
         order: '"last_name" ASC',
-        attributes: application_attributes
+        attributes: ['user_id', 'first_name', 'last_name']
 
     }).then(function(fellows) {
 
@@ -358,14 +201,13 @@ app.get('/applications', function getFellows(req, res) {
 });
 
 
-// GET /fellows/application:id - get one fellow's application data
-app.get('/:id', function getFellow(req, res){
+// GET /fellows/application:id - get one fellow's full application data
+app.get('/application/:user_id', function getFellow(req, res){
 
     //res.send('GET request - get a company record');
     Fellows.findOne({
-
         where: {
-            id: req.params.id
+            user_id: req.params.user_id
         },
         attributes: application_attributes
 
@@ -375,27 +217,15 @@ app.get('/:id', function getFellow(req, res){
 });
 
 // PUT /fellows/application:id - updates an existing fellow's application
-app.put('/application/:id', Middleware.isLoggedIn, function putFellow(req, res) {
+app.put('/application/:user_id', function putFellow(req, res) {
 
     Fellows.findOne({
 
         where: {
-            id: req.params.id
+            user_id: req.params.user_id
         }
 
     }).then(function(fellow) {
-
-        // make sure they're either the proper user or an admin
-        var currentUser = req.user;
-        if( currentUser.userType !== 'Admin' ) {
-
-            if (fellow.user_id !== currentUser.id) {
-
-                res.send('Unauthorized');
-                return;
-            }
-        }
- 
         // update the fellow application data here with the req body data
         fellow.first_name       = req.body.first_name;
         fellow.last_name        = req.body.last_name;
@@ -426,7 +256,5 @@ app.put('/application/:id', Middleware.isLoggedIn, function putFellow(req, res) 
 
 });
 
-//app.put('/set_flags', function putFlags(req, res) {
-//    Fellows.all
 
 module.exports = app;

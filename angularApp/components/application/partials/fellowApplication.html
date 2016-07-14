@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
 <!-- Bootstrap CSS-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css"/>
+ 
 
 <form class="form-horizontal">
     <fieldset class="col-md-8 col-md-offset-2">
@@ -16,7 +17,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon">First</span>
-                            <input id="firstname" name="firstname" class="form-control" placeholder="Jane" type="text" ng-model="fellow.firstname" value="{{fellow.firstname}}" required>
+                            <input class="form-control" placeholder="Jane" type="text" ng-model="fellow.first_name" ng-init="fellow.first_name" required>
                         </div>
                     </div>
                 </div>
@@ -24,7 +25,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="input-group">
                             <span class="input-group-addon">Last</span>
-                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.lastname" value="{{fellow.lastname}}" required>
+                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.last_name" value="{{fellow.last_name}}" required>
                         </div>
                     </div>
                 </div>
@@ -91,11 +92,11 @@
                     <label class="col-md-4 control-label">Are you a U.S. citizen<br>or permanent resident?</label>
                     <div class="col-md-4">
                         <label class="radio-inline">
-                            <input type="radio" name="citident" ng-model="fellow.permanentresident" value="true" required>
+                            <input type="radio" name="citident" ng-model="fellow.residentUSA" value="true" required>
                             Yes 
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="citident" ng-model="fellow.permanentresident" value="false" required>
+                            <input type="radio" name="citident" ng-model="fellow.residentUSA" value="false" required>
                             No 
                         </label>
                     </div>
@@ -131,7 +132,7 @@
                     <p><strong>Share a link to your resume</strong></p>
                 </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.resume" value="{{fellow.resume}}" required>
+                        <input class="form-control" type="text" ng-model="fellow.resumeURL" value="{{fellow.resumeURL}}" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -161,40 +162,41 @@
 
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="checkbox">
+                        <div class="radio">
                             <label>
-                                <input type="checkbox" name="ref" value="">
+                                <input type="radio" name="ref" value="Friend" ng-model="fellow.referral">
                                 Friend 
                             </label>
                         </div>
-                        <div class="checkbox">
+                        <div class="radio">
                             <label>
-                                <input type="checkbox" name="ref" value="">
+                                <input type="radio" name="ref" value="Career Fair" ng-model="fellow.referral">
                                 Career Fair 
                             </label>
                         </div>
-                        <div class="checkbox">
+                        <div class="radio">
                             <label>
-                                <input type="checkbox" name="ref" value="" ng-model="">
+                                <input type="radio" name="ref" value="Student Club" ng-model="fellow.referral">
                                 Student Club / Organization 
                             </label>
                         </div>
-                        <div class="checkbox">
+                        <div class="radio">
                             <label>
-                                <input type="checkbox" name="ref" value="" ng-model="">
+                                <input type="radio" name="ref" value="Invest Detroit" ng-model="fellow.referral">
                                 Invest Detroit 
                             </label>
                         </div>
-                        <div class="checkbox">
+                        <div class="radio">
                             <label>
-                                <input type="checkbox" name="ref" value="" ng-model="">
+                                <input type="radio" name="ref" value="Grand Circus" ng-model="fellow.referral">
                                 Grand Circus
                             </label>
                         </div>
-                        <div class="checkbox">
+                        <div class="radio">
                             <label>
-                                <input type="checkbox" name="ref" value ng-model="">
+                                <input type="radio" name="ref" value="true" ng-model="showtext">
                                 Other: 
+                                <input type="text" ng-show="showtext" ng-model="fellow.referral">
                             </label>
                         </div>
                     </div>
@@ -234,15 +236,15 @@
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <label class="radio-inline">
-                            <input type="radio" name="dev" >
+                            <input type="radio" name="dev" value="Front End" ng-model="fellow.developer_type">
                             Front End
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="dev">
+                            <input type="radio" name="dev" value="Back End" ng-model="fellow.developer_type">
                             Back End 
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="dev">
+                            <input type="radio" name="dev" value="Full Stack" ng-model="fellow.developer_type">
                             Full Stack 
                         </label>
                     </div>
@@ -280,7 +282,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.github" value="{{fellow.github}}"  required>
+                        <input class="form-control" type="text" ng-model="fellow.github" value="{{fellow.git_hub}}"  required>
                     </div>
                 </div>
 
