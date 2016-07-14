@@ -10,19 +10,43 @@ var Fellows = models.fellows;
 var Tags = models.tags;
 var Users = models.users;
 
+var application_attributes = [
+    'first_name',
+    'last_name',
+    'university',
+    'major',
+    'graduation',
+    'hometown',
+    'phone',
+    'residentUSA',
+    'description',
+    'dreamjob',
+    'resumeURL',
+    'coolthings',
+    'referral',
+    'whyHF',
+    'MIimpact',
+    'developer_type',
+    'devskills',
+    'achievements',
+    'involvements',
+    'git_hub',
+    'comments'
+];
+
 // Image Upload
 // var upload = multer({ dest: './public/assets/images/' });
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/assets/images/profile');
-  },
-  filename: function (req, file, cb) {
+    destination: function (req, file, cb) {
+        cb(null, './public/assets/images/profile');
+    },
+    filename: function (req, file, cb) {
 
-      var ext = "." + file.mimetype.split('/')[1];
-      var file_name = file.fieldname + "_"+ Date.now() + ext;
-      cb(null, file_name);
-  }
+        var ext = "." + file.mimetype.split('/')[1];
+        var file_name = file.fieldname + "_"+ Date.now() + ext;
+        cb(null, file_name);
+    }
 });
 
 var upload = multer({ storage: storage });

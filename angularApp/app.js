@@ -13,8 +13,8 @@
     //      components/componentModules.js otherwise the page will not run
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
-        'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 'app.helpers', 'app.calendar']);
-
+            'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 
+            'app.helpers', 'app.calendar', 'app.application', 'app.api']);
 
     /**
      * @name config
@@ -23,11 +23,11 @@
     app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         $routeProvider
-        .when('/', {
-            controller  : 'HomeController',
-            templateUrl : 'components/home/home.html'
-
-        })
+            .when('/', {
+                controller  : 'HomeController',
+                templateUrl : 'components/home/home.html',
+                resolve: { routePermission: Public },
+            })
         .when('/fellows', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
@@ -53,10 +53,43 @@
             controller: 'CalendarController',
             templateUrl: 'components/calendar/calendar.html',
         })
+        .when('/application/fellow', {
+            controller: 'FellowAppController',
+            templateUrl: 'components/application/partials/fellowApplication.html',
+        })
+        .when('/application/company', {
+            controller: 'CompanyAppController',
+            templateUrl: 'components/application/partials/companyApplication.html',
+        })
         //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //                   that runs if the user is logged in and editing
         .otherwise({ redirectTo: '/' });
 
     }]);
+    /**
+     * @name Public 
+     * @desc Checks if the user is logged in to allow them to continue, otherwise
+     *       redirects to the home page
+     */
+    var Public = function($location, $q, User) {
+        var deferred = $q.defer();
+        User.updateLoginStatus();
+        var type = User.getType();
+        deferred.resolve();
+        return deferred.promise; 
+    }
+
+    var Restricted = function($location, $q, User) {
+        var deferred = $q.defer();
+        User.updateLoginStatus();
+        var type = User.getType();
+        if (type !== undefined) {
+            deferred.resolve();
+        } else {
+            $location.path("/");
+            deferred.reject();
+        }
+        return deferred.promise; 
+    }
 
 })();
