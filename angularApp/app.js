@@ -1,6 +1,6 @@
 /**
  * app.routes
- * @desc    contains the routes for the app
+ * @desc   contains the routes for the app
  */
 // Note from JW: We're only using app.profile, so I don't know if we need tags,
 // // votes, alert, home, and config. We should delete what we don't need
@@ -14,7 +14,6 @@
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
         'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 'app.helpers', 'app.calendar', 'app.dash']);
-
 
     /**
      * @name config
@@ -36,6 +35,7 @@
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
         })
         .when('/about', {
+<<<<<<< Updated upstream
             templateUrl : 'assets/html/static_about.html'
         })
         .when('/application', {
@@ -46,6 +46,18 @@
         })
         .when('/groups', {
             templateUrl : 'static_groups.html'
+=======
+            templateUrl : 'assets/html/staticAbout.html'
+        })
+        .when('/application', {
+            templateUrl : 'assets/html/staticApplication.html'
+        })
+        .when('/contact', {
+            templateUrl : 'assets/html/staticContact.html'
+        })
+        .when('/groups', {
+            templateUrl : 'assets/html/groups.html'
+>>>>>>> Stashed changes
         })
         .when('/dash', {
             controller  : 'DashController',
