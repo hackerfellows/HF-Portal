@@ -18,8 +18,10 @@
 
         var vm = this;
         console.log("In tags controller");
-        console.log(Tags.all());
         $scope.newTag = '';
+        Tags.all().success( function( tags ){
+          $scope.tags = tags;
+         });
 
         $scope.addTag = function( newTag ){
 
@@ -37,8 +39,8 @@
             // show modal with tag
            
             var modalInstance = $uibModal.open({
-
-                templateUrl: 'source/app/tags/partials/edit-tag-form.html',
+                backdrop: false,
+                templateUrl: 'components/admin/tags/partials/edit-tag-form.html',
                 controller: 'EditTagsModalInstanceController',
                 size: 'md',
                 resolve: {
@@ -80,9 +82,10 @@
         .module('app.tags.controllers')
         .controller('EditTagsModalInstanceController', EditTagsModalInstanceController);
 
-    
-    EditTagsModalInstanceController.$inject = ['$scope', '$modalInstance', 'tag', 'Tags' ];
-    function EditTagsModalInstanceController ($scope, $modalInstance, tag, Tags) {
+    console.log("before modal inject call"); 
+    EditTagsModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'tag', 'Tags', '$uibModal' ];
+    console.log("after modal inject call");
+    function EditTagsModalInstanceController ($scope, $uibModalInstance, tag, Tags) {
 
         $scope.tag = tag;
 
@@ -90,7 +93,7 @@
 
             Tags.update( $scope.tag ).then(function(newTag){
 
-                $modalInstance.close( newTag );
+                $uibModalInstance.close( newTag );
 
             },
             function(){
@@ -103,7 +106,7 @@
 
         $scope.cancel = function cancel() {
 
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     }
    

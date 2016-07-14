@@ -79,10 +79,23 @@
         ]);
 
   angular
-    .module('app.tags.controllers', []);
+    .module('app.tags.controllers', ['ui.bootstrap']);
   angular
     .module('app.tags.services', []);
   //End admin-tags
+ 
+  //admin-users
+  angular
+    .module('app.adminUsers', [
+        'app.adminUsers.controllers',
+        'app.adminUsers.services'
+        ]);
+
+  angular
+    .module('app.adminUsers.controllers', ['ui.bootstrap']);
+  angular
+    .module('app.adminUsers.services', []);
+  //End admin-users
 
 
 })();

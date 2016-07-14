@@ -12,7 +12,7 @@
     //NOTE: Make sure these modules (app.moduleName) are defined in
     //      components/componentModules.js otherwise the page will not run
     var app = angular.module('app', ['ngRoute', 'app.home', 'app.profile', 'ui.bootstrap',
-        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar', 'app.admin', 'app.tags']);
+        'app.profileGrid', 'app.navbar', 'app.accounts', 'app.calendar', 'app.admin', 'app.tags', 'app.adminUsers']);
 
     /**
      * @name config
@@ -53,8 +53,8 @@
         templateUrl: 'components/admin/tags/tags.html',
     })
     .when('/admin/users', {
-        controller: 'AdminController',
-        templateUrl: 'components/admin/admin.html',
+        controller: 'AdminUsersController',
+        templateUrl: 'components/admin/users/adminUsers.html',
     })
     .when('/admin/applicants', {
         controller: 'AdminController',

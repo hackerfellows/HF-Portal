@@ -36,15 +36,6 @@
          */
         function all(){
 
-            var temp = [
-                    {name: 'aws'},
-                    {name: 'soccer'},
-                    {name: 'none'}
-                
-                
-                
-                ]
-
                     
 
            
