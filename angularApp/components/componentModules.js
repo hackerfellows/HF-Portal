@@ -61,15 +61,11 @@
   angular
     .module('app.profileGrid', [
         'app.profileGrid.controllers',
-        'app.profileGrid.services',
         'app.profileGrid.directives'
         ]);
 
   angular
     .module('app.profileGrid.controllers', []);
-
-  angular
-    .module('app.profileGrid.services', []);
 
   angular
     .module('app.profileGrid.directives', []);
