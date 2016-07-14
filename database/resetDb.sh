@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Usage: populateDb.sh directory host"
-echo "Starting to populate database..."
+echo "Usage: resetDb.sh directory host"
+echo "Starting to reset database..."
 
 # check if argument supplied
 quit() {
@@ -12,18 +12,18 @@ quit() {
 
 if [ -z "$1" ]; then
     echo "Please supply directory where SQL scripts are located or reset."
-    quit "ERROR: Database population failed!"
+    quit "ERROR: Database reset failed!"
 fi
 directory=$1
 
 if [ -z "$2" ]; then
     echo "Please supply host to connect to Postgres database."
-    quit "ERROR: Database population failed!"
+    quit "ERROR: Database reset failed!"
 fi
 host=$2
 
 # specify order in which data should be inserted since some relies on other relations so sequence is important
-scripts=("reset.sql" "users.sql" "fellows.sql" "companies.sql" "tags.sql" "fellow_tags.sql" "company_tags.sql" "votes_fellows.sql" "votes_companies.sql")
+scripts=("drop.sql")
 for i in "${scripts[@]}"
 do
     sqlFile="${directory}/${i}"
@@ -31,4 +31,4 @@ do
     PGPASSWORD=$password psql -U hf -d hfportal -h $host < $sqlFile
 done
 
-quit "SUCCESS: Database population completed!"
+quit "SUCCESS: Database reset completed!"
