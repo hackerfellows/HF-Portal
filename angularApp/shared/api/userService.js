@@ -32,8 +32,6 @@
             isUserFellow: isUserFellow,
             isUserAccepted: isUserAccepted,
             updateLoginStatus: updateLoginStatus,
-            getApplication: getApplication,
-            updateApplication: getApplication,
             isUserCompany: isUserCompany
         };
 
@@ -55,14 +53,6 @@
             return $http.get('/api/v2/users/' + user_id + '/votes' );
         }
 
-        function getApplication() {
-            return $http.get('/api/v2/fellows/application/' + currentUser.id);
-        }
-
-        function updateApplication(user) {
-            return $http.put('/api/v2/fellows/application/' + currentUser.id, user);
-        }
-
         /**
          * @name login
          * @desc login a new user record
@@ -81,9 +71,14 @@
             console.log("Calling confimr long");
             $http.get( '/api/v2/users/confirm-login' )
                 .then(function (response) {
-                    if (response.success == true) {
+                    console.log(response);
+                    if (response.data.success == true) {
                         console.log("User is logged in");
-                        setCredentials( response.user.id, response.user.email, response.user.userType );
+                        setCredentials(
+                            response.data.user.id,
+                            response.data.user.email,
+                            response.data.user.userType
+                        );
                     }else{
                         console.log("HOW ARE YOU HERE");
                     }
