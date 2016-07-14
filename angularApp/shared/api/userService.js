@@ -71,12 +71,8 @@
             console.log("Calling confimr long");
             $http.get( '/api/v2/users/confirm-login' )
                 .then(function (response) {
-                    if (response.success == true) {
-                        console.log("User is logged in");
-                        setCredentials( response.user.id, response.user.email, response.user.userType );
-                    }else{
-                        console.log("HOW ARE YOU HERE");
-                    }
+                    console.log("User is logged in");
+                    setCredentials( response.user.id, response.user.email, response.user.userType );
                 },function(err){
                     console.log("User is NOT logged in");
                     console.log(err);
