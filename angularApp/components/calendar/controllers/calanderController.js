@@ -50,8 +50,9 @@ jQuery(document).ready(function($){
 
     // Determine sheet number from user session information
     var sheetNumber = assignSheetNumber();
-    // sheetNumber = 1;
+    sheetNumber = 1;
     $scope.invalidUser = (sheetNumber == 0);
+    $scope.userJustApplied = true;//false;//!(User.isUserAccepted);
 
     console.log(sheetNumber);
 
@@ -59,20 +60,7 @@ jQuery(document).ready(function($){
     var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
 
 
-    $http({
-      method: 'GET',
-      url: url
-    }).then(function successCallback(response) {
-      console.log("goooood")
-      console.log(response)
-      // this callback will be called asynchronously
-      // when the response is available
-    }, function errorCallback(response) {
-      console.log("errrrrr")
-      console.log(response)
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-    });
+
 
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
@@ -164,6 +152,21 @@ jQuery(document).ready(function($){
           }
           // a must be equal to b
           return 0;
+        });
+
+        $http({
+          method: 'GET',
+          url: url
+        }).then(function successCallback(response) {
+          console.log("goooood")
+          console.log(response)
+          // this callback will be called asynchronously
+          // when the response is available
+        }, function errorCallback(response) {
+          console.log("errrrrr")
+          console.log(response)
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
         });
 
       }) /*end of getJSON function */

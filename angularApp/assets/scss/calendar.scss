@@ -1,3 +1,8 @@
+$fontSizeText: 14px;
+$fontSizeHeader: 20px;
+$fontSizeDate: 12px;
+$timelineColor: #F26638;
+
 
 .material-icons.md-32 {
   font-size: 24px;
@@ -28,32 +33,18 @@
 Primary style
 
 -------------------------------- */
-/*html * {
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale; }
 
- *, *:after, *:before {
- -webkit-box-sizing: border-box;
- -moz-box-sizing: border-box;
- box-sizing: border-box; }
+body{
+  background-color: #DEDEDD;
+}
 
- body {
- font-size: 100%;
- font-family: "Droid Serif", serif;
- color: #7f8c97;
- background-color: #e9f0f5; }
+div.row.top-row.ng-scope{
+  text-align:center;
+}
 
- a {
- color: #acb7c0;
- text-decoration: none;
- font-family: "Open Sans", sans-serif; }
-
- img {
- max-width: 100%; }
-
- h1, h2 {
- font-family: "Open Sans", sans-serif;
- font-weight: bold; }
+div.row.top-row{
+  text-align:center;
+}
 
  /* --------------------------------
 
@@ -106,7 +97,7 @@ margin-bottom: 2em; }
   left: 18px;
   height: 100%;
   width: 4px;
-background: #d7e4ed; }
+background: $timelineColor; }
 @media only screen and (min-width: 1170px) {
   #cd-timeline {
     margin-top: 3em;
@@ -230,8 +221,9 @@ display: table; }
 .cd-timeline-content h2 {
 color: #303e49; }
 .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
-  font-size: 13px;
-font-size: 0.8125rem; }
+  font-size: $fontSizeDate;
+//font-size: 0.8125rem;
+}
 .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
 display: inline-block; }
 .cd-timeline-content p {
@@ -260,14 +252,17 @@ opacity: .7; }
 border-right: 7px solid #ffffff; }
 @media only screen and (min-width: 768px) {
   .cd-timeline-content h2 {
-    font-size: 20px;
-  font-size: 1.25rem; }
+    font-size: $fontSizeHeader;
+  //font-size: 1.25rem;
+ }
   .cd-timeline-content p {
-    font-size: 16px;
-  font-size: 1rem; }
+    font-size: $fontSizeText;
+  //font-size: 1rem;
+}
   .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
-    font-size: 14px;
-font-size: 0.875rem; } }
+    font-size: $fontSizeDate;
+//font-size: 0.875rem;
+} }
 @media only screen and (min-width: 1170px) {
   .cd-timeline-content {
     margin-left: 0;
@@ -286,7 +281,8 @@ font-size: 0.875rem; } }
     left: 122%;
     top: 6px;
     font-size: 16px;
-  font-size: 1rem; }
+  font-size: 1rem;
+}
   .cd-timeline-block:nth-child(even) .cd-timeline-content {
   float: right; }
   .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
