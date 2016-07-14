@@ -50,11 +50,12 @@ jQuery(document).ready(function($){
 
     // Determine sheet number from user session information
     var sheetNumber = assignSheetNumber();
-    sheetNumber = 1;
+    //sheetNumber = 1;
+    //sheetNumber = 3;
     $scope.invalidUser = (sheetNumber == 0);
-    $scope.userJustApplied = true;//false;//!(User.isUserAccepted);
+    $scope.userJustApplied = (sheetNumber == 2 || sheetNumber == 4);
 
-    console.log(sheetNumber);
+
 
     $scope.events = [];
     var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
@@ -66,7 +67,7 @@ jQuery(document).ready(function($){
     $scope.getSpreadsheetData = function() {
       console.log('Printing Sheet #'+sheetNumber)
 
-      $scope.webjson = $.getJSON(url, function(data,error){
+      $scope.webjson = $.getJSON(url).done( function(data,error){
         console.log("hi")
         console.log(error);
         //grab spreadsheet data from google sheet
@@ -169,7 +170,11 @@ jQuery(document).ready(function($){
           // or server returns response with an error status.
         });
 
-      }) /*end of getJSON function */
+      }).fail(function( jqxhr, textStatus, error ) {
+        var err = textStatus + ", " + error;
+        console.log( "Request Failed: " + err );
+        $scope.invalidUser = true;
+    }); /*end of getJSON function */
     } /*end spreadsheetData function*/
 
     /* Assign the correct sheet number to the right user
