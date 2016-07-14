@@ -36,6 +36,8 @@
     function FellowAppController($scope, User, Entities) {
         console.log("FellowAppController loaded");
 
+        initFormData();
+
         function initFormData() {
             $scope.fellow = Entities.getApplication("fellows");
         }
