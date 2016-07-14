@@ -1,6 +1,8 @@
 /**
 * AdminUsersController
 * @namespace app.adminUsers.controllers
+* use Jessica's Entities Service to update/remove fellows and comapnies
+* use Robin's User Service to update/remove users
 */
 (function () {
     'use strict';
@@ -9,12 +11,12 @@
     .module('app.adminUsers.controllers')
     .controller('AdminUsersController', AdminUsersController);
 
-    AdminUsersController.$inject = ['$scope', '$location', '$uibModal', '$window', 'User', 'Fellows', 'Companies'];
+    AdminUsersController.$inject = ['$scope', '$location', '$uibModal', '$window', 'Entities', 'User'];
 
     /**
      * @namespace AdminUsersController
      */
-     function AdminUsersController($scope, $location, $uibModal, $window, User, Fellows, Companies) {
+     function AdminUsersController($scope, $location, $uibModal, $window, Entities, User) {
 
        
 
@@ -24,18 +26,20 @@
 
             if( $scope.fellows.length === 0 ) {
 
-                Fellows.allWithUser().success(function (fellows) {
+                Entities.allWithUser('fellows').success(function (fellows) {
 
                     $scope.fellows = fellows;
+                    console.log("fellows retrieved");
 
                 });
             }
 
             if( $scope.companies.length === 0 ) {
 
-                Companies.allWithUser().success(function (companies) {
+                Entities.allWithUser('companies').success(function (companies) {
 
                     $scope.companies = companies;
+                     console.log("companies retrieved");
                 });
             }
         };
@@ -139,34 +143,7 @@
         };
 
 
-        /* Create User */
-        $scope.createUser = function (user) {
-
-            var modalInstance = $uibModal.open({
-                templateUrl: 'components/admin/users/partials/new-user-form.html',
-                controller: 'CreateUserModalInstanceController',
-                size: 'md',
-                resolve: {
-                    
-                }
-            });
-
-            modalInstance.result.then( function( response ) {
-
-                var newItem = response.data;
-
-                if( newItem.user.userType === 'Fellow' )
-                {
-                    $scope.fellows.unshift( newItem );
-                }
-                else if( newItem.user.userType === 'Company' )
-                {
-                    $scope.companies.unshift( newItem );
-                }
-
-            });
-        };
-
+/*
         $scope.removeFellow = function( fellow ){
 
             var c = confirm( "Are you sure you want to delete " + fellow.first_name + " " + fellow.last_name + "?");
@@ -186,24 +163,9 @@
             }
         };
 
-        $scope.removeCompany = function( company ){
+*/
 
-            var c = confirm( "Are you sure you want to delete " + company.name + "?");
 
-            if( c ){
-
-                // remove company
-                Companies.destroy( company.id ).then( function(){
-
-                    // now remove user
-                    User.destroy( company.user_id).then( function(){
-
-                        // reload users
-                        $window.location.reload();
-                    });
-                });
-            }
-        };
     }
 
 
@@ -220,8 +182,8 @@
         .controller('CompanyVotesModalInstanceController', CompanyVotesModalInstanceController)
         .controller('FellowVotesModalInstanceController', FellowVotesModalInstanceController);
 
-    EditFellowModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'fellow', 'User', 'Fellows' ];
-    function EditFellowModalInstanceController ($scope, $uibModalInstance, fellow, User, Fellows) {
+    EditFellowModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'Entities', 'fellow' ];
+    function EditFellowModalInstanceController ($scope, $uibModalInstance, Entities, fellow) {
 
         $scope.user = fellow.user;
         $scope.fellow = fellow;
@@ -242,31 +204,7 @@
 
         $scope.ok = function ok() {
 
-            User.update($scope.user).then(function(newUser){
-
-                // success callback
-                $scope.user = newUser;
-
-                // user is updated, so now update fellow
-                Fellows.update( $scope.fellow ).then(function(newFellow){
-
-                    // success callback
-                    $scope.fellow = newFellow;
-
-                    $uibModalInstance.close();
-                },
-                function(){
-
-                    // error callback
-                    $scope.errors = [ "There was an error updating the fellow" ];
-                });
-
-            },
-            function(){
-
-                // error callback
-                $scope.errors = [ "There was an error updating the fellow" ];
-            });
+            console.log("in function ok");
 
         };
 
@@ -275,8 +213,8 @@
         };
     }
 
-    EditCompanyModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'company', 'User', 'Companies' ];
-    function EditCompanyModalInstanceController ($scope, $uibModalInstance, company, User, Companies) {
+    EditCompanyModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'company', 'Entities'];
+    function EditCompanyModalInstanceController ($scope, $uibModalInstance, company, Entities) {
 
         $scope.user = company.user;
         $scope.company = company;
@@ -297,32 +235,8 @@
 
         $scope.ok = function ok() {
 
-            User.update($scope.user).then( function( newUser ){
-
-                // success callback
-                $scope.user = newUser;
-
-                Companies.update($scope.company).then( function( newCompany ){
-
-                    // success callback
-                    $scope.company = newCompany;
-
-                    $uibModalInstance.close();
-
-                }, function(){
-
-                    // error callback
-                    $scope.errors = [ "There was an error updating the company" ];
-                });
-
-            }, function(){
-
-                // error callback
-                $scope.errors = [ "There was an error updating the company" ];
-            });
-
-            $uibModalInstance.close($scope.user);
-        };
+            console.log("in the function ok with company");
+       };
 
         $scope.cancel = function cancel() {
             $uibModalInstance.dismiss('cancel');
@@ -416,8 +330,8 @@
         };
     }
 
-    CreateUserModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'User', 'Fellows', 'Companies' ];
-    function CreateUserModalInstanceController ($scope, $uibModalInstance, User, Fellows, Companies) {
+    CreateUserModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'Entities' ];
+    function CreateUserModalInstanceController ($scope, $uibModalInstance, Entities) {
 
         $scope.verify_password = "";
 

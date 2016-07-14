@@ -1,4 +1,7 @@
-// Each component's modules should be declared in this
+/*  File name:      componentModules.js
+    Author:         Jessica Wu, Michael Baldwin
+    Description:    Every component needs to declare its modules here
+*/
 
 (function () {
   'use strict';
@@ -32,20 +35,20 @@
 
   //Profile
   angular
-    .module('app.profile', [
-        'app.profile.controllers',
-        'app.profile.services',
-        'app.profile.directives'
+    .module('app.profileSingle', [
+        'app.profileSingle.controllers',
+        'app.profileSingle.services',
+        'app.profileSingle.directives'
         ]);
 
   angular
-    .module('app.profile.controllers', []);
+    .module('app.profileSingle.controllers', []);
 
   angular
-    .module('app.profile.services', []);
+    .module('app.profileSingle.services', []);
 
   angular
-    .module('app.profile.directives', []);
+   .module('app.profileSingle.directives', []);
   //End Profile
 
   //Calendar
@@ -57,6 +60,7 @@
   angular
     .module('app.calendar.controllers', []);
   //End Calendar
+
 
   //admin
   angular
@@ -92,10 +96,31 @@
         ]);
 
   angular
-    .module('app.adminUsers.controllers', ['ui.bootstrap']);
+    .module('app.adminUsers.controllers', ['ui.bootstrap',  'app.profileSingle.services']);
   angular
     .module('app.adminUsers.services', []);
   //End admin-users
 
+  //admin-applicants
+  angular
+    .module('app.adminApplicants', [
+        'app.adminApplicants.controllers',
+        'app.adminApplicants.services'
+        ]);
+
+  angular
+    .module('app.adminApplicants.controllers', ['ui.bootstrap',  'app.adminApplicants.services']);
+  angular
+    .module('app.adminApplicants.services', []);
+  //End admin-applicants
+
+  angular
+    .module('app.application', [
+        'app.application.controllers'
+    ]);
+
+
+  angular
+    .module('app.application.controllers', []);
 
 })();

@@ -9,6 +9,7 @@ var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
+var order = require('gulp-order');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
 var proxy = require('proxy-middleware');
@@ -19,9 +20,12 @@ const exec = require('child_process').exec;
 gulp.task('default', ['full-reload']);
 
 
-// after compiling web app and starting browser-sync,
+//Compile everything, watch, and nodemon/browsersync
+gulp.task('server', ['watch', 'nodemon', 'browser-sync']);
+
+
 // watch for file changes and reload browser
-gulp.task('server', ['full-reload', 'nodemon', 'browser-sync'], function () {
+gulp.task('watch', ['full-reload'], function () {
 	// watch for js file changes in app and run 'js' gulp task
 	gulp.watch("angularApp/**/*.js", ['js']);
 
@@ -121,6 +125,11 @@ gulp.task('sass', function() {
 // annotating properly for angularjs, minifying
 gulp.task('js', function() {
 	return gulp.src(['angularApp/**/*.js', '!angularApp/assets/**'])
+		.pipe(order([
+			'app.js',
+			'**/*Modules.js',
+			'**/*.js'
+		]))
 		.pipe(concat('bundle.js'))
 		//.pipe(ngAnnotate())
 		//.pipe(uglify())

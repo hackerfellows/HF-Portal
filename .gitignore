@@ -10,3 +10,8 @@ public
 node_modules
 npm-debug.log
 
+# swp files
+*.swp
+
+# IDE
+.idea

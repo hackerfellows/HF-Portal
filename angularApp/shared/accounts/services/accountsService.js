@@ -26,6 +26,9 @@
         };
 
         function startLogin() {
+            if (loginModal !== null) {
+                loginModal.dismiss();
+            }
             loginModal = $uibModal.open({
                 backdrop: false,
                 templateUrl: '/shared/accounts/partials/login.html',
@@ -34,6 +37,9 @@
         }
 
         function startRegistration() {
+            if (registerModal !== null) {
+                registerModal.dismiss();
+            }
             registerModal = $uibModal.open({
                 templateUrl: '/shared/accounts/partials/register.html',
                 controller: 'RegisterController'

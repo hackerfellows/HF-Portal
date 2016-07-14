@@ -3,14 +3,14 @@
 
     angular
     .module('app.admin.services')
-    .service('Entities', Entities);
+    .service('Placeholder', Placeholder);
 
-    Entities.$inject = ['$http'];
-
-
+    Placeholder.$inject = ['$http'];
 
 
-     function Entities($http) {
+
+
+     function Placeholder($http) {
        console.log("in admin service"); 
        
        return 0;

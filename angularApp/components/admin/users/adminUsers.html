@@ -5,8 +5,7 @@
 		<div class="profile">
 
 				<div class="row">
-
-					<a class="btn btn-primary" ng-click="createUser()"><span class="glyphicon glyphicon-plus"></span> New User</a>
+                  
 
 					<h2>Fellows</h2>
 					<table class="table table-striped">
@@ -16,7 +15,10 @@
 							<th>Email</th>
 							<th class="stat">Voted For</th>
 							<th class="stat">Votes Cast</th>
-							<th class="stat">Enabled</th>
+                            <th class="stat">App.</th>
+                            <th class="stat">Prof.</th>
+                            <th class="stat">Vote</th>
+                            <th class="stat">Enabled</th>
 							<th></th>
 							<th></th>
 						</thead>
@@ -26,6 +28,9 @@
 							<td>{{ fellow.user.email }}</td>
 							<td class="stat"><a href ng-click="fellowVotes(fellow)">{{ fellow.user.VotesFor.length }}</a></td>
 							<td class="stat"><a href ng-click="fellowVotes(fellow)">{{ fellow.user.VotesCast.length }}</a></td>
+							<td class="stat">{{ fellow.enabled ? "Yes" : "No" }}</td>
+							<td class="stat">{{ fellow.enabled ? "Yes" : "No" }}</td>
+							<td class="stat">{{ fellow.enabled ? "Yes" : "No" }}</td>
 							<td class="stat">{{ fellow.enabled ? "Yes" : "No" }}</td>
 							<td><a href ng-click="editFellow(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
 							<td width="30"><a href ng-click="removeFellow(fellow)"><i class="fa fa-times text-danger"></i></a></td>
@@ -43,6 +48,9 @@
 							<th>Email</th>
 							<th class="stat">Voted For</th>
 							<th class="stat">Votes Cast</th>
+							<th class="stat">App.</th>
+							<th class="stat">Prof.</th>
+							<th class="stat">Vote</th>
 							<th class="stat">Enabled</th>
 							<th></th>
 							<th></th>
@@ -54,6 +62,9 @@
 							<td>{{ company.user.email }}</td>
 							<td class="stat"><a href ng-click="companyVotes(company)">{{ company.user.VotesFor.length }}</a></td>
 							<td class="stat"><a href ng-click="companyVotes(company)">{{ company.user.VotesCast.length }}</a></td>
+							<td class="stat">{{ company.enabled ? "Yes" : "No" }}</td>
+							<td class="stat">{{ company.enabled ? "Yes" : "No" }}</td>
+							<td class="stat">{{ company.enabled ? "Yes" : "No" }}</td>
 							<td class="stat">{{ company.enabled ? "Yes" : "No" }}</td>
 							<td><a href ng-click="editCompany(company)"><i class="fa fa-pencil-square-o"></i></a></td>
 							<td width="30"><a href ng-click="removeCompany(company)"><i class="fa fa-times text-danger"></i></a></td>

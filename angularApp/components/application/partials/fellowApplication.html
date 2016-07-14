@@ -1,105 +1,104 @@
 <div>
-    <div ng-controller="FellowApplicationController">
-        <form novalidate class="application-form">
-            <label>
-                First Name: <input type="text" ng-model="fellow.firstname"  required /><br />
-            </label>
-            <label>
-                Last Name: <input type="text" ng-model="fellow.lastname"  required /><br />
-            </label>
-            <label>
-                University: <input type="text" ng-model="fellow.university"  required /><br />
-            </label>
-            <label>
-                Major / Minor: <input type="text" ng-model="fellow.major"  required /><br />
-            </label>
-            <label>
-                GPA: <input type="number" ng-model="fellow.gpa"  required /><br />
-            </label>
-            <label>
-                Expected Graduation Date: <input type="date" ng-model="fellow.graduation" placeholder="yyyy-MM-dd" required/>
-            </label>
-            <label>
-                Hometown: <input type="text" ng-model="fellow.hometown" /><br />
-            </label>
-            <label>
-                Phone: <input type="text" ng-model="fellow.phone"  required /><br />
-            </label>
-            <label>
-                Are you a US Citizen or Permanent Resident?: <input type="radio" name="citident" ng-model="fellow.permanentresident" value="true" required/>Yes
-                <input type="radio" name="citident" ng-model="fellow.permanentresident" value="false" required/>No<br />
-            </label>
+    <form novalidate class="application-form">
+        <label>
+            First Name: <input type="text" ng-model="fellow.firstname"  required /><br />
+        </label>
+        <label>
+            Last Name: <input type="text" ng-model="fellow.lastname"  required /><br />
+        </label>
+        <label>
+            University: <input type="text" ng-model="fellow.university"  required /><br />
+        </label>
+        <label>
+            Major / Minor: <input type="text" ng-model="fellow.major"  required /><br />
+        </label>
+        <label>
+            GPA: <input type="number" ng-model="fellow.gpa"  required /><br />
+        </label>
+        <label>
+            Expected Graduation Date: <input type="date" ng-model="fellow.graduation" placeholder="yyyy-MM-dd" required/>
+        </label>
+        <label>
+            Hometown: <input type="text" ng-model="fellow.hometown" /><br />
+        </label>
+        <label>
+            Phone: <input type="text" ng-model="fellow.phone"  required /><br />
+        </label>
+        <label>
+            Are you a US Citizen or Permanent Resident?: <input type="radio" name="citident" ng-model="fellow.permanentresident" value="true" required/>Yes
+            <input type="radio" name="citident" ng-model="fellow.permanentresident" value="false" required/>No<br />
+        </label>
 
-            <!-- In depth personal stuff -->
-            <label>
-                Give us a single phrase to describe yourself<br />
-                <input type="text" ng-model="fellow.description"  required /><br />
-            </label>
-            <label>
-                What is your dream job?<br />
-                <input type="text" ng-model="fellow.dreamjob"  required /><br />
-            </label>
-            <label>
-                Share a link to your resume<br />
-                <input type="text" ng-model="fellow.resume"  required /><br />
-            </label>
-            <label>
-                Your resume is the typical boring info, but we want more! Tell us 3 cool things about you -- spare time activities -- travels -- anything you think we should know!<br />
-                <input type="text" ng-model="fellow.coolthings"  required /><br />
-            </label>
+        <!-- In depth personal stuff -->
+        <label>
+            Give us a single phrase to describe yourself<br />
+            <input type="text" ng-model="fellow.description"  required /><br />
+        </label>
+        <label>
+            What is your dream job?<br />
+            <input type="text" ng-model="fellow.dreamjob"  required /><br />
+        </label>
+        <label>
+            Share a link to your resume<br />
+            <input type="text" ng-model="fellow.resume"  required /><br />
+        </label>
+        <label>
+            Your resume is the typical boring info, but we want more! Tell us 3 cool things about you -- spare time activities -- travels -- anything you think we should know!<br />
+            <input type="text" ng-model="fellow.coolthings"  required /><br />
+        </label>
 
-            <!-- Programming stuff -->
-            <label>
-                Exciting that you learned about the hacker fellows program, how did you hear about us?<br />
-                Friend: <input type="checkbox" name="ref" ng-model="fellow.referral.friend" required/><br />
-                Career Fair: <input type="checkbox" name="ref" ng-model="fellow.referral.careerfair" required/><br />
-                Student Club / Organization: <input type="checkbox" name="ref" ng-model="fellow.referral.club" required/><br />
-                Invest Detroit: <input type="checkbox" name="ref" ng-model="fellow.referral.investdetroit" required/><br />
-                Grand Circus: <input type="checkbox" name="ref" ng-model="fellow.referral.grandcircus" required/><br />
-                Other: <input type="checkbox" name="ref" ng-model="fellow.referral.other" required/>
-                <div ng-show="{{fellow.referral.other}}">
-                    <input type="text" ng-model="fellow.referral.othervalue"/>
-                </div>
-                <br />
-            </label>
-            <label>
-                Why Hacker Fellows once you graduate?<br />
-                <textarea ng-model="fellow.whyHF" ng-maxLength="500" required>
-            </label>
-            <label>
-                WHy do you want to make an impact in Michigan while working for a startup?<br />
-                <textarea ng-model="fellow.MIimpact" ng-maxLength="500" required>
-            </label>
-            <!-- Developer Information Page -->
-            <label>
-                What type of developer are you?<br />
-                <input type="radio" name="dev" ng-model="fellow.devtype" ng-value="Front End" required/>Front End<br />
-                <input type="radio" name="dev" ng-model="fellow.devtype" ng-value="Back End" required/>Back End<br />
-                <input type="radio" name="dev" ng-model="fellow.devtype" ng-value="Full Stack" required/>Full Stack<br />
-            </label>
-            <label>
-                What are your top 7 software development skills? (Languages, Frameworks, etc...)<br />
-                <textarea ng-model="fellow.devskills" ng-maxLength="500" required>
-            </label>
-            <label>
-                What technical achievement are you proud to share?<br />
-                <textarea ng-model="fellow.achievement" ng-maxLength="500" required>
-            </label>
-            <label>
-                What involvements have you had with start-ups, hackathons, developer groups, side projects?<br />
-                <textarea ng-model="fellow.involvements" ng-maxLength="500" required>
-            </label>
-            <label>
-                Share a link to your GitHub profile<br />
-                <textarea ng-model="fellow.github" ng-maxLength="500" required>
-            </label>
-            <label>
-                Any comments about your technical skills you wish to share? Any really cool side projects in the works or freelance success stories?<br />
-                <textarea ng-model="fellow.comments" ng-maxLength="500">
-            </label>
+        <!-- Programming stuff -->
+        <label>
+            Exciting that you learned about the hacker fellows program, how did you hear about us?<br />
+            Friend: <input type="checkbox" name="ref" ng-model="fellow.referral.friend" required/><br />
+            Career Fair: <input type="checkbox" name="ref" ng-model="fellow.referral.careerfair" required/><br />
+            Student Club / Organization: <input type="checkbox" name="ref" ng-model="fellow.referral.club" required/><br />
+            Invest Detroit: <input type="checkbox" name="ref" ng-model="fellow.referral.investdetroit" required/><br />
+            Grand Circus: <input type="checkbox" name="ref" ng-model="fellow.referral.grandcircus" required/><br />
+            Other: <input type="checkbox" name="ref" ng-model="fellow.referral.other" required/>
+            <div ng-show="{{fellow.referral.other}}">
+                <input type="text" ng-model="fellow.referral.othervalue"/>
+            </div>
+            <br />
+        </label>
+        <label>
+            Why Hacker Fellows once you graduate?<br />
+            <textarea ng-model="fellow.whyHF" ng-maxLength="500" required></textarea><br />
+        </label>
 
-            <input type="button" ng-click="reset()" value="Reset" />
-            <input type="submit" ng-click="update(fellow)" value="Save" />
-        </form>
-    </div>
+        <label>
+            WHy do you want to make an impact in Michigan while working for a startup?<br />
+            <textarea ng-model="fellow.MIimpact" ng-maxLength="500" required></textarea><br />
+        </label>
+        <!-- Developer Information Page -->
+        <label>
+            What type of developer are you?<br />
+            <input type="radio" name="dev" ng-model="fellow.devtype" ng-value="FrontEnd" required/>Front End<br />
+            <input type="radio" name="dev" ng-model="fellow.devtype" ng-value="BackEnd" required/>Back End<br />
+            <input type="radio" name="dev" ng-model="fellow.devtype" ng-value="FullStack" required/>Full Stack<br />
+        </label>
+        <label>
+            What are your top 7 software development skills? (Languages, Frameworks, etc...)<br />
+            <textarea ng-model="fellow.devskills" ng-maxLength="500" required></textarea><br />
+        </label>
+        <label>
+            What technical achievement are you proud to share?<br />
+            <textarea ng-model="fellow.achievement" ng-maxLength="500" required></textarea><br />
+        </label>
+        <label>
+            What involvements have you had with start-ups, hackathons, developer groups, side projects?<br />
+            <textarea ng-model="fellow.involvements" ng-maxLength="500" required></textarea><br />
+        </label>
+        <label>
+            Share a link to your GitHub profile<br />
+            <textarea ng-model="fellow.github" ng-maxLength="500" required></textarea><br />
+        </label>
+        <label>
+            Any comments about your technical skills you wish to share? Any really cool side projects in the works or freelance success stories?<br />
+            <textarea ng-model="fellow.comments" ng-maxLength="500"></textarea><br />
+        </label>
+
+        <input type="button" ng-click="cancel()" value="Reset" />
+        <input type="submit" ng-click="apply(fellow)" value="Save" />
+    </form>
 </div>
