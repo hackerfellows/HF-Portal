@@ -318,4 +318,83 @@ app.delete('/:id', Middleware.isAdmin, function deleteFellow(req, res) {
 });
 
 
+// GET /fellows/applications - lists all application data
+app.get('/applications', function getFellows(req, res) {
+
+    Fellows.all({
+
+        // change this so it only requests certain columnts
+        // (might have to just get all the columns but handle returning certain
+        // columns in the callback)
+        where: {
+
+            first_name: {ne: null},
+            enabled: 1
+        },
+        order: '"last_name" ASC',
+
+    }).then(function(fellows) {
+
+        res.send(fellows);
+    });
+
+});
+
+
+// GET /fellows/application:id - get one fellow's application data
+app.get('/:id', function getFellow(req, res){
+
+    //res.send('GET request - get a company record');
+    Fellows.findOne({
+
+        // change this so it only requests certain columnts
+        // (might have to just get all the columns but handle returning certain
+        // columns in the callback)
+        where: {
+            id: req.params.id
+        },
+        attributes: [
+            'id',
+            'other one',
+        ]
+        
+
+    }).then(function(fellow) {
+        res.send(fellow);
+    });
+});
+
+// PUT /fellows/application:id - updates an existing fellow's application
+app.put('/application/:id', Middleware.isLoggedIn, function putFellow(req, res) {
+
+    Fellows.findOne({
+
+        where: {
+            id: req.params.id
+        }
+
+    }).then(function(fellow) {
+
+        var currentUser = req.user;
+        if( currentUser.userType !== 'Admin' ) {
+
+            if (fellow.user_id !== currentUser.id) {
+
+                res.send('Unauthorized');
+                return;
+            }
+        }
+        
+        // update the fellow application data here with the req body data
+        fellow.user_id = req.body.user_id;
+        fellow.first_name = req.body.first_name;
+        fellow.last_name = req.body.last_name;
+
+        fellow.save();
+
+        res.send(fellow);
+    });
+
+});
+
 module.exports = app;
