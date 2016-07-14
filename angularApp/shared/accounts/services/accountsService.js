@@ -41,6 +41,7 @@
                 registerModal.dismiss();
             }
             registerModal = $uibModal.open({
+                backdrop: false,
                 templateUrl: '/shared/accounts/partials/register.html',
                 controller: 'RegisterController'
             });

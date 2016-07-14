@@ -68,14 +68,19 @@
          *           and sets the local user object appropriatly 
          */
         function updateLoginStatus () {
+            console.log("Calling confimr long");
             $http.get( '/api/v2/users/confirm-login' )
-                .success(function (user) {
-                    if (user && user.id) {
-                        setCredentials( user.id, user.email, user.userType );
+                .then(function (response) {
+                    if (response.success == true) {
+                        console.log("User is logged in");
+                        setCredentials( response.user.id, response.user.email, response.user.userType );
+                    }else{
+                        console.log("HOW ARE YOU HERE");
                     }
-                    else{
-                        currentUser = {};
-                    }
+                },function(err){
+                    console.log("User is NOT logged in");
+                    console.log(err);
+                    currentUser = {};
                 });
         }
 
