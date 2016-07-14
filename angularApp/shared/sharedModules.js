@@ -38,4 +38,14 @@
     angular
         .module('app.helpers.services', []);
     //End Helpers
+
+    //API
+    angular
+        .module('app.api', [
+                'app.api.services'
+        ]);
+    angular
+        .module('app.api.services', []);
+    //End API
+
 })();

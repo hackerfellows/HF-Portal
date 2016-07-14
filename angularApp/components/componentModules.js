@@ -19,15 +19,11 @@
   angular
     .module('app.profileGrid', [
         'app.profileGrid.controllers',
-        'app.profileGrid.services',
         'app.profileGrid.directives'
         ]);
 
   angular
     .module('app.profileGrid.controllers', []);
-
-  angular
-    .module('app.profileGrid.services', []);
 
   angular
     .module('app.profileGrid.directives', []);
@@ -61,6 +57,12 @@
     .module('app.calendar.controllers', []);
   //End Calendar
 
+  angular
+    .module('app.application', [
+        'app.application.controllers'
+    ]);
 
+  angular
+    .module('app.application.controllers', []);
 
 })();

@@ -27,10 +27,11 @@
         $scope.login = function(loginForm) {
             $scope.loginForm.errors = [];
             User.login(loginForm).success(function( data ){
+                console.log(data);
                 if( data.success ){
                     var user = data.user;
                     $uibModalInstance.close();
-                    User.SetCredentials( user.id, user.email, user.userType );
+                    User.setCredentials( user.id, user.email, user.userType );
                 }
                 else{
                     $scope.loginForm.errors.push( "Invalid user credentials" );

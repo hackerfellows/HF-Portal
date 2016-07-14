@@ -1,3 +1,4 @@
+
 .material-icons.md-32 {
   font-size: 24px;
   color: white;
@@ -12,6 +13,16 @@
   margin-left: -12px;
   margin-top: -12px;
 }
+
+@import 'bourbon'; // http://bourbon.io/
+
+@import '../../assets/partials/variables'; // colors, fonts etc...
+
+@import '../../assets/partials/mixins'; // custom mixins
+
+@import '../../assets/partials/layout'; // responsive grid and media queries
+
+
 /* --------------------------------
 
 Primary style
@@ -400,3 +411,14 @@ Main components
   /*.cd-timeline-img.cd-picture.yellow {*/
     /*background: yellow;*/
   /*}*/
+
+.whitespace {
+  margin: 20px;
+  padding: 20px;
+}
+
+#post-application-header {
+  text-align: center;
+  background: #000;
+  margin: 0;
+}

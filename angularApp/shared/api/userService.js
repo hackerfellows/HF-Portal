@@ -6,20 +6,35 @@
     'use strict';
 
     angular
-        .module('app.accounts.services')
+        .module('app.api.services')
         .factory('User', User);
 
-    User.$inject = ['$rootScope', '$http'];
+    User.$inject = ['$rootScope', '$http', '$q'];
 
     /**
      * @namespace User
      * @returns {Service}
      */
-    function User($rootScope, $http) {
+    function User($rootScope, $http, $q) {
+        var provides = {
+            getVotes: getVotes,
+            create: create,
+            login: login,
+            update: update,
+            destroy: destroy,
+            setCredentials: setCredentials,
+            clearCredentials: clearCredentials,
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser,
+            getType: getType,
+            isUserLoggedIn: isUserLoggedIn,
+            isUserAdmin: isUserAdmin,
+            isUserFellow: isUserFellow,
+            isUserAccepted: isUserAccepted,
+            updateLoginStatus: updateLoginStatus,
+            isUserCompany: isUserCompany
+        };
 
-        var rootUrl = ''; 
-
-        // Will hold info for the currently logged in user
         var currentUser = {};
 
         function getCurrentUser() {
@@ -30,8 +45,12 @@
             currentUser = user;
         }
 
+        /**
+         * @name getVotes
+         * @desc calls the api and returns a list of votes for that user
+         */
         function getVotes( user_id ){
-            return $http.get(rootUrl + '/api/v1/users/' + user_id + '/votes' );
+            return $http.get('/api/v2/users/' + user_id + '/votes' );
         }
 
         /**
@@ -39,64 +58,38 @@
          * @desc login a new user record
          */
         function login(user) {
-            return $http.post(rootUrl + '/api/v1/users/login', user);
+            return $http.post('/api/v2/users/login', user);
         }
 
-        // On paths that require login, make sure the login is confirmed before the route is loaded.
-        var routeLoginCheck = function($q, $timeout, $http, $location, $rootScope, User){
 
-            // Initialize a new promise
-            var deferred = $q.defer();
-
-            // keep user logged in after page refresh
-            // Check backend for existing user in session and update User Service
-            $http.get( '/api/v1/users/confirm-login' )
-                .success(function (user) {
-                    //console.log( user );
-                    if (user && user.id) {
-                        self.SetCredentials( user.id, user.email, user.userType );
-                        deferred.resolve();
+        /**
+         * @name updateLoginStatus
+         * @desc polls the api for the current login status of the user
+         *           and sets the local user object appropriatly 
+         */
+        function updateLoginStatus () {
+            console.log("Calling confimr long");
+            $http.get( '/api/v2/users/confirm-login' )
+                .then(function (response) {
+                    if (response.success == true) {
+                        console.log("User is logged in");
+                        setCredentials( response.user.id, response.user.email, response.user.userType );
+                    }else{
+                        console.log("HOW ARE YOU HERE");
                     }
-                    else{
-                        deferred.reject();
-                        $location.url('/');
-                    }
+                },function(err){
+                    console.log("User is NOT logged in");
+                    console.log(err);
+                    currentUser = {};
                 });
-            return deferred.promise;
-        };
-
-        var updateLoginStatus = function(){
-            $scope.isUserLoggedIn = User.isUserLoggedIn();
-            $scope.isUserAdmin = User.isUserAdmin();
-            $scope.isUserFellow = User.isUserFellow();
-            $scope.isUserCompany = User.isUserCompany();
-        };
-
-        /**
-         * @name all
-         * @desc get all the users
-         */
-        //function all() {
-        //
-        //    return [];
-        //
-        //    //return $http.get(rootUrl + '/api/v1/companies/');
-        //}
-
-        /**
-         * @name get
-         * @desc get just one user
-         */
-        //function get(id) {
-        //    return $http.get(rootUrl + '/api/v1/users/' + parseInt(id) );
-        //}
+        }
 
         /**
          * @name create
          * @desc create a new user record
          */
         function create(user) {
-            return $http.post(rootUrl + '/api/v1/users/create', user);
+            return $http.post('/api/v2/users/create', user);
         }
 
         /**
@@ -104,7 +97,7 @@
          * @desc updatea a user record
          */
         function update(user) {
-            return $http.put(rootUrl + '/api/v1/users/' + user.id, user);
+            return $http.put('/api/v2/users/' + user.id, user);
         }
 
         /**
@@ -112,7 +105,7 @@
          * @desc destroy a user record
          */
         function destroy(id) {
-            return $http.delete(rootUrl + rootUrl + '/api/v1/users/' + id);
+            return $http.delete('/api/v2/users/' + id);
         }
 
         function isUserLoggedIn(){
@@ -123,11 +116,20 @@
             else return false;
         }
 
+        function getType() {
+            return currentUser.userType;
+        }
+
         function isUserAdmin(){
             if( currentUser.userType === 'Admin' ){
                 return true;
             }
             else return false;
+        }
+
+        function isUserAccepted(){
+            console.log("isUserAccepted is just a stub, returning true");
+            return true;
         }
 
         function isUserFellow(){
@@ -144,49 +146,29 @@
             else return false;
         }
 
-        function SetCredentials(id, username, userType) {
-            var authdata = Base64.encode(id + ':' + username + ':' + userType);
+        function setCredentials(id, username, userType) {
             currentUser = {
                 id: id,
                 username: username,
                 userType: userType,
-                authdata: authdata
             };
-            loginStatusChanged();
         }
 
-        function ClearCredentials() {
-            $http.get( rootUrl + '/api/v1/users/logout' ).then( function(){
+        /**
+         * @name clearCredentials()
+         * @desc calls the api's logout endpoint for the current user and clears the local object
+         */
+        function clearCredentials() {
+            var toReturn = $http.get( '/api/v2/users/logout' );
+            
+            toReturn.then( function(){
                 currentUser = {};
             });
-            loginStatusChanged();
+
+            return toReturn;
         }
 
-
-        function loginStatusChanged() {
-
-            $rootScope.$broadcast('loginStatusChanged');
-        }
-
-        return {
-            //all: all,
-            //get: get,
-            getVotes: getVotes,
-            create: create,
-            login: login,
-            update: update,
-            destroy: destroy,
-            SetCredentials: SetCredentials,
-            ClearCredentials: ClearCredentials,
-            getCurrentUser: getCurrentUser,
-            setCurrentUser: setCurrentUser,
-            isUserLoggedIn: isUserLoggedIn,
-            isUserAdmin: isUserAdmin,
-            isUserFellow: isUserFellow,
-            routeLoginCheck: routeLoginCheck,
-            updateLoginStatus: updateLoginStatus,
-            isUserCompany: isUserCompany
-        };
+		return provides;
     }
 
     // Base64 encoding service used by AuthenticationService
