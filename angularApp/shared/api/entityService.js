@@ -8,7 +8,7 @@
     'use strict';
 
     angular
-    .module('app.profileGrid.services')
+    .module('app.api.services')
     .service('Entities', Entities);
 
     Entities.$inject = ['$http'];

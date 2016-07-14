@@ -9,20 +9,24 @@
         .module('app.accounts.services')
         .service('Accounts', Accounts);
 
-    Accounts.$inject = ['$http', '$uibModal'];
+    Accounts.$inject = ['$http', '$uibModal', 'User'];
     /**
      * @namespace Accounts
      * @returns {Service}
      */
-    function Accounts($http, $uibModal) {
+    function Accounts($http, $uibModal, User) {
         var loginModal = null;
         var registerModal = null;
+
+        var isUserLoggedIn;
+        var isUserAdmin;
+        var isUserFellow;
+        var isUserCompany;
 
         return {
             startLogin: startLogin,
             startRegistration: startRegistration,
-            endLogin: endLogin,
-            endRegistration: endRegistration
+            updateNavbar: updateNavbar
         };
 
         function startLogin() {
@@ -34,6 +38,12 @@
                 templateUrl: '/shared/accounts/partials/login.html',
                 controller: 'LoginController'
             });
+
+            loginModal.result.then(function(){
+                 
+            });
+
+            return loginModal.result;
         }
 
         function startRegistration() {
@@ -41,21 +51,20 @@
                 registerModal.dismiss();
             }
             registerModal = $uibModal.open({
+                backdrop: false,
                 templateUrl: '/shared/accounts/partials/register.html',
                 controller: 'RegisterController'
             });
+
+            return registerModal.result;
         }
-        function endLogin() {
-            if (loginModal !== null){
-                loginModal.close();
-            }
-            loginModal = null;
-        }
-        function endRegistration() {
-            if (registerModal !== null){
-                registerModal.close();
-            }
-            registerModal = null;
+
+        function updateNavbar() {
+            isUserLoggedIn = User.isUserLoggedIn();
+            isUserAdmin = User.isUserAdmin();
+            isUserFellow = User.isUserFellow();
+            isUserCompany = User.isUserCompany();
+            console.log(isUserLoggedIn);
         }
 
     }
