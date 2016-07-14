@@ -99,11 +99,20 @@ app.post('/login', function(req, res, next) {
 
 // Check to see if a user is currently logged in, if so return their info
 app.get('/confirm-login', function (req, res) {
+    var ret = {};
+    var retStatus = -42;
     var user = req.user;
     if( user !== undefined ) {
-        user.password = '';
+        user.password = undefined;
+        ret.success = true;
+        ret.user = user;
+        retStatus = 200;
+    }else{
+        ret.success = false;
+        ret.user = null;
+        retStatus = 401;
     }
-    res.send( user );
+    res.status(retStatus).json( ret );
 });
 
 
@@ -187,5 +196,21 @@ app.delete('/:user_id', Middleware.isAdmin, function (req, res) {
     });
 });
 
+app.get( '/applications', function( req, res ){
+    Users.scope('public').findOne({
+        where: {
+            id: req.params.user_id
+        },
+        include: [
+            // include specific fields for application
+        ]
+    }).then(function(user) {
+        var results = {
+            votesFor: user.VotesFor,
+            votesCast: user.VotesCast
+        };
+        res.send(results);
+    });
+});
 
 module.exports = app;

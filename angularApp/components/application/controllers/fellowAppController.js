@@ -1,16 +1,17 @@
-/* 
- * user.firstname
- * user.lastname
+/*
+ * user.first_name*
+ * user.last_name*
+ * user.university
  * user.major
  * user.graduation
  * user.hometown
  * user.phone
- * user.permanentresident
+ * user.residentUSA*
  * user.description
  * user.dreamjob
- * user.resume
+ * user.resumeURL*
  * user.coolthings
- * user.referral.friend
+ * user.referral.friend *referral is a text field*
  * user.referral.careerfair
  * user.referral.club
  * user.referral.investdetroit
@@ -19,13 +20,12 @@
  * user.referral.othervalue
  * user.whyHF
  * user.MIimpact
- * user.devtype
+ * user.developer_type*
  * user.devskills
  * user.achievement
  * user.involvements
- * user.github
+ * user.git_hub*
  * user.comments
- * user.firstname
  *
  */
 
