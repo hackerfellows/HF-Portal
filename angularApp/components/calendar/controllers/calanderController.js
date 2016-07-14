@@ -1,3 +1,12 @@
+//File name: calanderController.js
+	//Author: Ben Willshire  & Michael Wright
+	//Description:
+	//    Controller for the calendar page. Checks what user is logged in,
+  //    pulls from the correct source, and then displays the content
+	//Function:
+	//    CalendarController, assignSheetNumber, getSpreadsheetData
+
+
 
 // Setup CalendarController
 (function () {
@@ -21,8 +30,6 @@
 
     // Determine sheet number from user session information
     var sheetNumber = assignSheetNumber(User);
-    //sheetNumber = 1;
-    sheetNumber = 3;
     $scope.invalidUser = (sheetNumber == 0);
     $scope.userJustApplied = (sheetNumber == 2 || sheetNumber == 4);
 
@@ -31,11 +38,8 @@
 
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
-      console.log('Printing Sheet #'+sheetNumber)
-
-      $scope.webjson = $.getJSON(url).done( function(data,error){
-        console.log("hi")
-        console.log(error);
+      
+      $scope.webjson = $.getJSON(url).done( function(data,status){
         //grab spreadsheet data from google sheet
         $scope.spreadsheet = data;
         var entry_array = data.feed.entry;
@@ -43,6 +47,7 @@
         var idCounter = 0;
         $scope.showMoreInfo = [];
         $scope.hasOutsideLink = [];
+
         // Loop through the entries from the spreadsheet JSON
         for (var entry in entry_array) {
 
@@ -125,12 +130,10 @@
           method: 'GET',
           url: url
         }).then(function successCallback(response) {
-          console.log("goooood")
-          console.log(response)
           // this callback will be called asynchronously
           // when the response is available
         }, function errorCallback(response) {
-          console.log("errrrrr")
+          console.log("error at end of getSpreadsheetData")
           console.log(response)
           // called asynchronously if an error occurs
           // or server returns response with an error status.
