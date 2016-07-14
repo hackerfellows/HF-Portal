@@ -8,20 +8,14 @@ All other calls need user level authentication
 /api/v2/fellows
 	/
 		GET: 	get all fellows plus information from Users (email, user type, and votes)
-		POST:	create a new fellow, returns that user's json to client
-	/users
-		GET:	DEPRICATED
-	/applications
-		GET:	list all applications
-	/application/:id
+	/:user_id
+		GET:	gets fellows information from Fellows and Users table
+		PUT:$	updates an existing fellow's record
+	/application
+		GET:	returns first_name, last_name, and user_id of all fellows not yet accepted
+	/application/:user_id
 		GET:	Get specific application based on fellow id
 		PUT:	update a specific fellow's application
-	/:id
-		GET: 	get one fellow with tags
-		PUT:$	updates an existing fellow's record
-		DEL:+	deletes an existing fellow's record and application
-	/user_id/:user_id
-		GET: 	get one fellow with tags plus their Users row
 	/set_flags
 		POST:	enables or disables all fellow flags. Flags are application, profile, and vote. 
 			It enables or disables that feature for a fellow
@@ -34,6 +28,23 @@ All other calls need user level authentication
 	/set_flags/:id
 		POST:	enables or disables single fellow flag. Flags are application, profile, and vote. 
 			see /set_flags
+
+
+	Depricated calls - see notes for how to use in api v2
+
+	/
+		POST:	DEPRICATED - NEW FELLOWS NOW CREATED AT POST /users/create
+	/:id
+		DEL:+	DEPRICATED - USE DELETE FROM THE USER ROUTE
+
+	These are deprecated because we now only reference by user_id instead of the fellow id
+	/:id
+		GET: 	DEPRICATED - SEE GET /fellows/:user_id
+		PUT:$	DEPRICATED - SEE PUT /fellows/:user_id
+	/users
+		GET:	DEPRICATED - SEE GET /fellows/
+	/user_id/:user_id
+		GET: 	DEPRICATED - SEE /fellows/:user_id
 
 
 
