@@ -10,7 +10,7 @@ bash populateDb.sh
 Users
 - 1 admin
 - 22 fellows
-- 28 companies
+- 27 companies
 
 ## Notes
 Log into Postgres command prompt
