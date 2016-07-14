@@ -32,8 +32,6 @@
             isUserFellow: isUserFellow,
             isUserAccepted: isUserAccepted,
             updateLoginStatus: updateLoginStatus,
-            getApplication: getApplication,
-            updateApplication: getApplication,
             isUserCompany: isUserCompany
         };
 
@@ -53,14 +51,6 @@
          */
         function getVotes( user_id ){
             return $http.get('/api/v2/users/' + user_id + '/votes' );
-        }
-
-        function getApplication() {
-            return $http.get('/api/v2/fellows/application/' + currentUser.id);
-        }
-
-        function updateApplication(user) {
-            return $http.put('/api/v2/fellows/application/' + currentUser.id, user);
         }
 
         /**

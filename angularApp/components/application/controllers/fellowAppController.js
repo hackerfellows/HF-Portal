@@ -37,7 +37,7 @@
         console.log("FellowAppController loaded");
 
         function initFormData() {
-            //$scope.fellow = 
+            $scope.fellow = Entities.getApplication("fellows");
         }
 
         function apply(fellow) {
