@@ -315,17 +315,10 @@ app.put('/:id', Middleware.isLoggedIn, upload.single('file'),function putCompany
 
 // DELETE /companies/:id - deletes an existing company record
 app.delete('/:id', Middleware.isAdmin, function deleteCompany(req, res) {
-
     Companies.findOne({
-
-        where: {
-            id: req.params.id
-        }
-
+        where: { id: req.params.id }
     }).then(function(company) {
-
         company.destroy();
-
         res.send("Company Deleted");
     });
 
