@@ -81,9 +81,14 @@
             console.log("Calling confimr long");
             $http.get( '/api/v2/users/confirm-login' )
                 .then(function (response) {
-                    if (response.success == true) {
+                    console.log(response);
+                    if (response.data.success == true) {
                         console.log("User is logged in");
-                        setCredentials( response.user.id, response.user.email, response.user.userType );
+                        setCredentials(
+                            response.data.user.id,
+                            response.data.user.email,
+                            response.data.user.userType
+                        );
                     }else{
                         console.log("HOW ARE YOU HERE");
                     }
