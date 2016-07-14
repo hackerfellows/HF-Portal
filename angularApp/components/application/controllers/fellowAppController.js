@@ -42,10 +42,11 @@
             $scope.fellow = Entities.getApplication("fellows");
         }
 
-        function apply(fellow) {
+        $scope.apply = function(fellow) {
+            console.log("applying");
             Entities.updateApplication(fellow, "fellows");
         }
-        function cancel() {
+        $scope.cancel = function() {
             console.log("Cancel is a stub function");
         }
     }
