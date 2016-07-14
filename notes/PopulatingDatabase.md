@@ -1,9 +1,11 @@
 # Populating Database
+## Create Test Data: [Mockaroo](https://www.mockaroo.com/projects/1254)
 
-## How To Populate
+## Load Data
+in vagrant
 ```
 cd database
-sh populateDb.sh sql
+./populateDb.sh sql localhost
 ```
 
 ## Test Dataset
