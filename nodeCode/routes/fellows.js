@@ -171,6 +171,15 @@ app.put('/:user_id', function putFellow(req, res) {
 
 });
 
+// DELETE /fellows/:id - deletes an existing fellow record
+app.delete('/:id', Middleware.isAdmin, function deleteFellow(req, res) {
+    Fellows.findOne({
+        where: { id: req.params.id }
+    }).then(function(fellow) {
+        fellow.destroy();
+        res.send("Fellow Deleted");
+    });
+});
 
 // GET /fellows/application - lists name and user_id of all applicants not accepted
 app.get('/application', function getFellows(req, res) {

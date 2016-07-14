@@ -1,6 +1,6 @@
 /**
  * app.routes
- * @desc    contains the routes for the app
+ * @desc   contains the routes for the app
  */
 // Note from JW: We're only using app.profile, so I don't know if we need tags,
 // // votes, alert, home, and config. We should delete what we don't need
@@ -14,7 +14,7 @@
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
             'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 
-            'app.helpers', 'app.calendar', 'app.application', 'app.api']);
+            'app.helpers', 'app.calendar', 'app.application', 'app.api', 'app.dash']);
 
     /**
      * @name config
@@ -23,31 +23,50 @@
     app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         $routeProvider
-            .when('/', {
-                controller  : 'HomeController',
-                templateUrl : 'components/home/home.html',
-                resolve: { routePermission: Public },
-            })
+        .when('/', {
+            controller  : 'HomeController',
+            templateUrl : 'components/home/home.html',
+            resolve: { routePermission: Public }
+        })
         .when('/fellows', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
         })
-
-
         .when('/fellows/:fellow_id/:fellow_name', {
             controller: 'ProfileSingleController',
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
-
+        })
+        .when('/about', {
+            templateUrl : 'assets/html/staticAbout.html'
+        })
+        .when('/application', {
+            templateUrl : 'assets/html/staticApplication.html'
+        })
+        .when('/contact', {
+            templateUrl : 'assets/html/staticContact.html'
+        })
+        .when('/groups', {
+            templateUrl : 'assets/html/groups.html'
+        })
+        .when('/dash', {
+            controller  : 'DashController',
+            templateUrl : 'components/dash/dash.html'
+        })
+        .when('/fellows', {
+            controller: 'ProfileGridController',
+            templateUrl: 'components/profileGrid/profileGrid.html',
+        })
+        .when('/fellows/:fellow_id/:fellow_name', {
+            controller: 'ProfileController',
+            templateUrl: 'components/profileSingle/profileSingle.html',
         })
         .when('/companies', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
         })
         .when('/companies/:company_id/:company_name', {
-
-            controller: 'ProfileSingleController',
-            templateUrl: 'components/profileSingle/profileSingleWrapper.html',
-
+            controller: 'ProfileController',
+            templateUrl: 'components/profileSingle/profileSingle.html',
         })
         .when('/calendar', {
             controller: 'CalendarController',
@@ -66,6 +85,7 @@
         .otherwise({ redirectTo: '/' });
 
     }]);
+
     /**
      * @name Public 
      * @desc Checks if the user is logged in to allow them to continue, otherwise
