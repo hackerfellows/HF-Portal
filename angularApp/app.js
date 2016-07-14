@@ -35,18 +35,6 @@
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
         })
         .when('/about', {
-<<<<<<< Updated upstream
-            templateUrl : 'assets/html/static_about.html'
-        })
-        .when('/application', {
-            templateUrl : 'assets/html/static_application.html'
-        })
-        .when('/contact', {
-            templateUrl : 'assets/html/static_contact.html'
-        })
-        .when('/groups', {
-            templateUrl : 'static_groups.html'
-=======
             templateUrl : 'assets/html/staticAbout.html'
         })
         .when('/application', {
@@ -57,7 +45,6 @@
         })
         .when('/groups', {
             templateUrl : 'assets/html/groups.html'
->>>>>>> Stashed changes
         })
         .when('/dash', {
             controller  : 'DashController',
