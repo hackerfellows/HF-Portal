@@ -68,16 +68,11 @@ All other calls need user level authentication
 		POST:*	attempts login, redirects to /login/success or /login/failure
 	/confirm-login
 		GET:	returns user if logged in, null if not
-	/login/success
-		GET:	allows login, returns user session info
-	/login/failure
-		GET:	denies login, returns error message
 	/logout
 		GET:	logs out
 	/create
 		POST:*	creates a new user
-	/:id
-		PUT:$	updates a user
 	/:user_id
+		PUT:$	updates a user
 		DEL:+	deletes a user
 
