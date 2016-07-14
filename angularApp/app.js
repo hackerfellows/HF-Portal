@@ -13,7 +13,8 @@
     //      components/componentModules.js otherwise the page will not run
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
-            'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 'app.helpers', 'app.calendar', 'app.application']);
+            'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 
+            'app.helpers', 'app.calendar', 'app.application', 'app.api']);
 
     /**
      * @name config

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('app.accounts.services')
+        .module('app.api.services')
         .factory('User', User);
 
     User.$inject = ['$rootScope', '$http', '$q'];
