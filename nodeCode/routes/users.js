@@ -208,7 +208,15 @@ app.delete('/:user_id', function (req, res) {
                         where: { fellow_id: fellow.id }
                     });
                     fellow.destroy();
-                    user.destroy();
+                    //Find and delete votes
+                    Votes.destroy({
+                        where: Sequelize.or(
+                            {voter_id: user.id},
+                            {votee_id: user.id}
+                        )
+                    }).then(function() {
+                        user.destroy();
+                    });
                 }
             });
 
@@ -222,17 +230,18 @@ app.delete('/:user_id', function (req, res) {
                         where: { company_id: company.id }
                     });
                     company.destroy();
-                    user.destroy();
+                    //Find and delete votes
+                    Votes.destroy({
+                        where: Sequelize.or(
+                            {voter_id: user.id},
+                            {votee_id: user.id}
+                        )
+                    }).then(function() {
+                        user.destroy();
+                    });
                 }
             });
 
-            //Find and delete votes
-            Votes.destroy({
-                where: Sequelize.or(
-                    {voter_id: user.id},
-                    {votee_id: user.id}
-                )
-            });
 
             res.send({success: true});
         }
