@@ -63,7 +63,7 @@ All other calls need user level authentication
 
 /api/v2/users
 	/:user_id/votes
-		GET:	gets votes for a specific user	
+		GET:	gets votes for a specific user (both votesFor and votesCast)	
 	/login
 		POST:*	attempts login, redirects to /login/success or /login/failure
 	/confirm-login
