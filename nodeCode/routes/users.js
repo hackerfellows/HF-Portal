@@ -196,5 +196,21 @@ app.delete('/:user_id', Middleware.isAdmin, function (req, res) {
     });
 });
 
+app.get( '/applications', function( req, res ){
+    Users.scope('public').findOne({
+        where: {
+            id: req.params.user_id
+        },
+        include: [
+            // include specific fields for application
+        ]
+    }).then(function(user) {
+        var results = {
+            votesFor: user.VotesFor,
+            votesCast: user.VotesCast
+        };
+        res.send(results);
+    });
+});
 
 module.exports = app;

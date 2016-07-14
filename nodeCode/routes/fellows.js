@@ -10,20 +10,44 @@ var Companies = models.companies;
 var Tags = models.tags;
 var Users = models.users;
 
+var application_attributes = [
+    'first_name',
+    'last_name',
+    'university',
+    'major',
+    'graduation',
+    'hometown',
+    'phone',
+    'residentUSA',
+    'description',
+    'dreamjob',
+    'resumeURL',
+    'coolthings',
+    'referral',
+    'whyHF',
+    'MIimpact',
+    'developer_type',
+    'devskills',
+    'achievements',
+    'involvements',
+    'git_hub',
+    'comments'
+];
+
 // Image Upload
 // var upload = multer({ dest: './public/assets/images/' });
 
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/assets/images/profile/');
-  },
-  filename: function (req, file, cb) {
+    destination: function (req, file, cb) {
+        cb(null, './public/assets/images/profile/');
+    },
+    filename: function (req, file, cb) {
 
-      var ext = "." + file.mimetype.split('/')[1];
-      var file_name = file.fieldname + "_"+ Date.now() + ext;
-      cb(null, file_name);
+        var ext = "." + file.mimetype.split('/')[1];
+        var file_name = file.fieldname + "_"+ Date.now() + ext;
+        cb(null, file_name);
 
-  }
+    }
 });
 var upload = multer({ storage: storage });
 
@@ -317,5 +341,100 @@ app.delete('/:id', Middleware.isAdmin, function deleteFellow(req, res) {
 
 });
 
+
+// GET /fellows/applications - lists all application data
+app.get('/applications', function getFellows(req, res) {
+
+    Fellows.all({
+
+        // change this so it only requests certain columnts
+        // (might have to just get all the columns but handle returning certain
+        // columns in the callback)
+        where: {
+
+            first_name: {ne: null},
+            enabled: 1
+        },
+        order: '"last_name" ASC',
+        attributes: application_attributes
+
+    }).then(function(fellows) {
+
+        res.send(fellows);
+    });
+
+});
+
+
+// GET /fellows/application:id - get one fellow's application data
+app.get('/:id', function getFellow(req, res){
+
+    //res.send('GET request - get a company record');
+    Fellows.findOne({
+
+        where: {
+            id: req.params.id
+        },
+        attributes: application_attributes
+
+    }).then(function(attributes) {
+        res.send(attributes);
+    });
+});
+
+// PUT /fellows/application:id - updates an existing fellow's application
+app.put('/application/:id', Middleware.isLoggedIn, function putFellow(req, res) {
+
+    Fellows.findOne({
+
+        where: {
+            id: req.params.id
+        }
+
+    }).then(function(fellow) {
+
+        // make sure they're either the proper user or an admin
+        var currentUser = req.user;
+        if( currentUser.userType !== 'Admin' ) {
+
+            if (fellow.user_id !== currentUser.id) {
+
+                res.send('Unauthorized');
+                return;
+            }
+        }
+ 
+        // update the fellow application data here with the req body data
+        fellow.first_name       = req.body.first_name;
+        fellow.last_name        = req.body.last_name;
+        fellow.university       = req.body.university;
+        fellow.major            = req.body.major;
+        fellow.graduation       = req.body.graduation;
+        fellow.hometown         = req.body.hometown;
+        fellow.phone            = req.body.phone;
+        fellow.residentUSA      = req.body.residentUSA;
+        fellow.description      = req.body.description;
+        fellow.dreamjob         = req.body.dreamjob;
+        fellow.resumeURL        = req.body.resumeURL;
+        fellow.coolthings       = req.body.coolthings;
+        fellow.referral         = req.body.referral;
+        fellow.whyHF            = req.body.whyHF;
+        fellow.MIimpact         = req.body.MIimpact;
+        fellow.developer_type   = req.body.developer_type;
+        fellow.devskills        = req.body.devskills;
+        fellow.achievements     = req.body.achievements;
+        fellow.involvements     = req.body.involvements;
+        fellow.git_hub          = req.body.git_hub;
+        fellow.comments         = req.body.git_hub;
+
+        fellow.save();
+
+        res.send(fellow);
+    });
+
+});
+
+//app.put('/set_flags', function putFlags(req, res) {
+//    Fellows.all
 
 module.exports = app;
