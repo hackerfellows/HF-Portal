@@ -54,7 +54,13 @@
                             <a href="/#/">Home</a>
                         </li>
                         <li class="listitem">
-                            <a ng-href="/#/#apply-section" ng-click="scrollTo('apply-section')">Apply</a>
+                            <a ng-href="/#/#apply-section" ng-click="scrollTo('apply-section')" ng-hide="isUserLoggedIn()">Apply</a>
+                        </li>
+                        <li class="listitem">
+                            <a ng-href="/#/application/company" ng-show="isUserCompany()">Apply</a>
+                        </li>
+                        <li class="listitem">
+                            <a ng-href="/#/application/fellow" ng-show="isUserFellow()">Apply</a>
                         </li>
                         <li class="listitem">
                             <a ng-href="/#/#employers-section" ng-click="scrollTo('start-ups-section')">Start-Ups</a>
