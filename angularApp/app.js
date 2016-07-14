@@ -57,6 +57,6 @@
         //                   that runs if the user is logged in and editing
         .otherwise({ redirectTo: '/' });
 
-    });
+    }]);
 
 })();
