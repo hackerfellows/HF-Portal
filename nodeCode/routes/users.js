@@ -2,10 +2,19 @@ var express = require('express');
 var app = express();
 var bcrypt = require('bcrypt');
 var passport = require('passport');
+var Sequelize = require('sequelize');
 var PassportLocalStrategy = require('passport-local').Strategy;
 
 var models = require('../models');
+var Fellows = models.fellows;
+var Companies = models.companies;
+var Tags = models.tags;
 var Users = models.users;
+var FellowTag = models.fellow_tag;
+var CompanyTag = models.company_tag;
+var Votes = models.votes;
+
+
 var Middleware = require('./middleware');
 
 /** User Auth - Passport **/
@@ -155,10 +164,10 @@ app.post('/create', function createUser(req, res) {
 });
 
 // PUT /users/:id - updates an existing user record
-app.put('/:id', Middleware.isOwnerOrAdmin, function putUser(req, res) {
+app.put('/:user_id', Middleware.isOwnerOrAdmin, function putUser(req, res) {
     Users.findOne({
         where: {
-            id: req.params.id
+            id: req.params.user_id
         }
     }).then(function(user) {
         user.email = req.body.email;
@@ -180,18 +189,64 @@ app.put('/:id', Middleware.isOwnerOrAdmin, function putUser(req, res) {
 });
 
 // DELETE /users/ - Deletes a user
-app.delete('/:user_id', Middleware.isAdmin, function (req, res) {
+app.delete('/:user_id', function (req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id
         }
     }).then(function(user) {
         if( user !== null ){
-            user.destroy();
-            res.send( '1' );
+            //Now find all their associated data and delete it
+
+            //Delete user if exists
+            Fellows.findOne({
+                where: { user_id: req.params.user_id }
+            }).then(function(fellow) {
+                if(fellow !== null){
+                    //Find and delete fellow_tags
+                    FellowTag.destroy({
+                        where: { fellow_id: fellow.id }
+                    });
+                    fellow.destroy();
+                    //Find and delete votes
+                    Votes.destroy({
+                        where: Sequelize.or(
+                            {voter_id: user.id},
+                            {votee_id: user.id}
+                        )
+                    }).then(function() {
+                        user.destroy();
+                    });
+                }
+            });
+
+            //Delete company if exists
+            Companies.findOne({
+                where: { user_id: req.params.user_id }
+            }).then(function(company) {
+                if(company !== null){
+                    //Find and delete company_tags
+                    CompanyTag.destroy({
+                        where: { company_id: company.id }
+                    });
+                    company.destroy();
+                    //Find and delete votes
+                    Votes.destroy({
+                        where: Sequelize.or(
+                            {voter_id: user.id},
+                            {votee_id: user.id}
+                        )
+                    }).then(function() {
+                        user.destroy();
+                    });
+                }
+            });
+
+
+            res.send({success: true});
         }
         else{
-            res.status(400).send({ error: 'User not found' });
+            res.status(400).json({success: false, error: 'User not found'});
         }
     });
 });
