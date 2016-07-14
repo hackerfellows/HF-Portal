@@ -2,17 +2,17 @@
 
 ## How To Populate
 ```
-bash populateDb.sh
+cd database
+sh populateDb.sh sql
 ```
 
 ## Test Dataset
-
 Users
 - 1 admin
-- 22 fellows
-- 27 companies
+- 19 fellows
+- 30 companies
 
-## Notes
+## Maintainer Notes
 Log into Postgres command prompt
 ```
 psql -U hf -h localhost -p 5432 -d hfportal
