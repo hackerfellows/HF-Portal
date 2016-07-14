@@ -2,7 +2,6 @@
     <div class="modal-header">
         <h4 class="modal-title">Login</h4>
     </div>
-
     <div class="alert alert-danger" role="alert" ng-show="loginForm.errors.length">
         <p ng-repeat="error in loginForm.errors">{{ error }}</p>
     </div>
@@ -16,7 +15,7 @@
             <input type="password" class="form-control" id="password" ng-model="loginForm.password">
         </div>
         <div class="centered">
-            <p>New User? <a href="#" ng-click="beginRegistration()">Sign Up!</a></p>
+            <p>New User? <a ng-click="beginRegistration()">Sign Up!</a></p>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary" ng-click="login(loginForm)">Login</button>
