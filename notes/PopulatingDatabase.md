@@ -2,9 +2,27 @@
 ## Create Test Data: [Mockaroo](https://www.mockaroo.com/projects/1254)
 
 ## Load Data
-in vagrant
+### 0.
+In Vagrant, move into database directory
 ```
 cd database
+```
+
+### 1.
+Run script to drop tables using Postgres
+```
+./resetDb.sh sql localhost
+```
+
+### 2.
+Run server to create tables using Sequelize
+```
+gulp server
+```
+
+### 3.
+Run script to insert data using Postgres
+```
 ./populateDb.sh sql localhost
 ```
 
