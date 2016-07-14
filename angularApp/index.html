@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap2/bootstrap-switch.min.css" type="text/css"/>
         <link rel="stylesheet" href="assets/css/global.css" type="text/css"/>
+        <link rel="stylesheet" href="assets/css/toast.css" type="text/css"/>
 
         <!-- Body Copy Font -->
         <!--<link href='https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700,300italic,700italic' rel='stylesheet'
@@ -98,14 +99,17 @@
                 </div>
             </div>
         </nav>
-       <!-- self-closing div is not valid html5, causes angular to reload itself endlessly -->
+        
         <div class="container main-content" ng-view=""></div>
+        <div class="toast toast-success"></div>
+        <div class="toast toast-failure"></div>
+        <div class="toast toast-info"></div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-sanitize.min.js"></script>
-        <!--TODO: bundle up all the stuff here VVVV -->
         <script src="assets/js/bundle.js"></script>
-        <!--End bundle ^^^^^^^ -->
+        <script src="assets/js/toast.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>

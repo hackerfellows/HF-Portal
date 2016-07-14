@@ -1,5 +1,4 @@
-/* 
- * user.firstname
+/* * user.firstname
  * user.lastname
  * user.major
  * user.graduation
@@ -25,7 +24,6 @@
  * user.involvements
  * user.github
  * user.comments
- * user.firstname
  *
  */
 

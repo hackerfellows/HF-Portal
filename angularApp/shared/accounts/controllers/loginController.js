@@ -30,6 +30,7 @@
                 console.log(data);
                 if( data.success ){
                     var user = data.user;
+                    showToastSuccess("Login Succcess");
                     $uibModalInstance.close();
                     User.setCredentials( user.id, user.email, user.userType );
                 }

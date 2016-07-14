@@ -52,6 +52,7 @@
                         };
                         //Insert company
                     }
+                    showToastSuccess("Account Created Succcessfully");
                     $uibModalInstance.dismiss('create');
                 }, function( response ){
                     // create user error callback

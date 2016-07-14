@@ -27,7 +27,9 @@ gulp.task('server', ['watch', 'nodemon', 'browser-sync']);
 // watch for file changes and reload browser
 gulp.task('watch', ['full-reload'], function () {
 	// watch for js file changes in app and run 'js' gulp task
-	gulp.watch("angularApp/**/*.js", ['js']);
+	gulp.watch(["angularApp/**/*.js", "!angularApp/assets/**/*.js"], ['js']);
+
+    gulp.watch("angularApp/assets/**/*.js", ['assetsjs']);
 
 	// watch for scss file changes in app and run 'sass' gulp task
 	gulp.watch("angularApp/assets/scss/*.scss", ['sass']);
@@ -93,7 +95,7 @@ gulp.task('nodemon', function (cb) {
  **/
 
 // "compile" web app into "public" folder
-gulp.task('full-reload', ['html', 'img', 'sass', 'js'], function() {
+gulp.task('full-reload', ['html', 'img', 'sass', 'js', 'assetsjs'], function() {
 	console.log('Publishing web application into public folder');
 });
 
@@ -135,4 +137,13 @@ gulp.task('js', function() {
 		//.pipe(uglify())
 		.pipe(gulp.dest("public/assets/js"))
 		.pipe(browserSync.stream());
+
+});
+
+gulp.task('assetsjs', function() {
+	return gulp.src(['angularApp/assets/js/**/*.js'])
+        .pipe(require('gulp-debug')())
+		.pipe(gulp.dest("public/assets/js"))
+		.pipe(browserSync.stream());
+
 });

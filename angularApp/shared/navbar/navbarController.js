@@ -28,6 +28,7 @@
 
         $scope.logoutUser = function() {
             User.clearCredentials().then(function () {
+                showToastInfo("You have been logged out");
                 updateLoginStatus();
             });
         };
