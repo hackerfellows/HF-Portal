@@ -17,7 +17,7 @@
      * @namespace CompaniesController
      */
     function ProfileGridController($scope, $location, Entities, HFHelpers) {
-
+        $scope.helpers = HFHelpers;
         var whichEntity = "";
 
         //Decide if the path is /fellows or /companies
@@ -39,7 +39,7 @@
             $scope.entityList = result;
         });
 
-        $scope.helpers = HFHelpers;
+        
         /*
         $scope.openModal = function (company) {
 

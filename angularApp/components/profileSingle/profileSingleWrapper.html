@@ -16,10 +16,11 @@
             <li class="active">{{ entityObject.first_name }} {{ entityObject.last_name }}</li>
         </ul>
 
-        <button ng-click="edit()">Click Me!</button>
+        <button ng-show="showEditButton" ng-click="edit()">Edit</button>
         
         <!-- if fellow -->
-        <profile-single-fellow ng-if="whichEntity=='fellow'"></profile-single-fellow>
+        <profile-single-fellow ng-if="whichEntity=='fellow'" ng-hide="editMode"></profile-single-fellow>
+        <profile-single-fellow-edit ng-if="whichEntity=='fellow'" ng-show="editMode"></profile-single-fellow-edit>
 
         <!-- if company -->
         <profile-single-company ng-if="whichEntity=='company'"></profile-single-company>

@@ -13,25 +13,24 @@
         .module('app.profileSingle.controllers')
         .controller('ProfileSingleController', ProfileSingleController);
 
-    ProfileSingleController.$inject = ['$scope', '$location', 'HFHelpers', 'Entities'];
+    ProfileSingleController.$inject = ['$scope', '$location', 'HFHelpers', 
+                                       'Entities', 'User'];
     /**
      * @namespace ProfileController
      */
-    function ProfileSingleController($scope, $location, HFHelpers, Entities) {
-        console.log("single profile view");
+    function ProfileSingleController($scope, $location, HFHelpers, Entities, User) {
+        $scope.helpers = HFHelpers;
         //shared stuff
         var urlEntity = $location.path().split('/')[1];
         var entityId = $location.path().split('/')[2];
         //Check path to see if it's 'fellows' or 'companies'
         if (urlEntity === "fellows") {
-            console.log("fellow profile");
             $scope.whichEntity = "fellow";
             $scope.whichEntityPlural = "fellows";
             $scope.edit = function() {
               editFellow();
             }
         } else if (urlEntity === "companies") {
-            console.log("company profile");
             $scope.whichEntity = "company";
             $scope.whichEntityPlural = "companies";
             $scope.edit = function(){
@@ -44,19 +43,30 @@
         //Make the API call to fetch the data for the chosen entity
         Entities.getById($scope.whichEntityPlural, entityId).success(function(result) {
             $scope.entityObject = result;
+            checkLogin();
         });
 
-        $scope.helpers = HFHelpers;
-
-
+        //Checks to see if the logged in user is viewing their own 
+        //entity page
+        //only allow the edit button to be viewable if the logged in user
+        function checkLogin(){
+          var currentUserId = User.getCurrentUser().id;
+            if(entityId === 'currentUserId'){
+                console.log("correct user logged in");
+                $scope.showEditButton = true;
+            } else {
+                console.log("incorrect user logged in");
+                //TODO: CHANGE MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE TO FALSE PLEEEEEEEEEEEEEASE
+                $scope.showEditButton = true;
+            }
+        }
+              
 
 
         function editFellow(){
-          console.log("entering edit mode for fellow");
-
-          //check login
-
-          //if it fails, 
+            console.log("entering edit mode for fellow");
+            //all the fields should be editable
+            $scope.editMode = true;
         }
 
 
@@ -67,33 +77,12 @@
         //if company ""
 
 
+      // if( User.isUserLoggedIn() ) {
 
+      //     var currentUser = User.getCurrentUser();
 
-        /*   var vm = this;
-
-      if( User.isUserLoggedIn() ) {
-
-          var currentUser = User.getCurrentUser();
-
-          // redirect the user based on their type
-          if (currentUser.userType === 'Admin') {
-              //console.log("Like a boss");
-              $location.path("/profile/admin");
-          }
-          else if (currentUser.userType === 'Fellow') {
-              //console.log("Like a fella");
-              $location.path("/profile/fellow");
-          }
-          else if (currentUser.userType === 'Company') {
-              //console.log("Like a company");
-              $location.path("/profile/company");
-          }
-      }
-      else{
-
-           $location.path("/");
-      }
-*/
+      //     // redirect the user based on their type
+      // }
     }
 
 

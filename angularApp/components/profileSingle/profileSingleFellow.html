@@ -11,6 +11,7 @@
             <div class="photo">
                 <img class="img" ng-src={{entityObject.image_url}} width="150px" />
             </div>
+            <!-- TODO: add isCompany(), currentUserVoted(), vote() functions -->
             <div class="row vote-container" ng-show="isCompany()">
                 <span class="btn btn-default btn-lg vote-button" ng-show="done || currentUserVoted(fellow)">
                 Interested
@@ -24,13 +25,24 @@
             </div>
         </div>
         <div class="col-md-9">
-            <h1 class="name">{{ entityObject.first_name +" "+ entityObject.last_name }}</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="name"  ng-attr-contenteditable="{{ editMode }}">{{ entityObject.first_name }}</h1>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="name" ng-attr-contenteditable="{{ editMode }}">{{ entityObject.last_name }}</h1>       
+                </div>
+            </div>
+             
             <p class="tagline">{{ entityObject.description }}</p>
             <div class="bio" ng-bind-html="helpers.paragraphize(entityObject.bio)"></div>
             <div class="interests" ng-bind-html="helpers.paragraphize(entityObject.interests)"></div>
             <p class="question"><strong>Q.</strong> {{ entityObject.question }}</p>
             <p class="answer"><strong>A.</strong> {{ entityObject.answer }}</p>
-            <p class="links"><a class="github" ng-href="{{ entityObject.git_hub }}" target="_blank">GitHub</a> | <a class="portfolio" ng-href="{{ entityObject.portfolio }}" target="_blank">Portfolio</a></p>
+            <p class="links">
+                <a class="github" ng-href="{{ entityObject.git_hub }}" target="_blank" ng-hide="{{ editMode }}">GitHub</a>
+                <a class="github" ng-href="" target="_blank" ng-attr-contenteditable="{{ editMode }}">{{entityObject.git_hub}}</a> | 
+                <a class="portfolio" ng-href="{{ entityObject.portfolio }}" target="_blank">Portfolio</a></p>
         </div>
     </div>
     <div class="row tags">

@@ -31,10 +31,10 @@
 		<div class="details-button">
 			<!--again, conditional for company name or fellow fname and lname-->
 			<!--Only show if enabled-->
-			<a type="button" class="detButton" ng-if="item.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.id }}/{{ helpers.slugify( item.first_name + ' ' + item.last_name ) }}">
+			<a type="button" class="detButton" ng-if="item.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}/{{ helpers.slugify( item.first_name + ' ' + item.last_name ) }}">
 				<i class="fa fa-plus fa-lg"></i> full profile
 			</a>
-			<a type="button" class="detButton" ng-if="item.enabled && item.name" ng-href="/#/{{whichEntity}}/{{ item.id }}/{{helpers.slugify(item.name)}}">
+			<a type="button" class="detButton" ng-if="item.enabled && item.name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}/{{helpers.slugify(item.name)}}">
 				<i class="fa fa-plus fa-lg"></i> full profile
 			</a>
 		</div>

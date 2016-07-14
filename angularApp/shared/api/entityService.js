@@ -1,4 +1,4 @@
-/*  File name:      profileGridService.js
+/*  File name:      entityService.js
     Author:         Jessica Wu, Michael Baldwin
     Description:    wraps all API calls in a class of helper functions
     Function:       Returns an object containing the results of all API calls
@@ -23,9 +23,7 @@
 
             allWithUser: allWithUser,
             getById: getById,
-            create: create,
-            update: update,
-            destroy: destroy
+            update: update
         };
 
         /**
@@ -52,37 +50,38 @@
             //return $http.get('/api/v2/' + whichEntity + '/' + id);
         }
 
-        // *
-        //  * @name getByUserId
-        //  * @desc get one entity by user_id (used in old code to view profile
-        //          (company OR fellow) of currently logged in user)
-         
-        // function getByUserId(whichEntity, userId) {
-        //     return $http.get('/api/v1/' + whichEntity + '/user_id/' + userId);
-        // }
 ////////////////////////////////////////////////////////////////FIX AFTER
-        /**
-         * @name create
-         * @desc creeate a new fellow record
-         */
-        function create(fellow) {
-            return $http.post('/api/v1/fellows/', fellow);
-        }
-
+        
         /**
          * @name update
-         * @desc updates a fellow record
+         * @desc updates an entity record
+                 whichEntity = 'fellows' or 'companies'
+                 entityObject = the object with all the data
+        *********MAKE SURE THIS SAVES TO A SEPARATE TABLE AND NOT THE ONE WITH
+                 THE ENTITY'S ORIGINAL APPLICATION DATA*********
          */
-        function update(fellow) {
-            return $http.put('/api/v1/fellows/' + fellow.id, fellow);
+        function update(whichEntity, entityObject, id) {
+            return $http.put('/api/v2/' + whichEntity + '/' + entityObject.id, 
+                            entityObject);
         }
 
-        /**
-         * @name destroy
-         * @desc destroy a fellow record
-         */
-         function destroy(id) {
-            return $http.delete('/api/v1/fellows/' + id);
-        }
+        
+
+        // /**
+        //I think only admin can create and destroy
+        //  * @name create
+        //  * @desc creeate a new fellow record
+        //  */
+        // function create(fellow) {
+        //     return $http.post('/api/v1/fellows/', fellow);
+        // }
+
+        // /**
+        //  * @name destroy
+        //  * @desc destroy a fellow record
+        //  */
+        //  function destroy(id) {
+        //     return $http.delete('/api/v2/fellows/' + id);
+        // }
     }
 })();
