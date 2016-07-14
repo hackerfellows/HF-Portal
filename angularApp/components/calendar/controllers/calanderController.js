@@ -1,32 +1,3 @@
- // This jQuery comes from 'vertical-timeline' implementation by Sebastiano Guerriero from https://codyhouse.co/gem/vertical-timeline/
-jQuery(document).ready(function($){
-
-  var timelineBlocks = $('.cd-timeline-block'),
-  offset = 0.8;
-
-  //hide timeline blocks which are outside the viewport
-  hideBlocks(timelineBlocks, offset);
-
-  //on scolling, show/animate timeline blocks when enter the viewport
-  $(window).on('scroll', function(){
-    (!window.requestAnimationFrame)
-      ? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
-      : window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
-  });
-
-  function hideBlocks(blocks, offset) {
-    blocks.each(function(){
-      ( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
-    });
-  }
-
-  function showBlocks(blocks, offset) {
-    blocks.each(function(){
-      ( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
-    });
-  }
-});
-
 
 // Setup CalendarController
 (function () {
@@ -49,19 +20,14 @@ jQuery(document).ready(function($){
   function CalendarController($scope, $http, User) {
 
     // Determine sheet number from user session information
-    var sheetNumber = assignSheetNumber();
+    var sheetNumber = assignSheetNumber(User);
     //sheetNumber = 1;
-    //sheetNumber = 3;
+    sheetNumber = 3;
     $scope.invalidUser = (sheetNumber == 0);
     $scope.userJustApplied = (sheetNumber == 2 || sheetNumber == 4);
 
-
-
     $scope.events = [];
     var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
-
-
-
 
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
@@ -170,6 +136,9 @@ jQuery(document).ready(function($){
           // or server returns response with an error status.
         });
 
+
+
+        //end of .done() of getJSON
       }).fail(function( jqxhr, textStatus, error ) {
         var err = textStatus + ", " + error;
         console.log( "Request Failed: " + err );
@@ -177,42 +146,45 @@ jQuery(document).ready(function($){
     }); /*end of getJSON function */
     } /*end spreadsheetData function*/
 
-    /* Assign the correct sheet number to the right user
-
-    Sheet Number:
-    1. Accepted Company
-    2. Non-Accepted Company
-    3. Accepted Fellow
-    4. Non-Accepted Fellow
-    0. ERROR - no conditions met
-    */
-    function assignSheetNumber() {
-      // Only provide calendar to logged in users
-      var toReturn = 0;
-      if( User.isUserLoggedIn() ){
-
-        // The User is a company
-        if ( User.isUserCompany() ) {
-
-          // Assign based on acceptance
-          User.isUserAccepted() ? toReturn = 1 : toReturn = 2;
-          return toReturn;
-        } // of Company
-
-        // The User is a Fellow
-        if ( User.isUserFellow() ) {
-
-          // Assign based on acceptance
-          User.isUserAccepted() ? toReturn = 3 : toReturn = 4;
-          return toReturn;
-        } // of Fellow
-
-      } // of isUserLoggedIn
-
-      // user failed to meet conditions, ERROR case
-      return toReturn;
-
-    } // of assignSheetNumber
 
   } /*end function CalendarController()*/
 })();
+
+
+
+/* Assign the correct sheet number to the right user
+
+Sheet Number:
+1. Accepted Company
+2. Non-Accepted Company
+3. Accepted Fellow
+4. Non-Accepted Fellow
+0. ERROR - no conditions met
+*/
+function assignSheetNumber(User) {
+  // Only provide calendar to logged in users
+  var toReturn = 0;
+  if( User.isUserLoggedIn() ){
+
+    // The User is a company
+    if ( User.isUserCompany() ) {
+
+      // Assign based on acceptance
+      User.isUserAccepted() ? toReturn = 1 : toReturn = 2;
+      return toReturn;
+    } // of Company
+
+    // The User is a Fellow
+    if ( User.isUserFellow() ) {
+
+      // Assign based on acceptance
+      User.isUserAccepted() ? toReturn = 3 : toReturn = 4;
+      return toReturn;
+    } // of Fellow
+
+  } // of isUserLoggedIn
+
+  // user failed to meet conditions, ERROR case
+  return toReturn;
+
+} // of assignSheetNumber

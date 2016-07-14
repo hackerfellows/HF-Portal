@@ -2,6 +2,7 @@ $fontSizeText: 14px;
 $fontSizeHeader: 20px;
 $fontSizeDate: 12px;
 $timelineColor: #F26638;
+$boxShadowColor:  #FABE9B;
 
 
 .material-icons.md-32 {
@@ -213,7 +214,7 @@ transform: scale(1); } }
   background: #ffffff;
   border-radius: 0.25em;
   padding: 1em;
-box-shadow: 0 3px 0 #d7e4ed; }
+box-shadow: 0 3px 0 $boxShadowColor;}
 .cd-timeline-content::after {
   clear: both;
   content: "";
