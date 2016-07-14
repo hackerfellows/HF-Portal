@@ -52,6 +52,26 @@
                         };
                         //Insert company
                     }
+
+                    showToastSuccess("Account Created Succcessfully");
+                    var loginObject = {
+                        email: user.email,
+                        password: user.password,
+                        errors: []
+                    }
+                    User.login(loginObject).success(function( data ){
+                        console.log(data);
+                        if( data.success ){
+                            var user = data.user;
+                            $uibModalInstance.close();
+                            User.setCredentials( user.id, user.email, user.userType );
+                        }
+                        else{
+                            $scope.loginForm.errors.push( "Invalid user credentials" );
+                        }
+                    }).error( function(error){
+                        $scope.loginForm.errors.push( "Invalid user credentials" );
+                    });
                     $uibModalInstance.dismiss('create');
                 }, function( response ){
                     // create user error callback
@@ -64,4 +84,4 @@
             $uibModalInstance.dismiss('cancel');
         };
     }
-})();
+    })();

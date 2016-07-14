@@ -12,7 +12,7 @@
 
             <div class="panel-body">
                 <div class="form-group">
-                    <label class="col-md-2 control-label" for="prependedtext">Name</label>
+                    <label class="col-md-2 control-label">Name</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon">First</span>
@@ -24,7 +24,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="input-group">
                             <span class="input-group-addon">Last</span>
-                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.lastname" required>
+                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.lastname" value="{{fellow.lastname}}" required>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                            <input type="text" placeholder="Trump University" class="form-control input-md" ng-model="fellow.university" required>
+                            <input type="text" placeholder="Trump University" class="form-control input-md" ng-model="fellow.university"  value="{{fellow.university}}" required>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                            <input type="text" placeholder="Computer Science / History, English" class="form-control input-md" ng-model="fellow.major" required>
+                            <input type="text" placeholder="Computer Science / History, English" class="form-control input-md" ng-model="fellow.major" value="{{fellow.major}}" required>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-ra"></i></span>
-                            <input type="text" placeholder="4.0" class="form-control input-md" ng-model="fellow.gpa" required>
+                            <input type="text" placeholder="4.0" class="form-control input-md" ng-model="fellow.gpa" value="{{fellow.gpa}}" required>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                            <input type="text" placeholder="MM/YYYY" class="form-control input-md" ng-model="fellow.graduation" required>
+                            <input type="text" placeholder="MM/YYYY" class="form-control input-md" ng-model="fellow.graduation" value="{{fellow.graduation}}" required>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                            <input type="text" placeholder="Detroit, MI" class="form-control input-md" ng-model="fellow.hometown" required>
+                            <input type="text" placeholder="Detroit, MI" class="form-control input-md" ng-model="fellow.hometown"  value="{{fellow.hometown}}" required>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" placeholder="(555) 555-5555" class="form-control input-md" ng-model="fellow.phone" required>
+                            <input type="text" placeholder="(555) 555-5555" class="form-control input-md" ng-model="fellow.phone" value="{{fellow.phone}}" required>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     <p><strong>Single phrase to describe yourself</strong></p>
                 </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.description" required>
+                        <input class="form-control" type="text" ng-model="fellow.description" value="{{fellow.description}}" value="{{fellow.lastname}}"  required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -123,7 +123,7 @@
                     <p><strong>What is your dream job?</strong></p>
                 </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.dreamjob" required>
+                        <input class="form-control" type="text" ng-model="fellow.dreamjob" value="{{fellow.dreamjob}}" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -131,7 +131,7 @@
                     <p><strong>Share a link to your resume</strong></p>
                 </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.resume" required>
+                        <input class="form-control" type="text" ng-model="fellow.resume" value="{{fellow.resume}}" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -141,7 +141,7 @@
                 </div>
 
                     <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.coolthings" mg-maxLength="500"></textarea>
+                        <textarea class="form-control" ng-model="fellow.coolthings"  value="{{fellow.coolthings}}" ng-maxLength="500"></textarea>
                     </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.whyHF" mg-maxLength="500"></textarea>
+                        <textarea class="form-control" ng-model="fellow.whyHF" value="{{fellow.whyHF}}" ng-maxLength="500"></textarea>
                     </div>
                 </div>
 
@@ -214,7 +214,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.MIimpact" mg-maxLength="500"></textarea>
+                        <textarea class="form-control" ng-model="fellow.MIimpact"  value="{{fellow.MIimpact}}" ng-maxLength="500"></textarea>
                     </div>
                 </div>
             </div>
@@ -253,7 +253,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.devskills" mg-maxLength="500"></textarea>
+                        <textarea class="form-control" ng-model="fellow.devskills" value="{{fellow.devskills}}" ng-maxLength="500"></textarea>
                     </div>
                 </div>
 
@@ -262,7 +262,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.achievement" mg-maxLength="500"></textarea>
+                        <textarea class="form-control" ng-model="fellow.achievement"  value="{{fellow.achievement}}" ng-maxLength="500"></textarea>
                     </div>
                 </div>
 
@@ -271,7 +271,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.involvements" mg-maxLength="500"></textarea>
+                        <textarea class="form-control" ng-model="fellow.involvements"  value="{{fellow.involvements}}" ng-maxLength="500"></textarea>
                     </div>
                 </div>
 
@@ -280,7 +280,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.github" required>
+                        <input class="form-control" type="text" ng-model="fellow.github" value="{{fellow.github}}"  required>
                     </div>
                 </div>
 
@@ -289,7 +289,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.comments" mg-maxLength="500"></textarea>
+                        <textarea class="form-control" ng-model="fellow.comments" value="{{fellow.comments}}"  ng-maxLength="500"></textarea>
                     </div>
                 </div>
             </div>

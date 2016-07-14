@@ -1,18 +1,20 @@
 # Populating Database
+## Create Test Data: [Mockaroo](https://www.mockaroo.com/projects/1254)
 
-## How To Populate
+## Load Data
+in vagrant
 ```
-bash populateDb.sh
+cd database
+./populateDb.sh sql localhost
 ```
 
 ## Test Dataset
-
 Users
 - 1 admin
-- 22 fellows
-- 28 companies
+- 19 fellows
+- 30 companies
 
-## Notes
+## Maintainer Notes
 Log into Postgres command prompt
 ```
 psql -U hf -h localhost -p 5432 -d hfportal

@@ -15,12 +15,25 @@ All other calls need user level authentication
 		GET:	list all applications
 	/application/:id
 		GET:	Get specific application based on fellow id
+		PUT:	update a specific fellow's application
 	/:id
 		GET: 	get one fellow with tags
-		PUT:$	updates an existing fellow's record and application
+		PUT:$	updates an existing fellow's record
 		DEL:+	deletes an existing fellow's record and application
 	/user_id/:user_id
 		GET: 	get one fellow with tags plus their Users row
+	/set_flags
+		POST:	enables or disables all fellow flags. Flags are application, profile, and vote. 
+			It enables or disables that feature for a fellow
+			An example of what we expect at thsis route is as follows
+			{
+				flag: "application",
+				value: 0
+			}
+			This would disable applications for all users, in this case.
+	/set_flags/:id
+		POST:	enables or disables single fellow flag. Flags are application, profile, and vote. 
+			see /set_flags
 
 
 
@@ -40,6 +53,18 @@ All other calls need user level authentication
 		DEL:+	deletes an existing company's record and application
 	/user_id/:user_id
 		GET:	literally the same as a GET on /:id (/:id probably shouldn't return Users stuff)
+	/set_flags
+		POST:	enables or disables all company flags. Flags are application, profile, and vote. 
+			It enables or disables that feature for a company.
+			An example of what we expect at thsis route is as follows
+			{
+				flag: "application",
+				value: 0
+			}
+			This would disable applications for all companies
+	/set_flags/:id
+		POST:	enables or disables single company flag. Flags are application, profile, and vote. 
+			see /set_flags
 
 
 /api/v2/tags
@@ -63,21 +88,16 @@ All other calls need user level authentication
 
 /api/v2/users
 	/:user_id/votes
-		GET:	gets votes for a specific user	
+		GET:	gets votes for a specific user (both votesFor and votesCast)	
 	/login
 		POST:*	attempts login, redirects to /login/success or /login/failure
 	/confirm-login
 		GET:	returns user if logged in, null if not
-	/login/success
-		GET:	allows login, returns user session info
-	/login/failure
-		GET:	denies login, returns error message
 	/logout
 		GET:	logs out
 	/create
 		POST:*	creates a new user
-	/:id
-		PUT:$	updates a user
 	/:user_id
+		PUT:$	updates a user
 		DEL:+	deletes a user
 

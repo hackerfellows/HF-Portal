@@ -8,28 +8,21 @@
 
     function NavbarController($scope, Accounts, User) {
 
-        updateLoginStatus();
+        $scope.isUserLoggedIn = User.isUserLoggedIn;
+        $scope.isUserAdmin = User.isUserAdmin;
+        $scope.isUserFellow = User.isUserFellow;
+        $scope.isUserCompany = User.isUserCompany;
+
+        console.log($scope.isUserLoggedIn);
 
         $scope.openLoginModal = function() {
-            Accounts.startLogin().then(function() {
-                updateLoginStatus();
-                console.log(User.getCurrentUser());
-            });
+            Accounts.startLogin();
         };
 
-        function updateLoginStatus() {
-            $scope.isUserLoggedIn = User.isUserLoggedIn();
-            $scope.isUserAdmin = User.isUserAdmin();
-            $scope.isUserFellow = User.isUserFellow();
-            $scope.isUserCompany = User.isUserCompany();
-
-            console.log($scope.isUserLoggedIn);
-        }
 
         $scope.logoutUser = function() {
-            User.clearCredentials().then(function () {
-                updateLoginStatus();
-            });
+            showToastInfo("You have been logged out");
+            User.clearCredentials();
         };
     }
 })();
