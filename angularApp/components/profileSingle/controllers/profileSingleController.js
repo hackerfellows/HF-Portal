@@ -6,59 +6,70 @@
                     Allows user (company or fellow) to edit their own profile.
                     Error checks to make sure the user's inputs are valid.
 */
+(function() {
+    'use strict';
 
+    angular
+        .module('app.profileSingle.controllers')
+        .controller('ProfileSingleController', ProfileSingleController);
 
-(function () {
-  'use strict';
+    ProfileSingleController.$inject = ['$scope', '$location', 'HFHelpers', 'Entities'];
+    /**
+     * @namespace ProfileController
+     */
+    function ProfileSingleController($scope, $location, HFHelpers, Entities) {
+        console.log("single profile view");
+        //shared stuff
+        var urlEntity = $location.path().split('/')[1];
+        var entityId = $location.path().split('/')[2];
+        //Check path to see if it's 'fellows' or 'companies'
+        if (urlEntity === "fellows") {
+            console.log("fellow profile");
+            $scope.whichEntity = "fellow";
+            $scope.whichEntityPlural = "fellows";
+            $scope.edit = function() {
+              editFellow();
+            }
+        } else if (urlEntity === "companies") {
+            console.log("company profile");
+            $scope.whichEntity = "company";
+            $scope.whichEntityPlural = "companies";
+            $scope.edit = function(){
+              editCompany();
+            }
+        } else {
+            console.log("error");
+        }
 
-  angular
-  .module('app.profileSingle.controllers')
-  .controller('ProfileSingleController', ProfileSingleController);
-
-  ProfileSingleController.$inject = ['$scope', '$location', 'HFHelpers', 'Entities'];
-  /**
-  * @namespace ProfileController
-  */
-  function ProfileSingleController($scope, $location, HFHelpers, Entities ) {
-    console.log("single profile view");
-      //shared stuff
-      var entityId = $location.path().split('/')[2];
-      //Check path to see if it's 'fellows' or 'companies'
-      if($location.path().split('/')[1] === "fellows"){
-        console.log("fellow profile");
-        $scope.whichEntity = "fellow";
-        $scope.whichEntityPlural = "fellows";
-      } else if ($location.path().split('/')[1] === "companies"){
-        console.log("company profile");
-        $scope.whichEntity = "company";
-        $scope.whichEntityPlural = "companies";
-      } else {
-        console.log("error");
-      }
-
-      
-      Entities.getById($scope.whichEntityPlural, entityId).success(function (result) {
-
+        //Make the API call to fetch the data for the chosen entity
+        Entities.getById($scope.whichEntityPlural, entityId).success(function(result) {
             $scope.entityObject = result;
-           // console.log("List:", result);
         });
 
         $scope.helpers = HFHelpers;
 
-      //if fellow call fellow helper function
 
 
 
-      //if company ""
+        function editFellow(){
+          console.log("entering edit mode for fellow");
+
+          //check login
+
+          //if it fails, 
+        }
+
+
+        //if fellow call fellow helper function
+
+
+
+        //if company ""
 
 
 
 
-
-
-
-
-   /*   var vm = this;
+        /*   var vm = this;
 
       if( User.isUserLoggedIn() ) {
 
@@ -83,7 +94,7 @@
            $location.path("/");
       }
 */
-  }
+    }
 
 
 })();
