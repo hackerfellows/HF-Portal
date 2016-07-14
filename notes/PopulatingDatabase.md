@@ -17,7 +17,7 @@ Run script to drop tables using Postgres
 ### 2.
 Run server to create tables using Sequelize
 ```
-gulp server
+gulp nodemon
 ```
 
 ### 3.
