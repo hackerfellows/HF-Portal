@@ -38,7 +38,7 @@
 
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
-      
+
       $scope.webjson = $.getJSON(url).done( function(data,status){
         //grab spreadsheet data from google sheet
         $scope.spreadsheet = data;
@@ -62,8 +62,6 @@
           var outsideLink = entry_array[entry].gsx$outsidelink.$t;
           var id          = idCounter++;
 
-          // Uncomment to show JSON from google sheet
-          //console.log(information)
 
           // Replace icon spaces with underscores
           var icon        = icon.replace(/ /g,"_");
