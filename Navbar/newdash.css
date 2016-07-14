@@ -1,0 +1,43 @@
+
+.hackernav{
+    background-color: #2e2e2e;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    border: none;
+    height: 100px;
+    
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+.theNavLinks {
+    margin-top: 7.5vh;
+    color:white;
+    font-size: 18px;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+  
+    
+}
+
+.hackerlogo{
+    margin-top: -30%;
+}
+
+.theNavLogin{
+    margin-top: 7.5vh;
+    color:white;
+    font-size: 18px;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    
+}
+
+.navbar-collapse{
+   background-color: #2e2e2e;
+ 
+}
+
+
