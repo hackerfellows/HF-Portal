@@ -21,8 +21,10 @@
             $uibModalInstance.dismiss();
         };
         $scope.beginRegistration = function() {
-           $uibModalInstance.dismiss();
-           Accounts.startRegistration();
+            Accounts.startRegistration().then(function(){
+                return;
+            });
+            $uibModalInstance.dismiss();
         };
         $scope.login = function(loginForm) {
             $scope.loginForm.errors = [];
@@ -30,8 +32,9 @@
                 console.log(data);
                 if( data.success ){
                     var user = data.user;
+                    showToastSuccess("Login Succcess");
                     $uibModalInstance.close();
-                    User.SetCredentials( user.id, user.email, user.userType );
+                    User.setCredentials( user.id, user.email, user.userType );
                 }
                 else{
                     $scope.loginForm.errors.push( "Invalid user credentials" );
