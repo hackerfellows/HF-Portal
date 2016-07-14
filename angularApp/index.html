@@ -50,49 +50,49 @@
                 </div>
                 <div id="menuitem" class="collapse navbar-collapse ">
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="listitem" ng-hide="isUserLoggedIn">
+                        <li class="listitem">
                             <a href="/#/">Home</a>
                         </li>
-                        <li class="listitem" ng-hide="isUserLoggedIn">
+                        <li class="listitem">
                             <a ng-href="/#/#apply-section" ng-click="scrollTo('apply-section')">Apply</a>
                         </li>
-                        <li class="listitem" ng-hide="isUserLoggedIn">
+                        <li class="listitem">
                             <a ng-href="/#/#employers-section" ng-click="scrollTo('start-ups-section')">Start-Ups</a>
                         </li>
-                        <li class="listitem" ng-hide="isUserLoggedIn">
+                        <li class="listitem" ng-hide="isUserLoggedIn()">
                             <a ng-href="/#/#faq-section" ng-click="scrollTo('faq-section')">FAQ</a>
                         </li>
-                        <li class="listitem" ng-hide="isUserLoggedIn">
+                        <li class="listitem" ng-hide="isUserLoggedIn()">
                             <a ng-href="/#/#fellows-section" ng-click="scrollTo('fellows-section')">2015
                                         Fellows</a>
                         </li>
                         <li class="listitem">
-                            <a href="/#/fellows" ng-show="isUserLoggedIn">2016 Fellows</a>
+                            <a href="/#/fellows" ng-show="isUserLoggedIn()">2016 Fellows</a>
                         </li>
                         <li class="listitem">
-                            <a href="/#/companies" ng-show="isUserLoggedIn">Companies</a>
+                            <a href="/#/companies" ng-show="isUserLoggedIn()">Companies</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" class="navbar-collapse collapse">
-                        <li ng-hide="isUserLoggedIn">
+                        <li ng-hide="isUserLoggedIn()">
                             <a href="" ng-click="openLoginModal()">Login</a>
                         </li>
-                        <li ng-show="isUserLoggedIn && !isUserAdmin">
+                        <li ng-show="isUserLoggedIn() && !isUserAdmin()">
                             <a href="/#/votes">Votes</a>
                         </li>
-                        <li ng-show="isUserFellow">
+                        <li ng-show="isUserFellow()">
                             <a href="/#/profile/fellow">Profile</a>
                         </li>
-                        <li ng-show="isUserCompany">
+                        <li ng-show="isUserCompany()">
                             <a href="/#/profile/company">Profile</a>
                         </li>
-                        <li ng-show="isUserAdmin">
+                        <li ng-show="isUserAdmin()">
                             <a href="/#/profile/admin">Users</a>
                         </li>
-                        <li ng-show="isUserAdmin">
+                        <li ng-show="isUserAdmin()">
                             <a href="/#/tags">Tags</a>
                         </li>
-                        <li ng-show="isUserLoggedIn">
+                        <li ng-show="isUserLoggedIn()">
                             <a href="" ng-click="logoutUser()">Logout</a>
                         </li>
                     </ul>

@@ -26,15 +26,10 @@ gulp.task('server', ['watch', 'nodemon', 'browser-sync']);
 
 // watch for file changes and reload browser
 gulp.task('watch', ['full-reload'], function () {
-<<<<<<< HEAD
 	// watch for js file changes in app and run 'js' gulp task
 	gulp.watch(["angularApp/**/*.js", "!angularApp/assets/**/*.js"], ['js']);
 
     gulp.watch("angularApp/assets/**/*.js", ['assetsjs']);
-=======
-    // watch for js file changes in app and run 'js' gulp task
-    gulp.watch("angularApp/**/*.js", ['js']);
->>>>>>> applicationAPI
 
     // watch for scss file changes in app and run 'sass' gulp task
     gulp.watch("angularApp/assets/scss/*.scss", ['sass']);
@@ -99,17 +94,10 @@ gulp.task('nodemon', function (cb) {
      * Compile assets and whatnot
      **/
 
-<<<<<<< HEAD
 // "compile" web app into "public" folder
 gulp.task('full-reload', ['html', 'img', 'sass', 'js', 'assetsjs'], function() {
 	console.log('Publishing web application into public folder');
 });
-=======
-    // "compile" web app into "public" folder
-    gulp.task('full-reload', ['html', 'img', 'sass', 'js'], function() {
-        console.log('Publishing web application into public folder');
-    });
->>>>>>> applicationAPI
 
 // move html files into public
 gulp.task('html', function() {

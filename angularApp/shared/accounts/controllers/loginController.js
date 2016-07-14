@@ -21,8 +21,10 @@
             $uibModalInstance.dismiss();
         };
         $scope.beginRegistration = function() {
-           $uibModalInstance.dismiss();
-           Accounts.startRegistration();
+            Accounts.startRegistration().then(function(){
+                return;
+            });
+            $uibModalInstance.dismiss();
         };
         $scope.login = function(loginForm) {
             $scope.loginForm.errors = [];
