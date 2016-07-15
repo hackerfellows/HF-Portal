@@ -254,41 +254,41 @@ function getApplicationByID(req, res){
 
 
 function putApplicationById(req, res) {
+    var thing = {};
+    thing.name = req.body.name;
+    thing.website_url = req.body.website_url;
+    thing.location = req.body.location;
+    thing.industry = req.body.industry;
+    thing.primary_contact = req.body.primary_contact;
+    thing.contact_email = req.body.contact_email;
+    thing.contact_phone = req.body.contact_phone;
+    thing.map_url = req.body.map_url;
+    thing.logo_url = req.body.logo_url;
+    thing.description = req.body.description;
+    thing.age = req.body.age;
+    thing.company_size = req.body.company_size;
+    thing.value_prop = req.body.value_prop;
+    thing.whyHF = req.body.whyHF;
+    thing.developer_type = req.body.developer_type;
+    if(req.body.devneeds !== undefined) {
+        thing.devneeds0 = req.body.devneeds[0];
+        thing.devneeds1 = req.body.devneeds[1];
+        thing.devneeds2 = req.body.devneeds[2];
+        thing.devneeds3 = req.body.devneeds[3];
+        thing.devneeds4 = req.body.devneeds[4];
+    }
+    thing.ideal_dev = req.body.ideal_dev;
+
+    console.log(req.body);
+
     Companies.update(
-        {
-            name: req.body.name,
-            website_url: req.body.website_url,
-            location: req.body.location,
-            industry: req.body.industry,
-            primary_contact: req.body.primary_contact,
-            contact_email: req.body.contact_email,
-            contact_phone: req.body.contact_phone,
-            map_url: req.body.map_url,
-            logo_url: req.body.logo_url,
-            description: req.body.description,
-            age: req.body.age,
-            company_size: req.body.company_size,
-            value_prop: req.body.value_prop,
-            whyHF: req.body.whyHF,
-            developer_type: req.body.developer_type,
-            ideal_dev: req.body.ideal_dev
-        },
+        thing,
         {
             where: { user_id: req.params.user_id }
         }).then(function(result){
-            //res.json(result);
             getApplicationByID(req, res);
         });
 }
-    /*
-        if(req.body.devneeds !== undefined) {
-            attributes.devneeds0 = req.body.devneeds[0];
-            attributes.devneeds1 = req.body.devneeds[1];
-            attributes.devneeds2 = req.body.devneeds[2];
-            attributes.devneeds3 = req.body.devneeds[3];
-            attributes.devneeds4 = req.body.devneeds[4];
-        }
-        */
 /*
 function putApplicationById(req, res) {
 
