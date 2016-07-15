@@ -243,15 +243,43 @@ app.delete('/:user_id', function (req, res) {
 });
 
 
-app.put('/flags', function putFlags(req, res) {
+app.put('/flags', putFlags);
+app.get('/flags/:user_id', getFlagsByID);
+app.put('/flags/:user_id',putFlagsByID);
+
+
+function putFlags(req, res) {
     console.log("put user/flags");
     res.status(501).json({success: false, error: "Not Implemented"});
-});
-app.put('/flags/:user_id', function putFlagsByID(req, res) {
+};
+function putFlagsByID(req, res) {
     console.log("put user/flags/" + req.params.user_id);
+    switch(req.body.flag){
+        case "enabled":
+            thing.enabled = req.body.value;
+            break;
+        case "accepted":
+            thing.accepted = req.body.value;
+            break;
+        case "application_flag":
+            thing.application_flag = req.body.value;
+            break;
+        case "profile_flag":
+            thing.profile_flag = req.body.value;
+            break;
+        case "vote_flag":
+            thing.vote_flag = req.body.value;
+            break;
+    }
+    Users.update(
+        thing,
+        { where: { id: req.params.user_id } }
+        ).then(function(result){
+            getFlagsByID(req,res);
+        });
     res.status(501).json({success: false, error: "Not Implemented"});
-});
-app.get('/flags/:user_id', function getFlagsByID(req, res) {
+};
+function getFlagsByID(req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id
@@ -260,7 +288,12 @@ app.get('/flags/:user_id', function getFlagsByID(req, res) {
     }).then(function(user) {
         res.json({success: user !== null, data: user});
     });
-});
+};
+
+
+
+
+
 
 //This is after flags because put /flags was interpreted as flags as user_id
 app.put('/:user_id', function putUser(req, res) {
@@ -286,4 +319,7 @@ app.put('/:user_id', function putUser(req, res) {
         }
     });
 });
+
+
+
 module.exports = app;
