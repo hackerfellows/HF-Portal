@@ -18,23 +18,36 @@
 
         console.log("in admin applicants controller"); 
 
-        $scope.applicants = [];
+        $scope.fellow_applicants = []
+        $scope.company_applicants = []
         $scope.userListLoad = function() {
 
-            if( $scope.applicants.length === 0 ) {
+            // If there are fellow applicants, retrieve them
+            if( $scope.fellow_applicants.length === 0 ) {
 
-                Entities.getApplicants('fellows').success(function (applicants) {
+                Entities.getApplicants('fellows').success(function (fellow_applicants) {
 
-                    $scope.applicants = applicants;
+                    $scope.fellow_applicants = fellow_applicants;
                     console.log("got applicants");
+                    console.log(fellow_applicants)
+
+                });
+            }
+            if( $scope.company_applicants.length === 0 ) {
+
+                Entities.getApplicants('companies').success(function (company_applicants) {
+
+                    $scope.company_applicants = company_applicants;
+                    console.log("got company applicants");
+                    console.log(company_applicants)
 
                 });
             }
 
-            
-        };
-        $scope.userListLoad();
 
+        };
+
+        $scope.userListLoad();
 
         $scope.viewApplicant = function(applicant){
 
@@ -62,26 +75,20 @@
 
         $scope.rejectApplicant = function(applicant ){
 
-            var c = confirm( "Are you sure you want to reject" + applicant.first_name + " " + applicant.last_name + "?");
+            var c = confirm( "Are you sure you want to reject " + applicant.first_name + " " + applicant.last_name + "?");
 
             if( c ){
 
-                // remove applicant
-//                Fellows.destroy( applicant.id ).then( function(){
-
-                    // now remove user
-//                    User.destroy( applicant.user_id).then( function(){
-
-                        // reload users
-//                        $window.location.reload();
-//                    });
-//                });
+                User.destroy(applicant.user.id ).then( function(){
+                    console.log('deleted');
+                    $window.location.reload();
+                });
             }
         };
 
         $scope.acceptApplicant = function(applicant ){
 
-            var c = confirm( "Are you sure you want to accept" + applicant.first_name + " " + applicant.last_name + "?");
+            var c = confirm( "Are you sure you want to accept " + applicant.first_name + " " + applicant.last_name + "?");
 
             if( c ){
 
@@ -117,19 +124,30 @@
 
         $scope.user = applicant.user;
         $scope.applicant = applicant;
+        $scope.isApplicantFellow = false;
+        $scope.isApplicantCompany = false; 
 
-        $scope.init = function(){
+        var str = '';
+        if(applicant.user.userType.toLowerCase() == 'fellow'){
+            str = 'fellows';
+            $scope.isApplicantFellow = true;
 
-            $("[name='enabled']").bootstrapSwitch({
+        }else{
+            str = 'companies'; 
+            $scope.isApplicantCompany = true;
+        
+        }
+            $scope.init = function(){
+            Entities.getApplication(applicant.user, str).success(function (application) {
 
-                onText: "Visible",
-                offText: "Hidden",
-                state: $scope.applicant.enabled,
-                onSwitchChange: function (event, state) {
+                $scope.application = application;
+                console.log("got application");
+                console.log(application);
 
-                    $scope.applicant.enabled = ( state ) ? 1 : 0;
-                }
             });
+
+
+
         };
 
         $scope.ok = function ok() {

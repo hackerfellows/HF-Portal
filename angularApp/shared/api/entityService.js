@@ -89,5 +89,9 @@
         function getApplicants(type) {
             return $http.get('/api/v2/' + type + '/unaccepted');
         }
+
+        function getApplication(user, type){
+            return $http.get('/api/v2/' + type + '/profile/' + user.id );
+        }
     }
 })();

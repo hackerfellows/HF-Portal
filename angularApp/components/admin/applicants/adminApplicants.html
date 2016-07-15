@@ -16,15 +16,15 @@
 							<th>Email</th>
 							<th class="stat">View Application</th>
 							<th>Accept</th>						
-							<th>Reject</th>						
+							<th>Delete</th>						
 						</thead>
 						<tbody>
-						<tr ng-repeat="fellow in fellows">
-							<td>{{ fellow.first_name + " " + fellow.last_name }}</td>
-							<td>{{ fellow.user.email }}</td>
-							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
-							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
-							<td width="30"><a href ng-click="rejectApplicant(fellow)"><i class="fa fa-times text-danger"></i></a></td>
+						<tr ng-repeat="fellow_applicant in fellow_applicants">
+							<td>{{ fellow_applicant.first_name + " " + fellow_applicant.last_name }}</td>
+							<td>{{ fellow_applicant.user.email }}</td>
+							<td><a href ng-click="viewApplicant(fellow_applicant)"><i class="fa fa-pencil-square-o"></i></a></td>
+							<td><a href ng-click="acceptApplicant(fellow_applicant)"><i class="fa fa-check"></i></a></td>
+							<td width="30"><a href ng-click="rejectApplicant(fellow_applicant)"><i class="fa fa-times text-danger"></i></a></td>
 						</tr>
 
 						</tbody>
@@ -37,15 +37,15 @@
 							<th>Email</th>
 							<th class="stat">View Application</th>
 							<th>Accept</th>						
-							<th>Reject</th>						
+							<th>Delete</th>						
 						</thead>
 						<tbody>
-						<tr ng-repeat="fellow in fellows">
-							<td>{{ fellow.first_name + " " + fellow.last_name }}</td>
-							<td>{{ fellow.user.email }}</td>
-							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
-							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
-							<td width="30"><a href ng-click="rejectApplicant(fellow)"><i class="fa fa-times text-danger"></i></a></td>
+						<tr ng-repeat="company_applicant in company_applicants">
+							<td>{{ company_applicant.name }}</td>
+							<td>{{ company_applicant.user.email }}</td>
+							<td><a href ng-click="viewApplicant(company_applicant)"><i class="fa fa-pencil-square-o"></i></a></td>
+							<td><a href ng-click="acceptApplicant(company_applicant)"><i class="fa fa-check"></i></a></td>
+							<td width="30"><a href ng-click="rejectApplicant(company_applicant)"><i class="fa fa-times text-danger"></i></a></td>
 						</tr>
 
 						</tbody>
