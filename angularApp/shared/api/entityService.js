@@ -67,7 +67,8 @@
                  THE ENTITY'S ORIGINAL APPLICATION DATA*********
          */
         function updateProf(user, type) {
-            return $http.put('/api/v2/' + type + '/profile/' + user.id, user);
+            console.log(user, type, user.user_id);
+            return $http.put('/api/v2/' + type + '/profile/' + user.user_id, user);
         }
 
 

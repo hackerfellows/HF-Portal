@@ -48,13 +48,15 @@
         //only allow the edit button to be viewable if the logged in user
         function checkLogin(){
           var currentUserId = User.getCurrentUser().id;
-            if(entityId === 'currentUserId'){
+          // console.log("entityID", entityId);
+          // console.log("currentUser", currentUserId);
+            if(parseInt(entityId) === parseInt(currentUserId)){
                 console.log("correct user logged in");
                 $scope.showEditButton = true;
             } else {
                 console.log("incorrect user logged in");
                 //TODO: CHANGE MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE TO FALSE PLEEEEEEEEEEEEEASE
-                $scope.showEditButton = true;
+                $scope.showEditButton = false;
             }
         }
 
@@ -81,7 +83,12 @@
                     $scope.entityObject = result["data"];
                     $scope.editMode = false;
                 } 
-            });
+                }, function(err) {
+                    console.log("OMG YOU IDIOT", err);
+
+                }
+            );
+            console.log("skipped the other stuff");
             $scope.editMode = false;
                 
         }

@@ -66,8 +66,8 @@
             resolve: { routePermission: Public }
         })
         .when('/fellows/:fellow_id', {
-            controller: 'ProfileController',
-            templateUrl: 'components/profileSingle/profileSingle.html',
+            controller: 'ProfileSingleController',
+            templateUrl: 'components/profileSingle/profileSingleWrapper.html',
             resolve: { routePermission: Public }
         })
         .when('/companies', {
