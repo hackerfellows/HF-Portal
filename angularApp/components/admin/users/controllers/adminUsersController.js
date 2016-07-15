@@ -26,7 +26,7 @@
 
             if( $scope.fellows.length === 0 ) {
 
-                Entities.allWithUser('fellows').success(function (fellows) {
+                Entities.getAll('fellows').success(function (fellows) {
 
                     $scope.fellows = fellows;
                     console.log("fellows retrieved");
@@ -36,10 +36,11 @@
 
             if( $scope.companies.length === 0 ) {
 
-                Entities.allWithUser('companies').success(function (companies) {
+                Entities.getAll('companies').success(function (companies) {
 
                     $scope.companies = companies;
-                     console.log("companies retrieved");
+                    console.log("companies retrieved");
+                    console.log(companies);
                 });
             }
         };
@@ -143,7 +144,7 @@
         };
 
 
-/*
+
         $scope.removeFellow = function( fellow ){
 
             var c = confirm( "Are you sure you want to delete " + fellow.first_name + " " + fellow.last_name + "?");
@@ -151,19 +152,25 @@
             if( c ){
 
                 // remove fellow
-                Fellows.destroy( fellow.id ).then( function(){
+                //Fellows.destroy( fellow.id ).then( function(){
 
                     // now remove user
-                    User.destroy( fellow.user_id).then( function(){
+                   // User.destroy( fellow.user_id).then( function(){
 
                         // reload users
-                        $window.location.reload();
-                    });
+                    //    $window.location.reload();
+                   // });
+               // });
+
+                Entities.destory(fellow.user_id, 'fellows').then( function(){
+                    $window.location.reload();
+                    console.log('destroying fellow');
                 });
+               
             }
         };
 
-*/
+
 
 
     }
