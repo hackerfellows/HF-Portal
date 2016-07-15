@@ -16,6 +16,7 @@ var application_attributes = [
     'university',
     'major',
     'graduation',
+    'gpa',
     'hometown',
     'phone',
     'residentUSA',
@@ -284,6 +285,7 @@ function putApplicationById(req, res) {
     thing.university       = req.body.university;
     thing.major            = req.body.major;
     thing.graduation       = req.body.graduation;
+    thing.gpa              = req.body.gpa;
     thing.hometown         = req.body.hometown;
     thing.phone            = req.body.phone;
     thing.residentUSA      = req.body.residentUSA;
