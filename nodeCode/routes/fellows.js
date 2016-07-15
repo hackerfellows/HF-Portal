@@ -34,6 +34,28 @@ var application_attributes = [
     'comments'
 ];
 
+var profile_attributes = [
+    'user_id',
+    'first_name',
+    'last_name',
+    'university',
+    'major',
+    'bio',
+    'interests',
+    'description',
+    'git_hub',
+    'portfolio',
+    'developer_type',
+    'question',
+    'answer',
+    'image_url',
+    'resumeURL',
+    'developer_type',
+    'coolthings',
+    'achievements',
+    'involvements',
+];
+
 // Image Upload
 // var upload = multer({ dest: './public/assets/images/' });
 
@@ -52,17 +74,36 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-// GET /fellows - get all fellows
-app.get('/', function getFellows(req, res) {
+
+
+
+app.get('/', getAccepted);
+
+app.get('/unaccepted', getUnnaccepted);
+
+app.get('/profile/:user_id', getProfileByID);
+
+app.put('/profile/:user_id', putProfileById)
+
+app.get('/application/:user_id', getApplicationByID);
+
+app.put('/application/:user_id', putApplicationById);
+
+
+
+
+
+function getAccepted(req, res) {
 
     Fellows.all({
-
         order: '"last_name" ASC',
         include: [
             { model: Tags },
             {
                 model: Users,
                 attributes: ['id', 'email', 'userType'],
+                where: { accepted: 1 },
+                required: true,
                 include: [
                      {
                         model: Users,
@@ -81,120 +122,142 @@ app.get('/', function getFellows(req, res) {
     }).then(function(fellows) {
         res.send(fellows);
     });
-});
+};
 
-// GET /fellows/:user_id - get one fellow by user_id
-app.get('/:user_id', function getFellow(req, res){
 
-    //res.send('GET request - get a company record');
-    Fellows.findOne({
+
+function getUnnaccepted(req, res) {
+    Fellows.all({
         where: {
-            user_id: req.params.user_id
+            first_name: {ne: null}
         },
-        include: [{
-            model: Tags
-        },{
-            model: Users
-        }]
-    }).then(function(fellow) {
-        res.send(fellow);
+        order: '"last_name" ASC',
+        attributes: application_attributes,
+        include: [
+            {
+                model: Users,
+                where: { accepted: 0 },
+                required: true,
+                attributes: ['id', 'email', 'userType']
+            }
+        ]
+    }).then(function(fellows) {
+        res.send(fellows);
     });
-});
+};
 
 
-// PUT /fellows/:user_id - updates an existing fellow record
-app.put('/:user_id', function putFellow(req, res) {
+
+function getProfileByID(req, res){
 
     Fellows.findOne({
-
         where: {
             user_id: req.params.user_id
         },
-        include: [{
-            model: Tags
-        }]
+        attributes: profile_attributes,
+        include: [
+            {
+                model: Tags
+            },
+            {
+                model: Users,
+                attributes: ['id', 'email', 'userType'],
+                include: [
+                     {
+                        model: Users,
+                        as: 'VotesFor',
+                        attributes: ['id', 'email', 'userType'],
+                        include: [{ model: Companies }]
+                    },
+                {
+                    model: Users,
+                    as: 'VotesCast',
+                    attributes: ['id', 'email', 'userType'],
+                    include: [{ model: Companies }]
+                }]
+            }
+        ]
+    }).then(function(attributes) {
+        res.json({success: attributes !== null, data: attributes});
+    });
+};
 
-    }).then(function(fellow) {
 
-        fellow.user_id = req.body.user_id;
-        fellow.first_name = req.body.first_name;
-        fellow.last_name = req.body.last_name;
-        fellow.university = req.body.university;
-        fellow.major = req.body.major;
-        fellow.bio = req.body.bio;
-        fellow.interests = req.body.interests;
-        fellow.description = req.body.description;
-        fellow.git_hub = req.body.git_hub;
-        fellow.portfolio = req.body.portfolio;
-        fellow.developer_type = req.body.developer_type;
 
-        fellow.question = req.body.question;
-        fellow.answer = req.body.answer;
+function putProfileById(req, res) {
+    var thing = {};
 
-        fellow.image_url = req.body.image_url;
-        fellow.enabled = req.body.enabled;
+    thing.user_id = req.body.user_id;
+    thing.first_name = req.body.first_name;
+    thing.last_name = req.body.last_name;
+    thing.university = req.body.university;
+    thing.major = req.body.major;
+    thing.bio = req.body.bio;
+    thing.interests = req.body.interests;
+    thing.description = req.body.description;
+    thing.git_hub = req.body.git_hub;
+    thing.portfolio = req.body.portfolio;
+    thing.developer_type = req.body.developer_type;
+    thing.question = req.body.question;
+    thing.answer = req.body.answer;
+    thing.image_url = req.body.image_url;
 
-        fellow.save();
+    Fellows.update(
+        thing,
+        {
+            where: { user_id: req.params.user_id }
+        }).then(function(result){
+            // remove all tags, then re-add currently posted tags
+            Fellows.findOne({
+                where: {
+                    user_id: req.params.user_id
+                }
+            }).then(function(fellow) {
+                fellow.setTags(null).then(function() {
+                    var count=-1;
+                    if (Array.isArray(req.body.tags)) {
+                        req.body.tags.forEach(function ( tag ) {
+                            if( typeof tag.name !== "undefined" ) {
+                                (count === -1 ? 1 : count++);
+                                console.log(count);
+                                Tags.findOne({
+                                    where: {
+                                        name: {
+                                            ilike: tag.name
+                                        }
+                                    }
+                                }).then(function (tagObj) {
 
-        // remove all tags, then re-add currently posted tags
-        fellow.setTags(null).then(function() {
-            if (Array.isArray(req.body.tags)) {
-                req.body.tags.forEach(function ( tag ) {
-                    if( typeof tag.name !== "undefined" ) {
-                        Tags.findOne({
-                            where: {
-                                name: {
-                                    ilike: tag.name
-                                }
-                            }
-                        }).then(function (tagObj) {
-                            // if tag found assign
-                            if( tagObj ){
-                                fellow.addTag(tagObj);
-                            }
-                            // else create and assign
-                            else{
-                                Tags.create({
-                                    name: tag.name
-                                }).then( function( tagObj ){
-                                    fellow.addTag(tagObj);
+                                    // if tag found assign
+                                    if( tagObj ){
+                                        fellow.addTag(tagObj);
+                                    }
+                                    // else create and assign
+                                    else{
+                                        Tags.create({
+                                            name: tag.name
+                                        }).then( function( tagObj ){
+                                            fellow.addTag(tagObj);
+                                        });
+                                    }
+                                    count--;
                                 });
                             }
                         });
+                        while(count !== 0);//BUSY WAIT LIKE A DUMBASS
                     }
+                    getProfileByID(req, res);
                 });
-            }
+            });
         });
-
-        res.send(fellow);
-    });
-
-});
-
-// GET /fellows/application - lists name and user_id of all applicants not accepted
-app.get('/application', function getFellows(req, res) {
-
-    Fellows.all({
-
-        where: {
-            first_name: {ne: null},
-            enabled: 0
-        },
-        order: '"last_name" ASC',
-        attributes: ['user_id', 'first_name', 'last_name']
-
-    }).then(function(fellows) {
-
-        res.send(fellows);
-    });
-
-});
+}
 
 
-// GET /fellows/application:id - get one fellow's full application data
-app.get('/application/:user_id', function getFellow(req, res){
 
-    //res.send('GET request - get a company record');
+
+function getApplicationByID(req, res){
+
+    //res.send('GET request - get a fellow record');
     Fellows.findOne({
         where: {
             user_id: req.params.user_id
@@ -202,49 +265,44 @@ app.get('/application/:user_id', function getFellow(req, res){
         attributes: application_attributes
 
     }).then(function(attributes) {
-        res.send(attributes);
+        res.json({success: attributes !== null, data: attributes});
     });
-});
+};
 
-// PUT /fellows/application:id - updates an existing fellow's application
-app.put('/application/:user_id', function putFellow(req, res) {
 
-    Fellows.findOne({
 
-        where: {
-            user_id: req.params.user_id
-        }
+function putApplicationById(req, res) {
+    var thing = {};
+    thing.first_name       = req.body.first_name;
+    thing.last_name        = req.body.last_name;
+    thing.university       = req.body.university;
+    thing.major            = req.body.major;
+    thing.graduation       = req.body.graduation;
+    thing.hometown         = req.body.hometown;
+    thing.phone            = req.body.phone;
+    thing.residentUSA      = req.body.residentUSA;
+    thing.description      = req.body.description;
+    thing.dreamjob         = req.body.dreamjob;
+    thing.resumeURL        = req.body.resumeURL;
+    thing.coolthings       = req.body.coolthings;
+    thing.referral         = req.body.referral;
+    thing.whyHF            = req.body.whyHF;
+    thing.MIimpact         = req.body.MIimpact;
+    thing.developer_type   = req.body.developer_type;
+    thing.devskills        = req.body.devskills;
+    thing.achievements     = req.body.achievements;
+    thing.involvements     = req.body.involvements;
+    thing.git_hub          = req.body.git_hub;
+    thing.comments         = req.body.git_hub;
 
-    }).then(function(fellow) {
-        // update the fellow application data here with the req body data
-        fellow.first_name       = req.body.first_name;
-        fellow.last_name        = req.body.last_name;
-        fellow.university       = req.body.university;
-        fellow.major            = req.body.major;
-        fellow.graduation       = req.body.graduation;
-        fellow.hometown         = req.body.hometown;
-        fellow.phone            = req.body.phone;
-        fellow.residentUSA      = req.body.residentUSA;
-        fellow.description      = req.body.description;
-        fellow.dreamjob         = req.body.dreamjob;
-        fellow.resumeURL        = req.body.resumeURL;
-        fellow.coolthings       = req.body.coolthings;
-        fellow.referral         = req.body.referral;
-        fellow.whyHF            = req.body.whyHF;
-        fellow.MIimpact         = req.body.MIimpact;
-        fellow.developer_type   = req.body.developer_type;
-        fellow.devskills        = req.body.devskills;
-        fellow.achievements     = req.body.achievements;
-        fellow.involvements     = req.body.involvements;
-        fellow.git_hub          = req.body.git_hub;
-        fellow.comments         = req.body.git_hub;
-
-        fellow.save();
-
-        res.send(fellow);
-    });
-
-});
+    Fellows.update(
+        thing,
+        {
+            where: {user_id: req.params.user_id }
+        }).then(function(result){
+            getApplicationByID(req, res);
+        });
+}
 
 
 module.exports = app;
