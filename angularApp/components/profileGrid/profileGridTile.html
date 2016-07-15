@@ -1,4 +1,4 @@
-<div class="grid-box " ng-if="item.enabled">
+<div class="grid-box " ng-if="item.user.enabled">
 	<!--
 	File name: 		profileGridTile.html
 	Author: 		Jessica Wu, Michael Baldwin
@@ -8,10 +8,8 @@
 	Notes:			{{entity}} variables refer to "fellows" or "companies"
 	-->
 
-<div class="grid-box fellow">
-
 	<div class="photo">
-		<img class="img" ng-src={{fellow.image_url}} /><!--maybe use a $scope.image type thing?-->
+		<img class="img" ng-src="{{item.image_url}}" width="150px"/><!--maybe use a $scope.image type thing?-->
 	</div>
 
 	<div class="info">
@@ -33,10 +31,10 @@
 		<div class="details-button">
 			<!--again, conditional for company name or fellow fname and lname-->
 			<!--Only show if enabled-->
-			<a type="button" class="detButton" ng-if="item.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.id }}/{{ helpers.slugify( item.first_name + ' ' + item.last_name ) }}">
+			<a type="button" class="detButton" ng-if="item.user.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}">
 				<i class="fa fa-plus fa-lg"></i> full profile
 			</a>
-			<a type="button" class="detButton" ng-if="item.enabled && item.name" ng-href="/#/{{whichEntity}}/{{ item.id }}/{{helpers.slugify(item.name)}}">
+			<a type="button" class="detButton" ng-if="item.user.enabled && item.name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}">
 				<i class="fa fa-plus fa-lg"></i> full profile
 			</a>
 		</div>

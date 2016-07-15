@@ -1,0 +1,170 @@
+<div class="profile">
+    <h1>Edit Your Profile</h1>
+    <div class="row">
+        <div id="profile-photo" class="col-md-4">
+            <h4 class="title">Profile Image</h4>
+            <div class="user-photo">
+                <div class="user-photo">
+                    <img id="preview" ng-src="{{ entityObject.image_url }}" ng-show="entityObject.image_url" width="150" height="150" />
+                    <span class="placeholder" ng-show="!entityObject.image_url">No Profile Image</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                    <label for="image_url" class="control-label">Image URL</label>
+                    <input type="text" class="form-control" id="name" ng-model="entityObject.image_url" value="{{entityObject.image_url}}"/>
+                </div>
+          <!--   <p class="description">For best results - please use a square image</p>
+
+            <div class="file">
+                <input type="file" id="file_input" onchange="angular.element(this).scope().getS3Key(this)" />
+                <i class='fa fa-circle-o-notch fa-spin loading-icon'></i>
+            </div>
+
+            <p class="uploading">Uploading...Please wait to save</p>
+            <p class="upload-status">Uploaded. Click Update to Save</p>
+ -->
+        </div>
+
+        <div class="col-md-7 col-md-offset-1">
+
+            <form>
+
+                <input type="hidden" id="image_url" name="image_url" ng-model="entityObject.image_url" value="" />
+
+                <div class="form-group">
+
+                    <label for="enabled" class="control-label">Profile Status</label>
+                    <input type="checkbox"
+                           id="enabled"
+                           name="enabled"
+                           value="1"
+                           ng-model="fellow.enabled"
+                           ng-true-value="1"
+                           ng-false-value="0"
+                    />
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="name" class="control-label">Company Name</label>
+                    <input type="text" class="form-control" id="name" ng-model="entityObject.name" value="{{entityObject.name}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="website_url" class="control-label">Website URL <span>Please include http://</span></label>
+                    <input type="text" class="form-control" id="companyURL" ng-model="entityObject.website_url" value="{{entityObject.website_url}}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="city" class="control-label">City</label>
+                    <input type="text" class="form-control" id="city" ng-model="entityObject.city" value="{{entityObject.city}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="industry" class="control-label">Industry</label>
+                    <input type="text" class="form-control" id="industry" ng-model="entityObject.industry" value="{{entityObject.industry}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="primary_contact" class="control-label">Primary Contact Name</label>
+                    <input type="text" class="form-control" id="primary_contact" ng-model="entityObject.primary_contact" value="{{entityObject.primary_contact}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_email" class="control-label">Contact Email</label>
+                    <input type="text" class="form-control" id="contact_email" ng-model="entityObject.contact_email" value="{{entityObject.contact_email}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="map_url" class="control-label">Google Map Url</label>
+                    <input type="text" class="form-control" id="map_url" ng-model="entityObject.map_url" value="{{entityObject.map_url}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="control-label">Please give a brief description of your company.</label>
+                    <input type="text" class="form-control" id="description" ng-model="entityObject.description" value="{{entityObject.description}}" />
+                </div>
+
+
+                <div class="form-group">
+                    <label for="company_size" class="control-label ">Company Size</label>
+                    <input type="text" class="form-control" id="company_size" ng-model="entityObject.company_size" value="{{entityObject.company_size}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="value_prop" class="control-label ">Describe the problem you are solving.</label>
+                    <input type="text" class="form-control" id="value_prop" ng-model="entityObject.value_prop" value="{{entityObject.value_prop}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="whyHF" class="control-label "> Why do you want to be part of Hacker Fellows?</label>
+                    <input type="text" class="form-control" id="whyHF" ng-model="entityObject.whyHF" value="{{entityObject.whyHF}}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="developer_type" class="control-label">How would you best classify the developer you are seeking?</label>
+                    <select name="developer_type" class="form-control" id="developer_type" ng-model="company.developer_type">
+                        <option>Front End</option>
+                        <option>Back End</option>
+                        <option>Full Stack</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label"> Desired Technical Skills / Technology  (Top 5)<span>Manually enter skills that are not in the list</span></label>
+                    <ui-select multiple
+                               tagging="tagTransform"
+                               tagging-label="(new)"
+                               ng-model="company.tags"
+                               theme="bootstrap"
+                               ng-disabled="disabled"
+                               style="width: 100%"
+                               limit="5"
+                               title="Choose a skill">
+                        <ui-select-match placeholder="Select skill">{{ $item.name }}</ui-select-match>
+                        <ui-select-choices repeat="tag in tags | propsFilter: { name: $select.search }">
+                            <!--<span ng-bind-html="''+tag.name | highlight: $select.search"></span>-->
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ideal_dev" class="control-label">Describe your ideal junior level software dev </label>
+                    <input type="text" class="form-control" id="ideal_dev" ng-model="entityObject.ideal_dev" value="{{entityObject.ideal_dev}}" />
+                </div>
+
+
+
+
+
+                <!--<div class="form-group">-->
+                    <!--<label for="bio" class="control-label">Company Bio</label>-->
+                    <!--<textarea class="form-control" rows="5" id="bio" ng-model="entityObject.bio" value="{{entityObject.bio}}"></textarea>-->
+                <!--</div>-->
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <div class="update-btn">
+                        <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"  ng-click="update(entityObject)">Update</button>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-if="editMode">
+                    <div class="update-btn">
+                        <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"  ng-click="cancelEdit()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>

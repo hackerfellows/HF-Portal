@@ -33,7 +33,7 @@
             templateUrl: 'components/profileGrid/profileGrid.html',
             resolve: { routePermission: Public }
         })
-        .when('/fellows/:fellow_id/:fellow_name', {
+        .when('/fellows/:fellow_id', {
             controller: 'ProfileSingleController',
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
             resolve: { routePermission: Public }
@@ -59,14 +59,15 @@
             templateUrl : 'components/dash/dash.html',
             resolve: { routePermission: Public }
         })
+
         .when('/fellows', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
             resolve: { routePermission: Public }
         })
-        .when('/fellows/:fellow_id/:fellow_name', {
-            controller: 'ProfileController',
-            templateUrl: 'components/profileSingle/profileSingle.html',
+        .when('/fellows/:fellow_id', {
+            controller: 'ProfileSingleController',
+            templateUrl: 'components/profileSingle/profileSingleWrapper.html',
             resolve: { routePermission: Public }
         })
         .when('/companies', {
@@ -74,9 +75,9 @@
             templateUrl: 'components/profileGrid/profileGrid.html',
             resolve: { routePermission: Public }
         })
-        .when('/companies/:company_id/:company_name', {
-            controller: 'ProfileController',
-            templateUrl: 'components/profileSingle/profileSingle.html',
+        .when('/companies/:company_id', {
+            controller: 'ProfileSingleController',
+            templateUrl: 'components/profileSingle/profileSingleWrapper.html',
             resolve: { routePermission: Public }
         })
         .when('/calendar', {

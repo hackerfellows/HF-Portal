@@ -161,29 +161,28 @@ function getProfileByID(req, res){
         },
         attributes: profile_attributes,
         include: [
+        {
+            model: Tags
+        },
+        {
+            model: Users,
+            attributes: [
+                'id', 'email', 'userType', 'application_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
+            ],
+            include: [
             {
-                model: Tags
+                model: Users,
+                as: 'VotesFor',
+                attributes: ['id', 'email', 'userType'],
+                include: [{ model: Companies }]
             },
             {
                 model: Users,
-                attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
-                ],
-                include: [
-                     {
-                        model: Users,
-                        as: 'VotesFor',
-                        attributes: ['id', 'email', 'userType'],
-                        include: [{ model: Companies }]
-                    },
-                {
-                    model: Users,
-                    as: 'VotesCast',
-                    attributes: ['id', 'email', 'userType'],
-                    include: [{ model: Companies }]
-                }]
-            }
-        ]
+                as: 'VotesCast',
+                attributes: ['id', 'email', 'userType'],
+                include: [{ model: Companies }]
+            }]
+        }]
     }).then(function(attributes) {
         res.json({success: attributes !== null, data: attributes});
     });
@@ -192,6 +191,7 @@ function getProfileByID(req, res){
 
 
 function putProfileById(req, res) {
+
     var thing = {};
 
     thing.user_id = req.body.user_id;
@@ -206,57 +206,52 @@ function putProfileById(req, res) {
     thing.portfolio = req.body.portfolio;
     thing.developer_type = req.body.developer_type;
     thing.question = req.body.question;
+    thing.achievements = req.body.achievements;
     thing.answer = req.body.answer;
     thing.image_url = req.body.image_url;
 
     Fellows.update(
-        thing,
-        {
-            where: { user_id: req.params.user_id }
-        }).then(function(result){
-            // remove all tags, then re-add currently posted tags
-            Fellows.findOne({
-                where: {
-                    user_id: req.params.user_id
-                }
-            }).then(function(fellow) {
-                fellow.setTags(null).then(function() {
-                    var count=-1;
-                    if (Array.isArray(req.body.tags)) {
-                        req.body.tags.forEach(function ( tag ) {
-                            if( typeof tag.name !== "undefined" ) {
-                                (count === -1 ? 1 : count++);
-                                console.log(count);
-                                Tags.findOne({
-                                    where: {
-                                        name: {
-                                            ilike: tag.name
-                                        }
+            thing,
+            {
+                where: { user_id: req.params.user_id }
+            }).then(function(result){
+        // remove all tags, then re-add currently posted tags
+        Fellows.findOne({
+            where: {
+                user_id: req.params.user_id
+            }
+        }).then(function(fellow) {
+            fellow.setTags(null).then(function() {
+                if (Array.isArray(req.body.tags)) {
+                    req.body.tags.forEach(function ( tag ) {
+                        if( typeof tag !== "undefined" ) {
+                            Tags.findOne({
+                                where: {
+                                    name: {
+                                        ilike: tag
                                     }
-                                }).then(function (tagObj) {
-
-                                    // if tag found assign
-                                    if( tagObj ){
+                                }
+                            }).then(function (tagObj) {
+                                // if tag found assign
+                                if( tagObj ){
+                                    fellow.addTag(tagObj);
+                                }
+                                // else create and assign
+                                else{
+                                    Tags.create({
+                                        name: tag
+                                    }).then( function( tagObj ){
                                         fellow.addTag(tagObj);
-                                    }
-                                    // else create and assign
-                                    else{
-                                        Tags.create({
-                                            name: tag.name
-                                        }).then( function( tagObj ){
-                                            fellow.addTag(tagObj);
-                                        });
-                                    }
-                                    count--;
-                                });
-                            }
-                        });
-                        while(count !== 0);//BUSY WAIT LIKE A DUMBASS
-                    }
-                    getProfileByID(req, res);
-                });
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+                getProfileByID(req, res);
             });
         });
+    });
 }
 
 
