@@ -64,7 +64,6 @@
             isUserAdmin = User.isUserAdmin();
             isUserFellow = User.isUserFellow();
             isUserCompany = User.isUserCompany();
-            console.log(isUserLoggedIn);
         }
 
     }

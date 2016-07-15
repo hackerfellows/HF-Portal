@@ -13,7 +13,7 @@ var Users = models.users;
 var application_attributes = [
     'name',
     'website_url',
-    'location',
+    'city',
     'industry',
     'primary_contact',
     'contact_email',
@@ -37,7 +37,7 @@ var profile_attributes = [
     'user_id',
     'name',
     'primary_contact',
-    'location',
+    'city',
     'company_size',
     'industry',
     'bio',
@@ -86,7 +86,7 @@ app.get('/unaccepted', getUnnaccepted);
 
 app.get('/profile/:user_id', getProfileByID);
 
-app.put('/profile/:user_id', putProfileById)
+app.put('/profile/:user_id', putProfileById);
 
 app.get('/application/:user_id', getApplicationByID);
 
@@ -148,7 +148,7 @@ function getUnnaccepted(req, res) {
     }).then(function(companys) {
         res.send(companys);
     });
-};
+}
 
 
 
@@ -186,7 +186,7 @@ function getProfileByID(req, res){
     }).then(function(attributes) {
         res.json({success: attributes !== null, data: attributes});
     });
-};
+}
 
 
 function putProfileById(req, res) {
@@ -195,7 +195,7 @@ function putProfileById(req, res) {
     thing.user_id = req.body.user_id;
     thing.name = req.body.name;
     thing.primary_contact = req.body.primary_contact;
-    thing.location = req.body.location;
+    thing.city = req.body.city;
     thing.company_size = req.body.company_size;
     thing.industry = req.body.industry;
     thing.bio = req.body.bio;
@@ -270,14 +270,14 @@ function getApplicationByID(req, res){
     }).then(function(attributes) {
         res.json({success: attributes !== null, data: attributes});
     });
-};
+}
 
 
 function putApplicationById(req, res) {
     var thing = {};
     thing.name = req.body.name;
     thing.website_url = req.body.website_url;
-    thing.location = req.body.location;
+    thing.city = req.body.city;
     thing.industry = req.body.industry;
     thing.primary_contact = req.body.primary_contact;
     thing.contact_email = req.body.contact_email;

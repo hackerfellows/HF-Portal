@@ -13,14 +13,13 @@
         $scope.isUserFellow = User.isUserFellow;
         $scope.isUserCompany = User.isUserCompany;
 
-        console.log($scope.isUserLoggedIn);
-
         $scope.openLoginModal = function() {
             Accounts.startLogin();
         };
 
 
         $scope.logoutUser = function() {
+            showToastInfo("You have been logged out");
             User.clearCredentials();
         };
     }

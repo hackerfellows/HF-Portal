@@ -9,8 +9,8 @@
         .module('app.accounts.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$uibModalInstance', 'User', 'Accounts'];
-    function LoginController($scope, $uibModalInstance, User, Accounts) {
+    LoginController.$inject = ['$window', '$scope', '$uibModalInstance', 'User', 'Accounts'];
+    function LoginController($window, $scope, $uibModalInstance, User, Accounts) {
         // save this through a refresh
         $scope.loginForm = {
             email: "",
@@ -29,10 +29,10 @@
         $scope.login = function(loginForm) {
             $scope.loginForm.errors = [];
             User.login(loginForm).success(function( data ){
-                console.log(data);
                 if( data.success ){
                     var user = data.user;
                     showToastSuccess("Login Succcess");
+                    $window.location.href = '/#/dash';
                     $uibModalInstance.close();
                     User.setCredentials( user.id, user.email, user.userType );
                 }

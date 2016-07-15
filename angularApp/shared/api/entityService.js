@@ -24,8 +24,6 @@
         return {
             getAll: getAll,
             getById: getById,
-            create: create,
-            update: update,
             updateProf: updateProf,
             destroy: destroy,
             getApplication: getApplication,
@@ -53,31 +51,11 @@
         }
 
         function getApplication(type) {
-            return $http.get('/api/v2/' + type + '/' + User.getCurrentUser().id);
+            return $http.get('/api/v2/' + type + '/application/' + User.getCurrentUser().id);
         }
 
         function updateApplication(user, type) {
-            return $http.put('/api/v2/' + type + '/' + User.getCurrentUser().id, user);
-        }
-
-        /**
-         * @name create
-         * @desc creeate a new fellow record
-         */
-        function create(user, type) {
-            return $http.post('/api/v2/' + type + '/', user);
-        }
-
-        /**
-         * @name update
-         * @desc updates an entity record
-                 whichEntity = 'fellows' or 'companies'
-                 entityObject = the object with all the data
-        *********MAKE SURE THIS SAVES TO A SEPARATE TABLE AND NOT THE ONE WITH
-                 THE ENTITY'S ORIGINAL APPLICATION DATA*********
-         */
-        function update(user, type) {
-            return $http.put('/api/v2/' + type + '/' + user.id, user);
+            return $http.put('/api/v2/' + type + '/application/' + User.getCurrentUser().id, user);
         }
 
         /**
