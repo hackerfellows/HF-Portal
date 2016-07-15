@@ -1,34 +1,33 @@
 /**
-* HomeController
-* @namespace app.home.controllers
-*/
+ * HomeController
+ * @namespace app.home.controllers
+ */
 (function () {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('app.home.controllers')
-    .controller('HomeController', HomeController);
+    angular
+        .module('app.home.controllers')
+        .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope'];
+    HomeController.$inject = ['$scope'];
 
-  /**
-  * @namespace HomeController
-  */
-  function HomeController($scope) {
+    /**
+     * @namespace HomeController
+     */
+    function HomeController($scope) {
 
-//    var vm = this;
-  console.log("in the home controller");
+        //    var vm = this;
 
-    //Fellows.all().success(function(fellows){
-    //
-    //  $scope.fellows = fellows;
-    //});
+        //Fellows.all().success(function(fellows){
+        //
+        //  $scope.fellows = fellows;
+        //});
 
-    // activate();
+        // activate();
 
-    // function activate() {
-    //   //console.log('activated home controller!');
-    //   //Home.all();
-    // }
-  }
+        // function activate() {
+        //   //console.log('activated home controller!');
+        //   //Home.all();
+        // }
+    }
 })();

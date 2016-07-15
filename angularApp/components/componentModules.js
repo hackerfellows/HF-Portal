@@ -161,4 +161,14 @@
   angular
     .module('app.application.controllers', []);
 
+    //Votes
+    angular
+        .module('app.votes', [
+                'app.votes.controllers'
+        ]);
+
+    angular
+        .module('app.votes.controllers', []);
+    //End Votes
+
 })();

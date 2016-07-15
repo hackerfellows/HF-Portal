@@ -1,0 +1,73 @@
+.spacer5{
+    margin-top: 5%;
+}
+
+.container{
+    z-index: 0;
+}
+
+.suitcase h5{
+    padding-top: 10px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 500;
+}
+
+.prof h5{
+    padding-top: 10px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 500;
+}
+
+.thumbs h5{
+    padding-top: 10px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 500;
+}
+
+.calendar h5{
+    padding-top: 10px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 500;
+}
+
+.suitcase svg{
+    display: block;
+    margin: 0 auto;
+    fill: #ff6633;
+}
+
+.thumbs svg{
+    display: block;
+    margin: 0 auto;
+}
+
+.calendar svg{
+    display: block;
+    margin: 0 auto;
+    fill: #ff6633;
+}
+
+.prof svg{
+    display: block;
+    margin: 0px auto;
+}
+
+#Layer_1 path{
+    -webkit-transition: fill .4s ease;
+    -moz-transition: fill .4s ease;
+    -o-transition: fill .4s ease;
+    transition: fill .4s ease;
+    fill:#333333;
+}
+
+#Layer_1:hover path {
+    fill:#ff6633;
+}
