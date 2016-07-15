@@ -1,16 +1,16 @@
 /*
     company.name
-    company.website
+    company.website_url
     company.city
     company.industry
     company.contact_name
     company.contact_email
     company.contact_phone
-    company.map
-    company.logo
+    company.map_url
+    company.logo_url
     company.description
     company.age
-    company.staffcount
+    company.company_size
     company.value_prop
     company.whyHF
     company.developer_type
