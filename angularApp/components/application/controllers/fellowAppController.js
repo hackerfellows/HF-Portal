@@ -31,14 +31,14 @@
         .module('app.application.controllers')
         .controller('FellowAppController', FellowAppController);
 
-    FellowAppController.$inject = ['$scope', 'Entities'];
+    FellowAppController.$inject = ['$scope', 'Entities', 'User'];
 
-    function FellowAppController($scope, Entities) {
+    function FellowAppController($scope, Entities, User) {
 
         initFormData();
 
         function initFormData() {
-            Entities.getApplication("fellows").then(function(thing) {
+            Entities.getApplication(User.getCurrentUser(), "fellows").then(function(thing) {
                 $scope.fellow = thing.data.data;
             }, function() {
                 console.log("Error in Entities.getAppliction()");

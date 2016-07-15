@@ -9,15 +9,13 @@
         .module('app.dash.controllers')
         .controller('DashController', DashController);
 
-    DashController.$inject = ['$scope'];
+    DashController.$inject = ['$scope', 'User'];
 
     /**
      * @namespace DashController
      */
-    function DashController($scope) {
-        var vm = this;
-        activate();
-        function activate() {
-        }
+    function DashController($scope, User) {
+
+        $scope.currentID = User.getCurrentUser().id;
     }
 })();
