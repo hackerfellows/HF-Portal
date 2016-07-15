@@ -6,48 +6,32 @@ All other calls need user level authentication
 
 
 /api/v2/fellows
-	/
-		GET: 	get all fellows plus information from Users (email, user type, and votes)
-	/:user_id
-		GET:	gets fellows information from Fellows and Users table
-		PUT:$	updates an existing fellow's record
-	/application
-		GET:	returns first_name, last_name, and user_id of all fellows not yet accepted
-	/application/:user_id
-		GET:	Get specific application based on fellow id
-		PUT:	update a specific fellow's application
-	/set_flags
-		POST:	enables or disables all fellow flags. Flags are application, profile, and vote. 
-			It enables or disables that feature for a fellow
-			An example of what we expect at thsis route is as follows
-			{
-				flag: "application",
-				value: 0
-			}
-			This would disable applications for all users, in this case.
-	/set_flags/:id
-		POST:	enables or disables single fellow flag. Flags are application, profile, and vote. 
-			see /set_flags
+fellows
+    all accepted fellows' profile information
+	/fellows/
+	[get] profile columns, including tags and votes
 
+    all unaccepted fellows list application info
+	/fellows/unaccepted
+	[get] user_id, email, application columns
 
-	Depricated calls - see notes for how to use in api v2
+    one fellow's profile
+	/fellows/profile/:user_id
+	[get/put] profile columns, tags, votes
 
-	/
-		POST:	DEPRICATED - NEW FELLOWS NOW CREATED AT POST /users/create
-	/:id
-		DEL:+	DEPRICATED - USE DELETE FROM THE USER ROUTE
+    one fellow's application
+	/fellows/application/:user_id
+	[get/put] user_id, email, application columns
 
-	These are deprecated because we now only reference by user_id instead of the fellow id
-	/:id
-		GET: 	DEPRICATED - SEE GET /fellows/:user_id
-		PUT:$	DEPRICATED - SEE PUT /fellows/:user_id
-	/users
-		GET:	DEPRICATED - SEE GET /fellows/
-	/user_id/:user_id
-		GET: 	DEPRICATED - SEE /fellows/:user_id
+    set single flags for fellows
+	/fellows/set_flag
+	[put] pass in the flag (application, profile, vote, accepted, enabled) and the value (0 or 1)
 
+    set single flag for 1 fellows
+	/fellows/set_flag/:user_id
+	[put] pass in the flag (application, profile, vote, accepted, enabled) and the value (0 or 1)
 
-
+(not ready)
 /api/v2/companies
 	/
 		GET: 	get all fellows plus information from Users (email, user type, and votes)
@@ -82,12 +66,14 @@ All other calls need user level authentication
 	/
 		GET:	gets all tags
 		POST:	creates a tag if one doesn't already exist
-	/:id
+	/:tag_id
 		PUT:+	updates a tag name
 	/:tag_id
 		DEL:+	removes tag
 
 
+no one knows what these do right now, probably for profile stuff
+jessica plis
 /api/v2/votes
 	/
 		POST:	pass voter and votee id in body and enforces voting rules
@@ -98,8 +84,6 @@ All other calls need user level authentication
 
 
 /api/v2/users
-	/:user_id/votes
-		GET:	gets votes for a specific user (both votesFor and votesCast)	
 	/login
 		POST:*	attempts login, redirects to /login/success or /login/failure
 	/confirm-login

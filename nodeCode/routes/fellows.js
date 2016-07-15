@@ -34,6 +34,25 @@ var application_attributes = [
     'comments'
 ];
 
+var profile_attribues = [
+    'user_id',
+    'first_name',
+    'last_name',
+    'university',
+    'major',
+    'bio',
+    'interests',
+    'description',
+    'git_hub',
+    'portfolio',
+    'developer_type',
+    'question',
+    'answer',
+    'image_url',
+    'enabled',
+    'accepted'
+];
+
 // Image Upload
 // var upload = multer({ dest: './public/assets/images/' });
 
@@ -83,27 +102,63 @@ app.get('/', function getFellows(req, res) {
     });
 });
 
-// GET /fellows/:user_id - get one fellow by user_id
-app.get('/:user_id', function getFellow(req, res){
 
-    //res.send('GET request - get a company record');
-    Fellows.findOne({
+// GET /fellows/application - lists name and user_id of all applicants not accepted
+app.get('/unaccepted', function getFellows(req, res) {
+    Fellows.all({
         where: {
-            user_id: req.params.user_id
+            first_name: {ne: null},
+            accepted: 0
         },
-        include: [{
-            model: Tags
-        },{
-            model: Users
-        }]
-    }).then(function(fellow) {
-        res.send(fellow);
+        order: '"last_name" ASC',
+        attributes: application_attributes,
+        include: [
+            {
+                model: Users,
+                attributes: ['id', 'email', 'userType']
+            }
+        ]
+    }).then(function(fellows) {
+        res.send(fellows);
     });
 });
 
 
-// PUT /fellows/:user_id - updates an existing fellow record
-app.put('/:user_id', function putFellow(req, res) {
+app.get('/profile/:user_id', function getFellow(req, res){
+
+    Fellows.findOne({
+        where: {
+            user_id: req.params.user_id
+        },
+        attributes: profile_attributes,
+        include: [
+            {
+                model: Tags
+            },
+            {
+                model: Users,
+                attributes: ['id', 'email', 'userType']
+            },
+            {
+                model: Users,
+                as: 'VotesFor',
+                attributes: ['id', 'email', 'userType'],
+                include: [{ model: Companies }]
+            },
+            {
+                model: Users,
+                as: 'VotesCast',
+                attributes: ['id', 'email', 'userType'],
+                include: [{ model: Companies }]
+            }
+        ]
+    }).then(function(attributes) {
+        res.send(attributes);
+    });
+});
+
+
+app.put('/profile/:user_id', function putFellow(req, res) {
 
     Fellows.findOne({
 
@@ -133,6 +188,7 @@ app.put('/:user_id', function putFellow(req, res) {
 
         fellow.image_url = req.body.image_url;
         fellow.enabled = req.body.enabled;
+        fellow.accepted = req.body.accepted;
 
         fellow.save();
 
@@ -171,24 +227,6 @@ app.put('/:user_id', function putFellow(req, res) {
 
 });
 
-// GET /fellows/application - lists name and user_id of all applicants not accepted
-app.get('/application', function getFellows(req, res) {
-
-    Fellows.all({
-
-        where: {
-            first_name: {ne: null},
-            enabled: 0
-        },
-        order: '"last_name" ASC',
-        attributes: ['user_id', 'first_name', 'last_name']
-
-    }).then(function(fellows) {
-
-        res.send(fellows);
-    });
-
-});
 
 
 // GET /fellows/application:id - get one fellow's full application data
@@ -205,6 +243,7 @@ app.get('/application/:user_id', function getFellow(req, res){
         res.send(attributes);
     });
 });
+
 
 // PUT /fellows/application:id - updates an existing fellow's application
 app.put('/application/:user_id', function putFellow(req, res) {
