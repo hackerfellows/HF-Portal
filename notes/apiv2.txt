@@ -74,7 +74,7 @@ jessica plis
 	PUT:$	updates a user
 	DEL:+	deletes a user
 
-    /set_flag
+    /flags/
 	PUT:	set single flag for all fellows
 		flags are: application, profile, vote, accepted, enabled
 		values are: 0, 1
@@ -84,6 +84,7 @@ jessica plis
 		    value: 0
 		}
 
-    /set_flag/:user_id
+    /flags/:user_id
+	GET:	See all flags for that user
 	PUT:	set single flag for one fellow
 		see /set_flag for flags, values, and example
