@@ -35,7 +35,7 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-        Entities.allWithUser($scope.whichEntity).success(function (result) {
+        Entities.getAll($scope.whichEntity).success(function (result) {
             $scope.entityList = result;
         });
 

@@ -38,9 +38,6 @@
                  info (email)
          */
         function getAll(type) {
-            //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
-            return $http.get('test' + whichEntity + 'Get.json');
-            // ^^^^^^^^^^^
             return $http.get('/api/v2/' + type);
         }
 
@@ -51,10 +48,6 @@
          */
 
         function getById(type, id) {
-           //TODO: DELETE MEEEEEEEEEEEEEEEEEEE VVVV
-            return $http.get('test' + whichEntity + 'Get' + id + '.json');
-            // ^^^^^^^^^^^
-         
             return $http.get('/api/v2/' + type + '/' + id);
         }
 

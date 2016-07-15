@@ -52,21 +52,13 @@
             controller  : 'DashController',
             templateUrl : 'components/dash/dash.html'
         })
-        .when('/fellows', {
-            controller: 'ProfileGridController',
-            templateUrl: 'components/profileGrid/profileGrid.html',
-        })
-        .when('/fellows/:fellow_id/:fellow_name', {
-            controller: 'ProfileController',
-            templateUrl: 'components/profileSingle/profileSingle.html',
-        })
         .when('/companies', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
         })
         .when('/companies/:company_id/:company_name', {
-            controller: 'ProfileController',
-            templateUrl: 'components/profileSingle/profileSingle.html',
+            controller: 'ProfileSingleController',
+            templateUrl: 'components/profileSingle/profileSingleWrapper.html',
         })
         .when('/calendar', {
             controller: 'CalendarController',
