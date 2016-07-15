@@ -12,21 +12,19 @@ var Users = models.users;
 
 var application_attributes = [
     'name',
-    'website',
-    'city',
+    'website_url',
+    'location',
     'industry',
-    'contact_name',
+    'primary_contact',
     'contact_email',
     'contact_phone',
-    'map',
-    'logo',
+    'map_url',
+    'logo_url',
     'description',
     'age',
-    'staffcount',
+    'company_size',
     'value_prop',
     'whyHF',
-    'developer_type',
-    'developer_type',
     'developer_type',
     'devneeds0',
     'devneeds1',
@@ -120,9 +118,9 @@ function getAccepted(req, res) {
 function getUnnaccepted(req, res) {
     Companies.all({
         where: {
-            first_name: {ne: null}
+            name: {ne: null}
         },
-        order: '"last_name" ASC',
+        order: '"name" ASC',
         attributes: application_attributes,
         include: [
             {
@@ -255,47 +253,84 @@ function getApplicationByID(req, res){
 };
 
 
-
+function putApplicationById(req, res) {
+    Companies.update(
+        {
+            name: req.body.name,
+            website_url: req.body.website_url,
+            location: req.body.location,
+            industry: req.body.industry,
+            primary_contact: req.body.primary_contact,
+            contact_email: req.body.contact_email,
+            contact_phone: req.body.contact_phone,
+            map_url: req.body.map_url,
+            logo_url: req.body.logo_url,
+            description: req.body.description,
+            age: req.body.age,
+            company_size: req.body.company_size,
+            value_prop: req.body.value_prop,
+            whyHF: req.body.whyHF,
+            developer_type: req.body.developer_type,
+            ideal_dev: req.body.ideal_dev
+        },
+        {
+            where: { user_id: req.params.user_id }
+        }).then(function(result){
+            //res.json(result);
+            getApplicationByID(req, res);
+        });
+}
+    /*
+        if(req.body.devneeds !== undefined) {
+            attributes.devneeds0 = req.body.devneeds[0];
+            attributes.devneeds1 = req.body.devneeds[1];
+            attributes.devneeds2 = req.body.devneeds[2];
+            attributes.devneeds3 = req.body.devneeds[3];
+            attributes.devneeds4 = req.body.devneeds[4];
+        }
+        */
+/*
 function putApplicationById(req, res) {
 
     Companies.findOne({
 
         where: {
             user_id: req.params.user_id
-        }
+        },
+        attributes: application_attributes
 
-    }).then(function(company) {
+    }).then(function(attributes) {
         // update the company application data here with the req body data
-        company.name = req.body.name;
-        company.website = req.body.website;
-        company.city = req.body.city;
-        company.industry = req.body.industry;
-        company.contact_name = req.body.contact_name;
-        company.contact_email = req.body.contact_email;
-        company.contact_phone = req.body.contact_phone;
-        company.map = req.body.map;
-        company.logo = req.body.logo;
-        company.description = req.body.description;
-        company.age = req.body.age;
-        company.staffcount = req.body.staffcount;
-        company.value_prop = req.body.value_prop;
-        company.whyHF = req.body.whyHF;
-        company.developer_type = req.body.developer_type;
-        company.developer_type = req.body.developer_type;
-        company.developer_type = req.body.developer_type;
-        company.devneeds0 = req.body.devneeds[0];
-        company.devneeds1 = req.body.devneeds[1];
-        company.devneeds2 = req.body.devneeds[2];
-        company.devneeds3 = req.body.devneeds[3];
-        company.devneeds4 = req.body.devneeds[4];
-        company.ideal_dev = req.body.ideal_dev;
+        attributes.name = req.body.name;
+        attributes.website_url = req.body.website_url;
+        attributes.location = req.body.location;
+        attributes.industry = req.body.industry;
+        attributes.primary_contact = req.body.primary_contact;
+        attributes.contact_email = req.body.contact_email;
+        attributes.contact_phone = req.body.contact_phone;
+        attributes.map_url = req.body.map_url;
+        attributes.logo_url = req.body.logo_url;
+        attributes.description = req.body.description;
+        attributes.age = req.body.age;
+        attributes.company_size = req.body.company_size;
+        attributes.value_prop = req.body.value_prop;
+        attributes.whyHF = req.body.whyHF;
+        attributes.developer_type = req.body.developer_type;
+        if(req.body.devneeds !== undefined) {
+            attributes.devneeds0 = req.body.devneeds[0];
+            attributes.devneeds1 = req.body.devneeds[1];
+            attributes.devneeds2 = req.body.devneeds[2];
+            attributes.devneeds3 = req.body.devneeds[3];
+            attributes.devneeds4 = req.body.devneeds[4];
+        }
+        attributes.ideal_dev = req.body.ideal_dev;
 
-        company.save();
+        attributes.save();
 
-        //res.json({ success: true });
-        getApplicationByID(req, res);
+        res.json(attributes);
+        //getApplicationByID(req, res);
     });
 
 };
-
+*/
 module.exports = app;
