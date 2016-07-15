@@ -136,7 +136,7 @@ function getUnnaccepted(req, res) {
 };
 
 
- 
+
 function getProfileByID(req, res){
 
     Companies.findOne({
@@ -167,7 +167,7 @@ function getProfileByID(req, res){
             }
         ]
     }).then(function(attributes) {
-        res.send(attributes);
+        res.json({success: attributes !== null, data: attributes});
     });
 };
 
@@ -186,7 +186,7 @@ function putProfileById(req, res) {
     thing.developer_type = req.body.developer_type;
     thing.website_url = req.body.website_url;
     thing.image_url = req.body.image_url;
-        
+
     Companies.update(
         thing,
         {
@@ -251,7 +251,7 @@ function getApplicationByID(req, res){
         attributes: application_attributes
 
     }).then(function(attributes) {
-        res.send(attributes);
+        res.json({success: attributes !== null, data: attributes});
     });
 };
 
@@ -292,48 +292,4 @@ function putApplicationById(req, res) {
             getApplicationByID(req, res);
         });
 }
-/*
-function putApplicationById(req, res) {
-
-    Companies.findOne({
-
-        where: {
-            user_id: req.params.user_id
-        },
-        attributes: application_attributes
-
-    }).then(function(attributes) {
-        // update the company application data here with the req body data
-        attributes.name = req.body.name;
-        attributes.website_url = req.body.website_url;
-        attributes.location = req.body.location;
-        attributes.industry = req.body.industry;
-        attributes.primary_contact = req.body.primary_contact;
-        attributes.contact_email = req.body.contact_email;
-        attributes.contact_phone = req.body.contact_phone;
-        attributes.map_url = req.body.map_url;
-        attributes.logo_url = req.body.logo_url;
-        attributes.description = req.body.description;
-        attributes.age = req.body.age;
-        attributes.company_size = req.body.company_size;
-        attributes.value_prop = req.body.value_prop;
-        attributes.whyHF = req.body.whyHF;
-        attributes.developer_type = req.body.developer_type;
-        if(req.body.devneeds !== undefined) {
-            attributes.devneeds0 = req.body.devneeds[0];
-            attributes.devneeds1 = req.body.devneeds[1];
-            attributes.devneeds2 = req.body.devneeds[2];
-            attributes.devneeds3 = req.body.devneeds[3];
-            attributes.devneeds4 = req.body.devneeds[4];
-        }
-        attributes.ideal_dev = req.body.ideal_dev;
-
-        attributes.save();
-
-        res.json(attributes);
-        //getApplicationByID(req, res);
-    });
-
-};
-*/
 module.exports = app;

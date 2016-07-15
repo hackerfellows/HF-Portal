@@ -142,7 +142,7 @@ function getUnnaccepted(req, res) {
 };
 
 
- 
+
 function getProfileByID(req, res){
 
     Fellows.findOne({
@@ -173,7 +173,7 @@ function getProfileByID(req, res){
             }
         ]
     }).then(function(attributes) {
-        res.send(attributes);
+        res.json({success: attributes !== null, data: attributes});
     });
 };
 
@@ -242,61 +242,12 @@ function putProfileById(req, res) {
                         while(count !== 0);//BUSY WAIT LIKE A DUMBASS
                     }
                     getProfileByID(req, res);
-                    
                 });
-                
             });
         });
 }
 
 
-//
-/*
-        where: {
-            user_id: req.params.user_id
-        },
-        include: [{
-            model: Tags
-        }]
-
-    }).then(function(fellow) {
-
-
-        // remove all tags, then re-add currently posted tags
-        fellow.setTags(null).then(function() {
-            if (Array.isArray(req.body.tags)) {
-                req.body.tags.forEach(function ( tag ) {
-                    if( typeof tag.name !== "undefined" ) {
-                        Tags.findOne({
-                            where: {
-                                name: {
-                                    ilike: tag.name
-                                }
-                            }
-                        }).then(function (tagObj) {
-                            // if tag found assign
-                            if( tagObj ){
-                                fellow.addTag(tagObj);
-                            }
-                            // else create and assign
-                            else{
-                                Tags.create({
-                                    name: tag.name
-                                }).then( function( tagObj ){
-                                    fellow.addTag(tagObj);
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-        });
-        
-        getProfileByID(req, res);
-    });
-
-};
-*/
 
 
 function getApplicationByID(req, res){
@@ -309,7 +260,7 @@ function getApplicationByID(req, res){
         attributes: application_attributes
 
     }).then(function(attributes) {
-        res.send(attributes);
+        res.json({success: attributes !== null, data: attributes});
     });
 };
 
