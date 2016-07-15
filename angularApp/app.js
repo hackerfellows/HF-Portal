@@ -31,54 +31,68 @@
         .when('/fellows', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
+            resolve: { routePermission: Public }
         })
         .when('/fellows/:fellow_id/:fellow_name', {
             controller: 'ProfileSingleController',
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
+            resolve: { routePermission: Public }
         })
         .when('/about', {
-            templateUrl : 'assets/html/staticAbout.html'
+            templateUrl : 'assets/html/staticAbout.html',
+            resolve: { routePermission: Public }
         })
         .when('/application', {
-            templateUrl : 'assets/html/staticApplication.html'
+            templateUrl : 'assets/html/staticApplication.html',
+            resolve: { routePermission: Public }
         })
         .when('/contact', {
-            templateUrl : 'assets/html/staticContact.html'
+            templateUrl : 'assets/html/staticContact.html',
+            resolve: { routePermission: Public }
         })
         .when('/members', {
-            templateUrl : 'assets/html/staticMembers.html'
+            templateUrl : 'assets/html/staticMembers.html',
+            resolve: { routePermission: Public }
         })
         .when('/dash', {
             controller  : 'DashController',
-            templateUrl : 'components/dash/dash.html'
+            templateUrl : 'components/dash/dash.html',
+            resolve: { routePermission: Public }
         })
         .when('/fellows', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
+            resolve: { routePermission: Public }
         })
         .when('/fellows/:fellow_id/:fellow_name', {
             controller: 'ProfileController',
             templateUrl: 'components/profileSingle/profileSingle.html',
+            resolve: { routePermission: Public }
         })
         .when('/companies', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
+            resolve: { routePermission: Public }
         })
         .when('/companies/:company_id/:company_name', {
             controller: 'ProfileController',
             templateUrl: 'components/profileSingle/profileSingle.html',
+            resolve: { routePermission: Public }
         })
         .when('/calendar', {
             controller: 'CalendarController',
             templateUrl: 'components/calendar/calendar.html',
+            resolve: { routePermission: Public }
         })
         .when('/application/fellow', {
             controller: 'FellowAppController',
             templateUrl: 'components/application/partials/fellowApplication.html',
+            resolve: { routePermission: Public }
         })
         .when('/application/company', {
             controller: 'CompanyAppController',
             templateUrl: 'components/application/partials/companyApplication.html',
+            resolve: { routePermission: Public }
         })
         //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //                   that runs if the user is logged in and editing
