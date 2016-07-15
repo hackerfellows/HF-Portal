@@ -32,14 +32,14 @@
         .module('app.application.controllers')
         .controller('CompanyAppController', CompanyAppController);
 
-    CompanyAppController.$inject = ['$scope', 'Entities'];
+    CompanyAppController.$inject = ['$scope', 'Entities', 'User'];
 
-    function CompanyAppController($scope, Entities) {
+    function CompanyAppController($scope, Entities, User) {
 
         initFormData();
 
         function initFormData() {
-            Entities.getApplication("companies").then(function(thing) {
+            Entities.getApplication(User.getCurrentUser(), "companies").then(function(thing) {
                 $scope.company = thing.data.data;
             }, function() {
                 console.log("Error in Entities.getAppliction()");
