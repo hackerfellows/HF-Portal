@@ -33,7 +33,7 @@
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
         })
-        .when('/fellows/:fellow_id/:fellow_name', {
+        .when('/fellows/:fellow_id', {
             controller: 'ProfileSingleController',
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
         })
@@ -57,7 +57,7 @@
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
         })
-        .when('/companies/:company_id/:company_name', {
+        .when('/companies/:company_id', {
             controller: 'ProfileSingleController',
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
         })
