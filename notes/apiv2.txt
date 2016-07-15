@@ -25,6 +25,7 @@ fellows
 
 (not ready)
 /api/v2/companies
+
     /
 	GET:	get all accepted companies' profile information
 

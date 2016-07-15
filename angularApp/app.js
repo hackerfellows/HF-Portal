@@ -14,8 +14,7 @@
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
         'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 'app.helpers', 'app.calendar',
-        'app.admin', 'app.tags', 'app.adminUsers', 'app.adminApplicants', 'app.application', 'app.api', 'app.dash']);
-
+        'app.admin', 'app.tags', 'app.adminUsers', 'app.adminApplicants', 'app.application', 'app.api', 'app.dash', 'app.votes']);
 
     /**
      * @name config
@@ -88,22 +87,27 @@
         .when('/admin', {
             controller: 'AdminController',
             templateUrl: 'components/admin/admin.html',
+            resolve: { routePermission: Public }
         })
         .when('/admin/tags', {
             controller: 'TagsController',
             templateUrl: 'components/admin/tags/tags.html',
+            resolve: { routePermission: Public }
         })
         .when('/admin/users', {
             controller: 'AdminUsersController',
             templateUrl: 'components/admin/users/adminUsers.html',
+            resolve: { routePermission: Public }
         })
         .when('/admin/applicants', {
             controller: 'AdminApplicantsController',
             templateUrl: 'components/admin/applicants/adminApplicants.html',
+            resolve: { routePermission: Public }
         })
         .when('/admin/calendar', {
             controller: 'AdminController',
             templateUrl: 'components/admin/admin.html',
+            resolve: { routePermission: Public }
         })
 
         .when('/application/fellow', {
@@ -116,6 +120,17 @@
             templateUrl: 'components/application/partials/companyApplication.html',
             resolve: { routePermission: Public }
         })
+        .when('/company/votes', {
+            controller: 'VotesController',
+            templateUrl: 'components/votes/companyVotes.html',
+            resolve: { routePermission: Restricted }
+        })
+        .when('/fellow/votes', {
+            controller: 'VotesController',
+            templateUrl: 'components/votes/fellowVotes.html',
+            resolve: { routePermission: Restricted }
+        })
+        //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //                   that runs if the user is logged in and editing
         .otherwise({ redirectTo: '/' });
@@ -123,7 +138,7 @@
     }]);
 
     /**
-     * @name Public 
+     * @name Public
      * @desc Checks if the user is logged in to allow them to continue, otherwise
      *       redirects to the home page
      */
@@ -132,7 +147,7 @@
         User.updateLoginStatus();
         var type = User.getType();
         deferred.resolve();
-        return deferred.promise; 
+        return deferred.promise;
     };
 
     var Restricted = function($location, $q, User) {
@@ -145,7 +160,7 @@
             $location.path("/");
             deferred.reject();
         }
-        return deferred.promise; 
+        return deferred.promise;
     };
 
 })();

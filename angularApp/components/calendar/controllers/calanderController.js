@@ -1,31 +1,11 @@
- // This jQuery comes from 'vertical-timeline' implementation by Sebastiano Guerriero from https://codyhouse.co/gem/vertical-timeline/
-jQuery(document).ready(function($){
+//File name: calanderController.js
+	//Author: Ben Willshire  & Michael Wright
+	//Description:
+	//    Controller for the calendar page. Checks what user is logged in,
+  //    pulls from the correct source, and then displays the content
+	//Function:
+	//    CalendarController, assignSheetNumber, getSpreadsheetData
 
-  var timelineBlocks = $('.cd-timeline-block'),
-  offset = 0.8;
-
-  //hide timeline blocks which are outside the viewport
-  hideBlocks(timelineBlocks, offset);
-
-  //on scolling, show/animate timeline blocks when enter the viewport
-  $(window).on('scroll', function(){
-    (!window.requestAnimationFrame)
-      ? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
-      : window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
-  });
-
-  function hideBlocks(blocks, offset) {
-    blocks.each(function(){
-      ( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
-    });
-  }
-
-  function showBlocks(blocks, offset) {
-    blocks.each(function(){
-      ( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
-    });
-  }
-});
 
 
 // Setup CalendarController
@@ -49,34 +29,23 @@ jQuery(document).ready(function($){
   function CalendarController($scope, $http, User) {
 
     // Determine sheet number from user session information
-    var sheetNumber = assignSheetNumber();
-     sheetNumber = 1;
-    $scope.invalidUser = (sheetNumber === 0);
-
-    console.log(sheetNumber);
+    var sheetNumber = assignSheetNumber(User);
+    //sheetNumber = 1;
+    $scope.invalidUser = (sheetNumber == 0);
+    $scope.userJustApplied = (sheetNumber == 2 || sheetNumber == 4);
+    $scope.isUserAdmin = (sheetNumber == 5);
 
     $scope.events = [];
     var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
 
-
-    $http({
-      method: 'GET',
-      url: url
-    }).then(function successCallback(response) {
-      console.log(response);
-      // this callback will be called asynchronously
-      // when the response is available
-    }, function errorCallback(response) {
-      console.log(response);
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-    });
-
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
-
-      $scope.webjson = $.getJSON(url, function(data,error){
-        console.log(error);
+      //Don't try to fetch data that is not there
+      if($scope.invalidUser || $scope.isUserAdmin)
+      {
+        return;
+      }
+      $scope.webjson = $.getJSON(url).done( function(data,status){
         //grab spreadsheet data from google sheet
         $scope.spreadsheet = data;
         var entry_array = data.feed.entry;
@@ -84,6 +53,7 @@ jQuery(document).ready(function($){
         var idCounter = 0;
         $scope.showMoreInfo = [];
         $scope.hasOutsideLink = [];
+
         // Loop through the entries from the spreadsheet JSON
         for (var entry in entry_array) {
 
@@ -98,8 +68,6 @@ jQuery(document).ready(function($){
           var outsideLink = entry_array[entry].gsx$outsidelink.$t;
           var id          = idCounter++;
 
-          // Uncomment to show JSON from google sheet
-          //console.log(information)
 
           // Replace icon spaces with underscores
           icon        = icon.replace(/ /g,"_");
@@ -162,45 +130,72 @@ jQuery(document).ready(function($){
           return 0;
         });
 
-      }) /*end of getJSON function */
+        $http({
+          method: 'GET',
+          url: url
+        }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+        }, function errorCallback(response) {
+          console.log("error at end of getSpreadsheetData")
+          console.log(response)
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+
+
+
+        //end of .done() of getJSON
+      }).fail(function( jqxhr, textStatus, error ) {
+        var err = textStatus + ", " + error;
+        console.log( "Request Failed: " + err );
+        $scope.invalidUser = true;
+    }); /*end of getJSON function */
     } /*end spreadsheetData function*/
 
-    /* Assign the correct sheet number to the right user
-
-    Sheet Number:
-    1. Accepted Company
-    2. Non-Accepted Company
-    3. Accepted Fellow
-    4. Non-Accepted Fellow
-    0. ERROR - no conditions met
-    */
-    function assignSheetNumber() {
-      // Only provide calendar to logged in users
-      var toReturn = 0;
-      if( User.isUserLoggedIn() ){
-
-        // The User is a company
-        if ( User.isUserCompany() ) {
-
-          // Assign based on acceptance
-          User.isUserAccepted() ? toReturn = 1 : toReturn = 2;
-          return toReturn;
-        } // of Company
-
-        // The User is a Fellow
-        if ( User.isUserFellow() ) {
-
-          // Assign based on acceptance
-          User.isUserAccepted() ? toReturn = 3 : toReturn = 4;
-          return toReturn;
-        } // of Fellow
-
-      } // of isUserLoggedIn
-
-      // user failed to meet conditions, ERROR case
-      return toReturn;
-
-    } // of assignSheetNumber
 
   } /*end function CalendarController()*/
 })();
+
+
+
+/* Assign the correct sheet number to the right user
+
+Sheet Number:
+1. Accepted Company
+2. Non-Accepted Company
+3. Accepted Fellow
+4. Non-Accepted Fellow
+5. Admin
+0. ERROR - no conditions met
+*/
+function assignSheetNumber(User) {
+  // Only provide calendar to logged in users
+  var toReturn = 0;
+  if(User.isUserAdmin() ){
+    return 5;
+  }
+  if( User.isUserLoggedIn() ){
+
+    // The User is a company
+    if ( User.isUserCompany() ) {
+
+      // Assign based on acceptance
+      User.isUserAccepted() ? toReturn = 1 : toReturn = 2;
+      return toReturn;
+    } // of Company
+
+    // The User is a Fellow
+    if ( User.isUserFellow() ) {
+
+      // Assign based on acceptance
+      User.isUserAccepted() ? toReturn = 3 : toReturn = 4;
+      return toReturn;
+    } // of Fellow
+
+  } // of isUserLoggedIn
+
+  // user failed to meet conditions, ERROR case
+  return toReturn;
+
+} // of assignSheetNumber

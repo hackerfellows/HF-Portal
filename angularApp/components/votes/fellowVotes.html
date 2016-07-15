@@ -1,0 +1,28 @@
+<div class="profile votes">
+
+  <h1>Your Top Companies</h1>
+
+  <div class="row">
+
+    <div class="col-md-4 col-md-offset-4">
+
+      <p ng-hide="votes.length > 0" style="text-align: center">You have not show interest in any companies yet</p>
+
+      <h3 ng-show="votes.length > 0">You have shown interest in:</h3>
+      <table class="table table-striped" ng-show="votes.length > 0">
+        <tr ng-repeat="vote in votes">
+          <td>
+            <a class="name" ng-href="/#/companies/{{ vote.Votee.company.id }}/{{ helpers.slugify( vote.Votee.company.name ) }}">
+              {{ vote.Votee.company.name }}
+            </a>
+          </td>
+          <td>
+            <a class="btn btn-xs label-danger" ng-click="removeVote(vote)"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+</div>

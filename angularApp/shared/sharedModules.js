@@ -20,7 +20,7 @@
 
     //End Accounts
 
-    //Navbar    
+    //Navbar
     angular
         .module('app.navbar', [
                 'app.navbar.controllers'
