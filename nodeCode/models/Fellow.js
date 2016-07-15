@@ -36,16 +36,8 @@
             portfolio: DataTypes.STRING,
             question: DataTypes.STRING,
             answer: DataTypes.STRING,
-            image_url: DataTypes.STRING,
+            image_url: DataTypes.STRING
 
-            application_flag: { type: DataTypes.INTEGER, defaultValue: 0 },
-            profile_flag: { type: DataTypes.INTEGER, defaultValue: 0 },
-            vote_flag: { type: DataTypes.INTEGER, defaultValue: 0 },
-            enabled: {
-
-                type: DataTypes.INTEGER,
-                defaultValue: 0
-            }
 
         },{
 
