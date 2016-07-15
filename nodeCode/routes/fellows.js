@@ -34,7 +34,7 @@ var application_attributes = [
     'comments'
 ];
 
-var profile_attribues = [
+var profile_attributes = [
     'user_id',
     'first_name',
     'last_name',
@@ -72,10 +72,14 @@ var upload = multer({ storage: storage });
 
 
 // GET /fellows - get all fellows
-app.get('/', function getFellows(req, res) {
+app.get('/', getAcceptedFellows);
+
+function getAcceptedFellows(req, res) {
 
     Fellows.all({
-
+        where: {
+            accepted: 1
+        },
         order: '"last_name" ASC',
         include: [
             { model: Tags },
@@ -100,7 +104,7 @@ app.get('/', function getFellows(req, res) {
     }).then(function(fellows) {
         res.send(fellows);
     });
-});
+};
 
 
 // GET /fellows/application - lists name and user_id of all applicants not accepted
@@ -124,7 +128,9 @@ app.get('/unaccepted', function getFellows(req, res) {
 });
 
 
-app.get('/profile/:user_id', function getFellow(req, res){
+app.get('/profile/:user_id', getProfileByID);
+ 
+function getProfileByID(req, res){
 
     Fellows.findOne({
         where: {
@@ -137,25 +143,26 @@ app.get('/profile/:user_id', function getFellow(req, res){
             },
             {
                 model: Users,
-                attributes: ['id', 'email', 'userType']
-            },
-            {
-                model: Users,
-                as: 'VotesFor',
                 attributes: ['id', 'email', 'userType'],
-                include: [{ model: Companies }]
-            },
-            {
-                model: Users,
-                as: 'VotesCast',
-                attributes: ['id', 'email', 'userType'],
-                include: [{ model: Companies }]
+                include: [
+                     {
+                        model: Users,
+                        as: 'VotesFor',
+                        attributes: ['id', 'email', 'userType'],
+                        include: [{ model: Companies }]
+                    },
+                {
+                    model: Users,
+                    as: 'VotesCast',
+                    attributes: ['id', 'email', 'userType'],
+                    include: [{ model: Companies }]
+                }]
             }
         ]
     }).then(function(attributes) {
         res.send(attributes);
     });
-});
+};
 
 
 app.put('/profile/:user_id', function putFellow(req, res) {
@@ -221,8 +228,8 @@ app.put('/profile/:user_id', function putFellow(req, res) {
                 });
             }
         });
-
-        res.send(fellow);
+        
+        getProfileByID(req, res);
     });
 
 });
@@ -230,7 +237,9 @@ app.put('/profile/:user_id', function putFellow(req, res) {
 
 
 // GET /fellows/application:id - get one fellow's full application data
-app.get('/application/:user_id', function getFellow(req, res){
+app.get('/application/:user_id', getApplicationByID);
+
+function getApplicationByID(req, res){
 
     //res.send('GET request - get a company record');
     Fellows.findOne({
@@ -242,7 +251,7 @@ app.get('/application/:user_id', function getFellow(req, res){
     }).then(function(attributes) {
         res.send(attributes);
     });
-});
+};
 
 
 // PUT /fellows/application:id - updates an existing fellow's application
@@ -280,7 +289,8 @@ app.put('/application/:user_id', function putFellow(req, res) {
 
         fellow.save();
 
-        res.send(fellow);
+        //res.json({ success: true });
+        getApplicationByID(req, res);
     });
 
 });
