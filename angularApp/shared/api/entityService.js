@@ -13,14 +13,14 @@
     .module('app.api.services')
     .service('Entities', Entities);
 
-    Entities.$inject = ['$http'];
+    Entities.$inject = ['$http', 'User'];
 
 
     /**
      * @namespace Entities
      * @returns {Service}
      */
-    function Entities($http) {
+    function Entities($http, User) {
         return {
 
             getAll: getAll,
@@ -51,11 +51,11 @@
         }
 
         function getApplication(type) {
-            return $http.get('/api/v2/fellows/' + type + '/' + User.getCurrentUser().id);
+            return $http.get('/api/v2/' + type + '/' + User.getCurrentUser().id);
         }
 
         function updateApplication(user, type) {
-            return $http.put('/api/v2/fellows/' + type + '/' + User.getCurrentUser().id, user);
+            return $http.put('/api/v2/' + type + '/' + User.getCurrentUser().id, user);
         }
 
         /**
@@ -63,7 +63,7 @@
          * @desc creeate a new fellow record
          */
         function create(user, type) {
-            return $http.post('/api/v1/' + type + '/', user);
+            return $http.post('/api/v2/' + type + '/', user);
         }
 
         /**
@@ -71,7 +71,7 @@
          * @desc updates a fellow record
          */
         function update(user, type) {
-            return $http.put('/api/v1/' + type + '/' + user.id, user);
+            return $http.put('/api/v2/' + type + '/' + user.id, user);
         }
 
         /**
@@ -79,7 +79,7 @@
          * @desc destroy a fellow record
          */
          function destroy(id, type) {
-            return $http.delete('/api/v1/' + type + '/' + id);
+            return $http.delete('/api/v2/' + type + '/' + id);
         }
     }
 })();

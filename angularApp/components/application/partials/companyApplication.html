@@ -1,86 +1,150 @@
-<div>
-    <form novalidate class="application-form">
-        <label>
-            Company Name: <input type="text" ng-model="company.name" required/><br />
-        </label>
-        <label>
-            Website: <input type="text" ng-model="company.website" required/><br />
-        </label>
-        <label>
-            City: <input type="text" ng-model="company.city" required/><br />
-        </label>
-        <label>
-            Industry Type: <input type="text" ng-model="company.industry" required/><br />
-        </label>
-        <label>
-            Who at your company will be the main contact for Hacker Fellows?: <input type="text" ng-model="company.contact.name" required/><br />
-        </label>
-        <label>
-            What is their work email?: <input type="text" ng-model="company.contact.email" required/><br />
-        </label>
-        <label>
-            What is their phone number?: <input type="text" ng-model="company.contact.phone" required/><br />
-        </label>
-        <label>
-            Google Maps URL: <input type="text" ng-model="company.map" required/><br />
-        </label>
-
-        <!-- detailed company info -->
-
-        <label>
-            Please give a brief description of your company.<br />
-            <input type="text" ng-model="company.description" required/><br />
-        </label>
-        <label>
-            How long has your company been around?<br />
-            <input type="text" ng-model="company.age" required/><br />
-        </label>
-        <label>
-            How many people are employed by your company?<br />
-            <input type="text" ng-model="company.staffcount" required/><br />
-        </label>
-        <label>
-            Describe the problem you are solving.<br />
-            <textarea ng-model="company.valueprop" ng-maxLength="500" required></textarea><br />
-        </label>
-        <label>
-            Why do you want to be part of Hacker Fellows?<br />
-            <textarea ng-model="company.whyHF" ng-maxLength="500" required></textarea><br />
-        </label>
-
-        <!-- Technical Needs -->
-
-        <label>
-            Please select the developer type that best fits your needs<br />
-            <input type="radio" ng-model="company.dev.type" ng-value="FrontEnd"/>Front End<br />
-            <input type="radio" ng-model="company.dev.type" ng-value="BackEnd"/>Back End<br />
-            <input type="radio" ng-model="company.dev.type" ng-value="FullStack"/>Full Stack<br />
-            <input type="radio" ng-model="company.dev.other"/>
-            <div ng-show="{{company.dev.other}}">
-                <input type="text" ng-model="company.dev.type"/>
+<form class="form-horizontal">
+    <fieldset class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h1 class="panel-title"> Basic Info</h1>
             </div>
-        </label>
-
-        <label>
-            What are your top 5 software development needs?<br />
-            <input type="text" ng-model="company.devneeds[0]" required/><br />
-            <input type="text" ng-model="company.devneeds[1]" required/><br />
-            <input type="text" ng-model="company.devneeds[2]" required/><br />
-            <input type="text" ng-model="company.devneeds[3]" required/><br />
-            <input type="text" ng-model="company.devneeds[4]" required/><br />
-        </label>
-
-
-        <label>
-            Describe your ideal junior level software dev?<br />
-            <textarea ng-model="company.idealdev" ng-maxLength="500" required></textarea><br />
-        </label>
-        <label>
-            Share a link to your company's logo.<br />
-            <input type="text" ng-model="company.logourl" required/><br />
-        </label>
-
-        <input type="button" ng-click="cancel()" value="Cancel" />
-        <input type="submit" ng-click="apply(company)" value="Save" />
-    </form>
-</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Company Name</strong></p>
+                        <input class="form-control" type="text" ng-model="company.name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Website</strong></p>
+                        <input class="form-control" type="text" ng-model="company.website" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>City</strong></p>
+                        <input class="form-control" type="text" ng-model="company.city" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Industry Type</strong></p>
+                        <input class="form-control" type="text" ng-model="company.industry" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Who at your company will be the main contact for Hacker Fellows?</strong></p>
+                        <input class="form-control" type="text" ng-model="company.contact_name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>What is their work email?</strong></p>
+                        <input class="form-control" type="text" ng-model="company.contact_email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>What is their phone number?</strong></p>
+                        <input class="form-control" type="text" ng-model="company.contact_phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Google Maps URL</strong></p>
+                        <input class="form-control" type="text" ng-model="company.map" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Share a link to your company's logo</strong></p>
+                        <input class="form-control" type="text" ng-model="company.logo" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h1 class="panel-title"> In-Depth Info</h1>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Please give a brief description of your company</strong></p>
+                        <textarea class="form-control" ng-model="company.description" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>How long has your company been around?</strong></p>
+                        <input class="form-control" type="text" ng-model="company.age" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>How many people are employed by your company?</strong></p>
+                        <input class="form-control" type="text" ng-model="company.staffcount" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Describe the problem you are solving</strong></p>
+                        <textarea class="form-control" ng-model="company.value_prop" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Why do you want to be a part of Hacker Fellows?</strong></p>
+                        <textarea class="form-control" ng-model="company.whyHF" required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h1 class="panel-title">Technical Needs</h1>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Please select the developer type that best fits your needs</strong></p>
+                        <label class="radio-inline">
+                            <input type="radio" name="dev" value="Front End" ng-model="company.developer_type">
+                            Front End
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="dev" value="Back End" ng-model="company.developer_type">
+                            Back End 
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="dev" value="Full Stack" ng-model="company.developer_type">
+                            Full Stack 
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>What are your top 5 software development needs?</strong></p>
+                        <input class="form-control" type="text" ng-model="company.devneeds[0]" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds[1]" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds[2]" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds[3]" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds[4]" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Describe your ideal junior level software dev?</strong></p>
+                        <textarea class="form-control" ng-model="company.ideal_dev" required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group well well-lg">
+            <div class="col-md-3 col-md-offset-2 ">
+                <button class="btn btn-info btn-lg center-block">Save and come back later</button>
+            </div> 
+            <div class="col-md-3 col-md-offset-2 ">
+                <button type="submit" class="btn btn-success btn-lg center-block" ng-click="apply(company)">Submit Now</button>
+            </div> 
+        </div>
+    </fieldset>
+</form>
