@@ -10,7 +10,12 @@
                 </div>
             </div>
 
-            <p class="description">For best results - please use a square image</p>
+            <div class="form-group">
+
+                    <label for="image_url" class="control-label">Image URL</label>
+                    <input type="text" class="form-control" id="name" ng-model="entityObject.image_url" value="{{entityObject.image_url}}"/>
+                </div>
+          <!--   <p class="description">For best results - please use a square image</p>
 
             <div class="file">
                 <input type="file" id="file_input" onchange="angular.element(this).scope().getS3Key(this)" />
@@ -19,7 +24,7 @@
 
             <p class="uploading">Uploading...Please wait to save</p>
             <p class="upload-status">Uploaded. Click Update to Save</p>
-
+ -->
         </div>
 
         <div class="col-md-7 col-md-offset-1">
@@ -49,13 +54,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="companyURL" class="control-label">Website URL <span>Please include http://</span></label>
+                    <label for="website_url" class="control-label">Website URL <span>Please include http://</span></label>
                     <input type="text" class="form-control" id="companyURL" ng-model="entityObject.website_url" value="{{entityObject.website_url}}" />
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="control-label">City</label>
-                    <input type="text" class="form-control" id="location" ng-model="entityObject.location" value="{{entityObject.location}}"/>
+                    <label for="city" class="control-label">City</label>
+                    <input type="text" class="form-control" id="city" ng-model="entityObject.city" value="{{entityObject.city}}"/>
                 </div>
 
                 <div class="form-group">
@@ -69,13 +74,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="control-label">Email</label>
-                    <input type="text" class="form-control" id="email" ng-model="entityObject.user.email" value="{{entityObject.user.email}}"/>
+                    <label for="contact_email" class="control-label">Contact Email</label>
+                    <input type="text" class="form-control" id="contact_email" ng-model="entityObject.contact_email" value="{{entityObject.contact_email}}"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="control-label">Google Map Url</label>
-                    <input type="text" class="form-control" id="email" ng-model="entityObject.map_url" value="{{entityObject.map_url}}"/>
+                    <label for="map_url" class="control-label">Google Map Url</label>
+                    <input type="text" class="form-control" id="map_url" ng-model="entityObject.map_url" value="{{entityObject.map_url}}"/>
                 </div>
 
                 <div class="form-group">
@@ -90,13 +95,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="problem_solving" class="control-label ">Describe the problem you are solving.</label>
-                    <input type="text" class="form-control" id="problem_solving" ng-model="entityObject.problem_solving" value="{{entityObject.problem_solving}}"/>
+                    <label for="value_prop" class="control-label ">Describe the problem you are solving.</label>
+                    <input type="text" class="form-control" id="value_prop" ng-model="entityObject.value_prop" value="{{entityObject.value_prop}}"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="why_hf" class="control-label "> Why do you want to be part of Hacker Fellows?</label>
-                    <input type="text" class="form-control" id="why_hf" ng-model="entityObject.why_hf" value="{{entityObject.why_hf}}"/>
+                    <label for="whyHF" class="control-label "> Why do you want to be part of Hacker Fellows?</label>
+                    <input type="text" class="form-control" id="whyHF" ng-model="entityObject.whyHF" value="{{entityObject.whyHF}}"/>
                 </div>
 
                 <div class="form-group">
@@ -127,8 +132,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="companyURL" class="control-label">Describe your ideal junior level software dev </label>
-                    <input type="text" class="form-control" id="companyURL" ng-model="entityObject.ideal_jlsd" value="{{entityObject.ideal_jlsd}}" />
+                    <label for="ideal_dev" class="control-label">Describe your ideal junior level software dev </label>
+                    <input type="text" class="form-control" id="ideal_dev" ng-model="entityObject.ideal_dev" value="{{entityObject.ideal_dev}}" />
                 </div>
 
 

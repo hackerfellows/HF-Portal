@@ -21,16 +21,16 @@
             About {{entityObject.name}}:
             <p class="tagline">{{ entityObject.description }}</p>
             What problem are we trying to solve?
-            <div class="problem" ng-bind-html="helpers.paragraphize(entityObject.problem_solving)"></div>
+            <div class="value_prop" ng-bind-html="helpers.paragraphize(entityObject.value_prop)"></div>
             Why we want to join Hacker Fellows:
-            <div class="problem" ng-bind-html="helpers.paragraphize(entityObject.why_hf)"></div>
+            <div class="whyHF" ng-bind-html="helpers.paragraphize(entityObject.whyHF)"></div>
             Our idea junior level software dev:
-            <div class="ideal_jlsd" ng-bind-html="helpers.paragraphize(entityObject.ideal_jlsd)"></div>
+            <div class="ideal_dev" ng-bind-html="helpers.paragraphize(entityObject.ideal_dev)"></div>
 
             <p class="stat industry"><span>Industry:</span> {{ entityObject.industry }}</p>
-            <p class="stat city"><span>City:</span> {{entityObject.location}}</p>
+            <p class="stat city"><span>City:</span> {{entityObject.city}}</p>
             <p class="stat company-size"><span>Company Size:</span> {{ entityObject.company_size }}</p>
-            <p class="stat contact"><span>Primary Contact:</span> {{ entityObject.primary_contact }} | {{ entityObject.user.email }}</p>
+            <p class="stat contact"><span>Primary Contact:</span> {{ entityObject.primary_contact }} | {{ entityObject.contact_email }}</p>
             <p class="links"><a class="website" ng-href="{{ entityObject.website_url }}" target="_blank">Website</a></p>
         </div>
         <!-- This is the code for embedding a google map. Someone will need to set up their google developer account to obtain an API key-->
@@ -40,7 +40,7 @@
           frameborder="0" style="border:0"
           src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY
             &q=Space+Needle,Seattle+WA" allowfullscreen>
-        </iframe -->>
+        </iframe -->
     </div>
     <div class="row tags">
         <h3>Desired Skills:</h3>

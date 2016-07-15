@@ -166,7 +166,7 @@ function getProfileByID(req, res){
         {
             model: Users,
             attributes: [
-                'id', 'email', 'userType', 'applicaton_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
+                'id', 'email', 'userType', 'application_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
             ],
             include: [
             {

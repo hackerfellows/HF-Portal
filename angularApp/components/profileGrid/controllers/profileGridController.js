@@ -36,7 +36,7 @@
 //////////////////////////////////////////////////////////////////////////
 
         Entities.getAll($scope.whichEntity).success(function (result) {
-            console.log(result);
+            console.log("profilegrid", result);
             $scope.entityList = result;
         });
 

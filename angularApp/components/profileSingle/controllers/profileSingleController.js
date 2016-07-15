@@ -37,12 +37,15 @@
         }
 
         //Make the API call to fetch the data for the chosen entity
-        Entities.getById($scope.whichEntityPlural, entityId).success(function(result) {
-            console.log(result);
-            $scope.entityObject = result["data"];
-            checkLogin();
-        });
-
+        function fetchData(){
+            Entities.getById($scope.whichEntityPlural, entityId).success(function(result) {
+                console.log("profilesingle", result);
+                $scope.entityObject = result["data"];
+                checkLogin();
+                $scope.editMode = false;
+            });
+        }
+        fetchData();
         //Checks to see if the logged in user is viewing their own
         //entity page
         //only allow the edit button to be viewable if the logged in user
@@ -75,22 +78,18 @@
 
             Entities.updateProf(entityObject, $scope.whichEntityPlural).then(function(result) {
                 console.log("did we do it");
-                if (result["success"] === false){
-                    console.log("NOOOOOOO Something broke in the put to" + $scope.whichEntityPlural + " :(");
-                    //NOOOOOO :(
-                } else {
+                // if (result["success"] === false){
+                //     console.log("NOOOOOOO Something broke in the put to" + $scope.whichEntityPlural + " :(");
+                //     //NOOOOOO :(
+                // } else {
                     console.log(":D", result);
-                    $scope.entityObject = result["data"];
-                    $scope.editMode = false;
-                } 
+                    fetchData();      
+                // } 
                 }, function(err) {
                     console.log("OMG YOU IDIOT", err);
 
                 }
-            );
-            console.log("skipped the other stuff");
-            $scope.editMode = false;
-                
+            );                
         }
 
         // $scope.updateCompany = function(){

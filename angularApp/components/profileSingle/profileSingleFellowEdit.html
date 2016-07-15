@@ -7,13 +7,17 @@
                 <img id="preview" ng-src="{{ entityObject.image_url }}" ng-show="entityObject.image_url" width="150" height="150" />
                 <span class="placeholder" ng-show="!entityObject.image_url">No Profile Image</span>
             </div>
-            <p class="description">For best results - please use a square image</p>
+            <div class="form-group">
+                <label for="image_url" class="control-label">Image URL</label>
+                <input type="text" class="form-control" id="name" ng-model="entityObject.image_url" value="{{entityObject.image_url}}"/>
+            </div>
+            <!-- <p class="description">For best results - please use a square image</p>
             <div class="file">
                 <input type="file" id="file_input" onchange="angular.element(this).scope().getS3Key(this)" />
                 <i class='fa fa-circle-o-notch fa-spin loading-icon'></i>
             </div>
             <p class="uploading">Uploading...Please wait to save</p>
-            <p class="upload-status">Uploaded. Click Update to Save</p>
+            <p class="upload-status">Uploaded. Click Update to Save</p> -->
         </div>
 
         <div class="col-md-7 col-md-offset-1">

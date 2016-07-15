@@ -167,7 +167,7 @@ function getProfileByID(req, res){
         {
             model: Users,
             attributes: [
-                'id', 'email', 'userType', 'applicaton_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
+                'id', 'email', 'userType', 'application_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
             ],
             include: [
             {
@@ -206,6 +206,7 @@ function putProfileById(req, res) {
     thing.portfolio = req.body.portfolio;
     thing.developer_type = req.body.developer_type;
     thing.question = req.body.question;
+    thing.achievements = req.body.achievements;
     thing.answer = req.body.answer;
     thing.image_url = req.body.image_url;
 
