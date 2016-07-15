@@ -1,23 +1,16 @@
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-<!-- Bootstrap CSS-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css"/>
- 
-
 <form class="form-horizontal">
     <fieldset class="col-md-8 col-md-offset-2">
         <div class="panel panel-primary">
             <div class="panel-heading text-center">
                 <h1 class="panel-title"> Basic Info</h1>
             </div>
-
             <div class="panel-body">
                 <div class="form-group">
                     <label class="col-md-2 control-label">Name</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon">First</span>
-                            <input class="form-control" placeholder="Jane" type="text" ng-model="fellow.first_name" ng-init="fellow.first_name" required>
+                            <input class="form-control" placeholder="Jane" type="text" ng-model="fellow.first_name" required>
                         </div>
                     </div>
                 </div>
@@ -25,28 +18,25 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="input-group">
                             <span class="input-group-addon">Last</span>
-                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.last_name" value="{{fellow.last_name}}" required>
+                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.last_name" required>
                         </div>
                     </div>
                 </div>
-
-                <!-- University -->
                 <div class="form-group">
                     <label class="col-md-2 control-label">University</label>  
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                            <input type="text" placeholder="Trump University" class="form-control input-md" ng-model="fellow.university"  value="{{fellow.university}}" required>
+                            <input type="text" placeholder="Trump University" class="form-control input-md" ng-model="fellow.university" required>
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-md-2 control-label">Majors / Minors</label>  
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                            <input type="text" placeholder="Computer Science / History, English" class="form-control input-md" ng-model="fellow.major" value="{{fellow.major}}" required>
+                            <input type="text" placeholder="Computer Science / History, English" class="form-control input-md" ng-model="fellow.major" required>
                         </div>
                     </div>
                 </div>
@@ -55,7 +45,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-ra"></i></span>
-                            <input type="text" placeholder="4.0" class="form-control input-md" ng-model="fellow.gpa" value="{{fellow.gpa}}" required>
+                            <input type="text" placeholder="4.0" class="form-control input-md" ng-model="fellow.gpa" required>
                         </div>
                     </div>
                 </div>
@@ -64,7 +54,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                            <input type="text" placeholder="MM/YYYY" class="form-control input-md" ng-model="fellow.graduation" value="{{fellow.graduation}}" required>
+                            <input type="text" placeholder="MM/YYYY" class="form-control input-md" ng-model="fellow.graduation" required>
                         </div>
                     </div>
                 </div>
@@ -73,7 +63,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                            <input type="text" placeholder="Detroit, MI" class="form-control input-md" ng-model="fellow.hometown"  value="{{fellow.hometown}}" required>
+                            <input type="text" placeholder="Detroit, MI" class="form-control input-md" ng-model="fellow.hometown"  required>
                         </div>
                     </div>
                 </div>
@@ -82,86 +72,64 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" placeholder="(555) 555-5555" class="form-control input-md" ng-model="fellow.phone" value="{{fellow.phone}}" required>
+                            <input type="text" placeholder="(555) 555-5555" class="form-control input-md" ng-model="fellow.phone" required>
                         </div>
                     </div>
                 </div>
-
-                <!-- Multiple Radios -->
                 <div class="form-group">
                     <label class="col-md-4 control-label">Are you a U.S. citizen<br>or permanent resident?</label>
                     <div class="col-md-4">
                         <label class="radio-inline">
-                            <input type="radio" name="citident" ng-model="fellow.residentUSA" value="true" required>
+                            <input type="radio" name="usa" ng-model="fellow.residentUSA" value="true" required>
                             Yes 
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="citident" ng-model="fellow.residentUSA" value="false" required>
+                            <input type="radio" name="usa" ng-model="fellow.residentUSA" value="false" required>
                             No 
                         </label>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="panel panel-primary">
             <div class="panel-heading text-center">
                 <h1 class="panel-title">In-Depth Info</h1>
             </div>
-
             <div class="panel-body">
-
                 <div class="form-group">
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>Single phrase to describe yourself</strong></p>
-                </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.description" value="{{fellow.description}}" value="{{fellow.lastname}}"  required>
+                        <p><strong>Single phrase to describe yourself</strong></p>
+                        <input class="form-control" type="text" ng-model="fellow.description" required>
                     </div>
                 </div>
                 <div class="form-group">
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>What is your dream job?</strong></p>
-                </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.dreamjob" value="{{fellow.dreamjob}}" required>
+                        <p><strong>What is your dream job?</strong></p>
+                        <input class="form-control" type="text" ng-model="fellow.dreamjob" required>
                     </div>
                 </div>
                 <div class="form-group">
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>Share a link to your resume</strong></p>
-                </div>
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.resumeURL" value="{{fellow.resumeURL}}" required>
+                        <p><strong>Share a link to your resume</strong></p>
+                        <input class="form-control" type="text" ng-model="fellow.resumeURL" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class=""></label>
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>Tell us 3 cool things about you -- anything you think we should know!</strong></p>
-                </div>
-
-                    <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.coolthings"  value="{{fellow.coolthings}}" ng-maxLength="500"></textarea>
-                    </div>
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Tell us 3 cool things about you -- anything you think we should know!</strong></p>
+                        <textarea class="form-control" ng-model="fellow.coolthings" ng-maxLength="500"></textarea>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="panel panel-primary">
             <div class="panel-heading text-center">
                 <h1 class="panel-title">Hacker Fellows</h1>
             </div>
-
             <div class="panel-body">
-
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>Exciting that you learned about the Hacker Fellows program! How did you hear about us?</strong></p>
-                </div>
-
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Exciting that you learned about the Hacker Fellows program! How did you hear about us?</strong></p>
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Friend" ng-model="fellow.referral">
@@ -201,40 +169,28 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>Why Hacker Fellows one you graduate?</strong></p>
-                </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.whyHF" value="{{fellow.whyHF}}" ng-maxLength="500"></textarea>
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Why Hacker Fellows one you graduate?</strong></p>
+                        <textarea class="form-control" ng-model="fellow.whyHF" ng-maxLength="500"></textarea>
                     </div>
                 </div>
-
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>Why do you want to make an impact in Michigan while working for a startup?</strong></p>
-                </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.MIimpact"  value="{{fellow.MIimpact}}" ng-maxLength="500"></textarea>
+                    <div class="col-md-8 col-md-offset-2">
+                        <p><strong>Why do you want to make an impact in Michigan while working for a startup?</strong></p>
+                        <textarea class="form-control" ng-model="fellow.MIimpact"  ng-maxLength="500"></textarea>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="panel panel-primary">
             <div class="panel-heading text-center">
                 <h1 class="panel-title">Developer Information</h1>
             </div>
-
             <div class="panel-body">
-
-
-                <div class="col-md-8 col-md-offset-2">
-                    <p><strong>What type of developer are you? </strong></p>
-                </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
+                        <p><strong>What type of developer are you? </strong></p>
                         <label class="radio-inline">
                             <input type="radio" name="dev" value="Front End" ng-model="fellow.developer_type">
                             Front End
@@ -249,64 +205,55 @@
                         </label>
                     </div>
                 </div>
-
                 <div class="col-md-8 col-md-offset-2">
                     <p><strong>What are your top 7 software development skills? (Languages, Frameworks, Tools, etc...)</strong></p>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.devskills" value="{{fellow.devskills}}" ng-maxLength="500"></textarea>
+                    <div class="col-md-8 col-md-offset-2"> 
+                        <textarea class="form-control" ng-model="fellow.devskills" ng-maxLength="500"></textarea>
                     </div>
                 </div>
-
                 <div class="col-md-8 col-md-offset-2">
                     <p><strong>What technical achievement are you proud to share?</strong></p>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.achievement"  value="{{fellow.achievement}}" ng-maxLength="500"></textarea>
+                    <div class="col-md-8 col-md-offset-2">
+                        <textarea class="form-control" ng-model="fellow.achievement" ng-maxLength="500"></textarea>
                     </div>
                 </div>
-
                 <div class="col-md-8 col-md-offset-2">
                     <p><strong>What involvements have you had with start-ups, hackathons, developer groups, side projects, etc?</strong></p>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.involvements"  value="{{fellow.involvements}}" ng-maxLength="500"></textarea>
+                    <div class="col-md-8 col-md-offset-2">
+                        <textarea class="form-control" ng-model="fellow.involvements"  ng-maxLength="500"></textarea>
                     </div>
                 </div>
-
                 <div class="col-md-8 col-md-offset-2">
                     <p><strong>Share a link to your GitHub profile</strong></p>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.github" value="{{fellow.git_hub}}"  required>
+                        <input class="form-control" type="text" ng-model="fellow.github" required>
                     </div>
                 </div>
-
                 <div class="col-md-8 col-md-offset-2">
                     <p><strong>Any comments about your technical skills you wish to share? Any really cool side projects in the works or freelance success stories?</strong></p>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2">                     
-                        <textarea class="form-control" ng-model="fellow.comments" value="{{fellow.comments}}"  ng-maxLength="500"></textarea>
+                    <div class="col-md-8 col-md-offset-2">
+                        <textarea class="form-control" ng-model="fellow.comments" ng-maxLength="500"></textarea>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="form-group well well-lg">
             <div class="col-md-3 col-md-offset-2 ">
                 <button class="btn btn-info btn-lg center-block">Save and come back later</button>
             </div> 
-
             <div class="col-md-3 col-md-offset-2 ">
                 <button type="submit" class="btn btn-success btn-lg center-block" ng-click="apply(fellow)">Submit Now</button>
             </div> 
-
         </div>
     </fieldset>
 </form>
-
