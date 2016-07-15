@@ -36,6 +36,7 @@
 //////////////////////////////////////////////////////////////////////////
 
         Entities.getAll($scope.whichEntity).success(function (result) {
+            console.log(result);
             $scope.entityList = result;
         });
 

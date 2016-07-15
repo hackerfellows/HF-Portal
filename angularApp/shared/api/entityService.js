@@ -27,6 +27,7 @@
             getById: getById,
             create: create,
             update: update,
+            updateProf: updateProf,
             destroy: destroy,
             getApplication: getApplication,
             updateApplication: updateApplication
@@ -48,7 +49,7 @@
          */
 
         function getById(type, id) {
-            return $http.get('/api/v2/' + type + '/' + id);
+            return $http.get('/api/v2/' + type + '/profile/' + id);
         }
 
         function getApplication(type) {
@@ -78,6 +79,19 @@
         function update(user, type) {
             return $http.put('/api/v2/' + type + '/' + user.id, user);
         }
+
+        /**
+         * @name updateProf
+         * @desc updates an entity record
+                 whichEntity = 'fellows' or 'companies'
+                 entityObject = the object with all the data
+        *********MAKE SURE THIS SAVES TO A SEPARATE TABLE AND NOT THE ONE WITH
+                 THE ENTITY'S ORIGINAL APPLICATION DATA*********
+         */
+        function updateProf(user, type) {
+            return $http.put('/api/v2/' + type + '/profile/' + user.id, user);
+        }
+
 
         /**
          * @name destroy

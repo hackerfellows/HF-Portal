@@ -38,7 +38,8 @@
 
         //Make the API call to fetch the data for the chosen entity
         Entities.getById($scope.whichEntityPlural, entityId).success(function(result) {
-            $scope.entityObject = result;
+            console.log(result);
+            $scope.entityObject = result["data"];
             checkLogin();
         });
 
@@ -70,8 +71,8 @@
         $scope.update = function(entityObject){
             console.log("call API for fellow"); 
 
-            Entities.update(entityObject, $scope.whichEntityPlural).then(function(result) {
-
+            Entities.updateProf(entityObject, $scope.whichEntityPlural).then(function(result) {
+                console.log("did we do it");
                 if (result["success"] === false){
                     console.log("NOOOOOOO Something broke in the put to" + $scope.whichEntityPlural + " :(");
                     //NOOOOOO :(
@@ -81,6 +82,8 @@
                     $scope.editMode = false;
                 } 
             });
+            $scope.editMode = false;
+                
         }
 
         // $scope.updateCompany = function(){
