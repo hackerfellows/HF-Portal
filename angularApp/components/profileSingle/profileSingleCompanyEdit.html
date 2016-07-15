@@ -90,39 +90,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="company_size" class="control-label ">Describe the problem you are solving.</label>
-                    <input type="text" class="form-control" id="company_size" ng-model="entityObject.problem_solving" value="{{entityObject.problem_solving}}"/>
+                    <label for="problem_solving" class="control-label ">Describe the problem you are solving.</label>
+                    <input type="text" class="form-control" id="problem_solving" ng-model="entityObject.problem_solving" value="{{entityObject.problem_solving}}"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="company_size" class="control-label "> Why do you want to be part of Hacker Fellows?</label>
-                    <input type="text" class="form-control" id="company_size" ng-model="entityObject.why_hf" value="{{entityObject.why_hf}}"/>
+                    <label for="why_hf" class="control-label "> Why do you want to be part of Hacker Fellows?</label>
+                    <input type="text" class="form-control" id="why_hf" ng-model="entityObject.why_hf" value="{{entityObject.why_hf}}"/>
                 </div>
 
                 <div class="form-group">
                     <label for="developer_type" class="control-label">How would you best classify the developer you are seeking?</label>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="developer_type" ng-true-value="'Front End'" value="Front End" ng-model="company.developer_type" />
-                            Front End
-                        </label>
-                    </div>
-
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="developer_type" ng-true-value="'Back End'" value="Back End" ng-model="company.developer_type" />
-                            Back End
-                        </label>
-
-                    </div>
-
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="developer_type" ng-true-value="'Full Stack'" value="Full Stack" ng-model="company.developer_type" />
-                            Full Stack
-                        </label>
-                    </div>
-
                     <select name="developer_type" class="form-control" id="developer_type" ng-model="company.developer_type">
                         <option>Front End</option>
                         <option>Back End</option>

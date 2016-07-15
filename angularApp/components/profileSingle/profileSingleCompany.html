@@ -18,13 +18,29 @@
         </div>
         <div class="col-md-9">
             <h1 class="name">{{ entityObject.name }}</h1>
+            About {{entityObject.name}}:
             <p class="tagline">{{ entityObject.description }}</p>
-            <div class="bio" ng-bind-html="helpers.paragraphize(entityObject.bio)"></div>
+            What problem are we trying to solve?
+            <div class="problem" ng-bind-html="helpers.paragraphize(entityObject.problem_solving)"></div>
+            Why we want to join Hacker Fellows:
+            <div class="problem" ng-bind-html="helpers.paragraphize(entityObject.why_hf)"></div>
+            Our idea junior level software dev:
+            <div class="ideal_jlsd" ng-bind-html="helpers.paragraphize(entityObject.ideal_jlsd)"></div>
+
             <p class="stat industry"><span>Industry:</span> {{ entityObject.industry }}</p>
+            <p class="stat city"><span>City:</span> {{entityObject.location}}</p>
             <p class="stat company-size"><span>Company Size:</span> {{ entityObject.company_size }}</p>
             <p class="stat contact"><span>Primary Contact:</span> {{ entityObject.primary_contact }} | {{ entityObject.user.email }}</p>
             <p class="links"><a class="website" ng-href="{{ entityObject.website_url }}" target="_blank">Website</a></p>
         </div>
+        <!-- This is the code for embedding a google map. Someone will need to set up their google developer account to obtain an API key-->
+        <!-- <iframe
+          width="600"
+          height="450"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY
+            &q=Space+Needle,Seattle+WA" allowfullscreen>
+        </iframe -->>
     </div>
     <div class="row tags">
         <h3>Desired Skills:</h3>

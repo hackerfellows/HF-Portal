@@ -42,13 +42,7 @@
 
                 <div class="form-group">
                     <label for="email" class="control-label">Email</label>
-                    <input type="text" class="form-control" id="email" ng-model="entityObject.email" value="{{entityObject.email}}" disabled />
-                </div>
-                baldwmc
-                <div class="form-group">
-                    <!--TODO: Check that this is in the application-->
-                    <label for="email" class="control-label">Twitter Handle</label>
-                    <input type="text" class="form-control" id="twitter" ng-model="entityObject.twitter" value="{{entityObject.twitter}}" disabled />
+                    <input type="text" class="form-control" id="email" ng-model="entityObject.user.email" value="{{entityObject.user.email}}" disabled />
                 </div>
 
                 <div class="form-group">
@@ -57,13 +51,13 @@
                 </div>
 
                  <div class="form-group">
-                    <label for="git_hub" class="control-label">Link to Resume</label>
-                    <input type="text" class="form-control" id="git_hub" ng-model="entityObject.resume_url" value="{{ entityObject.resume_url }}"/>
+                    <label for="resumeURL" class="control-label">Link to Resume</label>
+                    <input type="text" class="form-control" id="resumeURL" ng-model="entityObject.resumeURL" value="{{ entityObject.resumeURL }}"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="bio" class="control-label">Your resume is the typical boring info, but we want more! Tell us 3 cool things about you - spare time activities, travels, - anything you think we should know!</label>
-                    <textarea class="form-control" rows="5" id="coolThings" ng-model="entityObject.coolThings" value="{{entityObject.coolThings}}"></textarea>
+                    <label for="coolthings" class="control-label">Your resume is the typical boring info, but we want more! Tell us 3 cool things about you - spare time activities, travels, - anything you think we should know!</label>
+                    <textarea class="form-control" rows="5" id="coolthings" ng-model="entityObject.coolthings" value="{{entityObject.coolthings}}"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -96,14 +90,14 @@
 
 
                 <div class="form-group">
-                    <label for="bio" class="control-label">What technical achievement are you proud to share? √</label>
-                    <textarea class="form-control" rows="5" id="interests" ng-model="entityObject.interests" value="{{entityObject.interests}}"></textarea>
+                    <label for="achievement" class="control-label">What technical achievement are you proud to share? √</label>
+                    <textarea class="form-control" rows="5" id="achievement" ng-model="entityObject.achievement" value="{{entityObject.achievement}}"></textarea>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="bio" class="control-label">What involvement have you had with start-ups, hackathons, developer groups, even side projects, please tell all?</label>
-                    <textarea class="form-control" rows="5" id="bio" ng-model="entityObject.bio" value="{{entityObject.bio}}"></textarea>
+                    <label for="involvements" class="control-label">What involvement have you had with start-ups, hackathons, developer groups, even side projects, please tell all?</label>
+                    <textarea class="form-control" rows="5" id="involvements" ng-model="entityObject.involvements" value="{{entityObject.involvements}}"></textarea>
                 </div>
 
 
