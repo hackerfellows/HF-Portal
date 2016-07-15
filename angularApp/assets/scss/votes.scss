@@ -2,13 +2,38 @@ h1 {
   text-align: center;
   margin: 0;
   color: #333;
+  font-family: Dosis;
+  font-size: 4em;
+  padding: 0.2em;
+}
+
+h3 {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 2em;
 }
 
 table {
-  width: 100%;
+  min-width: 200px;
+  margin: 0 auto;
+  float: left;
 }
 .remove-vote {
   float: right;
   background-color: #333;
   color: #ff6633;
+}
+
+.col-md-4.col-md-offset-4 {
+  padding: 0 2em;
+  margin: 0em auto;
+  width: 100%;
+}
+
+td {
+  font-family: Dosis;
+  font-size: 1.4em;
+
+  a {
+  color: #ff6633;
+  }
 }
