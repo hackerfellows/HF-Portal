@@ -1,4 +1,4 @@
-/*  File name:      profileGridService.js
+/*  File name:      entityService.js
     Author:         Jessica Wu, Michael Baldwin
     Description:    wraps all API calls in a class of helper functions
     Function:       Returns an object containing the results of all API calls
@@ -22,14 +22,13 @@
      */
     function Entities($http, User) {
         return {
-
             getAll: getAll,
             getById: getById,
-            create: create,
-            update: update,
+            updateProf: updateProf,
             destroy: destroy,
             getApplication: getApplication,
-            updateApplication: updateApplication
+            updateApplication: updateApplication,
+            getApplicants: getApplicants 
         };
 
         /**
@@ -46,40 +45,51 @@
          * @desc get one entity (used in old code to view a profile)
                  get one fellow/company with tags
          */
+
         function getById(type, id) {
-            return $http.get('/api/v2/' + type + '/' + id);
+            return $http.get('/api/v2/' + type + '/profile/' + id);
         }
 
         function getApplication(type) {
-            return $http.get('/api/v2/' + type + '/' + User.getCurrentUser().id);
+            return $http.get('/api/v2/' + type + '/application/' + User.getCurrentUser().id);
         }
 
         function updateApplication(user, type) {
-            return $http.put('/api/v2/' + type + '/' + User.getCurrentUser().id, user);
+            return $http.put('/api/v2/' + type + '/application/' + User.getCurrentUser().id, user);
         }
 
         /**
-         * @name create
-         * @desc creeate a new fellow record
+         * @name updateProf
+         * @desc updates an entity record
+                 whichEntity = 'fellows' or 'companies'
+                 entityObject = the object with all the data
+        *********MAKE SURE THIS SAVES TO A SEPARATE TABLE AND NOT THE ONE WITH
+                 THE ENTITY'S ORIGINAL APPLICATION DATA*********
          */
-        function create(user, type) {
-            return $http.post('/api/v2/' + type + '/', user);
+        function updateProf(user, type) {
+            console.log(user, type, user.user_id);
+            return $http.put('/api/v2/' + type + '/profile/' + user.user_id, user);
         }
 
-        /**
-         * @name update
-         * @desc updates a fellow record
-         */
-        function update(user, type) {
-            return $http.put('/api/v2/' + type + '/' + user.id, user);
-        }
 
         /**
          * @name destroy
          * @desc destroy a fellow record
          */
-         function destroy(id, type) {
+        function destroy(id, type) {
             return $http.delete('/api/v2/' + type + '/' + id);
+        }
+
+        /**
+         * @name getApplicants 
+         * @desc gets unaccepted applicants
+         */
+        function getApplicants(type) {
+            return $http.get('/api/v2/' + type + '/unaccepted');
+        }
+
+        function getApplication(user, type){
+            return $http.get('/api/v2/' + type + '/profile/' + user.id );
         }
     }
 })();

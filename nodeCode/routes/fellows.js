@@ -6,6 +6,7 @@ var Middleware = require('./middleware');
 
 var models = require('../models');
 var Fellows = models.fellows;
+var FellowTags = models.fellow_tag;
 var Companies = models.companies;
 var Tags = models.tags;
 var Users = models.users;
@@ -16,6 +17,7 @@ var application_attributes = [
     'university',
     'major',
     'graduation',
+    'gpa',
     'hometown',
     'phone',
     'residentUSA',
@@ -50,7 +52,6 @@ var profile_attributes = [
     'answer',
     'image_url',
     'resumeURL',
-    'developer_type',
     'coolthings',
     'achievements',
     'involvements',
@@ -74,7 +75,14 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-
+// sleeps for time (milliseconds)
+function sleep(time) {
+    var stop = new Date().getTime();
+    while(new Date().getTime() < stop + time) {
+        ;
+    }
+    return;
+}
 
 
 app.get('/', getAccepted);
@@ -160,29 +168,28 @@ function getProfileByID(req, res){
         },
         attributes: profile_attributes,
         include: [
+        {
+            model: Tags
+        },
+        {
+            model: Users,
+            attributes: [
+                'id', 'email', 'userType', 'application_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
+            ],
+            include: [
             {
-                model: Tags
+                model: Users,
+                as: 'VotesFor',
+                attributes: ['id', 'email', 'userType'],
+                include: [{ model: Companies }]
             },
             {
                 model: Users,
-                attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
-                ],
-                include: [
-                     {
-                        model: Users,
-                        as: 'VotesFor',
-                        attributes: ['id', 'email', 'userType'],
-                        include: [{ model: Companies }]
-                    },
-                {
-                    model: Users,
-                    as: 'VotesCast',
-                    attributes: ['id', 'email', 'userType'],
-                    include: [{ model: Companies }]
-                }]
-            }
-        ]
+                as: 'VotesCast',
+                attributes: ['id', 'email', 'userType'],
+                include: [{ model: Companies }]
+            }]
+        }]
     }).then(function(attributes) {
         res.json({success: attributes !== null, data: attributes});
     });
@@ -191,6 +198,7 @@ function getProfileByID(req, res){
 
 
 function putProfileById(req, res) {
+
     var thing = {};
 
     thing.user_id = req.body.user_id;
@@ -205,57 +213,71 @@ function putProfileById(req, res) {
     thing.portfolio = req.body.portfolio;
     thing.developer_type = req.body.developer_type;
     thing.question = req.body.question;
+    thing.achievements = req.body.achievements;
     thing.answer = req.body.answer;
     thing.image_url = req.body.image_url;
+    thing.resumeURL = req.body.resumeURL;
+    thing.coolthings = req.body.coolthings;
+    thing.achievements = req.body.achievements;
+    thing.involvements = req.body.involvements;
 
     Fellows.update(
-        thing,
-        {
-            where: { user_id: req.params.user_id }
-        }).then(function(result){
-            // remove all tags, then re-add currently posted tags
-            Fellows.findOne({
-                where: {
-                    user_id: req.params.user_id
-                }
-            }).then(function(fellow) {
-                fellow.setTags(null).then(function() {
-                    var count=-1;
-                    if (Array.isArray(req.body.tags)) {
-                        req.body.tags.forEach(function ( tag ) {
-                            if( typeof tag.name !== "undefined" ) {
-                                (count === -1 ? 1 : count++);
-                                console.log(count);
-                                Tags.findOne({
-                                    where: {
-                                        name: {
-                                            ilike: tag.name
-                                        }
+            thing,
+            {
+                where: { user_id: req.params.user_id }
+            }).then(function(result){
+        // remove all tags, then re-add currently posted tags
+        Fellows.findOne({
+            where: {
+                user_id: req.params.user_id
+            }
+        }).then(function(fellow) {
+            fellow.setTags(null).then(function() {
+                if (Array.isArray(req.body.tags)) {
+                    req.body.tags.forEach(function ( tag ) {
+                        if( typeof tag !== "undefined" ) {
+                            Tags.findOne({
+                                where: {
+                                    name: {
+                                        ilike: tag
                                     }
-                                }).then(function (tagObj) {
-
-                                    // if tag found assign
-                                    if( tagObj ){
+                                }
+                            }).then(function (tagObj) {
+                                // if tag found assign
+                                if( tagObj ){
+                                    fellow.addTag(tagObj);
+                                }
+                                // else create and assign
+                                else{
+                                    Tags.create({
+                                        name: tag
+                                    }).then( function( tagObj ){
                                         fellow.addTag(tagObj);
-                                    }
-                                    // else create and assign
-                                    else{
-                                        Tags.create({
-                                            name: tag.name
-                                        }).then( function( tagObj ){
-                                            fellow.addTag(tagObj);
-                                        });
-                                    }
-                                    count--;
-                                });
-                            }
-                        });
-                        while(count !== 0);//BUSY WAIT LIKE A DUMBASS
-                    }
-                    getProfileByID(req, res);
-                });
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }/*
+                var loop_still = true;
+                console.log('i made it');
+                while (loop_still) {
+                    FellowTags.find({
+                        where: { fellow_id: fellow.id }
+                    }).then(function(fellow_tags) {
+                        console.log('tags length is now: ' + req.body.tags.length);
+                        if(fellow_tags.length === req.body.tags.length) {
+                            getProfileByID(req, res);
+                            loop_still = false;
+                        }
+                    });
+                }
+                */
+                //sleep(5000);
+                getProfileByID(req, res);
             });
         });
+    });
 }
 
 
@@ -284,6 +306,7 @@ function putApplicationById(req, res) {
     thing.university       = req.body.university;
     thing.major            = req.body.major;
     thing.graduation       = req.body.graduation;
+    thing.gpa              = req.body.gpa;
     thing.hometown         = req.body.hometown;
     thing.phone            = req.body.phone;
     thing.residentUSA      = req.body.residentUSA;

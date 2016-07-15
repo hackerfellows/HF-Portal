@@ -10,58 +10,40 @@ var Tags = models.tags;
 
 // GET /api/tags - get all tags
 app.get('/', function getTags(req, res) {
-
-
     Tags.all({
-
         order: '"name" ASC'
-
     }).then(function(tags) {
-
         res.send(tags);
     });
-
 });
 
 // POST /api/tags - create a tag
-app.post('/', Middleware.isLoggedIn, function createTag( req, res ){
-
+app.post('/', function createTag( req, res ){
     // find tags by case insensitive compare
     Tags.findOne({
-
         where: {
             name: {
-
                 ilike: req.body.name
             }
         }
-
     }).then( function( tag ){
-
         if( tag === null ){
-
             // no tag found, so create
             Tags.create({
-
                 'name': req.body.name
-
             }).then( function( tag ){
-
                 res.send( tag );
             });
         }
         else{
-
             // tag already exists
             res.status(400).send({ error: 'Tag already exists' });
         }
-
     });
-
 });
 
 // PUT /api/tags/:id - update a tag
-app.put('/:id', Middleware.isAdmin, function putTag(req, res) {
+app.put('/:id', function putTag(req, res) {
 
     Tags.findOne({
 
@@ -89,7 +71,7 @@ app.put('/:id', Middleware.isAdmin, function putTag(req, res) {
 
 
 // DELETE /votes/ - Deletes a fellow's vote
-app.delete('/:tag_id', Middleware.isAdmin, function (req, res) {
+app.delete('/:tag_id', function (req, res) {
 
     Tags.findOne({
 

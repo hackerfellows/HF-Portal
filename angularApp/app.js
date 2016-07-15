@@ -13,8 +13,8 @@
     //      components/componentModules.js otherwise the page will not run
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
-            'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts',
-            'app.helpers', 'app.calendar', 'app.application', 'app.api', 'app.dash', 'app.votes']);
+        'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 'app.helpers', 'app.calendar',
+        'app.admin', 'app.tags', 'app.adminUsers', 'app.adminApplicants', 'app.application', 'app.api', 'app.dash', 'app.votes']);
 
     /**
      * @name config
@@ -31,55 +31,95 @@
         .when('/fellows', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
+            resolve: { routePermission: Public }
         })
-        .when('/fellows/:fellow_id/:fellow_name', {
+        .when('/fellows/:fellow_id', {
             controller: 'ProfileSingleController',
             templateUrl: 'components/profileSingle/profileSingleWrapper.html',
+            resolve: { routePermission: Public }
         })
         .when('/about', {
-            templateUrl : 'assets/html/staticAbout.html'
+            templateUrl : 'assets/html/staticAbout.html',
+            resolve: { routePermission: Public }
         })
         .when('/application', {
-            templateUrl : 'assets/html/staticApplication.html'
+            templateUrl : 'assets/html/staticApplication.html',
+            resolve: { routePermission: Public }
         })
         .when('/contact', {
-            templateUrl : 'assets/html/staticContact.html'
+            templateUrl : 'assets/html/staticContact.html',
+            resolve: { routePermission: Public }
         })
         .when('/members', {
-            templateUrl : 'assets/html/staticMembers.html'
+            templateUrl : 'assets/html/staticMembers.html',
+            resolve: { routePermission: Public }
         })
         .when('/dash', {
             controller  : 'DashController',
-            templateUrl : 'components/dash/dash.html'
+            templateUrl : 'components/dash/dash.html',
+            resolve: { routePermission: Public }
         })
+
         .when('/fellows', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
+            resolve: { routePermission: Public }
         })
-        .when('/fellows/:fellow_id/:fellow_name', {
-            controller: 'ProfileController',
-            templateUrl: 'components/profileSingle/profileSingle.html',
+        .when('/fellows/:fellow_id', {
+            controller: 'ProfileSingleController',
+            templateUrl: 'components/profileSingle/profileSingleWrapper.html',
+            resolve: { routePermission: Public }
         })
         .when('/companies', {
             controller: 'ProfileGridController',
             templateUrl: 'components/profileGrid/profileGrid.html',
+            resolve: { routePermission: Public }
         })
-        .when('/companies/:company_id/:company_name', {
-            controller: 'ProfileController',
-            templateUrl: 'components/profileSingle/profileSingle.html',
+        .when('/companies/:company_id', {
+            controller: 'ProfileSingleController',
+            templateUrl: 'components/profileSingle/profileSingleWrapper.html',
+            resolve: { routePermission: Public }
         })
         .when('/calendar', {
             controller: 'CalendarController',
             templateUrl: 'components/calendar/calendar.html',
             resolve: { routePermission: Public }
         })
+        .when('/admin', {
+            controller: 'AdminController',
+            templateUrl: 'components/admin/admin.html',
+            resolve: { routePermission: Public }
+        })
+        .when('/admin/tags', {
+            controller: 'TagsController',
+            templateUrl: 'components/admin/tags/tags.html',
+            resolve: { routePermission: Public }
+        })
+        .when('/admin/users', {
+            controller: 'AdminUsersController',
+            templateUrl: 'components/admin/users/adminUsers.html',
+            resolve: { routePermission: Public }
+        })
+        .when('/admin/applicants', {
+            controller: 'AdminApplicantsController',
+            templateUrl: 'components/admin/applicants/adminApplicants.html',
+            resolve: { routePermission: Public }
+        })
+        .when('/admin/calendar', {
+            controller: 'AdminController',
+            templateUrl: 'components/admin/admin.html',
+            resolve: { routePermission: Public }
+        })
+
         .when('/application/fellow', {
             controller: 'FellowAppController',
             templateUrl: 'components/application/partials/fellowApplication.html',
+            resolve: { routePermission: Public }
         })
         .when('/application/company', {
             controller: 'CompanyAppController',
             templateUrl: 'components/application/partials/companyApplication.html',
+            resolve: { routePermission: Public }
         })
         .when('/company/votes', {
             controller: 'VotesController',
