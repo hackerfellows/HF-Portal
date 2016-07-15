@@ -30,15 +30,21 @@
 
     // Determine sheet number from user session information
     var sheetNumber = assignSheetNumber(User);
+    //sheetNumber = 1;
     $scope.invalidUser = (sheetNumber == 0);
     $scope.userJustApplied = (sheetNumber == 2 || sheetNumber == 4);
+    $scope.isUserAdmin = (sheetNumber == 5);
 
     $scope.events = [];
     var url = 'https://spreadsheets.google.com/feeds/list/1rUiabmgoujPc1EWCSCvGiDhk80c9Y8ykcQ57D2Z7hfI/'+sheetNumber+'/public/values?alt=json';
 
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
-
+      //Don't try to fetch data that is not there
+      if($scope.invalidUser || $scope.isUserAdmin)
+      {
+        return;
+      }
       $scope.webjson = $.getJSON(url).done( function(data,status){
         //grab spreadsheet data from google sheet
         $scope.spreadsheet = data;
@@ -160,11 +166,15 @@ Sheet Number:
 2. Non-Accepted Company
 3. Accepted Fellow
 4. Non-Accepted Fellow
+5. Admin
 0. ERROR - no conditions met
 */
 function assignSheetNumber(User) {
   // Only provide calendar to logged in users
   var toReturn = 0;
+  if(User.isUserAdmin() ){
+    return 5;
+  }
   if( User.isUserLoggedIn() ){
 
     // The User is a company
