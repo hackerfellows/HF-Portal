@@ -1,5 +1,27 @@
 /*
- *
+    company.name
+    company.website
+    company.city
+    company.industry
+    company.contact_name
+    company.contact_email
+    company.contact_phone
+    company.map
+    company.logo
+    company.description
+    company.age
+    company.staffcount
+    company.value_prop
+    company.whyHF
+    company.developer_type
+    company.developer_type
+    company.developer_type
+    company.devneeds[0]
+    company.devneeds[1]
+    company.devneeds[2]
+    company.devneeds[3]
+    company.devneeds[4]
+    company.ideal_dev
  */
 
 
