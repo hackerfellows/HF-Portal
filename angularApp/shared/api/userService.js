@@ -72,7 +72,7 @@
             $http.get( '/api/v2/users/confirm-login' )
                 .then(function (response) {
                     console.log(response);
-                    if (response.data.success == true) {
+                    if (response.data.success === true) {
                         console.log("User is logged in");
                         setCredentials(
                             response.data.user.id,

@@ -45,9 +45,9 @@
         $scope.apply = function(fellow) {
             console.log("applying");
             Entities.updateApplication(fellow, "fellows");
-        }
+        };
         $scope.cancel = function() {
             console.log("Cancel is a stub function");
-        }
+        };
     }
 })();
