@@ -22,14 +22,14 @@
      */
     function Entities($http, User) {
         return {
-
             getAll: getAll,
             getById: getById,
             create: create,
             update: update,
             destroy: destroy,
             getApplication: getApplication,
-            updateApplication: updateApplication
+            updateApplication: updateApplication,
+            getApplicants: getApplicants 
         };
 
         /**
@@ -78,8 +78,16 @@
          * @name destroy
          * @desc destroy a fellow record
          */
-         function destroy(id, type) {
+        function destroy(id, type) {
             return $http.delete('/api/v2/' + type + '/' + id);
+        }
+
+        /**
+         * @name getApplicants 
+         * @desc gets unaccepted applicants
+         */
+        function getApplicants(type) {
+            return $http.get('/api/v2/' + type + '/unaccepted');
         }
     }
 })();

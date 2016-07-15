@@ -18,28 +18,20 @@
 
         console.log("in admin applicants controller"); 
 
-        $scope.fellows = [];
-        $scope.companies = [];
+        $scope.applicants = [];
         $scope.userListLoad = function() {
 
-            if( $scope.fellows.length === 0 ) {
+            if( $scope.applicants.length === 0 ) {
 
-                Entities.getAll('fellows').success(function (fellows) {
+                Entities.getApplicants('fellows').success(function (applicants) {
 
-                    $scope.fellows = fellows;
-                    console.log("fellows retrieved");
+                    $scope.applicants = applicants;
+                    console.log("got applicants");
 
                 });
             }
 
-            if( $scope.companies.length === 0 ) {
-
-                Entities.getAll('companies').success(function (companies) {
-
-                    $scope.companies = companies;
-                     console.log("companies retrieved");
-                });
-            }
+            
         };
         $scope.userListLoad();
 

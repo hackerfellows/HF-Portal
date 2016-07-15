@@ -8,28 +8,48 @@
 
 
 					<h2>Applicants</h2>
+                    <h3>Fellows</h3>
 					<table class="table table-striped">
 						<thead>
 						<tr>
 							<th>Name</th>
 							<th>Email</th>
 							<th class="stat">View Application</th>
+							<th>Accept</th>						
 							<th>Reject</th>						
 						</thead>
 						<tbody>
 						<tr ng-repeat="fellow in fellows">
-							<td>{{  fellow.first_name + " " + fellow.last_name }}</td>
+							<td>{{ fellow.first_name + " " + fellow.last_name }}</td>
 							<td>{{ fellow.user.email }}</td>
+							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
 							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
 							<td width="30"><a href ng-click="rejectApplicant(fellow)"><i class="fa fa-times text-danger"></i></a></td>
 						</tr>
 
 						</tbody>
 					</table>
+                    <h3>Companies</h3>
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th class="stat">View Application</th>
+							<th>Accept</th>						
+							<th>Reject</th>						
+						</thead>
+						<tbody>
+						<tr ng-repeat="fellow in fellows">
+							<td>{{ fellow.first_name + " " + fellow.last_name }}</td>
+							<td>{{ fellow.user.email }}</td>
+							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
+							<td><a href ng-click="viewApplicant(fellow)"><i class="fa fa-pencil-square-o"></i></a></td>
+							<td width="30"><a href ng-click="rejectApplicant(fellow)"><i class="fa fa-times text-danger"></i></a></td>
+						</tr>
 
-
-
-				</div>
+						</tbody>
+					</table>
 
 			</div>
 
