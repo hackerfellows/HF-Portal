@@ -5,3 +5,4 @@
 - User Exeperience
 - Calendar
 - Profile
+  - Refactored (duplicate code between entities)
