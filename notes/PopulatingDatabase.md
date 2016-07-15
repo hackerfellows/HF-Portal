@@ -1,18 +1,38 @@
 # Populating Database
+## Create Test Data: [Mockaroo](https://www.mockaroo.com/projects/1254)
 
-## How To Populate
+## Load Data
+### 0.
+In Vagrant, move into database directory
 ```
-bash populateDb.sh
+cd database
+```
+
+### 1.
+Run script to drop tables using Postgres
+```
+./resetDb.sh sql localhost
+```
+
+### 2.
+Run server to create tables using Sequelize
+```
+gulp nodemon
+```
+
+### 3.
+Run script to insert data using Postgres
+```
+./populateDb.sh sql localhost
 ```
 
 ## Test Dataset
-
 Users
 - 1 admin
-- 22 fellows
-- 27 companies
+- 19 fellows
+- 30 companies
 
-## Notes
+## Maintainer Notes
 Log into Postgres command prompt
 ```
 psql -U hf -h localhost -p 5432 -d hfportal

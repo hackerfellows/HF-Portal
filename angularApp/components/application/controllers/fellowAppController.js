@@ -11,13 +11,7 @@
  * user.dreamjob
  * user.resumeURL*
  * user.coolthings
- * user.referral.friend *referral is a text field*
- * user.referral.careerfair
- * user.referral.club
- * user.referral.investdetroit
- * user.referral.grandcircus
- * user.referral.other
- * user.referral.othervalue
+ * user.referral *referral is a text field*
  * user.whyHF
  * user.MIimpact
  * user.developer_type*
@@ -37,14 +31,22 @@
         .module('app.application.controllers')
         .controller('FellowAppController', FellowAppController);
 
-    FellowAppController.$inject = ['$scope'];
+    FellowAppController.$inject = ['$scope', 'User', 'Entities'];
 
-    function FellowAppController($scope) {
+    function FellowAppController($scope, User, Entities) {
         console.log("FellowAppController loaded");
-        function apply(fellow) {
-            console.log("Apply is a stub function");
+
+        initFormData();
+
+        function initFormData() {
+            $scope.fellow = Entities.getApplication("fellows");
         }
-        function cancel() {
+
+        $scope.apply = function(fellow) {
+            console.log("applying");
+            Entities.updateApplication(fellow, "fellows");
+        }
+        $scope.cancel = function() {
             console.log("Cancel is a stub function");
         }
     }
