@@ -16,6 +16,8 @@ fellows
     /profile/:user_id
 	GET:	get one fellow's profile information
 	PUT:	udpate one fellow's profile information
+		if updating tags, do not trust return data -
+		make a GET call afterwards, weird async stuff
 
     /application/:user_id
 	GET:	get one fellow's application
@@ -34,6 +36,8 @@ fellows
     /profile/:user_id
 	GET:	get one company's profile information
 	PUT:	udpate one company's profile information
+		if updating tags, do not trust return data -
+		make a GET call afterwards, weird async stuff
 
     /application/:user_id
 	GET:	get one company's application
