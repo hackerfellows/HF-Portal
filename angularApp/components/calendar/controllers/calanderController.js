@@ -70,11 +70,11 @@
 
 
           // Replace icon spaces with underscores
-          var icon        = icon.replace(/ /g,"_");
+          icon        = icon.replace(/ /g,"_");
 
           // Make datetime variable from concatnated date + time if time is listed
           var datetime = date[0];
-          if (time != "") {
+          if (time !== "") {
             datetime += " at " + time ;
           }
 
@@ -84,8 +84,8 @@
           curDate = new Date(curDateString);
           var eventDate = new Date(date[0] + date[1]);
 
-          $scope.showMoreInfo.push(information != "");
-          $scope.hasOutsideLink.push(outsideLink != "");
+          $scope.showMoreInfo.push(information !== "");
+          $scope.hasOutsideLink.push(outsideLink !== "");
 
           // Uncomment to show individual entries
           //console.log(entry_array[entry]);

@@ -1,28 +1,21 @@
 /**
-* DashController
-* @namespace app.dash.controllers
-*/
+ * DashController
+ * @namespace app.dash.controllers
+ */
 (function () {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('app.dash.controllers')
-    .controller('DashController', DashController);
+    angular
+        .module('app.dash.controllers')
+        .controller('DashController', DashController);
 
-  DashController.$inject = ['$scope', 'cats'];
+    DashController.$inject = ['$scope', 'User'];
 
-  /**
-  * @namespace DashController
-  */
-  function DashController($scope, cats) {
+    /**
+     * @namespace DashController
+     */
+    function DashController($scope, User) {
 
-    var vm = this;
-
-    activate();
-
-    function activate() {
-      //console.log('activated dash controller!');
-      //dash.all();
+        $scope.currentID = User.getCurrentUser().id;
     }
-  }
 })();

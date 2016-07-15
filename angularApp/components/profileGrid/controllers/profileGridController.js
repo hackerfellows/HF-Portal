@@ -17,7 +17,7 @@
      * @namespace CompaniesController
      */
     function ProfileGridController($scope, $location, Entities, HFHelpers) {
-
+        $scope.helpers = HFHelpers;
         var whichEntity = "";
 
         //Decide if the path is /fellows or /companies
@@ -35,11 +35,12 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-        Entities.allWithUser($scope.whichEntity).success(function (result) {
+        Entities.getAll($scope.whichEntity).success(function (result) {
+            console.log("profilegrid", result);
             $scope.entityList = result;
         });
 
-        $scope.helpers = HFHelpers;
+        
         /*
         $scope.openModal = function (company) {
 

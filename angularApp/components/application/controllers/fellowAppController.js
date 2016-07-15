@@ -31,23 +31,27 @@
         .module('app.application.controllers')
         .controller('FellowAppController', FellowAppController);
 
-    FellowAppController.$inject = ['$scope', 'User', 'Entities'];
+    FellowAppController.$inject = ['$scope', 'Entities', 'User'];
 
-    function FellowAppController($scope, User, Entities) {
-        console.log("FellowAppController loaded");
+    function FellowAppController($scope, Entities, User) {
 
         initFormData();
 
         function initFormData() {
-            $scope.fellow = Entities.getApplication("fellows");
+            Entities.getApplication(User.getCurrentUser(), "fellows").then(function(thing) {
+                $scope.fellow = thing.data.data;
+            }, function() {
+                console.log("Error in Entities.getAppliction()");
+            });
         }
 
         $scope.apply = function(fellow) {
-            console.log("applying");
             Entities.updateApplication(fellow, "fellows");
-        }
-        $scope.cancel = function() {
-            console.log("Cancel is a stub function");
-        }
+            showToastSuccess("Application submitted");
+        };
+        $scope.cancel = function(fellow) {
+            Entities.updateApplication(fellow, "fellows");
+            showToastInfo("Application saved");
+        };
     }
 })();

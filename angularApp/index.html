@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en" ng-app="app">
     <head>
         <title>Hacker Fellows Portal</title>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -16,30 +13,33 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" type="text/css"/>
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap2/bootstrap-switch.min.css" type="text/css"/>
+
         <link rel="stylesheet" href="assets/css/global.css" type="text/css"/>
+        <link rel="stylesheet" href="assets/css/toast.css" type="text/css"/>
         <link rel="stylesheet" href="assets/css/newdash.css" type="text/css">
 
         <!-- Body Copy Font -->
-        <!--<link href='https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700,300italic,700italic' rel='stylesheet'
-        type='text/css'>-->
+        <!-- <link href='https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700,300italic,700italic' rel='stylesheet' type='text/css'> -->
+        <link href='https://code.cdn.mozilla.net/fonts/fira.css' rel='stylesheet' type='text/css'>
+
+
         <!-- Header Font -->
         <link href='https://fonts.googleapis.com/css?family=Dosis:400,600,700' rel='stylesheet' type='text/css'>
-
-
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500" rel="stylesheet">
         <!--link rel="stylesheet" href="public/assets/stylesheets/vendor/select.min.css"-->
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
-
         <!--
-        <link rel="stylesheet" href="public/assets/stylesheets/vendor/bootstrap-switch.min.css">
+            <link rel="stylesheet" href="public/assets/stylesheets/vendor/bootstrap-switch.min.css">
 
-        <link rel="stylesheet" href="public/assets/stylesheets/style.css" type="text/css"/>
-        -->
+            <link rel="stylesheet" href="public/assets/stylesheets/style.css" type="text/css"/>
+            -->
     </head>
     <body>
 
         <nav class="hackernav  navbar-inverse navbar-fixed-top" ng-controller="NavbarController">
             <div class="container-fluid">
                 <div class="navbar-header">
+
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -158,27 +158,27 @@
                         </div>
                     </a>
                 </div>
+
                 <div class="collapse navbar-right navbar-collapse" id="myNavbar">
                     <ul class="theNavLinks nav navbar-nav">
                         <li><a href="#/about">About</a></li>
+                        <li><a href="/#/contact" ng-hide="isUserLoggedIn()">Contact Us</a></li>
                         <li><a href="/#/application" ng-hide="isUserLoggedIn()">App Info</a></li>
                         <li><a href="/#/dash" ng-show="isUserFellow()">Dashboard</a></li>
                         <li><a href="/#/calendar" ng-show="isUserLoggedIn()">Calendar</a></li>
-                        <li><a href="/#/profile/fellow" ng-show="isUserFellow()">Profile</a></li>
-                        <li><a href="/#/profile/company" ng-show="isUserCompany()">Profile</a></li>
+                        <!-- li><a href="/#/company/votes" ng-show="isUserCompany()">Votes</a></li>
+                        <li><a href="/#/fellow/votes" ng-show="isUserFellow()">Votes</a></li -->
                         <li><a href="/#/members" ng-hide="isUserLoggedIn()">Participants</a></li>
-                        <li><a href="/#/contact" ng-hide="isUserLoggedIn()">Contact Us</a></li>
                     </ul>
                     <ul class="theNavLogin nav navbar-nav navbar-right">
-                        <li><a href="/#/application/company" ng-show="isUserCompany()">Apply</a></li>
-                        <li><a href="/#/application/fellow" ng-show="isUserFellow()">Apply</a></li>
+                        <li><a href="/#/application/company" ng-show="isUserCompany() && !isUserAccepted()">Apply</a></li>
+                        <li><a href="/#/application/fellow" ng-show="isUserFellow() && !isUserAccepted()">Apply</a></li>
                         <li><a ng-hide="isUserLoggedIn()" ng-click="openLoginModal()">Login</a></li>
                         <li><a ng-show="isUserLoggedIn()" ng-click="logoutUser()">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
         <div class="container main-content" ng-view=""></div>
         <div class="toast toast-success"></div>
         <div class="toast toast-failure"></div>
