@@ -45,8 +45,8 @@
         .when('/contact', {
             templateUrl : 'assets/html/staticContact.html'
         })
-        .when('/groups', {
-            templateUrl : 'assets/html/groups.html'
+        .when('/members', {
+            templateUrl : 'assets/html/staticMembers.html'
         })
         .when('/dash', {
             controller  : 'DashController',
