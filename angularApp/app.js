@@ -97,7 +97,7 @@
         var type = User.getType();
         deferred.resolve();
         return deferred.promise; 
-    }
+    };
 
     var Restricted = function($location, $q, User) {
         var deferred = $q.defer();
@@ -110,6 +110,6 @@
             deferred.reject();
         }
         return deferred.promise; 
-    }
+    };
 
 })();

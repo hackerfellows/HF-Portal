@@ -132,9 +132,21 @@
             else return false;
         }
 
+        function getFlags(){
+            return $http.get("/api/v2/users/flags/" + currentUser.id);
+        }
+
         function isUserAccepted(){
-            console.log("isUserAccepted is just a stub, returning true");
-            return true;
+            getFlags().then(function(stuff){
+                console.log(stuff);
+                if (stuff.data.data.accepted === 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }, function(stuff) {
+                return false;
+            });
         }
 
         function isUserFellow(){
