@@ -24,7 +24,7 @@
 
             if( $scope.fellows.length === 0 ) {
 
-                Entities.allWithUser('fellows').success(function (fellows) {
+                Entities.getAll('fellows').success(function (fellows) {
 
                     $scope.fellows = fellows;
                     console.log("fellows retrieved");
@@ -34,7 +34,7 @@
 
             if( $scope.companies.length === 0 ) {
 
-                Entities.allWithUser('companies').success(function (companies) {
+                Entities.getAll('companies').success(function (companies) {
 
                     $scope.companies = companies;
                      console.log("companies retrieved");
@@ -44,7 +44,7 @@
         $scope.userListLoad();
 
 
-        $scope.viewApplicant = function(fellow){
+        $scope.viewApplicant = function(applicant){
 
             // send user data to service
 
@@ -54,9 +54,9 @@
                 controller: 'ViewApplicantModalInstanceController',
                 size: 'md',
                 resolve: {
-                    fellow: function() {
+                    applicant: function() {
 
-                        return fellow;
+                        return applicant;
                     }
                 }
 
@@ -68,17 +68,17 @@
 
 
 
-        $scope.rejectApplicant = function( fellow ){
+        $scope.rejectApplicant = function(applicant ){
 
-            var c = confirm( "Are you sure you want to reject" + fellow.first_name + " " + fellow.last_name + "?");
+            var c = confirm( "Are you sure you want to reject" + applicant.first_name + " " + applicant.last_name + "?");
 
             if( c ){
 
-                // remove fellow
-//                Fellows.destroy( fellow.id ).then( function(){
+                // remove applicant
+//                Fellows.destroy( applicant.id ).then( function(){
 
                     // now remove user
-//                    User.destroy( fellow.user_id).then( function(){
+//                    User.destroy( applicant.user_id).then( function(){
 
                         // reload users
 //                        $window.location.reload();
@@ -102,11 +102,11 @@
         .module('app.adminApplicants.controllers')
         .controller('ViewApplicantModalInstanceController', ViewApplicantModalInstanceController);
 
-    ViewApplicantModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'Entities', 'fellow', 'User' ];
-    function ViewApplicantModalInstanceController ($scope, $uibModalInstance, Entities, fellow, User) {
+    ViewApplicantModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'Entities', 'applicant', 'User' ];
+    function ViewApplicantModalInstanceController ($scope, $uibModalInstance, Entities, applicant, User) {
 
-        $scope.user = fellow.user;
-        $scope.fellow = fellow;
+        $scope.user = applicant.user;
+        $scope.applicant = applicant;
 
         $scope.init = function(){
 
@@ -114,16 +114,16 @@
 
                 onText: "Visible",
                 offText: "Hidden",
-                state: $scope.fellow.enabled,
+                state: $scope.applicant.enabled,
                 onSwitchChange: function (event, state) {
 
-                    $scope.fellow.enabled = ( state ) ? 1 : 0;
+                    $scope.applicant.enabled = ( state ) ? 1 : 0;
                 }
             });
         };
 
         $scope.ok = function ok() {
-
+            //This needs to make an api call to the database to update
             console.log("in function ok");
 
         };
