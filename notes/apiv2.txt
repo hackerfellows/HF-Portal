@@ -17,16 +17,16 @@ All other calls need user level authentication
 		GET:	Get specific application based on fellow id
 		PUT:	update a specific fellow's application
 	/set_flags
-		POST:	enables or disables all fellow flags. Flags are application, profile, and vote. 
+		POST:	enables or disables all fellow flags. Flags are application, profile, and vote.
 			It enables or disables that feature for a fellow
-			An example of what we expect at thsis route is as follows
+			An example of what we expect at this route is as follows
 			{
 				flag: "application",
 				value: 0
 			}
 			This would disable applications for all users, in this case.
 	/set_flags/:id
-		POST:	enables or disables single fellow flag. Flags are application, profile, and vote. 
+		POST:	enables or disables single fellow flag. Flags are application, profile, and vote.
 			see /set_flags
 
 
@@ -65,7 +65,7 @@ All other calls need user level authentication
 	/user_id/:user_id
 		GET:	literally the same as a GET on /:id (/:id probably shouldn't return Users stuff)
 	/set_flags
-		POST:	enables or disables all company flags. Flags are application, profile, and vote. 
+		POST:	enables or disables all company flags. Flags are application, profile, and vote.
 			It enables or disables that feature for a company.
 			An example of what we expect at thsis route is as follows
 			{
@@ -74,7 +74,7 @@ All other calls need user level authentication
 			}
 			This would disable applications for all companies
 	/set_flags/:id
-		POST:	enables or disables single company flag. Flags are application, profile, and vote. 
+		POST:	enables or disables single company flag. Flags are application, profile, and vote.
 			see /set_flags
 
 
@@ -99,7 +99,7 @@ All other calls need user level authentication
 
 /api/v2/users
 	/:user_id/votes
-		GET:	gets votes for a specific user (both votesFor and votesCast)	
+		GET:	gets votes for a specific user (both votesFor and votesCast)
 	/login
 		POST:*	attempts login, redirects to /login/success or /login/failure
 	/confirm-login
@@ -111,4 +111,3 @@ All other calls need user level authentication
 	/:user_id
 		PUT:$	updates a user
 		DEL:+	deletes a user
-

@@ -13,8 +13,8 @@
     //      components/componentModules.js otherwise the page will not run
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
-            'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 
-            'app.helpers', 'app.calendar', 'app.application', 'app.api', 'app.dash']);
+            'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts',
+            'app.helpers', 'app.calendar', 'app.application', 'app.api', 'app.dash', 'app.votes']);
 
     /**
      * @name config
@@ -71,6 +71,7 @@
         .when('/calendar', {
             controller: 'CalendarController',
             templateUrl: 'components/calendar/calendar.html',
+            resolve: { routePermission: Public }
         })
         .when('/application/fellow', {
             controller: 'FellowAppController',
@@ -80,6 +81,10 @@
             controller: 'CompanyAppController',
             templateUrl: 'components/application/partials/companyApplication.html',
         })
+        .when('/votes', {
+            controller: 'VotesController',
+            templateUrl: 'components/votes/votes.html',
+        })
         //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //                   that runs if the user is logged in and editing
         .otherwise({ redirectTo: '/' });
@@ -87,7 +92,7 @@
     }]);
 
     /**
-     * @name Public 
+     * @name Public
      * @desc Checks if the user is logged in to allow them to continue, otherwise
      *       redirects to the home page
      */
@@ -96,7 +101,7 @@
         User.updateLoginStatus();
         var type = User.getType();
         deferred.resolve();
-        return deferred.promise; 
+        return deferred.promise;
     }
 
     var Restricted = function($location, $q, User) {
@@ -109,7 +114,7 @@
             $location.path("/");
             deferred.reject();
         }
-        return deferred.promise; 
+        return deferred.promise;
     }
 
 })();

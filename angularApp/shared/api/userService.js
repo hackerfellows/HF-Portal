@@ -18,6 +18,8 @@
     function User($rootScope, $http, $q) {
         var provides = {
             getVotes: getVotes,
+            createVote: createVote,
+            deleteVote: deleteVote,
             create: create,
             login: login,
             update: update,
@@ -50,7 +52,18 @@
          * @desc calls the api and returns a list of votes for that user
          */
         function getVotes( user_id ){
-            return $http.get('/api/v2/users/' + user_id + '/votes' );
+            return $http.get('/api/v2/votes/' + user_id );
+        }
+
+        function createVote(votee_id) {
+          return $http.post('/api/v2/votes', {
+            voter_id: currentUser.id,
+            votee_id: votee_id
+          });
+        }
+
+        function deleteVote(voter_id, vote_id) {
+          return $http.delete('/api/v2/votes/' + voter_id + '/' + vote_id);
         }
 
         /**
@@ -65,7 +78,7 @@
         /**
          * @name updateLoginStatus
          * @desc polls the api for the current login status of the user
-         *           and sets the local user object appropriatly 
+         *           and sets the local user object appropriatly
          */
         function updateLoginStatus () {
             console.log("Calling confimr long");
@@ -165,7 +178,7 @@
          */
         function clearCredentials() {
             var toReturn = $http.get( '/api/v2/users/logout' );
-            
+
             toReturn.then( function(){
                 currentUser = {};
             });
