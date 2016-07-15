@@ -13,7 +13,7 @@
         .module('app.profileSingle.controllers')
         .controller('ProfileSingleController', ProfileSingleController);
 
-    ProfileSingleController.$inject = ['$scope', '$location', 'HFHelpers', 
+    ProfileSingleController.$inject = ['$scope', '$location', 'HFHelpers',
                                        'Entities', 'User'];
     /**
      * @namespace ProfileController
@@ -46,7 +46,7 @@
             checkLogin();
         });
 
-        //Checks to see if the logged in user is viewing their own 
+        //Checks to see if the logged in user is viewing their own
         //entity page
         //only allow the edit button to be viewable if the logged in user
         function checkLogin(){
@@ -60,8 +60,10 @@
                 $scope.showEditButton = true;
             }
         }
-              
 
+        $scope.cancelEdit = function(){
+            $scope.editMode = false;
+        }
 
         function editFellow(){
             console.log("entering edit mode for fellow");
@@ -69,6 +71,11 @@
             $scope.editMode = true;
         }
 
+        function editCompany(){
+            console.log("entering edit mode for company");
+            //all the fields should be editable
+            $scope.editMode = true;
+        }
 
         //if fellow call fellow helper function
 
