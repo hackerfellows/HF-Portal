@@ -51,7 +51,7 @@ jQuery(document).ready(function($){
     // Determine sheet number from user session information
     var sheetNumber = assignSheetNumber();
      sheetNumber = 1;
-    $scope.invalidUser = (sheetNumber == 0);
+    $scope.invalidUser = (sheetNumber === 0);
 
     console.log(sheetNumber);
 
@@ -63,23 +63,19 @@ jQuery(document).ready(function($){
       method: 'GET',
       url: url
     }).then(function successCallback(response) {
-      console.log("goooood")
-      console.log(response)
+      console.log(response);
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
-      console.log("errrrrr")
-      console.log(response)
+      console.log(response);
       // called asynchronously if an error occurs
       // or server returns response with an error status.
     });
 
     // Grab the event JSON from our google spreadsheet URL
     $scope.getSpreadsheetData = function() {
-      console.log('Printing Sheet #'+sheetNumber)
 
       $scope.webjson = $.getJSON(url, function(data,error){
-        console.log("hi")
         console.log(error);
         //grab spreadsheet data from google sheet
         $scope.spreadsheet = data;
@@ -106,11 +102,11 @@ jQuery(document).ready(function($){
           //console.log(information)
 
           // Replace icon spaces with underscores
-          var icon        = icon.replace(/ /g,"_");
+          icon        = icon.replace(/ /g,"_");
 
           // Make datetime variable from concatnated date + time if time is listed
           var datetime = date[0];
-          if (time != "") {
+          if (time !== "") {
             datetime += " at " + time ;
           }
 
@@ -120,8 +116,8 @@ jQuery(document).ready(function($){
           curDate = new Date(curDateString);
           var eventDate = new Date(date[0] + date[1]);
 
-          $scope.showMoreInfo.push(information != "");
-          $scope.hasOutsideLink.push(outsideLink != "");
+          $scope.showMoreInfo.push(information !== "");
+          $scope.hasOutsideLink.push(outsideLink !== "");
 
           // Uncomment to show individual entries
           //console.log(entry_array[entry]);

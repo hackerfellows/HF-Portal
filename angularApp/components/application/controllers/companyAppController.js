@@ -41,7 +41,6 @@
         function initFormData() {
             Entities.getApplication("companies").then(function(thing) {
                 $scope.company = thing.data.data;
-                console.log(thing.data.data);
             }, function() {
                 console.log("Error in Entities.getAppliction()");
             });

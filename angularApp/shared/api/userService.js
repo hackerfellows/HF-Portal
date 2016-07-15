@@ -68,22 +68,17 @@
          *           and sets the local user object appropriatly 
          */
         function updateLoginStatus () {
-            console.log("Calling confimr long");
             $http.get( '/api/v2/users/confirm-login' )
                 .then(function (response) {
-                    console.log(response);
                     if (response.data.success === true) {
-                        console.log("User is logged in");
                         setCredentials(
                             response.data.user.id,
                             response.data.user.email,
                             response.data.user.userType
                         );
                     }else{
-                        console.log("HOW ARE YOU HERE");
                     }
                 },function(err){
-                    console.log("User is NOT logged in");
                     console.log(err);
                     currentUser = {};
                 });
@@ -138,7 +133,6 @@
 
         function isUserAccepted(){
             getFlags().then(function(stuff){
-                console.log(stuff);
                 if (stuff.data.data.accepted === 1) {
                     return true;
                 } else {

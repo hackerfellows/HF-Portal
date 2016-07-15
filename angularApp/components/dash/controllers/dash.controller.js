@@ -18,8 +18,6 @@
         var vm = this;
         activate();
         function activate() {
-            //console.log('activated dash controller!');
-            //dash.all();
         }
     }
 })();

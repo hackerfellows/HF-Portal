@@ -40,7 +40,6 @@
         function initFormData() {
             Entities.getApplication("fellows").then(function(thing) {
                 $scope.fellow = thing.data.data;
-                console.log(thing.data.data);
             }, function() {
                 console.log("Error in Entities.getAppliction()");
             });
@@ -49,12 +48,10 @@
         $scope.apply = function(fellow) {
             Entities.updateApplication(fellow, "fellows");
             showToastSuccess("Application submitted");
-            console.log($scope.fellow);
         };
         $scope.cancel = function(fellow) {
             Entities.updateApplication(fellow, "fellows");
             showToastInfo("Application saved");
-            console.log($scope.fellow);
         };
     }
 })();

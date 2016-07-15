@@ -29,7 +29,6 @@
         $scope.login = function(loginForm) {
             $scope.loginForm.errors = [];
             User.login(loginForm).success(function( data ){
-                console.log(data);
                 if( data.success ){
                     var user = data.user;
                     showToastSuccess("Login Succcess");

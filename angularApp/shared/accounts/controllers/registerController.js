@@ -35,7 +35,6 @@
             if( $scope.errors.length === 0 ){
                 // send user to API via Service
                 User.create(user).then( function(response) {
-                    console.log( user );
                     var user_id = response.data.id;
                     var routedisplay;
                     if( user.userType === "Fellow" ){
@@ -63,7 +62,6 @@
                         errors: []
                     };
                     User.login(loginObject).success(function( data ){
-                        console.log(data);
                         if( data.success ){
                             var user = data.user;
                             $window.location.href = "/#/application/" + routedisplay;
@@ -79,7 +77,6 @@
                     $uibModalInstance.dismiss('create');
                 }, function( response ){
                     // create user error callback
-                    console.log( response );
                     $scope.errors.push( response.data.error );
                 });
             }
