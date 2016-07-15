@@ -1,6 +1,6 @@
 <form class="form-horizontal">
     <fieldset class="col-md-8 col-md-offset-2">
-        <div class="panel panel-primary">
+        <div class="panel panel-danger">
             <div class="panel-heading text-center">
                 <h1 class="panel-title"> Basic Info</h1>
             </div>
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-danger">
             <div class="panel-heading text-center">
                 <h1 class="panel-title"> In-Depth Info</h1>
             </div>
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-danger">
             <div class="panel-heading text-center">
                 <h1 class="panel-title">Technical Needs</h1>
             </div>
@@ -123,11 +123,11 @@
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>What are your top 5 software development needs?</strong></p>
-                        <input class="form-control" type="text" ng-model="company.devneeds[0]" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds[1]" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds[2]" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds[3]" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds[4]" required/>
+                        <input class="form-control" type="text" ng-model="company.devneeds0" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds1" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds2" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds3" required/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds4" required/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -140,7 +140,7 @@
         </div>
         <div class="form-group well well-lg">
             <div class="col-md-3 col-md-offset-2 ">
-                <button class="btn btn-info btn-lg center-block">Save and come back later</button>
+                <button class="btn btn-info btn-lg center-block" ng-click="cancel(company)">Save for Later</button>
             </div> 
             <div class="col-md-3 col-md-offset-2 ">
                 <button type="submit" class="btn btn-success btn-lg center-block" ng-click="apply(company)">Submit Now</button>

@@ -32,15 +32,28 @@
         .module('app.application.controllers')
         .controller('CompanyAppController', CompanyAppController);
 
-    CompanyAppController.$inject = ['$scope'];
+    CompanyAppController.$inject = ['$scope', 'Entities'];
 
-    function CompanyAppController($scope) {
-        function apply(company) {
-            console.log("Apply is a stub function");
-            //Make api call for application
+    function CompanyAppController($scope, Entities) {
+
+        initFormData();
+
+        function initFormData() {
+            Entities.getApplication("companies").then(function(thing) {
+                $scope.company = thing.data.data;
+                console.log(thing.data.data);
+            }, function() {
+                console.log("Error in Entities.getAppliction()");
+            });
         }
-        function cancel() {
-            console.log("Cancel is a stub function");
-        }
+
+        $scope.apply = function(company) {
+            Entities.updateApplication(company, "companies");
+            showToastSuccess("Application submitted");
+        };
+        $scope.cancel = function(company) {
+            Entities.updateApplication(company, "companies");
+            showToastInfo("Application saved");
+        };
     }
 })();

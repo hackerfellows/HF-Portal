@@ -9,8 +9,8 @@
         .module('app.accounts.controllers')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['$scope', '$uibModalInstance', 'User'];//, 'Fellows', 'Companies' ];
-    function RegisterController ($scope, $uibModalInstance, User) {//, Fellows, Companies) {
+    RegisterController.$inject = ['$window', '$scope', '$uibModalInstance', 'User'];//, 'Fellows', 'Companies' ];
+    function RegisterController ($window, $scope, $uibModalInstance, User) {//, Fellows, Companies) {
         $scope.verify_password = "";
         $scope.create = function (user){
             $scope.errors = [];
@@ -37,7 +37,9 @@
                 User.create(user).then( function(response) {
                     console.log( user );
                     var user_id = response.data.id;
+                    var routedisplay;
                     if( user.userType === "Fellow" ){
+                        routedisplay = "fellow";
                         var fellow_post = {
                             first_name: "",
                             last_name: "",
@@ -46,6 +48,7 @@
                         //Insert user
                     }
                     else if( user.userType === "Company" ){
+                        routedisplay = "company";
                         var company_post = {
                             name: "",
                             user_id: user_id
@@ -58,11 +61,12 @@
                         email: user.email,
                         password: user.password,
                         errors: []
-                    }
+                    };
                     User.login(loginObject).success(function( data ){
                         console.log(data);
                         if( data.success ){
                             var user = data.user;
+                            $window.location.href = "/#/application/" + routedisplay;
                             $uibModalInstance.close();
                             User.setCredentials( user.id, user.email, user.userType );
                         }

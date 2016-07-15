@@ -86,7 +86,7 @@ app.get('/unaccepted', getUnnaccepted);
 
 app.get('/profile/:user_id', getProfileByID);
 
-app.put('/profile/:user_id', putProfileById)
+app.put('/profile/:user_id', putProfileById);
 
 app.get('/application/:user_id', getApplicationByID);
 
@@ -148,7 +148,7 @@ function getUnnaccepted(req, res) {
     }).then(function(companys) {
         res.send(companys);
     });
-};
+}
 
 
 
@@ -186,7 +186,7 @@ function getProfileByID(req, res){
     }).then(function(attributes) {
         res.json({success: attributes !== null, data: attributes});
     });
-};
+}
 
 
 function putProfileById(req, res) {
@@ -270,7 +270,7 @@ function getApplicationByID(req, res){
     }).then(function(attributes) {
         res.json({success: attributes !== null, data: attributes});
     });
-};
+}
 
 
 function putApplicationById(req, res) {
