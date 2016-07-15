@@ -92,7 +92,7 @@ app.post('/login', function(req, res, next) {
         };
         if (err || !user) {
             return res.json(errJSON);
-        };
+        }
         req.logIn(user, function(err) {
             if (err) {
                 return res.json(errJSON);
@@ -151,10 +151,24 @@ app.post('/create', function createUser(req, res) {
                         password: hash,
                         userType: req.body.userType
                     }).then(function(user) {
-			//No reason to return password to client, and this is clearly the best way
-			//to prevent this.
-			user.dataValues.password = undefined;
-                        res.send(user.dataValues);
+                        //No reason to return password to client, and this is clearly the best way
+                        //to prevent this.
+                        if(req.body.userType === 'Fellow') {
+                            Fellows.create({
+                                user_id : user.id
+                            }).then(function(fellow) {
+                                user.dataValues.password = undefined;
+                                res.send(user.dataValues);
+                            });
+                        }
+                        else if(req.body.userType === 'Company') {
+                            Companies.create({
+                                user_id : user.id
+                            }).then(function(company) {
+                                user.dataValues.password = undefined;
+                                res.send(user.dataValues);
+                            });
+                        }
                     });
                 });
             });
