@@ -178,30 +178,6 @@ app.post('/create', function createUser(req, res) {
     });
 });
 
-// PUT /users/:id - updates an existing user record
-app.put('/:user_id', Middleware.isOwnerOrAdmin, function putUser(req, res) {
-    Users.findOne({
-        where: {
-            id: req.params.user_id
-        }
-    }).then(function(user) {
-        user.email = req.body.email;
-        user.save();
-
-        if( req.body.password !== undefined && req.body.password.length > 0 ){
-            bcrypt.genSalt(10, function(err, salt) {
-                bcrypt.hash(req.body.password, salt, function(err, hash) {
-
-                    user.password = hash;
-                    user.save();
-                });
-            });
-        }
-        else{
-            res.send(user);
-        }
-    });
-});
 
 // DELETE /users/ - Deletes a user
 app.delete('/:user_id', function (req, res) {
@@ -266,21 +242,48 @@ app.delete('/:user_id', function (req, res) {
     });
 });
 
-app.get( '/applications', function( req, res ){
-    Users.scope('public').findOne({
+
+app.put('/flags', function putFlags(req, res) {
+    console.log("put user/flags");
+    res.status(501).json({success: false, error: "Not Implemented"});
+});
+app.put('/flags/:user_id', function putFlagsByID(req, res) {
+    console.log("put user/flags/" + req.params.user_id);
+    res.status(501).json({success: false, error: "Not Implemented"});
+});
+app.get('/flags/:user_id', function getFlagsByID(req, res) {
+    Users.findOne({
         where: {
             id: req.params.user_id
         },
-        include: [
-            // include specific fields for application
-        ]
+        attributes: ['accepted', 'enabled', 'vote_flag']
     }).then(function(user) {
-        var results = {
-            votesFor: user.VotesFor,
-            votesCast: user.VotesCast
-        };
-        res.send(results);
+        res.json({success: user !== null, data: user});
     });
 });
 
+//This is after flags because put /flags was interpreted as flags as user_id
+app.put('/:user_id', function putUser(req, res) {
+    Users.findOne({
+        where: {
+            id: req.params.user_id
+        }
+    }).then(function(user) {
+        user.email = req.body.email;
+        user.save();
+
+        if( req.body.password !== undefined && req.body.password.length > 0 ){
+            bcrypt.genSalt(10, function(err, salt) {
+                bcrypt.hash(req.body.password, salt, function(err, hash) {
+
+                    user.password = hash;
+                    user.save();
+                });
+            });
+        }
+        else{
+            res.send(user);
+        }
+    });
+});
 module.exports = app;
