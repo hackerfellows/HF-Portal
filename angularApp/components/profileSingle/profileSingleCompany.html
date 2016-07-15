@@ -18,19 +18,19 @@
         </div>
         <div class="col-md-9">
             <h1 class="name">{{ entityObject.name }}</h1>
-            About {{entityObject.name}}:
+            <strong>About {{entityObject.name}}:</strong>
             <p class="tagline">{{ entityObject.description }}</p>
-            What problem are we trying to solve?
+            <strong>What problem are we trying to solve?</strong>
             <div class="value_prop" ng-bind-html="helpers.paragraphize(entityObject.value_prop)"></div>
-            Why we want to join Hacker Fellows:
+            <strong>Why we want to join Hacker Fellows:</strong>
             <div class="whyHF" ng-bind-html="helpers.paragraphize(entityObject.whyHF)"></div>
-            Our idea junior level software dev:
+            <strong>Our ideal junior level software dev:</strong>
             <div class="ideal_dev" ng-bind-html="helpers.paragraphize(entityObject.ideal_dev)"></div>
 
-            <p class="stat industry"><span>Industry:</span> {{ entityObject.industry }}</p>
-            <p class="stat city"><span>City:</span> {{entityObject.city}}</p>
-            <p class="stat company-size"><span>Company Size:</span> {{ entityObject.company_size }}</p>
-            <p class="stat contact"><span>Primary Contact:</span> {{ entityObject.primary_contact }} | {{ entityObject.contact_email }}</p>
+            <p class="stat industry"><strong>Industry:</strong> {{ entityObject.industry }}</p>
+            <p class="stat city"><strong>City:</strong> {{entityObject.city}}</p>
+            <p class="stat company-size"><strong>Company Size:</strong> {{ entityObject.company_size }}</p>
+            <p class="stat contact"><strong>Primary Contact:</strong> {{ entityObject.primary_contact }} | {{ entityObject.contact_email }}</p>
             <p class="links"><a class="website" ng-href="{{ entityObject.website_url }}" target="_blank">Website</a></p>
         </div>
         <!-- This is the code for embedding a google map. Someone will need to set up their google developer account to obtain an API key-->
