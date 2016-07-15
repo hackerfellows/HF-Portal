@@ -163,7 +163,7 @@
                     <ul class="theNavLinks nav navbar-nav">
                         <li><a href="#/about">About</a></li>
                         <li><a href="/#/contact" ng-hide="isUserLoggedIn()">Contact Us</a></li>
-                        <li><a href="/#/application" ng-hide="isUserLoggedIn()">Apply</a></li>
+                        <li><a href="/#/application" ng-hide="isUserLoggedIn()">Why Apply</a></li>
                         <li><a href="/#/dash" ng-show="isUserFellow()">Dashboard</a></li>
                         <li><a href="/#/calendar" ng-show="isUserLoggedIn()">Calendar</a></li>
                         <li><a href="/#/company/votes" ng-show="isUserCompany()">Votes</a></li>
@@ -173,7 +173,7 @@
                     <ul class="theNavLogin nav navbar-nav navbar-right">
                         <li><a href="/#/application/company" ng-show="isUserCompany() && !isUserAccepted()">Apply</a></li>
                         <li><a href="/#/application/fellow" ng-show="isUserFellow() && !isUserAccepted()">Apply</a></li>
-                        <li><a ng-hide="isUserLoggedIn()" ng-click="openLoginModal()">Login</a></li>
+                        <li><a ng-hide="isUserLoggedIn()" ng-click="openLoginModal()">Login/Signup</a></li>
                         <li><a ng-show="isUserLoggedIn()" ng-click="logoutUser()">Logout</a></li>
                     </ul>
                 </div>
