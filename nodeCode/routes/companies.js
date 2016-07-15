@@ -103,7 +103,9 @@ function getAccepted(req, res) {
                 model: Users,
                 where: { accepted: 1 },
                 required: true,
-                attributes: ['id', 'email', 'userType'],
+                attributes: [
+                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                ],
                 include: [
                      {
                         model: Users,
@@ -138,7 +140,9 @@ function getUnnaccepted(req, res) {
                 model: Users,
                 where: { accepted: 0 },
                 required: true,
-                attributes: ['id', 'email', 'userType']
+                attributes: [
+                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                ],
             }
         ]
     }).then(function(companys) {
@@ -161,7 +165,9 @@ function getProfileByID(req, res){
             },
             {
                 model: Users,
-                attributes: ['id', 'email', 'userType'],
+                attributes: [
+                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                ],
                 include: [
                      {
                         model: Users,
