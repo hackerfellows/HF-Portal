@@ -27,15 +27,11 @@
         if (urlEntity === "fellows") {
             $scope.whichEntity = "fellow";
             $scope.whichEntityPlural = "fellows";
-            $scope.edit = function() {
-              editFellow();
-            }
+            
         } else if (urlEntity === "companies") {
             $scope.whichEntity = "company";
             $scope.whichEntityPlural = "companies";
-            $scope.edit = function(){
-              editCompany();
-            }
+
         } else {
             console.log("error");
         }
@@ -61,21 +57,37 @@
             }
         }
 
+        //Clicked from a profile view, in wrapper
+        $scope.edit = function() {
+              $scope.editMode = true;
+        }
+
+        //Clicked from edit profile view, in single edit
         $scope.cancelEdit = function(){
             $scope.editMode = false;
         }
 
-        function editFellow(){
-            console.log("entering edit mode for fellow");
-            //all the fields should be editable
-            $scope.editMode = true;
+        $scope.update = function(entityObject){
+            console.log("call API for fellow"); 
+
+            Entities.update(entityObject, $scope.whichEntityPlural).then(function(result) {
+
+                if (result["success"] === false){
+                    console.log("NOOOOOOO Something broke in the put to" + $scope.whichEntityPlural + " :(");
+                    //NOOOOOO :(
+                } else {
+                    console.log(":D", result);
+                    $scope.entityObject = result["data"];
+                    $scope.editMode = false;
+                } 
+            });
         }
 
-        function editCompany(){
-            console.log("entering edit mode for company");
-            //all the fields should be editable
-            $scope.editMode = true;
-        }
+        // $scope.updateCompany = function(){
+        //     console.log("entering edit mode for company");
+        //     //all the fields should be editable
+        //     $scope.editMode = true;
+        // }
 
         //if fellow call fellow helper function
 
