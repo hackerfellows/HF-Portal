@@ -111,10 +111,11 @@ app.get('/confirm-login', function (req, res) {
     var ret = {};
     var retStatus = -42;
     var user = req.user;
+    console.log(user);
     if( user !== undefined ) {
-        user.password = undefined;
         ret.success = true;
-        ret.user = user;
+        ret.user = user.dataValues;
+        ret.user.password = undefined;
         retStatus = 200;
     }else{
         ret.success = false;
