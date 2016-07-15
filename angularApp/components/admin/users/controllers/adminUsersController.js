@@ -212,7 +212,7 @@
 
         $scope.ok = function ok() {
 
-            Entities.updateProfile(fellow, 'fellows').then( function(){
+            Entities.update(fellow, 'fellows').then( function(){
                 console.log('fellow info being updated');
             });
             console.log("in function ok");
@@ -246,7 +246,7 @@
 
         $scope.ok = function ok() {
 
-            Entities.updateProfile(company, 'companies').then( function(){
+            Entitiy.update(company, 'companies').then( function(){
                 console.log('company info being updated');
             });
             console.log("in function ok");
