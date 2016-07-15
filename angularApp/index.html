@@ -160,14 +160,16 @@
                 </div>
                 <div class="collapse navbar-right navbar-collapse" id="myNavbar">
                     <ul class="theNavLinks nav navbar-nav">
-                        <li><a href="#">About</a></li>
+                        <li><a href="#/about">About</a></li>
+                        <li><a href="/#/application" ng-hide="isUserLoggedIn()">App Info</a></li>
+                        <li><a href="/#/dash" ng-show="isUserFellow()">Dashboard</a></li>
                         <li><a href="/#/calendar" ng-show="isUserLoggedIn()">Calendar</a></li>
                         <li><a href="/#/profile/fellow" ng-show="isUserFellow()">Profile</a></li>
                         <li><a href="/#/profile/company" ng-show="isUserCompany()">Profile</a></li>
-                        <li><a href="/#/">Companies</a></li>
+                        <li><a href="/#/members" ng-hide="isUserLoggedIn()">Participants</a></li>
+                        <li><a href="/#/contact" ng-hide="isUserLoggedIn()">Contact Us</a></li>
                     </ul>
                     <ul class="theNavLogin nav navbar-nav navbar-right">
-                        <li><a href="/#/#apply-section" ng-hide="isUserLoggedIn()">Apply</a></li>
                         <li><a href="/#/application/company" ng-show="isUserCompany()">Apply</a></li>
                         <li><a href="/#/application/fellow" ng-show="isUserFellow()">Apply</a></li>
                         <li><a ng-hide="isUserLoggedIn()" ng-click="openLoginModal()">Login</a></li>

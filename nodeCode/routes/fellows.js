@@ -48,7 +48,12 @@ var profile_attributes = [
     'developer_type',
     'question',
     'answer',
-    'image_url'
+    'image_url',
+    'resumeURL',
+    'developer_type',
+    'coolthings',
+    'achievements',
+    'involvements',
 ];
 
 // Image Upload
@@ -96,7 +101,9 @@ function getAccepted(req, res) {
             { model: Tags },
             {
                 model: Users,
-                attributes: ['id', 'email', 'userType'],
+                attributes: [
+                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                ],
                 where: { accepted: 1 },
                 required: true,
                 include: [
@@ -133,7 +140,9 @@ function getUnnaccepted(req, res) {
                 model: Users,
                 where: { accepted: 0 },
                 required: true,
-                attributes: ['id', 'email', 'userType']
+                attributes: [
+                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                ],
             }
         ]
     }).then(function(fellows) {
@@ -156,7 +165,9 @@ function getProfileByID(req, res){
             },
             {
                 model: Users,
-                attributes: ['id', 'email', 'userType'],
+                attributes: [
+                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                ],
                 include: [
                      {
                         model: Users,
