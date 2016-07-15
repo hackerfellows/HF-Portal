@@ -24,8 +24,6 @@ fellows
 	PUT:	update one fellow's application
 
 
-
-(not ready)
 /api/v2/companies
 
     /
@@ -56,7 +54,6 @@ fellows
 
 
 no one knows what these do right now, probably for profile stuff
-jessica plis
 /api/v2/votes
     /
 	POST:	pass voter and votee id in body and enforces voting rules

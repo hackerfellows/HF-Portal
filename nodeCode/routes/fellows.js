@@ -6,6 +6,7 @@ var Middleware = require('./middleware');
 
 var models = require('../models');
 var Fellows = models.fellows;
+var FellowTags = models.fellow_tag;
 var Companies = models.companies;
 var Tags = models.tags;
 var Users = models.users;
@@ -51,7 +52,6 @@ var profile_attributes = [
     'answer',
     'image_url',
     'resumeURL',
-    'developer_type',
     'coolthings',
     'achievements',
     'involvements',
@@ -75,7 +75,14 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-
+// sleeps for time (milliseconds)
+function sleep(time) {
+    var stop = new Date().getTime();
+    while(new Date().getTime() < stop + time) {
+        ;
+    }
+    return;
+}
 
 
 app.get('/', getAccepted);
@@ -209,6 +216,10 @@ function putProfileById(req, res) {
     thing.achievements = req.body.achievements;
     thing.answer = req.body.answer;
     thing.image_url = req.body.image_url;
+    thing.resumeURL = req.body.resumeURL;
+    thing.coolthings = req.body.coolthings;
+    thing.achievements = req.body.achievements;
+    thing.involvements = req.body.involvements;
 
     Fellows.update(
             thing,
@@ -247,7 +258,22 @@ function putProfileById(req, res) {
                             });
                         }
                     });
+                }/*
+                var loop_still = true;
+                console.log('i made it');
+                while (loop_still) {
+                    FellowTags.find({
+                        where: { fellow_id: fellow.id }
+                    }).then(function(fellow_tags) {
+                        console.log('tags length is now: ' + req.body.tags.length);
+                        if(fellow_tags.length === req.body.tags.length) {
+                            getProfileByID(req, res);
+                            loop_still = false;
+                        }
+                    });
                 }
+                */
+                //sleep(5000);
                 getProfileByID(req, res);
             });
         });
