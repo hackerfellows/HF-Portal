@@ -18,17 +18,19 @@
 
     function VotesController($scope,User) {
         $scope.votes = [];
-        console.log("WHYYYYYYYY")
-        User.getVotes().success(function(votes){
-            console.log("Votes:::::::")
-            console.log(votes);
+        User.getVotes().then(function(votes){
+            console.log("Votes:::::::");
+            console.log("Here are all the votes maaaaaaan:");
+            console.log(votes.data);
+            $scope.votes = votes.data;
+
+        }, function(){
+            console.log("error in votes");
         });//End of User.getVotes
-
-
 
         $scope.removeVote  = function(vote){
             console.log("remove this vote: " + vote);
-        }
+        };
 
     }
 })();

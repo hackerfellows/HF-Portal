@@ -1,6 +1,6 @@
 $fontSizeText: 14px;
 $fontSizeHeader: 20px;
-$fontSizeDate: 12px;
+$fontSizeDate: 16px;
 $timelineColor: #F26638;
 $boxShadowColor:  #FABE9B;
 
@@ -282,7 +282,7 @@ border-right: 7px solid #ffffff; }
     left: 122%;
     top: 6px;
     font-size: 16px;
-  font-size: 1rem;
+  font-size: $fontSizeDate;
 }
   .cd-timeline-block:nth-child(even) .cd-timeline-content {
   float: right; }

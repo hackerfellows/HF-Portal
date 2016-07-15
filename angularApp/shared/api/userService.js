@@ -51,15 +51,16 @@
          * @name getVotes
          * @desc calls the api and returns a list of votes for that user
          */
-        function getVotes( user_id ){
-            return $http.get('/api/v2/votes/' + user_id );
+        function getVotes(){
+            console.log(currentUser);
+            return $http.get('/api/v2/votes/' + currentUser.id );
         }
 
         function createVote(votee_id) {
-          return $http.post('/api/v2/votes', {
-            voter_id: currentUser.id,
-            votee_id: votee_id
-          });
+            return $http.post('/api/v2/votes', {
+                voter_id: currentUser.id,
+                votee_id: votee_id
+            });
         }
 
         function deleteVote(voter_id, vote_id) {
@@ -85,7 +86,7 @@
             $http.get( '/api/v2/users/confirm-login' )
                 .then(function (response) {
                     console.log(response);
-                    if (response.data.success == true) {
+                    if (response.data.success === true) {
                         console.log("User is logged in");
                         setCredentials(
                             response.data.user.id,

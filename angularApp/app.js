@@ -81,10 +81,17 @@
             controller: 'CompanyAppController',
             templateUrl: 'components/application/partials/companyApplication.html',
         })
-        .when('/votes', {
+        .when('/company/votes', {
             controller: 'VotesController',
-            templateUrl: 'components/votes/votes.html',
+            templateUrl: 'components/votes/companyVotes.html',
+            resolve: { routePermission: Restricted }
         })
+        .when('/fellow/votes', {
+            controller: 'VotesController',
+            templateUrl: 'components/votes/fellowVotes.html',
+            resolve: { routePermission: Restricted }
+        })
+        //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //Profile team TODO: add a route for /entities/:entity_id/:entity_name/edit
         //                   that runs if the user is logged in and editing
         .otherwise({ redirectTo: '/' });
@@ -102,7 +109,7 @@
         var type = User.getType();
         deferred.resolve();
         return deferred.promise;
-    }
+    };
 
     var Restricted = function($location, $q, User) {
         var deferred = $q.defer();
@@ -115,6 +122,6 @@
             deferred.reject();
         }
         return deferred.promise;
-    }
+    };
 
 })();
