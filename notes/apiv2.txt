@@ -7,92 +7,97 @@ All other calls need user level authentication
 
 /api/v2/fellows
 fellows
-    all accepted fellows' profile information
-	/fellows/
-	[get] profile columns, including tags and votes
+    /
+	GET:	get all acceptef fellows' profile information
 
-    all unaccepted fellows list application info
-	/fellows/unaccepted
-	[get] user_id, email, application columns
+    /unaccepted
+	GET:	get all unaccepted fellows' application info
 
-    one fellow's profile
-	/fellows/profile/:user_id
-	[get/put] profile columns, tags, votes
+    /profile/:user_id
+	GET:	get one fellow's profile information
+	PUT:	udpate one fellow's profile information
 
-    one fellow's application
-	/fellows/application/:user_id
-	[get/put] user_id, email, application columns
+    /application/:user_id
+	GET:	get one fellow's application
+	PUT:	update one fellow's application
 
-    set single flags for fellows
-	/fellows/set_flag
-	[put] pass in the flag (application, profile, vote, accepted, enabled) and the value (0 or 1)
+    /set_flag
+	PUT:	set single flag for all fellows
+		flags are: application, profile, vote, accepted, enabled
+		values are: 0, 1
+		example:
+		{
+		    flag: "application",
+		    value: 0
+		}
 
-    set single flag for 1 fellows
-	/fellows/set_flag/:user_id
-	[put] pass in the flag (application, profile, vote, accepted, enabled) and the value (0 or 1)
+    /set_flag/:user_id
+	PUT:	set single flag for one fellow
+		see /set_flag for flags, values, and example
+
 
 (not ready)
 /api/v2/companies
-	/
-		GET: 	get all fellows plus information from Users (email, user type, and votes)
-		POST:	create a new company, returns that user's json to client
-	/users
-		GET:	DEPRICATED
-	/applications
-		GET:	list all applications
-	/application/:id
-		GET:	Get specific application based on compnay id
-	/:id
-		GET:	get one company with Tags and Users row TODO: Should this return users?
-		PUT:$	updates an existing company's record and application
-		DEL:+	deletes an existing company's record and application
-	/user_id/:user_id
-		GET:	literally the same as a GET on /:id (/:id probably shouldn't return Users stuff)
-	/set_flags
-		POST:	enables or disables all company flags. Flags are application, profile, and vote. 
-			It enables or disables that feature for a company.
-			An example of what we expect at thsis route is as follows
-			{
-				flag: "application",
-				value: 0
-			}
-			This would disable applications for all companies
-	/set_flags/:id
-		POST:	enables or disables single company flag. Flags are application, profile, and vote. 
-			see /set_flags
+    /
+	GET:	get all accepted companies' profile information
+
+    /unaccepted
+	GET:	get all unaccepted companies' application info
+
+    /profile/:user_id
+	GET:	get one company's profile information
+	PUT:	udpate one company's profile information
+
+    /application/:user_id
+	GET:	get one company's application
+	PUT:	update one company's application
+
+    /set_flag
+	PUT:	set single flag for all companies
+		flags are: application, profile, vote, accepted, enabled
+		values are: 0, 1
+		example:
+		{
+		    flag: "application",
+		    value: 0
+		}
+
+    /set_flag/:user_id
+	PUT:	set single flag for one company
+		see /set_flag for flags, values, and example
 
 
 /api/v2/tags
-	/
-		GET:	gets all tags
-		POST:	creates a tag if one doesn't already exist
-	/:tag_id
-		PUT:+	updates a tag name
-	/:tag_id
-		DEL:+	removes tag
+    /
+	GET:	gets all tags
+	POST:	creates a tag if one doesn't already exist
+    /:tag_id
+	PUT:+	updates a tag name
+    /:tag_id
+	DEL:+	removes tag
 
 
 no one knows what these do right now, probably for profile stuff
 jessica plis
 /api/v2/votes
-	/
-		POST:	pass voter and votee id in body and enforces voting rules
-	/:voter_id
-		GET:$	gets votes of user by voter_id
-	/:voter_id/:vote_id
-		DEL:$	deletes a vote
+    /
+	POST:	pass voter and votee id in body and enforces voting rules
+    /:voter_id
+	GET:$	gets votes of user by voter_id
+    /:voter_id/:vote_id
+	DEL:$	deletes a vote
 
 
 /api/v2/users
-	/login
-		POST:*	attempts login, redirects to /login/success or /login/failure
-	/confirm-login
-		GET:	returns user if logged in, null if not
-	/logout
-		GET:	logs out
-	/create
-		POST:*	creates a new user
-	/:user_id
-		PUT:$	updates a user
-		DEL:+	deletes a user
+    /login
+	POST:*	attempts login, redirects to /login/success or /login/failure
+    /confirm-login
+	GET:	returns user if logged in, null if not
+    /logout
+	GET:	logs out
+    /create
+	POST:*	creates a new user
+    /:user_id
+	PUT:$	updates a user
+	DEL:+	deletes a user
 
