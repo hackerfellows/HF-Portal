@@ -172,72 +172,75 @@ function getProfileByID(req, res){
 };
 
 
-
 function putProfileById(req, res) {
+    var thing = {};
 
-    Companies.findOne({
+    thing.user_id = req.body.user_id;
+    thing.name = req.body.name;
+    thing.primary_contact = req.body.primary_contact;
+    thing.location = req.body.location;
+    thing.company_size = req.body.company_size;
+    thing.industry = req.body.industry;
+    thing.bio = req.body.bio;
+    thing.description = req.body.description;
+    thing.developer_type = req.body.developer_type;
+    thing.website_url = req.body.website_url;
+    thing.image_url = req.body.image_url;
+        
+    Companies.update(
+        thing,
+        {
+            where: { user_id: req.params.user_id }
+        }).then(function(result){
+            // remove all tags, then re-add currently posted tags
+            Companies.findOne({
+                where: {
+                    user_id: req.params.user_id
+                }
+            }).then(function(company) {
+                company.setTags(null).then(function() {
+                    var count=-1;
+                    if (Array.isArray(req.body.tags)) {
+                        req.body.tags.forEach(function ( tag ) {
+                            if( typeof tag.name !== "undefined" ) {
+                                (count === -1 ? 1 : count++);
+                                console.log(count);
+                                Tags.findOne({
+                                    where: {
+                                        name: {
+                                            ilike: tag.name
+                                        }
+                                    }
+                                }).then(function (tagObj) {
 
-        where: {
-            user_id: req.params.user_id
-        },
-        include: [{
-            model: Tags
-        }]
-
-    }).then(function(company) {
-
-        company.user_id = req.body.user_id;
-        company.name = req.body.name;
-        company.primary_contact = req.body.primary_contact;
-        company.location = req.body.location;
-        company.company_size = req.body.company_size;
-        company.industry = req.body.industry;
-        company.bio = req.body.bio;
-        company.description = req.body.description;
-        company.developer_type = req.body.developer_type;
-        company.website_url = req.body.website_url;
-
-        company.image_url = req.body.image_url;
-
-        company.save();
-
-        // remove all tags, then re-add currently posted tags
-        company.setTags(null).then(function() {
-            if (Array.isArray(req.body.tags)) {
-                req.body.tags.forEach(function ( tag ) {
-                    if( typeof tag.name !== "undefined" ) {
-                        Tags.findOne({
-                            where: {
-                                name: {
-                                    ilike: tag.name
-                                }
-                            }
-                        }).then(function (tagObj) {
-                            // if tag found assign
-                            if( tagObj ){
-                                company.addTag(tagObj);
-                            }
-                            // else create and assign
-                            else{
-                                Tags.create({
-                                    name: tag.name
-                                }).then( function( tagObj ){
-                                    company.addTag(tagObj);
+                                    // if tag found assign
+                                    if( tagObj ){
+                                        company.addTag(tagObj);
+                                    }
+                                    // else create and assign
+                                    else{
+                                        Tags.create({
+                                            name: tag.name
+                                        }).then( function( tagObj ){
+                                            company.addTag(tagObj);
+                                        });
+                                    }
+                                    count--;
                                 });
                             }
                         });
+                        while(count !== 0);//BUSY WAIT LIKE A DUMBASS
                     }
+                    getProfileByID(req, res);
+
                 });
-            }
-        });
-        
-        getProfileByID(req, res);
+
+            });
     });
-
-};
-
+}
 
 
+//
 function getApplicationByID(req, res){
 
     //res.send('GET request - get a company record');

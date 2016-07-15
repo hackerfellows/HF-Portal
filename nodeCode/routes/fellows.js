@@ -48,8 +48,7 @@ var profile_attributes = [
     'developer_type',
     'question',
     'answer',
-    'image_url',
-    'enabled',
+    'image_url'
 ];
 
 // Image Upload
@@ -181,9 +180,78 @@ function getProfileByID(req, res){
 
 
 function putProfileById(req, res) {
+    var thing = {};
 
-    Fellows.findOne({
+    thing.user_id = req.body.user_id;
+    thing.first_name = req.body.first_name;
+    thing.last_name = req.body.last_name;
+    thing.university = req.body.university;
+    thing.major = req.body.major;
+    thing.bio = req.body.bio;
+    thing.interests = req.body.interests;
+    thing.description = req.body.description;
+    thing.git_hub = req.body.git_hub;
+    thing.portfolio = req.body.portfolio;
+    thing.developer_type = req.body.developer_type;
+    thing.question = req.body.question;
+    thing.answer = req.body.answer;
+    thing.image_url = req.body.image_url;
 
+    Fellows.update(
+        thing,
+        {
+            where: { user_id: req.params.user_id }
+        }).then(function(result){
+            // remove all tags, then re-add currently posted tags
+            Fellows.findOne({
+                where: {
+                    user_id: req.params.user_id
+                }
+            }).then(function(fellow) {
+                fellow.setTags(null).then(function() {
+                    var count=-1;
+                    if (Array.isArray(req.body.tags)) {
+                        req.body.tags.forEach(function ( tag ) {
+                            if( typeof tag.name !== "undefined" ) {
+                                (count === -1 ? 1 : count++);
+                                console.log(count);
+                                Tags.findOne({
+                                    where: {
+                                        name: {
+                                            ilike: tag.name
+                                        }
+                                    }
+                                }).then(function (tagObj) {
+
+                                    // if tag found assign
+                                    if( tagObj ){
+                                        fellow.addTag(tagObj);
+                                    }
+                                    // else create and assign
+                                    else{
+                                        Tags.create({
+                                            name: tag.name
+                                        }).then( function( tagObj ){
+                                            fellow.addTag(tagObj);
+                                        });
+                                    }
+                                    count--;
+                                });
+                            }
+                        });
+                        while(count !== 0);//BUSY WAIT LIKE A DUMBASS
+                    }
+                    getProfileByID(req, res);
+                    
+                });
+                
+            });
+        });
+}
+
+
+//
+/*
         where: {
             user_id: req.params.user_id
         },
@@ -193,25 +261,6 @@ function putProfileById(req, res) {
 
     }).then(function(fellow) {
 
-        fellow.user_id = req.body.user_id;
-        fellow.first_name = req.body.first_name;
-        fellow.last_name = req.body.last_name;
-        fellow.university = req.body.university;
-        fellow.major = req.body.major;
-        fellow.bio = req.body.bio;
-        fellow.interests = req.body.interests;
-        fellow.description = req.body.description;
-        fellow.git_hub = req.body.git_hub;
-        fellow.portfolio = req.body.portfolio;
-        fellow.developer_type = req.body.developer_type;
-
-        fellow.question = req.body.question;
-        fellow.answer = req.body.answer;
-
-        fellow.image_url = req.body.image_url;
-        fellow.enabled = req.body.enabled;
-
-        fellow.save();
 
         // remove all tags, then re-add currently posted tags
         fellow.setTags(null).then(function() {
@@ -247,12 +296,12 @@ function putProfileById(req, res) {
     });
 
 };
-
+*/
 
 
 function getApplicationByID(req, res){
 
-    //res.send('GET request - get a company record');
+    //res.send('GET request - get a fellow record');
     Fellows.findOne({
         where: {
             user_id: req.params.user_id
@@ -267,44 +316,37 @@ function getApplicationByID(req, res){
 
 
 function putApplicationById(req, res) {
+    var thing = {};
+    thing.first_name       = req.body.first_name;
+    thing.last_name        = req.body.last_name;
+    thing.university       = req.body.university;
+    thing.major            = req.body.major;
+    thing.graduation       = req.body.graduation;
+    thing.hometown         = req.body.hometown;
+    thing.phone            = req.body.phone;
+    thing.residentUSA      = req.body.residentUSA;
+    thing.description      = req.body.description;
+    thing.dreamjob         = req.body.dreamjob;
+    thing.resumeURL        = req.body.resumeURL;
+    thing.coolthings       = req.body.coolthings;
+    thing.referral         = req.body.referral;
+    thing.whyHF            = req.body.whyHF;
+    thing.MIimpact         = req.body.MIimpact;
+    thing.developer_type   = req.body.developer_type;
+    thing.devskills        = req.body.devskills;
+    thing.achievements     = req.body.achievements;
+    thing.involvements     = req.body.involvements;
+    thing.git_hub          = req.body.git_hub;
+    thing.comments         = req.body.git_hub;
 
-    Fellows.findOne({
-
-        where: {
-            user_id: req.params.user_id
-        }
-
-    }).then(function(fellow) {
-        // update the fellow application data here with the req body data
-        fellow.first_name       = req.body.first_name;
-        fellow.last_name        = req.body.last_name;
-        fellow.university       = req.body.university;
-        fellow.major            = req.body.major;
-        fellow.graduation       = req.body.graduation;
-        fellow.hometown         = req.body.hometown;
-        fellow.phone            = req.body.phone;
-        fellow.residentUSA      = req.body.residentUSA;
-        fellow.description      = req.body.description;
-        fellow.dreamjob         = req.body.dreamjob;
-        fellow.resumeURL        = req.body.resumeURL;
-        fellow.coolthings       = req.body.coolthings;
-        fellow.referral         = req.body.referral;
-        fellow.whyHF            = req.body.whyHF;
-        fellow.MIimpact         = req.body.MIimpact;
-        fellow.developer_type   = req.body.developer_type;
-        fellow.devskills        = req.body.devskills;
-        fellow.achievements     = req.body.achievements;
-        fellow.involvements     = req.body.involvements;
-        fellow.git_hub          = req.body.git_hub;
-        fellow.comments         = req.body.git_hub;
-
-        fellow.save();
-
-        //res.json({ success: true });
-        getApplicationByID(req, res);
-    });
-
-};
+    Fellows.update(
+        thing,
+        {
+            where: {user_id: req.params.user_id }
+        }).then(function(result){
+            getApplicationByID(req, res);
+        });
+}
 
 
 module.exports = app;
