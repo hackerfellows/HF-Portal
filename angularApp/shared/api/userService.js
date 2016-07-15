@@ -32,7 +32,10 @@
             isUserFellow: isUserFellow,
             isUserAccepted: isUserAccepted,
             updateLoginStatus: updateLoginStatus,
-            isUserCompany: isUserCompany
+            isUserCompany: isUserCompany,
+            getUserFlags: getUserFlags,
+            setUserFlag: setUserFlag,
+            setAllFlags: setAllFlags
         };
 
         var currentUser = {};
@@ -172,7 +175,36 @@
 
             return toReturn;
         }
+       
 
+        //set single flag for all users 
+        //flags are application, profile, vote, accepted, enabled
+        //values are 0 and 1
+        //flags variable is a 
+        //
+        function setAllFlags(flag_in, value_in){
+            var thing = {flag: flag_in, value: value_in};
+            return $http.put('/api/v2/users/flags', thing)
+
+        }
+
+        //set single flag for one user
+        //flags are application, profile, vote, accepted, enabled
+        //values are 0 and 1
+        function setUserFlag(flag_in, value_in, user){
+            var thing = {flag: flag_in, value: value_in};
+            return $http.put('/api/v2/users/flags/' + user.id, thing)
+        
+        }
+        
+        //get all flags for ONE user
+        //flags are application, profile, vote, accepted, enabled
+        //values are 0 and 1
+
+        function getUserFlags(user){
+
+            return $http.get('/api/v2/users/flags/' + user.id);
+        }
 		return provides;
     }
 

@@ -29,7 +29,8 @@
             destroy: destroy,
             getApplication: getApplication,
             updateApplication: updateApplication,
-            getApplicants: getApplicants 
+            getApplicants: getApplicants,
+            updateProfile: updateProfile
         };
 
         /**
@@ -92,6 +93,11 @@
 
         function getApplication(user, type){
             return $http.get('/api/v2/' + type + '/profile/' + user.id );
+        }
+
+        function updateProfile(user, type){
+            console.log(user);
+            return $http.put('/api/v2/' + type + '/profile/' + user.id, user);
         }
     }
 })();

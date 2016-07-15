@@ -192,7 +192,8 @@ function getProfileByID(req, res){
 
 function putProfileById(req, res) {
     var thing = {};
-
+    console.log('putProfileById');
+    console.log(req.body);
     thing.user_id = req.body.user_id;
     thing.first_name = req.body.first_name;
     thing.last_name = req.body.last_name;

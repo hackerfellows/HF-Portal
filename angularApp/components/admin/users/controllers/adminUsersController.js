@@ -212,8 +212,11 @@
 
         $scope.ok = function ok() {
 
+            Entities.updateProfile(fellow, 'fellows').then( function(){
+                console.log('fellow info being updated');
+            });
             console.log("in function ok");
-
+            $uibModalInstance.dismiss('cancel');
         };
 
         $scope.cancel = function cancel() {
@@ -243,7 +246,11 @@
 
         $scope.ok = function ok() {
 
-            console.log("in the function ok with company");
+            Entities.updateProfile(company, 'companies').then( function(){
+                console.log('company info being updated');
+            });
+            console.log("in function ok");
+            $uibModalInstance.dismiss('cancel');
        };
 
         $scope.cancel = function cancel() {

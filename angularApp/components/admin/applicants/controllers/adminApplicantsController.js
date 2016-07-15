@@ -92,16 +92,10 @@
 
             if( c ){
 
-                // remove applicant
-//                Fellows.destroy( applicant.id ).then( function(){
-
-                    // now remove user
-//                    User.destroy( applicant.user_id).then( function(){
-
-                        // reload users
-//                        $window.location.reload();
-//                    });
-//                });
+                User.setUserFlag('accepted', 1, applicant.user).then( function(){
+                    console.log('accepted this applicant' + applicant.user.id);
+                    $window.location.reload();
+                });
             }
         };
 
@@ -151,7 +145,7 @@
         };
 
         $scope.ok = function ok() {
-            //This needs to make an api call to the database to update
+            //This does not need to make an api call since no update 
             console.log("in function ok");
 
         };

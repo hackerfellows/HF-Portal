@@ -249,11 +249,35 @@ app.put('/flags/:user_id',putFlagsByID);
 
 
 function putFlags(req, res) {
-    console.log("put user/flags");
-    res.status(501).json({success: false, error: "Not Implemented"});
+    console.log("put user/flags/" + req.params.user_id);
+    var thing = {};
+    switch(req.body.flag){
+        case "enabled":
+            thing.enabled = req.body.value;
+            break;
+        case "accepted":
+            thing.accepted = req.body.value;
+            break;
+        case "application_flag":
+            thing.application_flag = req.body.value;
+            break;
+        case "profile_flag":
+            thing.profile_flag = req.body.value;
+            break;
+        case "vote_flag":
+            thing.vote_flag = req.body.value;
+            break;
+    }
+    Users.update(
+        thing
+        ).then(function(result){
+            getFlagsByID(req,res);
+        });
+
 };
 function putFlagsByID(req, res) {
     console.log("put user/flags/" + req.params.user_id);
+    var thing = {};
     switch(req.body.flag){
         case "enabled":
             thing.enabled = req.body.value;
@@ -277,14 +301,13 @@ function putFlagsByID(req, res) {
         ).then(function(result){
             getFlagsByID(req,res);
         });
-    res.status(501).json({success: false, error: "Not Implemented"});
 };
 function getFlagsByID(req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id
         },
-        attributes: ['accepted', 'enabled', 'vote_flag']
+        attributes: ['accepted', 'enabled', 'vote_flag', 'profile_flag', 'application_flag']
     }).then(function(user) {
         res.json({success: user !== null, data: user});
     });
