@@ -44,7 +44,18 @@ var profile_attributes = [
     'description',
     'developer_type',
     'website_url',
-    'image_url'
+    'image_url',
+    'contact_email',
+    'map_url',
+    'value_prop',
+    'whyHF',
+    'developer_type',
+    'devneeds0',
+    'devneeds1',
+    'devneeds2',
+    'devneeds3',
+    'devneeds4',
+    'ideal_dev'
 ];
 // Image Upload
 // var upload = multer({ dest: './public/assets/images/' });

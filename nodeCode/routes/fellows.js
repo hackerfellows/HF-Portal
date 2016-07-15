@@ -48,7 +48,12 @@ var profile_attributes = [
     'developer_type',
     'question',
     'answer',
-    'image_url'
+    'image_url',
+    'resumeURL',
+    'developer_type',
+    'coolthings',
+    'achievements',
+    'involvements',
 ];
 
 // Image Upload
