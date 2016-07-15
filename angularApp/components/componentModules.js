@@ -99,10 +99,64 @@
     .module('app.calendar.controllers', []);
   //End Calendar
 
+
+  //admin
+  angular
+    .module('app.admin', [
+        'app.admin.controllers',
+        'app.admin.services'
+        ]);
+
+  angular
+    .module('app.admin.controllers', []);
+  angular
+    .module('app.admin.services', []);
+  //End admin
+
+  //admin-tags
+  angular
+    .module('app.tags', [
+        'app.tags.controllers',
+        'app.tags.services'
+        ]);
+
+  angular
+    .module('app.tags.controllers', ['ui.bootstrap']);
+  angular
+    .module('app.tags.services', []);
+  //End admin-tags
+ 
+  //admin-users
+  angular
+    .module('app.adminUsers', [
+        'app.adminUsers.controllers',
+        'app.adminUsers.services'
+        ]);
+
+  angular
+    .module('app.adminUsers.controllers', ['ui.bootstrap',  'app.profileSingle.services']);
+  angular
+    .module('app.adminUsers.services', []);
+  //End admin-users
+
+  //admin-applicants
+  angular
+    .module('app.adminApplicants', [
+        'app.adminApplicants.controllers',
+        'app.adminApplicants.services'
+        ]);
+
+  angular
+    .module('app.adminApplicants.controllers', ['ui.bootstrap',  'app.adminApplicants.services']);
+  angular
+    .module('app.adminApplicants.services', []);
+  //End admin-applicants
+
   angular
     .module('app.application', [
         'app.application.controllers'
     ]);
+
 
   angular
     .module('app.application.controllers', []);

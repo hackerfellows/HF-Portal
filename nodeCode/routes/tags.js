@@ -24,7 +24,7 @@ app.get('/', function getTags(req, res) {
 });
 
 // POST /api/tags - create a tag
-app.post('/', Middleware.isLoggedIn, function createTag( req, res ){
+app.post('/', function createTag( req, res ){
 
     // find tags by case insensitive compare
     Tags.findOne({
@@ -61,7 +61,7 @@ app.post('/', Middleware.isLoggedIn, function createTag( req, res ){
 });
 
 // PUT /api/tags/:id - update a tag
-app.put('/:id', Middleware.isAdmin, function putTag(req, res) {
+app.put('/:id', function putTag(req, res) {
 
     Tags.findOne({
 
@@ -89,7 +89,7 @@ app.put('/:id', Middleware.isAdmin, function putTag(req, res) {
 
 
 // DELETE /votes/ - Deletes a fellow's vote
-app.delete('/:tag_id', Middleware.isAdmin, function (req, res) {
+app.delete('/:tag_id', function (req, res) {
 
     Tags.findOne({
 
