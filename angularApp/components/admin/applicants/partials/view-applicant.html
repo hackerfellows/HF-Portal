@@ -1,0 +1,80 @@
+
+
+    <div class="modal-header">
+        <h4 class="modal-title">Application:</h4>
+    </div>
+
+    <div class="modal-body box-modal" ng-init="init()" ng-show='isApplicantFellow'>
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" ng-model="applicant.first_name" name="first_name" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" ng-model="applicant.last_name" name="last_name" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" ng-model="applicant.email" name="email" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>University</label>
+            <input type="text" ng-model="applicant.university" name="school" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Bio</label>
+            <input type="text" ng-model="applicant.bio" name="bio" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Answer</label>
+            <input type="text" ng-model="applicant.answer" name="answer" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Major</label>
+            <input type="text" ng-model="applicant.major" name="major" class="form-control" />
+        </div>
+
+    </div>
+    <div class="modal-body box-modal" ng-init="init()" ng-show="isApplicantCompany">
+        <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" ng-model="applicant.name" name="name" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Primary Contact</label>
+            <input type="text" ng-model="applicant.primary_contact" name="contanct" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Size</label>
+            <input type="text" ng-model="applicant.company_size" name="size" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Industry</label>
+            <input type="text" ng-model="applicant.industry" name="industry" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" ng-model="applicant.location" name="location" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" ng-model="applicant.description" name="description" class="form-control" />
+        </div>
+        
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="cancel()">Back</button>
+    </div>
+

@@ -13,8 +13,9 @@
     //      components/componentModules.js otherwise the page will not run
 
     var app = angular.module('app', ['ngRoute', 'ngSanitize', 'app.home', 'ui.bootstrap',
-            'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 
-            'app.helpers', 'app.calendar', 'app.application', 'app.api', 'app.dash']);
+        'app.profileGrid', 'app.profileSingle', 'app.navbar', 'app.accounts', 'app.helpers', 'app.calendar',
+        'app.admin', 'app.tags', 'app.adminUsers', 'app.adminApplicants', 'app.application', 'app.api', 'app.dash']);
+
 
     /**
      * @name config
@@ -64,6 +65,27 @@
             controller: 'CalendarController',
             templateUrl: 'components/calendar/calendar.html',
         })
+        .when('/admin', {
+            controller: 'AdminController',
+            templateUrl: 'components/admin/admin.html',
+        })
+        .when('/admin/tags', {
+            controller: 'TagsController',
+            templateUrl: 'components/admin/tags/tags.html',
+        })
+        .when('/admin/users', {
+            controller: 'AdminUsersController',
+            templateUrl: 'components/admin/users/adminUsers.html',
+        })
+        .when('/admin/applicants', {
+            controller: 'AdminApplicantsController',
+            templateUrl: 'components/admin/applicants/adminApplicants.html',
+        })
+        .when('/admin/calendar', {
+            controller: 'AdminController',
+            templateUrl: 'components/admin/admin.html',
+        })
+
         .when('/application/fellow', {
             controller: 'FellowAppController',
             templateUrl: 'components/application/partials/fellowApplication.html',

@@ -111,13 +111,13 @@ function getAccepted(req, res) {
                         model: Users,
                         as: 'VotesFor',
                         attributes: ['id', 'email', 'userType'],
-                        include: [{ model: Companies }]
+                        include: [{ model: Fellows }]
                     },
                 {
                     model: Users,
                     as: 'VotesCast',
                     attributes: ['id', 'email', 'userType'],
-                    include: [{ model: Companies }]
+                    include: [{ model: Fellows }]
                 }]
             }
         ]
