@@ -30,6 +30,7 @@
 
                     $scope.fellows = fellows;
                     console.log("fellows retrieved");
+                    console.log(fellows);
 
                 });
             }
@@ -171,6 +172,30 @@
         };
 
 
+        $scope.removeCompany = function( company ){
+
+            var c = confirm( "Are you sure you want to delete " + company.name + " " + "?");
+
+            if( c ){
+
+                // remove fellow
+                //Fellows.destroy( fellow.id ).then( function(){
+
+                    // now remove user
+                   // User.destroy( fellow.user_id).then( function(){
+
+                        // reload users
+                    //    $window.location.reload();
+                   // });
+               // });
+
+                Entities.destory(company.user_id, 'company').then( function(){
+                    $window.location.reload();
+                    console.log('destroying company');
+                });
+               
+            }
+        };
 
 
     }
@@ -185,12 +210,11 @@
         .module('app.adminUsers.controllers')
         .controller('EditFellowModalInstanceController', EditFellowModalInstanceController)
         .controller('EditCompanyModalInstanceController', EditCompanyModalInstanceController)
-        .controller('CreateUserModalInstanceController', CreateUserModalInstanceController)
         .controller('CompanyVotesModalInstanceController', CompanyVotesModalInstanceController)
         .controller('FellowVotesModalInstanceController', FellowVotesModalInstanceController);
 
-    EditFellowModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'Entities', 'fellow' ];
-    function EditFellowModalInstanceController ($scope, $uibModalInstance, Entities, fellow) {
+    EditFellowModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'Entities', 'fellow', 'User'];
+    function EditFellowModalInstanceController ($scope, $uibModalInstance, Entities, fellow, User) {
 
         $scope.user = fellow.user;
         $scope.fellow = fellow;
@@ -220,8 +244,8 @@
         };
     }
 
-    EditCompanyModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'company', 'Entities'];
-    function EditCompanyModalInstanceController ($scope, $uibModalInstance, company, Entities) {
+    EditCompanyModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'company', 'Entities', 'User'];
+    function EditCompanyModalInstanceController ($scope, $uibModalInstance, company, Entities, User) {
 
         $scope.user = company.user;
         $scope.company = company;
@@ -250,8 +274,8 @@
         };
     }
 
-    FellowVotesModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'fellow' ];
-    function FellowVotesModalInstanceController( $scope, $uibModalInstance, fellow ){
+    FellowVotesModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'fellow', 'User' ];
+    function FellowVotesModalInstanceController( $scope, $uibModalInstance, fellow, User ){
 
         $scope.user = fellow.user;
         $scope.fellow = fellow;
@@ -294,8 +318,8 @@
         };
     }
 
-    CompanyVotesModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'company' ];
-    function CompanyVotesModalInstanceController( $scope, $uibModalInstance, company ){
+    CompanyVotesModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'company', 'User' ];
+    function CompanyVotesModalInstanceController( $scope, $uibModalInstance, company, User ){
 
         $scope.company = company;
 
@@ -335,116 +359,6 @@
 
             $uibModalInstance.close();
         };
-    }
-
-    CreateUserModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'Entities' ];
-    function CreateUserModalInstanceController ($scope, $uibModalInstance, Entities) {
-
-        $scope.verify_password = "";
-
-        $scope.create = function (user){
-
-            $scope.errors = [];
-
-            // Form is being validated by angular, but leaving this just in case
-            if( typeof user  === "undefined"){
-
-                $scope.errors.push( "Add some data first" );
-
-            }
-            else {
-
-                if( typeof user.email === "undefined" ) {
-
-                    $scope.errors.push( "Enter an email" );
-                }
-
-                if( typeof user.password === "undefined" ) {
-
-                    $scope.errors.push( "Enter a password" );
-                }
-
-                if( typeof user.userType === "undefined" ) {
-
-                    $scope.errors.push( "Choose a user type" );
-                }
-
-                if( user.password !== $scope.verify_password ){
-
-                    $scope.errors.push( "Passwords do not match" );
-                }
-            }
-
-
-            if( $scope.errors.length === 0 ){
-
-                // send user to API via Service
-                User.create(user).then( function(response) {
-
-                    // create user success callback
-                    //console.log(response);
-
-                    console.log( user );
-
-                    var user_id = response.data.id;
-
-                    if( user.userType === "Fellow" ){
-
-                        var fellow_post = {
-
-                            first_name: "",
-                            last_name: "",
-                            user_id: user_id
-                        };
-                        Fellows.create(fellow_post).then( function( fellow ){
-
-                            // create fellow success callback
-                            console.log( fellow );
-                            $uibModalInstance.close( fellow );
-
-                        }, function( response ){
-
-                            // create fellow error callback
-                            console.log( response );
-                            $scope.errors.push( response.data.error );
-                        });
-                    }
-                    else if( user.userType === "Company" ){
-
-                        var company_post = {
-
-                            name: "",
-                            user_id: user_id
-                        };
-                        Companies.create(company_post).then( function( company ){
-
-                            // create company success callback
-                            $uibModalInstance.close( company );
-
-                        }, function( response ){
-
-                            // create fellow error callback
-                            console.log( response );
-                            $scope.errors.push( response.data.error );
-                        });
-                    }
-
-                }, function( response ){
-
-                    // create user error callback
-
-                    console.log( response );
-                    $scope.errors.push( response.data.error );
-                });
-            }
-        };
-        
-        $scope.cancel = function cancel() {
-
-            $uibModalInstance.dismiss('cancel');
-        };
-
-
     }
 
 })();

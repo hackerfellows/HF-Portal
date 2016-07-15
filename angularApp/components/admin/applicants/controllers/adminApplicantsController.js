@@ -79,6 +79,24 @@
             }
         };
 
+        $scope.acceptApplicant = function(applicant ){
+
+            var c = confirm( "Are you sure you want to accept" + applicant.first_name + " " + applicant.last_name + "?");
+
+            if( c ){
+
+                // remove applicant
+//                Fellows.destroy( applicant.id ).then( function(){
+
+                    // now remove user
+//                    User.destroy( applicant.user_id).then( function(){
+
+                        // reload users
+//                        $window.location.reload();
+//                    });
+//                });
+            }
+        };
 
 
 
