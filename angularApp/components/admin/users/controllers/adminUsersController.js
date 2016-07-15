@@ -151,21 +151,9 @@
             var c = confirm( "Are you sure you want to delete " + fellow.first_name + " " + fellow.last_name + "?");
 
             if( c ){
-
-                // remove fellow
-                //Fellows.destroy( fellow.id ).then( function(){
-
-                    // now remove user
-                   // User.destroy( fellow.user_id).then( function(){
-
-                        // reload users
-                    //    $window.location.reload();
-                   // });
-               // });
-
-                Entities.destory(fellow.user_id, 'fellows').then( function(){
+                User.destroy(fellow.user.id ).then( function(){
+                    console.log('deleted');
                     $window.location.reload();
-                    console.log('destroying fellow');
                 });
                
             }
@@ -178,22 +166,11 @@
 
             if( c ){
 
-                // remove fellow
-                //Fellows.destroy( fellow.id ).then( function(){
-
-                    // now remove user
-                   // User.destroy( fellow.user_id).then( function(){
-
-                        // reload users
-                    //    $window.location.reload();
-                   // });
-               // });
-
-                Entities.destory(company.user_id, 'company').then( function(){
+                User.destroy(company.user.id ).then( function(){
+                    console.log('deleted');
                     $window.location.reload();
-                    console.log('destroying company');
                 });
-               
+
             }
         };
 
