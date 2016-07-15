@@ -21,19 +21,6 @@ fellows
 	GET:	get one fellow's application
 	PUT:	update one fellow's application
 
-    /set_flag
-	PUT:	set single flag for all fellows
-		flags are: application, profile, vote, accepted, enabled
-		values are: 0, 1
-		example:
-		{
-		    flag: "application",
-		    value: 0
-		}
-
-    /set_flag/:user_id
-	PUT:	set single flag for one fellow
-		see /set_flag for flags, values, and example
 
 
 (not ready)
@@ -51,20 +38,6 @@ fellows
     /application/:user_id
 	GET:	get one company's application
 	PUT:	update one company's application
-
-    /set_flag
-	PUT:	set single flag for all companies
-		flags are: application, profile, vote, accepted, enabled
-		values are: 0, 1
-		example:
-		{
-		    flag: "application",
-		    value: 0
-		}
-
-    /set_flag/:user_id
-	PUT:	set single flag for one company
-		see /set_flag for flags, values, and example
 
 
 /api/v2/tags
@@ -101,3 +74,16 @@ jessica plis
 	PUT:$	updates a user
 	DEL:+	deletes a user
 
+    /set_flag
+	PUT:	set single flag for all fellows
+		flags are: application, profile, vote, accepted, enabled
+		values are: 0, 1
+		example:
+		{
+		    flag: "application",
+		    value: 0
+		}
+
+    /set_flag/:user_id
+	PUT:	set single flag for one fellow
+		see /set_flag for flags, values, and example

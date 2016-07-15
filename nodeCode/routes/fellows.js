@@ -50,7 +50,6 @@ var profile_attributes = [
     'answer',
     'image_url',
     'enabled',
-    'accepted'
 ];
 
 // Image Upload
@@ -71,21 +70,36 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-// GET /fellows - get all fellows
-app.get('/', getAcceptedFellows);
 
-function getAcceptedFellows(req, res) {
+
+
+app.get('/', getAccepted);
+
+app.get('/unaccepted', getUnnaccepted);
+
+app.get('/profile/:user_id', getProfileByID);
+
+app.put('/profile/:user_id', putProfileById)
+
+app.get('/application/:user_id', getApplicationByID);
+
+app.put('/application/:user_id', putApplicationById);
+
+
+
+
+
+function getAccepted(req, res) {
 
     Fellows.all({
-        where: {
-            accepted: 1
-        },
         order: '"last_name" ASC',
         include: [
             { model: Tags },
             {
                 model: Users,
                 attributes: ['id', 'email', 'userType'],
+                where: { accepted: 1 },
+                required: true,
                 include: [
                      {
                         model: Users,
@@ -107,28 +121,28 @@ function getAcceptedFellows(req, res) {
 };
 
 
-// GET /fellows/application - lists name and user_id of all applicants not accepted
-app.get('/unaccepted', function getFellows(req, res) {
+
+function getUnnaccepted(req, res) {
     Fellows.all({
         where: {
-            first_name: {ne: null},
-            accepted: 0
+            first_name: {ne: null}
         },
         order: '"last_name" ASC',
         attributes: application_attributes,
         include: [
             {
                 model: Users,
+                where: { accepted: 0 },
+                required: true,
                 attributes: ['id', 'email', 'userType']
             }
         ]
     }).then(function(fellows) {
         res.send(fellows);
     });
-});
+};
 
 
-app.get('/profile/:user_id', getProfileByID);
  
 function getProfileByID(req, res){
 
@@ -165,7 +179,8 @@ function getProfileByID(req, res){
 };
 
 
-app.put('/profile/:user_id', function putFellow(req, res) {
+
+function putProfileById(req, res) {
 
     Fellows.findOne({
 
@@ -195,7 +210,6 @@ app.put('/profile/:user_id', function putFellow(req, res) {
 
         fellow.image_url = req.body.image_url;
         fellow.enabled = req.body.enabled;
-        fellow.accepted = req.body.accepted;
 
         fellow.save();
 
@@ -232,12 +246,9 @@ app.put('/profile/:user_id', function putFellow(req, res) {
         getProfileByID(req, res);
     });
 
-});
+};
 
 
-
-// GET /fellows/application:id - get one fellow's full application data
-app.get('/application/:user_id', getApplicationByID);
 
 function getApplicationByID(req, res){
 
@@ -254,8 +265,8 @@ function getApplicationByID(req, res){
 };
 
 
-// PUT /fellows/application:id - updates an existing fellow's application
-app.put('/application/:user_id', function putFellow(req, res) {
+
+function putApplicationById(req, res) {
 
     Fellows.findOne({
 
@@ -293,7 +304,7 @@ app.put('/application/:user_id', function putFellow(req, res) {
         getApplicationByID(req, res);
     });
 
-});
+};
 
 
 module.exports = app;

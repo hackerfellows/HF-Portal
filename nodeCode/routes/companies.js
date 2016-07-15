@@ -11,29 +11,43 @@ var Tags = models.tags;
 var Users = models.users;
 
 var application_attributes = [
-    'first_name',
-    'last_name',
-    'university',
-    'major',
-    'graduation',
-    'hometown',
-    'phone',
-    'residentUSA',
+    'name',
+    'website',
+    'city',
+    'industry',
+    'contact_name',
+    'contact_email',
+    'contact_phone',
+    'map',
+    'logo',
     'description',
-    'dreamjob',
-    'resumeURL',
-    'coolthings',
-    'referral',
+    'age',
+    'staffcount',
+    'value_prop',
     'whyHF',
-    'MIimpact',
     'developer_type',
-    'devskills',
-    'achievements',
-    'involvements',
-    'git_hub',
-    'comments'
+    'developer_type',
+    'developer_type',
+    'devneeds0',
+    'devneeds1',
+    'devneeds2',
+    'devneeds3',
+    'devneeds4',
+    'ideal_dev'
 ];
-
+var profile_attributes = [
+    'user_id',
+    'name',
+    'primary_contact',
+    'location',
+    'company_size',
+    'industry',
+    'bio',
+    'description',
+    'developer_type',
+    'website_url',
+    'image_url'
+];
 // Image Upload
 // var upload = multer({ dest: './public/assets/images/' });
 
@@ -52,201 +66,127 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-// GET /companies - get all companies
-app.get('/', function getCompanies(req, res) {
+
+
+
+
+
+app.get('/', getAccepted);
+
+app.get('/unaccepted', getUnnaccepted);
+
+app.get('/profile/:user_id', getProfileByID);
+
+app.put('/profile/:user_id', putProfileById)
+
+app.get('/application/:user_id', getApplicationByID);
+
+app.put('/application/:user_id', putApplicationById);
+
+
+function getAccepted(req, res) {
 
     Companies.all({
-
-        where: {
-
-            name: {ne: null},
-            enabled: 1
-        },
         order: '"name" ASC',
-        include: [{
-            model: Tags
-        }]
-
-    }).then(function(companies) {
-
-        res.send(companies);
-    });
-
-});
-
-// POST /companies - create a new company record
-app.post('/', Middleware.isAdmin, function postCompany(req, res) {
-    //res.send('POST request - create a new company record');
-
-    // Take POST data and build a Company Object (sequelize)
-    Companies.create({
-
-        user_id: req.body.user_id,
-        name: req.body.name,
-        primary_contact: req.body.primary_contact,
-        location: req.body.location,
-        company_size: req.body.company_size,
-        industry: req.body.industry,
-        bio: req.body.bio,
-        description: req.body.description,
-        developer_type: req.body.developer_type,
-        website_url: req.body.website_url,
-        image_url: req.body.image_url,
-        enabled: req.body.enabled
-
-    }).then(function( company) {
-
-        // get loaded fellow obj
-        Companies.findOne({
-
-            where: {
-                id: company.id
-            },
-            include: [{
-                model: Tags
-            },{
+        include: [
+            { model: Tags },
+            {
                 model: Users,
+                where: { accepted: 1 },
+                required: true,
                 attributes: ['id', 'email', 'userType'],
-                include: [{
-
-                    model: Users,
-                    as: 'VotesFor',
-                    attributes: ['id', 'email', 'userType'],
-                    include: [{
-
-                        model: Fellows
-                    }]
-                },
+                include: [
+                     {
+                        model: Users,
+                        as: 'VotesFor',
+                        attributes: ['id', 'email', 'userType'],
+                        include: [{ model: Companies }]
+                    },
                 {
-
                     model: Users,
                     as: 'VotesCast',
                     attributes: ['id', 'email', 'userType'],
-                    include: [{
-
-                        model: Fellows
-                    }]
+                    include: [{ model: Companies }]
                 }]
-            }]
+            }
+        ]
+    }).then(function(companys) {
+        res.send(companys);
+    });
+};
 
-        }).then(function(company) {
 
-            res.send(company);
-        });
 
-     });
-});
-
-// GET /companies - get all companies
-app.get('/users', function getCompanies(req, res) {
-
+function getUnnaccepted(req, res) {
     Companies.all({
-
-        order: '"name" ASC',
-        include: [{
-
-            model: Tags
-        },{
-
-            model: Users,
-            attributes: ['id', 'email', 'userType'],
-            include: [{
-
+        where: {
+            first_name: {ne: null}
+        },
+        order: '"last_name" ASC',
+        attributes: application_attributes,
+        include: [
+            {
                 model: Users,
-                as: 'VotesFor',
-                attributes: ['id', 'email', 'userType'],
-                include: [{
+                where: { accepted: 0 },
+                required: true,
+                attributes: ['id', 'email', 'userType']
+            }
+        ]
+    }).then(function(companys) {
+        res.send(companys);
+    });
+};
 
-                    model: Fellows
-                }]
+
+ 
+function getProfileByID(req, res){
+
+    Companies.findOne({
+        where: {
+            user_id: req.params.user_id
+        },
+        attributes: profile_attributes,
+        include: [
+            {
+                model: Tags
             },
             {
-
                 model: Users,
-                as: 'VotesCast',
                 attributes: ['id', 'email', 'userType'],
-                include: [{
-
-                    model: Fellows
+                include: [
+                     {
+                        model: Users,
+                        as: 'VotesFor',
+                        attributes: ['id', 'email', 'userType'],
+                        include: [{ model: Companies }]
+                    },
+                {
+                    model: Users,
+                    as: 'VotesCast',
+                    attributes: ['id', 'email', 'userType'],
+                    include: [{ model: Companies }]
                 }]
-            }]
-        }]
-
-    }).then(function(companies) {
-
-        res.send(companies);
+            }
+        ]
+    }).then(function(attributes) {
+        res.send(attributes);
     });
+};
 
-});
 
-// GET /companies/:id - get one company
-app.get('/:id', function getCompany(req, res) {
-    //res.send('GET request - get a company record');
-    Companies.findOne({
 
-        where: {
-            id: req.params.id
-        },
-        include: [{
-            model: Tags
-        },{
-            model: Users
-        }]
+function putProfileById(req, res) {
 
-    }).then(function(company) {
-
-        res.send(company);
-    });
-
-});
-
-// GET /companies/user_id/:id - get one company by user_id
-app.get('/user_id/:user_id', function getFellow(req, res){
-
-    //res.send('GET request - get a company record');
     Companies.findOne({
 
         where: {
             user_id: req.params.user_id
         },
         include: [{
-
             model: Tags
-
-        },{
-            model: Users
         }]
 
     }).then(function(company) {
-
-        res.send(company);
-    });
-});
-
-// PUT /companies/:id - updates an existing company record
-app.put('/:id', Middleware.isLoggedIn, upload.single('file'),function putCompany(req, res) {
-
-    Companies.findOne({
-
-        where: {
-            id: req.params.id
-        },
-        include: [{
-            model: Tags
-            //where: { state: Sequelize.col('project.state') }
-        }]
-
-    }).then(function(company) {
-
-        var currentUser = req.user;
-        if( currentUser.userType !== 'Admin' ) {
-
-            if (company.user_id !== currentUser.id) {
-
-                res.send('Unauthorized');
-                return;
-            }
-        }
 
         company.user_id = req.body.user_id;
         company.name = req.body.name;
@@ -260,44 +200,30 @@ app.put('/:id', Middleware.isLoggedIn, upload.single('file'),function putCompany
         company.website_url = req.body.website_url;
 
         company.image_url = req.body.image_url;
-        company.enabled = req.body.enabled;
 
         company.save();
 
         // remove all tags, then re-add currently posted tags
         company.setTags(null).then(function() {
-
-            console.log( req.body.tags );
-
-            if ( Array.isArray(req.body.tags) ) {
-
-                req.body.tags.forEach(function (tag) {
-
+            if (Array.isArray(req.body.tags)) {
+                req.body.tags.forEach(function ( tag ) {
                     if( typeof tag.name !== "undefined" ) {
-
                         Tags.findOne({
-
                             where: {
                                 name: {
-
                                     ilike: tag.name
                                 }
                             }
-
                         }).then(function (tagObj) {
-
+                            // if tag found assign
                             if( tagObj ){
-
                                 company.addTag(tagObj);
                             }
-                            else {
-
+                            // else create and assign
+                            else{
                                 Tags.create({
-
                                     name: tag.name
-
-                                }).then(function (tagObj) {
-
+                                }).then( function( tagObj ){
                                     company.addTag(tagObj);
                                 });
                             }
@@ -305,23 +231,71 @@ app.put('/:id', Middleware.isLoggedIn, upload.single('file'),function putCompany
                     }
                 });
             }
-
         });
-
-        res.send(company);
+        
+        getProfileByID(req, res);
     });
 
-});
+};
 
-// DELETE /companies/:id - deletes an existing company record
-app.delete('/:id', Middleware.isAdmin, function deleteCompany(req, res) {
+
+
+function getApplicationByID(req, res){
+
+    //res.send('GET request - get a company record');
     Companies.findOne({
-        where: { id: req.params.id }
+        where: {
+            user_id: req.params.user_id
+        },
+        attributes: application_attributes
+
+    }).then(function(attributes) {
+        res.send(attributes);
+    });
+};
+
+
+
+function putApplicationById(req, res) {
+
+    Companies.findOne({
+
+        where: {
+            user_id: req.params.user_id
+        }
+
     }).then(function(company) {
-        company.destroy();
-        res.send("Company Deleted");
+        // update the company application data here with the req body data
+        company.name = req.body.name;
+        company.website = req.body.website;
+        company.city = req.body.city;
+        company.industry = req.body.industry;
+        company.contact_name = req.body.contact_name;
+        company.contact_email = req.body.contact_email;
+        company.contact_phone = req.body.contact_phone;
+        company.map = req.body.map;
+        company.logo = req.body.logo;
+        company.description = req.body.description;
+        company.age = req.body.age;
+        company.staffcount = req.body.staffcount;
+        company.value_prop = req.body.value_prop;
+        company.whyHF = req.body.whyHF;
+        company.developer_type = req.body.developer_type;
+        company.developer_type = req.body.developer_type;
+        company.developer_type = req.body.developer_type;
+        company.devneeds0 = req.body.devneeds[0];
+        company.devneeds1 = req.body.devneeds[1];
+        company.devneeds2 = req.body.devneeds[2];
+        company.devneeds3 = req.body.devneeds[3];
+        company.devneeds4 = req.body.devneeds[4];
+        company.ideal_dev = req.body.ideal_dev;
+
+        company.save();
+
+        //res.json({ success: true });
+        getApplicationByID(req, res);
     });
 
-});
+};
 
 module.exports = app;
