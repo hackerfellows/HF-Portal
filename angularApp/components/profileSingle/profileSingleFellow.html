@@ -28,18 +28,17 @@
             <div class="row">
                     <h1 class="name"  ng-attr-contenteditable="{{ editMode }}">{{ entityObject.first_name + ' ' + entityObject.last_name}}</h1>
             </div>
-             tagline:
+             <strong>Tagline:</strong>
             <p class="tagline">{{ entityObject.description }}</p>
-            email:
+            <strong>Email:</strong>
             <p class="email">{{entityObject.user.email}}</p>
-            coolthings:
+            <strong>Cool things:</strong>
             <div class="coolthings" ng-bind-html="helpers.paragraphize(entityObject.coolthings)"></div>
-            achievements:
+            <strong>Achievements:</strong>
             <div class="achievements" ng-bind-html="helpers.paragraphize(entityObject.achievements)"></div>
-            involvements:
+            <strong>Involvements:</strong>
             <div class="involvements" ng-bind-html="helpers.paragraphize(entityObject.involvements)"></div>
-            <p class="question"><strong>Q.</strong> {{ entityObject.question }}</p>
-            <p class="answer"><strong>A.</strong> {{ entityObject.answer }}</p>
+            
             <p class="links">
                 <a class="github" ng-href="{{ entityObject.git_hub }}" target="_blank">GitHub</a> | 
                 <a class="Resume" ng-href="{{ entityObject.resumeURL }}" target="_blank">Resume</a></p>

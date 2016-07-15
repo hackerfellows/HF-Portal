@@ -7,12 +7,13 @@
 					Fills up the profileGrid
 	Notes:			{{entity}} variables refer to "fellows" or "companies"
 	-->
+	<div class="row therow">
 
-	<div class="photo">
+	<div class="photo col-lg-4">
 		<img class="img" ng-src="{{item.image_url}}" width="150px"/><!--maybe use a $scope.image type thing?-->
 	</div>
 
-	<div class="info">
+	<div class="info tester col-lg-4">
 		<!--some form of conditional that asks for first and last name if fellow,
 		and just company.name otherwise-->
 		<h3 class="name" ng-if="item.first_name">{{item.first_name +" "+ item.last_name}}</h3>
@@ -21,14 +22,15 @@
 		<div class="bio"><p>{{ item.bio }}</p></div>
 
 	</div>
+	
 
-	<div class="foot">
+	<div class="foot col-lg-4">
 		<div class="tagwrap">
 			<div class="tag fellow_tag " ng-repeat='tag in entity.tags | limitTo:6'>
 				{{ tag.name }}
 			</div>
 		</div>
-		<div class="details-button">
+		<div class="details-button deets">
 			<!--again, conditional for company name or fellow fname and lname-->
 			<!--Only show if enabled-->
 			<a type="button" class="detButton" ng-if="item.user.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}">
@@ -41,3 +43,28 @@
 	</div>
 
 </div>
+</div>
+
+<style>
+
+.tester{
+	margin-top: 1%;
+}
+
+.bio{
+	margin-top: 5%;
+}
+
+.deets{
+	margin-top: 18%;
+}
+
+.therow{
+	margin-top: 5%;
+}
+
+.detButton{
+	margin-top: 55%;
+}
+
+</style>
