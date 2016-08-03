@@ -256,7 +256,7 @@ app.get('/flags/:user_id', function getFlagsByID(req, res) {
         where: {
             id: req.params.user_id
         },
-        attributes: ['accepted', 'enabled', 'vote_flag']
+        attributes: ['application_past_due', 'vote_enabled', 'application_state', 'profile_enabled']
     }).then(function(user) {
         res.json({success: user !== null, data: user});
     });
