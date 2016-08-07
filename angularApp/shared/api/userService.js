@@ -39,8 +39,24 @@
             setApplicationPastDue: setApplicationPastDue,
             setVoteEnabled: setVoteEnabled,
             setApplicationState: setApplicationState,
-            setProfileEnabled: setProfileEnabled
+            setProfileEnabled: setProfileEnabled,
+            isUserCompany: isUserCompany
+        };
+
+        var currentUser = {};
+
+        function getCurrentUser() {
+            return currentUser;
         }
+
+        function setCurrentUser(user) {
+            currentUser = user;
+        }
+
+        /**
+         * @name getVotes
+         * @desc calls the api and returns a list of votes for that user
+         */
 
         function getVotes(){
             console.log(currentUser);
