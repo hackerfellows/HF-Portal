@@ -1,4 +1,4 @@
-<div class="grid-box " ng-if="item.user.enabled">
+<div class="grid-box col-lg-3" ng-if="item.user.enabled">
 	<!--
 	File name: 		profileGridTile.html
 	Author: 		Jessica Wu, Michael Baldwin
@@ -9,40 +9,38 @@
 	-->
 	<div class="row therow">
 
-	<div class="photo col-lg-4">
-		<img class="img" ng-src="{{item.image_url}}" width="150px"/><!--maybe use a $scope.image type thing?-->
-	</div>
+		<div class="photo">
+			<img class="img" ng-src="{{item.image_url}}"/>
+		</div>
 
-	<div class="info tester col-lg-4">
-		<!--some form of conditional that asks for first and last name if fellow,
-		and just company.name otherwise-->
-		<h3 class="name" ng-if="item.first_name">{{item.first_name +" "+ item.last_name}}</h3>
-		<h3 class="name" ng-if="item.name">{{item.name}}</h3>
-		<p class="tagline">{{ item.description }} <span ng-if="item.developer_type">| {{ item.developer_type }}</span></p>
-		<div class="bio"><p>{{ item.bio }}</p></div>
+		<div class="info tester">
+			<!--some form of conditional that asks for first and last name if fellow,
+			and just company.name otherwise-->
+			<h3 class="name" ng-if="item.first_name">{{item.first_name +" "+ item.last_name}}</h3>
+			<h3 class="name" ng-if="item.name">{{item.name}}</h3>
+			<p class="tagline">{{ item.description }} <span ng-if="item.developer_type">| {{ item.developer_type }}</span></p>
+			<div class="bio"><p>{{ item.bio }}</p></div>
+		</div>
+		
+		<div class="foot">
+			<div class="tagwrap">
+				<div class="tag fellow_tag " ng-repeat='tag in entity.tags | limitTo:6'>
+					{{ tag.name }}
+				</div>
+			</div>
 
-	</div>
-	
-
-	<div class="foot col-lg-4">
-		<div class="tagwrap">
-			<div class="tag fellow_tag " ng-repeat='tag in entity.tags | limitTo:6'>
-				{{ tag.name }}
+			<div class="details-button deets">
+				<!--again, conditional for company name or fellow fname and lname-->
+				<!--Only show if enabled-->
+				<a type="button" class="detButton" ng-if="item.user.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}">
+					<i class="fa fa-plus fa-lg"></i> full profile
+				</a>
+				<a type="button" class="detButton" ng-if="item.user.enabled && item.name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}">
+					<i class="fa fa-plus fa-lg"></i> full profile
+				</a>
 			</div>
 		</div>
-		<div class="details-button deets">
-			<!--again, conditional for company name or fellow fname and lname-->
-			<!--Only show if enabled-->
-			<a type="button" class="detButton" ng-if="item.user.enabled && item.first_name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}">
-				<i class="fa fa-plus fa-lg"></i> full profile
-			</a>
-			<a type="button" class="detButton" ng-if="item.user.enabled && item.name" ng-href="/#/{{whichEntity}}/{{ item.user_id }}">
-				<i class="fa fa-plus fa-lg"></i> full profile
-			</a>
-		</div>
 	</div>
-
-</div>
 </div>
 
 <style>
@@ -51,12 +49,16 @@
 	margin-top: 1%;
 }
 
+.photo img{
+	width: 150px;
+	height:150px;
+}
+
 .bio{
 	margin-top: 5%;
 }
 
 .deets{
-	margin-top: 18%;
 }
 
 .therow{

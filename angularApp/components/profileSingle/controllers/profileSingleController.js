@@ -51,8 +51,8 @@
         //only allow the edit button to be viewable if the logged in user
         function checkLogin(){
           var currentUserId = User.getCurrentUser().id;
-          // console.log("entityID", entityId);
-          // console.log("currentUser", currentUserId);
+          console.log("entityID", entityId);
+          console.log("currentUser", currentUserId);
             if(parseInt(entityId) === parseInt(currentUserId)){
                 console.log("correct user logged in");
                 $scope.showEditButton = true;
