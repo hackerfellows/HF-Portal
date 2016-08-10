@@ -104,7 +104,7 @@ function getAccepted(req, res) {
                 where: { accepted: 1 },
                 required: true,
                 attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                    'id', 'email', 'userType', 'vote_enabed', 'application_state', 'profile_enabled'
                 ],
                 include: [
                      {
@@ -141,7 +141,7 @@ function getUnnaccepted(req, res) {
                 where: { accepted: 0 },
                 required: true,
                 attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                    'id', 'email', 'userType', 'vote_enabled', 'application_state', 'profile_enabled'
                 ],
             }
         ]
@@ -166,7 +166,7 @@ function getProfileByID(req, res){
         {
             model: Users,
             attributes: [
-                'id', 'email', 'userType', 'application_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
+                'id', 'email', 'userType', 'application_state', 'profile_enabled', 'vote_enabled'
             ],
             include: [
             {

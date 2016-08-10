@@ -99,8 +99,6 @@ app.put('/application/:user_id', putApplicationById);
 
 
 
-
-
 function getAccepted(req, res) {
 
     Fellows.all({
@@ -110,7 +108,7 @@ function getAccepted(req, res) {
             {
                 model: Users,
                 attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                    'id', 'email', 'userType', 'vote_enabled', 'application_state', 'profile_enabled'
                 ],
                 where: { accepted: 1 },
                 required: true,
@@ -149,7 +147,7 @@ function getUnnaccepted(req, res) {
                 where: { accepted: 0 },
                 required: true,
                 attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                    'id', 'email', 'userType', 'vote_enabled', 'accepted', 'profile_enabled'
                 ],
             }
         ]
@@ -174,7 +172,7 @@ function getProfileByID(req, res){
         {
             model: Users,
             attributes: [
-                'id', 'email', 'userType', 'application_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
+                'id', 'email', 'userType', 'application_state', 'profile_enabled', 'vote_enabled', 'application_state'
             ],
             include: [
             {
