@@ -34,7 +34,8 @@
             isUserFellow: isUserFellow,
             isUserAccepted: isUserAccepted,
             updateLoginStatus: updateLoginStatus,
-            isUserCompany: isUserCompany
+            isUserCompany: isUserCompany,
+            setFlag: setFlag
         };
 
         var currentUser = {};
@@ -145,6 +146,9 @@
             return $http.get("/api/v2/users/flags/" + currentUser.id);
         }
 
+        function setFlag(user, flag){
+            return $http.put("/api/v2/users/flags/" + user.id, flag);
+        }
         function isUserAccepted(){
             getFlags().then(function(stuff){
                 if (stuff.data.data.accepted === 1) {
