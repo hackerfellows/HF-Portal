@@ -107,7 +107,7 @@ app.post('/login', function(req, res, next) {
 
 
 // Check to see if a user is currently logged in, if so return their info
-app.get('/confirm-login', function (req, res) {
+app.get('/confirm-login', Middleware.isUserOrAdmin, function (req, res) {
     var ret = {};
     var retStatus = -42;
     var user = req.user;
@@ -127,7 +127,7 @@ app.get('/confirm-login', function (req, res) {
 
 
 // Log user out
-app.get( '/logout', function( req, res ){
+app.get( '/logout', Middleware.isUserOrAdmin, function( req, res ){
     req.logout();
     res.end();
 });
@@ -180,7 +180,7 @@ app.post('/create', function createUser(req, res) {
 
 
 // DELETE /users/ - Deletes a user
-app.delete('/:user_id', function (req, res) {
+app.delete('/:user_id', Middleware.isAdmin, function (req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id
@@ -242,7 +242,7 @@ app.delete('/:user_id', function (req, res) {
     });
 });
 
-app.put('/flags/:user_id', function putFlagsByID(req, res) {
+app.put('/flags/:user_id', Middlware.isAdmin, function putFlagsByID(req, res) {
     console.log("put user/flags/" + req.params.user_id);
     Users.findOne({
         where: {
@@ -276,7 +276,7 @@ app.put('/flags/:user_id', function putFlagsByID(req, res) {
     });
 
 });
-app.get('/flags/:user_id', function getFlagsByID(req, res) {
+app.get('/flags/:user_id', Middleware.isAdmin, function getFlagsByID(req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id
@@ -288,7 +288,7 @@ app.get('/flags/:user_id', function getFlagsByID(req, res) {
 });
 
 //This is after flags because put /flags was interpreted as flags as user_id
-app.put('/:user_id', function putUser(req, res) {
+app.put('/:user_id', Middleware.isAdmin, function putUser(req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id

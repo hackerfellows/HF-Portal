@@ -75,22 +75,19 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
+app.get('/', Middleware.isLoggedIn, getAccepted);
 
+app.get('/unaccepted', Middleware.isAdmin, getUnnaccepted);
 
+app.get('/profile/:user_id', Middleware.isLoggedIn, getProfileByID);
 
+app.put('/profile/:user_id', Middleware.isOwnerOrAdmin, putProfileByID);
 
+app.get('/application/:user_id', Middleware.isOwnerOrAdmin, getApplicationByID);
 
-app.get('/', getAccepted);
+app.put('/application/:user_id', Middleware.isOwnerOrAdmin, putApplicationByID);
 
-app.get('/unaccepted', getUnnaccepted);
-
-app.get('/profile/:user_id', getProfileByID);
-
-app.put('/profile/:user_id', putProfileById);
-
-app.get('/application/:user_id', getApplicationByID);
-
-app.put('/application/:user_id', putApplicationById);
+app.put('/application/submit/:user_id', Middleware.isOwnerOrAdmin, putSubmitApplicationByID);
 
 
 function getAccepted(req, res) {
@@ -189,7 +186,7 @@ function getProfileByID(req, res){
 }
 
 
-function putProfileById(req, res) {
+function putProfileByID(req, res) {
     var thing = {};
 
     thing.user_id = req.body.user_id;
@@ -265,7 +262,7 @@ function getApplicationByID(req, res){
 }
 
 
-function putApplicationById(req, res) {
+function putApplicationByID(req, res) {
     var thing = {};
     thing.name = req.body.name;
     thing.website_url = req.body.website_url;
@@ -300,4 +297,50 @@ function putApplicationById(req, res) {
             getApplicationByID(req, res);
         });
 }
+
+
+function putSubmitApplicationByID(req, res) {
+    var thing = {};
+    thing.name = req.body.name;
+    thing.website_url = req.body.website_url;
+    thing.city = req.body.city;
+    thing.industry = req.body.industry;
+    thing.primary_contact = req.body.primary_contact;
+    thing.contact_email = req.body.contact_email;
+    thing.contact_phone = req.body.contact_phone;
+    thing.map_url = req.body.map_url;
+    thing.logo_url = req.body.logo_url;
+    thing.description = req.body.description;
+    thing.age = req.body.age;
+    thing.company_size = req.body.company_size;
+    thing.value_prop = req.body.value_prop;
+    thing.whyHF = req.body.whyHF;
+    thing.developer_type = req.body.developer_type;
+    if(req.body.devneeds !== undefined) {
+        thing.devneeds0 = req.body.devneeds[0];
+        thing.devneeds1 = req.body.devneeds[1];
+        thing.devneeds2 = req.body.devneeds[2];
+        thing.devneeds3 = req.body.devneeds[3];
+        thing.devneeds4 = req.body.devneeds[4];
+    }
+    thing.ideal_dev = req.body.ideal_dev;
+
+
+    Users.update(
+            { application_state: 1},
+            {
+                where: {id: req.params.user_id}
+            }
+            ).then(function(result){
+        Companies.update(
+                thing,
+                {
+                    where: { user_id: req.params.user_id }
+                }).then(function(result){
+            getApplicationByID(req, res);
+        });
+    });
+}
+
+
 module.exports = app;
