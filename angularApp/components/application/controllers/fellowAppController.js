@@ -55,7 +55,7 @@
 
         $scope.apply = function(fellow) {
             $scope.required = true;
-            Entities.updateApplication(fellow, "fellows");
+            Entities.submitApplication(fellow, "fellows");
             // TODO: set Application submitted flag
             showToastSuccess("Application submitted");
         };
