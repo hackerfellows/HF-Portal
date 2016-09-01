@@ -107,7 +107,7 @@ app.post('/login', function(req, res, next) {
 
 
 // Check to see if a user is currently logged in, if so return their info
-app.get('/confirm-login', Middleware.isUserOrAdmin, function (req, res) {
+app.get('/confirm-login', function (req, res) {
     var ret = {};
     var retStatus = -42;
     var user = req.user;
@@ -127,7 +127,7 @@ app.get('/confirm-login', Middleware.isUserOrAdmin, function (req, res) {
 
 
 // Log user out
-app.get( '/logout', Middleware.isUserOrAdmin, function( req, res ){
+app.get( '/logout', Middleware.isOwnerOrAdmin, function( req, res ){
     req.logout();
     res.end();
 });
@@ -242,7 +242,7 @@ app.delete('/:user_id', Middleware.isAdmin, function (req, res) {
     });
 });
 
-app.put('/flags/:user_id', Middlware.isAdmin, function putFlagsByID(req, res) {
+app.put('/flags/:user_id', Middleware.isAdmin, function putFlagsByID(req, res) {
     console.log("put user/flags/" + req.params.user_id);
     Users.findOne({
         where: {
