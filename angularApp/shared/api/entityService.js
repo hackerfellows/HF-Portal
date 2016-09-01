@@ -27,6 +27,7 @@
             updateProf: updateProf,
             destroy: destroy,
             getApplication: getApplication,
+            submitApplication: submitApplication,
             updateApplication: updateApplication,
             getApplicants: getApplicants 
         };
@@ -54,6 +55,9 @@
             return $http.get('/api/v2/' + type + '/application/' + User.getCurrentUser().id);
         }
 
+        function submitApplication(user, type) {
+            return $http.put('/api/v2/' + type + '/application/submit/' + User.getCurrentUser().id, user);
+        }
         function updateApplication(user, type) {
             return $http.put('/api/v2/' + type + '/application/' + User.getCurrentUser().id, user);
         }

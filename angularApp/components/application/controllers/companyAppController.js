@@ -47,7 +47,7 @@
         }
 
         $scope.apply = function(company) {
-            Entities.updateApplication(company, "companies");
+            Entities.submitApplication(company, "companies");
             showToastSuccess("Application submitted");
         };
         $scope.cancel = function(company) {
