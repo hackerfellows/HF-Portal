@@ -83,7 +83,6 @@
 
             }
             if( c ){
-                
                 User.destroy(applicant.user.id).then( function(){
                     console.log('deleted');
                     $window.location.reload();
@@ -92,10 +91,10 @@
         };
 
         $scope.acceptApplicant = function(applicant ){
-            var flag = {
-            		      flag: "application_state",
-            		       value: 1
-            		    }
+			var flag = {
+				flag: "application_state",
+				value: 1
+			}
             if(applicant.first_name === undefined){
                 var c = confirm( "Are you sure you want to accept " + applicant.name + "?");
 

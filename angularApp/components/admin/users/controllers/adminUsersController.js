@@ -18,7 +18,7 @@
      */
      function AdminUsersController($scope, $location, $uibModal, $window, Entities, User) {
 
-       
+
 
         $scope.fellows = [];
         $scope.companies = [];
@@ -155,7 +155,7 @@
                     console.log('deleted');
                     $window.location.reload();
                 });
-               
+
             }
         };
 
@@ -196,7 +196,7 @@
         $scope.user = fellow.user;
         $scope.fellow = fellow;
 
-        console.log("fellow" + fellow) 
+        console.log("fellow" + fellow)
         $scope.init = function(){
 
             $("[name='enabled']").bootstrapSwitch({

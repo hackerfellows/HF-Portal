@@ -1,7 +1,7 @@
 /*  File name:      profileGridSingleDirective.js
     Author:         Jessica Wu, Michael Baldwin
     Description:    Declares the fellow and company directives.
-                    Both the fellow and company directives will show fields 
+                    Both the fellow and company directives will show fields
                     specific to what entity they are.
 */
 

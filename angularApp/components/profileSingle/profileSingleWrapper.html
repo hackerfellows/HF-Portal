@@ -16,7 +16,7 @@
             <li class="active">{{ entityObject.first_name }} {{ entityObject.last_name }}</li>
         </ul>
 
-        
+
         <!-- if fellow -->
         <profile-single-fellow ng-if="whichEntity=='fellow'" ng-hide="editMode"></profile-single-fellow>
         <profile-single-fellow-edit ng-if="whichEntity=='fellow'" ng-show="editMode"></profile-single-fellow-edit>
@@ -30,7 +30,7 @@
         <p class="pagination">
         <div class="row">
             <a class="" href="/#/{{whichEntityPlural}}">
-                <span class="glyphicon glyphicon-chevron-left"></span> 
+                <span class="glyphicon glyphicon-chevron-left"></span>
                 Back to all {{whichEntityPlural}}
             </a>
 
@@ -38,5 +38,5 @@
         </div>
     </p>
     </div>
-    
+
 </div>

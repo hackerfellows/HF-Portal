@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">University</label>  
+                    <label class="col-md-2 control-label">University</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-university"></i></span>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Majors / Minors</label>  
+                    <label class="col-md-2 control-label">Majors / Minors</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-book"></i></span>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">GPA</label>  
+                    <label class="col-md-2 control-label">GPA</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-ra"></i></span>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Expected Graduation Date</label>  
+                    <label class="col-md-2 control-label">Expected Graduation Date</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Hometown</label>  
+                    <label class="col-md-2 control-label">Hometown</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Phone</label>  
+                    <label class="col-md-2 control-label">Phone</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -81,11 +81,11 @@
                     <div class="col-md-4">
                         <label class="radio-inline">
                             <input type="radio" name="usa" ng-model="fellow.residentUSA" value="true" ng-required="required">
-                            Yes 
+                            Yes
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="usa" ng-model="fellow.residentUSA" value="false" ng-required="required">
-                            No 
+                            No
                         </label>
                     </div>
                 </div>
@@ -133,25 +133,25 @@
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Friend" ng-model="fellow.referral">
-                                Friend 
+                                Friend
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Career Fair" ng-model="fellow.referral">
-                                Career Fair 
+                                Career Fair
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Student Club" ng-model="fellow.referral">
-                                Student Club / Organization 
+                                Student Club / Organization
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Invest Detroit" ng-model="fellow.referral">
-                                Invest Detroit 
+                                Invest Detroit
                             </label>
                         </div>
                         <div class="radio">
@@ -163,7 +163,7 @@
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="true" ng-model="showtext">
-                                Other: 
+                                Other:
                                 <input type="text" ng-show="showtext" ng-model="fellow.referral">
                             </label>
                         </div>
@@ -197,11 +197,11 @@
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="dev" value="Back End" ng-model="fellow.developer_type">
-                            Back End 
+                            Back End
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="dev" value="Full Stack" ng-model="fellow.developer_type">
-                            Full Stack 
+                            Full Stack
                         </label>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                     <p><strong>What are your top 7 software development skills? (Languages, Frameworks, Tools, etc...)</strong></p>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2"> 
+                    <div class="col-md-8 col-md-offset-2">
                         <textarea class="form-control" ng-model="fellow.devskills" ng-maxLength="500"></textarea>
                     </div>
                 </div>
@@ -250,10 +250,10 @@
         <div class="form-group well well-lg">
             <div class="col-md-3 col-md-offset-2 ">
                 <button class="btn btn-info btn-lg center-block" ng-click="cancel(fellow)">Save for Later</button>
-            </div> 
+            </div>
             <div class="col-md-3 col-md-offset-2 ">
                 <button type="submit" class="btn btn-success btn-lg center-block" ng-click="apply(fellow)">Submit Now</button>
-            </div> 
+            </div>
         </div>
     </fieldset>
 </form>

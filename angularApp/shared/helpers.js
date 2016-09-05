@@ -12,9 +12,8 @@
     .service('HFHelpers', HFHelpers);
 
     HFHelpers.$inject = [];
- 
+
     function HFHelpers() {
-     
         return {
             slugify: slugify,
             paragraphize: paragraphize
@@ -34,5 +33,5 @@
             var parts = str.split( "\n" );
             return ( parts.length > 0 ? '<p>' + parts.join('</p><p>') + '</p>' : '' );
         }
-   } 
+   }
 })();
