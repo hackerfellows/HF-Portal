@@ -224,10 +224,13 @@
 
         $scope.ok = function ok() {
             console.log("fellow" + fellow.user);
-            $scope.user.user_id = $scope.fellow.user_id; 
-            User.update($scope.fellow.user).then( function(){
-                console.log('updated fellow profile');
-                $uibModalInstance.dismiss('cancel');
+            User.setVoteEnabled($scope.fellow.user, $scope.fellow.user.vote_enabled).then( function(){
+                console.log('Vote setting changed');
+
+                User.setProfileEnabled($scope.fellow.user, $scope.fellow.user.profile_enabled).then( function(){
+                    console.log('profile setting changed');
+                    $uibModalInstance.dismiss('cancel');
+                });
             });
 
             console.log("in function ok");
@@ -271,7 +274,15 @@
         };
 
         $scope.ok = function ok() {
+            console.log("comapny " + $scope.company.user);
+            User.setVoteEnabled($scope.company.user, $scope.company.user.vote_enabled).then( function(){
+                console.log('Vote setting changed');
 
+                User.setProfileEnabled($scope.company.user, $scope.company.user.profile_enabled).then( function(){
+                    console.log('profile setting changed');
+                    $uibModalInstance.dismiss('cancel');
+                });
+            });
             console.log("in the function ok with company");
        };
 
