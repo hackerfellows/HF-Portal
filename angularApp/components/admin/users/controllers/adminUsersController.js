@@ -196,21 +196,39 @@
         $scope.user = fellow.user;
         $scope.fellow = fellow;
 
+        console.log("fellow" + fellow) 
         $scope.init = function(){
 
             $("[name='enabled']").bootstrapSwitch({
 
                 onText: "Visible",
                 offText: "Hidden",
-                state: $scope.fellow.enabled,
+                state: $scope.fellow.user.profile_enabled,
                 onSwitchChange: function (event, state) {
 
-                    $scope.fellow.enabled = ( state ) ? 1 : 0;
+                    $scope.fellow.user.profile_enabled = ( state ) ? 1 : 0;
+                }
+            });
+
+            $("[name='vote_enabled']").bootstrapSwitch({
+
+                onText: "On",
+                offText: "Off",
+                state: $scope.fellow.user.vote_enabled,
+                onSwitchChange: function (event, state) {
+
+                    $scope.fellow.user.vote_enabled = ( state ) ? 1 : 0;
                 }
             });
         };
 
         $scope.ok = function ok() {
+            console.log("fellow" + fellow.user);
+            $scope.user.user_id = $scope.fellow.user_id; 
+            Entities.updateProf($scope.user, "fellows").then( function(){
+                console.log('updated fellow profile');
+                $uibModalInstance.dismiss('cancel');
+            });
 
             console.log("in function ok");
 
@@ -233,10 +251,21 @@
 
                 onText: "Visible",
                 offText: "Hidden",
-                state: $scope.company.enabled,
+                state: $scope.company.user.profile_enabled,
                 onSwitchChange: function (event, state) {
 
-                    $scope.company.enabled = ( state ) ? 1 : 0;
+                    $scope.company.user.profile_enabled = ( state ) ? 1 : 0;
+                }
+            });
+
+            $("[name='vote_enabled']").bootstrapSwitch({
+
+                onText: "On",
+                offText: "Off",
+                state: $scope.company.user.vote_enabled,
+                onSwitchChange: function (event, state) {
+
+                    $scope.company.user.vote_enabled = ( state ) ? 1 : 0;
                 }
             });
         };
@@ -337,5 +366,4 @@
             $uibModalInstance.close();
         };
     }
-
 })();

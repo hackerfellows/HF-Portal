@@ -16,7 +16,7 @@
      */
      function AdminApplicantsController($scope, $location, $uibModal, $window, Entities, User) {
 
-        console.log("in admin applicants controller"); 
+        console.log("in admin applicants controller");
 
         $scope.fellow_applicants = []
         $scope.company_applicants = []
@@ -75,8 +75,13 @@
 
         $scope.rejectApplicant = function(applicant ){
 
-            var c = confirm( "Are you sure you want to reject " + applicant.first_name + " " + applicant.last_name + "?");
+            if(applicant.first_name === undefined){
+                var c = confirm( "Are you sure you want to reject " + applicant.name + "?");
 
+            }else{
+                var c = confirm( "Are you sure you want to reject " + applicant.first_name + " " + applicant.last_name + "?");
+
+            }
             if( c ){
 
                 User.destroy(applicant.user.id ).then( function(){
@@ -87,21 +92,23 @@
         };
 
         $scope.acceptApplicant = function(applicant ){
+            var flag = {
+            		      flag: "application_state",
+            		       value: 1
+            		    }
+            if(applicant.first_name === undefined){
+                var c = confirm( "Are you sure you want to accept " + applicant.name + "?");
 
-            var c = confirm( "Are you sure you want to accept " + applicant.first_name + " " + applicant.last_name + "?");
+            }else{
+                var c = confirm( "Are you sure you want to accept " + applicant.first_name + " " + applicant.last_name + "?");
 
+            }
             if( c ){
 
-                // remove applicant
-//                Fellows.destroy( applicant.id ).then( function(){
-
-                    // now remove user
-//                    User.destroy( applicant.user_id).then( function(){
-
-                        // reload users
-//                        $window.location.reload();
-//                    });
-//                });
+                User.setFlag(applicant.user, flag).then( function(){
+                    console.log('accepted');
+                    $window.location.reload();
+                });
             }
         };
 
@@ -125,7 +132,7 @@
         $scope.user = applicant.user;
         $scope.applicant = applicant;
         $scope.isApplicantFellow = false;
-        $scope.isApplicantCompany = false; 
+        $scope.isApplicantCompany = false;
 
         var str = '';
         if(applicant.user.userType.toLowerCase() == 'fellow'){
@@ -133,9 +140,9 @@
             $scope.isApplicantFellow = true;
 
         }else{
-            str = 'companies'; 
+            str = 'companies';
             $scope.isApplicantCompany = true;
-        
+
         }
             $scope.init = function(){
             Entities.getApplication(applicant.user, str).success(function (application) {
@@ -161,7 +168,7 @@
         };
     }
 
-    
-   
+
+
 
 })();
