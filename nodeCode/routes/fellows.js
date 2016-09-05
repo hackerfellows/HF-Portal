@@ -112,7 +112,7 @@ function getAccepted(req, res) {
                 attributes: [
                     'id', 'email', 'userType', 'vote_enabled', 'application_state', 'profile_enabled'
                 ],
-                where: { accepted: 1 },
+                where: { application_state: 2 },
                 required: true,
                 include: [
                      {
@@ -146,10 +146,10 @@ function getUnnaccepted(req, res) {
         include: [
             {
                 model: Users,
-                where: { accepted: 0 },
+                where: { application_state: 1 },
                 required: true,
                 attributes: [
-                    'id', 'email', 'userType', 'vote_enabled', 'accepted', 'profile_enabled'
+                    'id', 'email', 'userType', 'vote_enabled', 'profile_enabled'
                 ],
             }
         ]

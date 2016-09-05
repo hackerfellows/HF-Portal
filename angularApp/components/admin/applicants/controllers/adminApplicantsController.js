@@ -83,8 +83,8 @@
 
             }
             if( c ){
-
-                User.destroy(applicant.user.id ).then( function(){
+                
+                User.destroy(applicant.user.id).then( function(){
                     console.log('deleted');
                     $window.location.reload();
                 });
@@ -105,7 +105,7 @@
             }
             if( c ){
 
-                User.setFlag(applicant.user, flag).then( function(){
+                User.setApplicationState(applicant.user, 2).then( function(){
                     console.log('accepted');
                     $window.location.reload();
                 });

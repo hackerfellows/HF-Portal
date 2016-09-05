@@ -5,7 +5,7 @@ public
 
 # Vagrant
 .vagrant
-
+Vagrantfile
 # NPM
 node_modules
 npm-debug.log

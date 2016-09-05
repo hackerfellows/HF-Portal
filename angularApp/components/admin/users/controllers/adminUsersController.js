@@ -225,7 +225,7 @@
         $scope.ok = function ok() {
             console.log("fellow" + fellow.user);
             $scope.user.user_id = $scope.fellow.user_id; 
-            Entities.updateProf($scope.user, "fellows").then( function(){
+            User.update($scope.fellow.user).then( function(){
                 console.log('updated fellow profile');
                 $uibModalInstance.dismiss('cancel');
             });
