@@ -40,7 +40,7 @@
             $scope.entityList = result;
         });
 
-        
+
         /*
         $scope.openModal = function (company) {
 

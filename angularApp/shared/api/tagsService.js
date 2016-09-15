@@ -36,9 +36,9 @@
          */
         function all(){
 
-                    
 
-           
+
+
             return $http.get( rootUrl + '/api/v2/tags' );
         }
 

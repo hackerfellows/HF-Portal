@@ -10,7 +10,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon">First</span>
-                            <input class="form-control" placeholder="Jane" type="text" value="{{fellow.first_name}}" ng-model="fellow.first_name" required>
+                            <input class="form-control" placeholder="Jane" type="text" value="{{fellow.first_name}}" ng-model="fellow.first_name" ng-required="required">
                         </div>
                     </div>
                 </div>
@@ -18,61 +18,61 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="input-group">
                             <span class="input-group-addon">Last</span>
-                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.last_name" required>
+                            <input class="form-control" placeholder="Smith" type="text" ng-model="fellow.last_name" ng-required="required">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">University</label>  
+                    <label class="col-md-2 control-label">University</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                            <input type="text" placeholder="Trump University" class="form-control input-md" ng-model="fellow.university" required>
+                            <input type="text" placeholder="Trump University" class="form-control input-md" ng-model="fellow.university" ng-required="required">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Majors / Minors</label>  
+                    <label class="col-md-2 control-label">Majors / Minors</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                            <input type="text" placeholder="Computer Science / History, English" class="form-control input-md" ng-model="fellow.major" required>
+                            <input type="text" placeholder="Computer Science / History, English" class="form-control input-md" ng-model="fellow.major" ng-required="required">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">GPA</label>  
+                    <label class="col-md-2 control-label">GPA</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-ra"></i></span>
-                            <input type="text" placeholder="4.0" class="form-control input-md" ng-model="fellow.gpa" required>
+                            <input type="text" placeholder="4.0" class="form-control input-md" ng-model="fellow.gpa" ng-required="required">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Expected Graduation Date</label>  
+                    <label class="col-md-2 control-label">Expected Graduation Date</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-graduation-cap"></i></span>
-                            <input type="text" placeholder="MM/YYYY" class="form-control input-md" ng-model="fellow.graduation" required>
+                            <input type="text" placeholder="MM/YYYY" class="form-control input-md" ng-model="fellow.graduation" ng-required="required">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Hometown</label>  
+                    <label class="col-md-2 control-label">Hometown</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                            <input type="text" placeholder="Detroit, MI" class="form-control input-md" ng-model="fellow.hometown"  required>
+                            <input type="text" placeholder="Detroit, MI" class="form-control input-md" ng-model="fellow.hometown"  ng-required="required">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Phone</label>  
+                    <label class="col-md-2 control-label">Phone</label>
                     <div class="col-md-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            <input type="text" placeholder="(555) 555-5555" class="form-control input-md" ng-model="fellow.phone" required>
+                            <input type="text" placeholder="(555) 555-5555" class="form-control input-md" ng-model="fellow.phone" ng-required="required">
                         </div>
                     </div>
                 </div>
@@ -80,12 +80,12 @@
                     <label class="col-md-4 control-label">Are you a U.S. citizen<br>or permanent resident?</label>
                     <div class="col-md-4">
                         <label class="radio-inline">
-                            <input type="radio" name="usa" ng-model="fellow.residentUSA" value="true" required>
-                            Yes 
+                            <input type="radio" name="usa" ng-model="fellow.residentUSA" value="true" ng-required="required">
+                            Yes
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="usa" ng-model="fellow.residentUSA" value="false" required>
-                            No 
+                            <input type="radio" name="usa" ng-model="fellow.residentUSA" value="false" ng-required="required">
+                            No
                         </label>
                     </div>
                 </div>
@@ -99,19 +99,19 @@
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Single phrase to describe yourself</strong></p>
-                        <input class="form-control" type="text" ng-model="fellow.description" required>
+                        <input class="form-control" type="text" ng-model="fellow.description" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>What is your dream job?</strong></p>
-                        <input class="form-control" type="text" ng-model="fellow.dreamjob" required>
+                        <input class="form-control" type="text" ng-model="fellow.dreamjob" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Share a link to your resume</strong></p>
-                        <input class="form-control" type="text" ng-model="fellow.resumeURL" required>
+                        <input class="form-control" type="text" ng-model="fellow.resumeURL" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
@@ -133,25 +133,25 @@
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Friend" ng-model="fellow.referral">
-                                Friend 
+                                Friend
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Career Fair" ng-model="fellow.referral">
-                                Career Fair 
+                                Career Fair
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Student Club" ng-model="fellow.referral">
-                                Student Club / Organization 
+                                Student Club / Organization
                             </label>
                         </div>
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="Invest Detroit" ng-model="fellow.referral">
-                                Invest Detroit 
+                                Invest Detroit
                             </label>
                         </div>
                         <div class="radio">
@@ -163,7 +163,7 @@
                         <div class="radio">
                             <label>
                                 <input type="radio" name="ref" value="true" ng-model="showtext">
-                                Other: 
+                                Other:
                                 <input type="text" ng-show="showtext" ng-model="fellow.referral">
                             </label>
                         </div>
@@ -197,11 +197,11 @@
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="dev" value="Back End" ng-model="fellow.developer_type">
-                            Back End 
+                            Back End
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="dev" value="Full Stack" ng-model="fellow.developer_type">
-                            Full Stack 
+                            Full Stack
                         </label>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                     <p><strong>What are your top 7 software development skills? (Languages, Frameworks, Tools, etc...)</strong></p>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-2"> 
+                    <div class="col-md-8 col-md-offset-2">
                         <textarea class="form-control" ng-model="fellow.devskills" ng-maxLength="500"></textarea>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
-                        <input class="form-control" type="text" ng-model="fellow.git_hub" required>
+                        <input class="form-control" type="text" ng-model="fellow.git_hub" ng-required="required">
                     </div>
                 </div>
                 <div class="col-md-8 col-md-offset-2">
@@ -250,10 +250,10 @@
         <div class="form-group well well-lg">
             <div class="col-md-3 col-md-offset-2 ">
                 <button class="btn btn-info btn-lg center-block" ng-click="cancel(fellow)">Save for Later</button>
-            </div> 
+            </div>
             <div class="col-md-3 col-md-offset-2 ">
                 <button type="submit" class="btn btn-success btn-lg center-block" ng-click="apply(fellow)">Submit Now</button>
-            </div> 
+            </div>
         </div>
     </fieldset>
 </form>

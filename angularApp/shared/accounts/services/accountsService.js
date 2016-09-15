@@ -40,7 +40,7 @@
             });
 
             loginModal.result.then(function(){
-                 
+
             });
 
             return loginModal.result;

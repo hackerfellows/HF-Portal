@@ -8,55 +8,55 @@
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Company Name</strong></p>
-                        <input class="form-control" type="text" ng-model="company.name" required>
+                        <input class="form-control" type="text" ng-model="company.name" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Website</strong></p>
-                        <input class="form-control" type="text" ng-model="company.website_url" required>
+                        <input class="form-control" type="text" ng-model="company.website_url" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>City</strong></p>
-                        <input class="form-control" type="text" ng-model="company.city" required>
+                        <input class="form-control" type="text" ng-model="company.city" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Industry Type</strong></p>
-                        <input class="form-control" type="text" ng-model="company.industry" required>
+                        <input class="form-control" type="text" ng-model="company.industry" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Who at your company will be the main contact for Hacker Fellows?</strong></p>
-                        <input class="form-control" type="text" ng-model="company.primary_contact" required>
+                        <input class="form-control" type="text" ng-model="company.primary_contact" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>What is their work email?</strong></p>
-                        <input class="form-control" type="text" ng-model="company.contact_email" required>
+                        <input class="form-control" type="text" ng-model="company.contact_email" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>What is their phone number?</strong></p>
-                        <input class="form-control" type="text" ng-model="company.contact_phone" required>
+                        <input class="form-control" type="text" ng-model="company.contact_phone" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Google Maps URL</strong></p>
-                        <input class="form-control" type="text" ng-model="company.map_url" required>
+                        <input class="form-control" type="text" ng-model="company.map_url" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Share a link to your company's logo</strong></p>
-                        <input class="form-control" type="text" ng-model="company.logo_url" required>
+                        <input class="form-control" type="text" ng-model="company.logo_url" ng-required="required">
                     </div>
                 </div>
             </div>
@@ -69,31 +69,31 @@
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Please give a brief description of your company</strong></p>
-                        <textarea class="form-control" ng-model="company.description" required></textarea>
+                        <textarea class="form-control" ng-model="company.description" ng-required="required"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>How long has your company been around?</strong></p>
-                        <input class="form-control" type="text" ng-model="company.age" required>
+                        <input class="form-control" type="text" ng-model="company.age" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>How many people are employed by your company?</strong></p>
-                        <input class="form-control" type="text" ng-model="company.company_size" required>
+                        <input class="form-control" type="text" ng-model="company.company_size" ng-required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Describe the problem you are solving</strong></p>
-                        <textarea class="form-control" ng-model="company.value_prop" required></textarea>
+                        <textarea class="form-control" ng-model="company.value_prop" ng-required="required"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Why do you want to be a part of Hacker Fellows?</strong></p>
-                        <textarea class="form-control" ng-model="company.whyHF" required></textarea>
+                        <textarea class="form-control" ng-model="company.whyHF" ng-required="required"></textarea>
                     </div>
                 </div>
             </div>
@@ -112,28 +112,28 @@
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="dev" value="Back End" ng-model="company.developer_type">
-                            Back End 
+                            Back End
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="dev" value="Full Stack" ng-model="company.developer_type">
-                            Full Stack 
+                            Full Stack
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>What are your top 5 software development needs?</strong></p>
-                        <input class="form-control" type="text" ng-model="company.devneeds0" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds1" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds2" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds3" required/>
-                        <input class="form-control"  type="text" ng-model="company.devneeds4" required/>
+                        <input class="form-control" type="text" ng-model="company.devneeds0" ng-required="required"/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds1" ng-required="required"/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds2" ng-required="required"/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds3" ng-required="required"/>
+                        <input class="form-control"  type="text" ng-model="company.devneeds4" ng-required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-2">
                         <p><strong>Describe your ideal junior level software dev?</strong></p>
-                        <textarea class="form-control" ng-model="company.ideal_dev" required></textarea>
+                        <textarea class="form-control" ng-model="company.ideal_dev" ng-required="required"></textarea>
                     </div>
                 </div>
             </div>
@@ -141,10 +141,10 @@
         <div class="form-group well well-lg">
             <div class="col-md-3 col-md-offset-2 ">
                 <button class="btn btn-info btn-lg center-block" ng-click="cancel(company)">Save for Later</button>
-            </div> 
+            </div>
             <div class="col-md-3 col-md-offset-2 ">
                 <button type="submit" class="btn btn-success btn-lg center-block" ng-click="apply(company)">Submit Now</button>
-            </div> 
+            </div>
         </div>
     </fieldset>
 </form>

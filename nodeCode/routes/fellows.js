@@ -85,19 +85,19 @@ function sleep(time) {
 }
 
 
-app.get('/', getAccepted);
+app.get('/', Middleware.isLoggedIn, getAccepted);
 
-app.get('/unaccepted', getUnnaccepted);
+app.get('/unaccepted', Middleware.isAdmin, getUnnaccepted);
 
-app.get('/profile/:user_id', getProfileByID);
+app.get('/profile/:user_id', Middleware.isLoggedIn, getProfileByID);
 
-app.put('/profile/:user_id', putProfileById)
+app.put('/profile/:user_id', Middleware.isOwnerOrAdmin, putProfileByID);
 
-app.get('/application/:user_id', getApplicationByID);
+app.get('/application/:user_id', Middleware.isOwnerOrAdmin, getApplicationByID);
 
-app.put('/application/:user_id', putApplicationById);
+app.put('/application/:user_id', Middleware.isOwnerOrAdmin, putApplicationByID);
 
-
+app.put('/application/submit/:user_id', Middleware.isOwnerOrAdmin, putSubmitApplicationByID);
 
 
 
@@ -110,9 +110,9 @@ function getAccepted(req, res) {
             {
                 model: Users,
                 attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                    'id', 'email', 'userType', 'vote_enabled', 'application_state', 'profile_enabled'
                 ],
-                where: { accepted: 1 },
+                where: { application_state: 2 },
                 required: true,
                 include: [
                      {
@@ -146,10 +146,10 @@ function getUnnaccepted(req, res) {
         include: [
             {
                 model: Users,
-                where: { accepted: 0 },
+                where: { application_state: 1 },
                 required: true,
                 attributes: [
-                    'id', 'email', 'userType', 'vote_flag', 'accepted', 'enabled'
+                    'id', 'email', 'userType', 'vote_enabled', 'profile_enabled'
                 ],
             }
         ]
@@ -174,7 +174,7 @@ function getProfileByID(req, res){
         {
             model: Users,
             attributes: [
-                'id', 'email', 'userType', 'application_flag', 'profile_flag', 'vote_flag', 'accepted', 'enabled'
+                'id', 'email', 'userType', 'application_state', 'profile_enabled', 'vote_enabled', 'application_state'
             ],
             include: [
             {
@@ -197,7 +197,7 @@ function getProfileByID(req, res){
 
 
 
-function putProfileById(req, res) {
+function putProfileByID(req, res) {
 
     var thing = {};
 
@@ -299,7 +299,7 @@ function getApplicationByID(req, res){
 
 
 
-function putApplicationById(req, res) {
+function putApplicationByID(req, res) {
     var thing = {};
     thing.first_name       = req.body.first_name;
     thing.last_name        = req.body.last_name;
@@ -333,5 +333,48 @@ function putApplicationById(req, res) {
         });
 }
 
+
+function putSubmitApplicationByID(req, res) {
+    var thing = {};
+    thing.first_name       = req.body.first_name;
+    thing.last_name        = req.body.last_name;
+    thing.university       = req.body.university;
+    thing.major            = req.body.major;
+    thing.graduation       = req.body.graduation;
+    thing.gpa              = req.body.gpa;
+    thing.hometown         = req.body.hometown;
+    thing.phone            = req.body.phone;
+    thing.residentUSA      = req.body.residentUSA;
+    thing.description      = req.body.description;
+    thing.dreamjob         = req.body.dreamjob;
+    thing.resumeURL        = req.body.resumeURL;
+    thing.coolthings       = req.body.coolthings;
+    thing.referral         = req.body.referral;
+    thing.whyHF            = req.body.whyHF;
+    thing.MIimpact         = req.body.MIimpact;
+    thing.developer_type   = req.body.developer_type;
+    thing.devskills        = req.body.devskills;
+    thing.achievements     = req.body.achievements;
+    thing.involvements     = req.body.involvements;
+    thing.git_hub          = req.body.git_hub;
+    thing.comments         = req.body.git_hub;
+
+    Users.update(
+        { application_state: 1},
+        {
+            where: {id: req.params.user_id}
+        }
+    ).then(function(result){
+        Fellows.update(
+            thing,
+            {
+                where: {user_id: req.params.user_id }
+            }).then(function(result){
+                getApplicationByID(req, res);
+            });
+
+    });
+
+}
 
 module.exports = app;

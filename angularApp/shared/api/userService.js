@@ -18,6 +18,7 @@
     function User($rootScope, $http, $q) {
         var provides = {
             getVotes: getVotes,
+            getFlags: getFlags,
             createVote: createVote,
             deleteVote: deleteVote,
             create: create,
@@ -34,6 +35,11 @@
             isUserFellow: isUserFellow,
             isUserAccepted: isUserAccepted,
             updateLoginStatus: updateLoginStatus,
+            isUserCompany: isUserCompany,
+            setApplicationPastDue: setApplicationPastDue,
+            setVoteEnabled: setVoteEnabled,
+            setApplicationState: setApplicationState,
+            setProfileEnabled: setProfileEnabled,
             isUserCompany: isUserCompany
         };
 
@@ -51,6 +57,7 @@
          * @name getVotes
          * @desc calls the api and returns a list of votes for that user
          */
+
         function getVotes(){
             console.log(currentUser);
             return $http.get('/api/v2/votes/' + currentUser.id );
@@ -139,6 +146,26 @@
                 return true;
             }
             else return false;
+        }
+
+        function setApplicationPastDue(user, flag){
+            user.application_past_due = flag;
+            return $http.put('/api/v2/users/flags/' + user.id, user);
+        }
+
+        function setVoteEnabled(user, flag){
+            user.vote_enabled = flag;
+            return $http.put('/api/v2/users/flags/' + user.id, user);
+        }
+
+        function setApplicationState(user, state){
+            user.application_state = state;
+            return $http.put('/api/v2/users/flags/' + user.id, user);
+        }
+
+        function setProfileEnabled(user, flag){
+            user.profile_enabled = flag;
+            return $http.put('/api/v2/users/flags/' + user.id, user);
         }
 
         function getFlags(){

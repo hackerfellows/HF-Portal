@@ -127,7 +127,7 @@ app.get('/confirm-login', function (req, res) {
 
 
 // Log user out
-app.get( '/logout', function( req, res ){
+app.get( '/logout', Middleware.isOwnerOrAdmin, function( req, res ){
     req.logout();
     res.end();
 });
@@ -180,7 +180,7 @@ app.post('/create', function createUser(req, res) {
 
 
 // DELETE /users/ - Deletes a user
-app.delete('/:user_id', function (req, res) {
+app.delete('/:user_id', Middleware.isAdmin, function (req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id
@@ -242,28 +242,53 @@ app.delete('/:user_id', function (req, res) {
     });
 });
 
-
-app.put('/flags', function putFlags(req, res) {
-    console.log("put user/flags");
-    res.status(501).json({success: false, error: "Not Implemented"});
-});
-app.put('/flags/:user_id', function putFlagsByID(req, res) {
+app.put('/flags/:user_id', Middleware.isAdmin, function putFlagsByID(req, res) {
     console.log("put user/flags/" + req.params.user_id);
-    res.status(501).json({success: false, error: "Not Implemented"});
-});
-app.get('/flags/:user_id', function getFlagsByID(req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id
         },
-        attributes: ['accepted', 'enabled', 'vote_flag']
+    }).then(function(user) {
+        
+        var flagsSet = {};
+        if (req.body.hasOwnProperty("application_past_due")) {
+            user.application_past_due = req.body.application_past_due;
+            flagsSet.application_past_due = true;
+        }
+        if (req.body.hasOwnProperty("vote_enabled")) {
+            user.vote_enabled = req.body.vote_enabled;
+            flagsSet.vote_enabled = true;
+        }
+        if (req.body.hasOwnProperty("application_state")) {
+            user.application_state = req.body.application_state;
+            flagsSet.application_state = true;
+        }
+        if (req.body.hasOwnProperty("profile_enabled")) {
+            user.profile_enabled = req.body.profile_enabled;
+            flagsSet.profile_enabled = true;
+        }
+        if (Object.keys(flagsSet).length > 0) {
+            user.save();
+            res.json({success: true, data: flagsSet});
+        } else {
+            res.status(400).json({success: false, error: 'No Flags Passed'});
+        }
+    });
+
+});
+app.get('/flags/:user_id', Middleware.isAdmin, function getFlagsByID(req, res) {
+    Users.findOne({
+        where: {
+            id: req.params.user_id
+        },
+        attributes: ['application_past_due', 'vote_enabled', 'application_state', 'profile_enabled']
     }).then(function(user) {
         res.json({success: user !== null, data: user});
     });
 });
 
 //This is after flags because put /flags was interpreted as flags as user_id
-app.put('/:user_id', function putUser(req, res) {
+app.put('/:user_id', Middleware.isAdmin, function putUser(req, res) {
     Users.findOne({
         where: {
             id: req.params.user_id

@@ -27,13 +27,14 @@
             updateProf: updateProf,
             destroy: destroy,
             getApplication: getApplication,
+            submitApplication: submitApplication,
             updateApplication: updateApplication,
-            getApplicants: getApplicants 
+            getApplicants: getApplicants
         };
 
         /**
          * @name all
-         * @desc get all the fellows/companies along with their user account 
+         * @desc get all the fellows/companies along with their user account
                  info (email)
          */
         function getAll(type) {
@@ -54,6 +55,9 @@
             return $http.get('/api/v2/' + type + '/application/' + User.getCurrentUser().id);
         }
 
+        function submitApplication(user, type) {
+            return $http.put('/api/v2/' + type + '/application/submit/' + User.getCurrentUser().id, user);
+        }
         function updateApplication(user, type) {
             return $http.put('/api/v2/' + type + '/application/' + User.getCurrentUser().id, user);
         }
@@ -81,7 +85,7 @@
         }
 
         /**
-         * @name getApplicants 
+         * @name getApplicants
          * @desc gets unaccepted applicants
          */
         function getApplicants(type) {

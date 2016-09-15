@@ -27,7 +27,7 @@
         if (urlEntity === "fellows") {
             $scope.whichEntity = "fellow";
             $scope.whichEntityPlural = "fellows";
-            
+
         } else if (urlEntity === "companies") {
             $scope.whichEntity = "company";
             $scope.whichEntityPlural = "companies";
@@ -74,7 +74,7 @@
         }
 
         $scope.update = function(entityObject){
-            console.log("call API for fellow"); 
+            console.log("call API for fellow");
 
             Entities.updateProf(entityObject, $scope.whichEntityPlural).then(function(result) {
                 console.log("did we do it");
@@ -83,13 +83,13 @@
                 //     //NOOOOOO :(
                 // } else {
                     console.log(":D", result);
-                    fetchData();      
-                // } 
+                    fetchData();
+                // }
                 }, function(err) {
                     console.log("OMG YOU IDIOT", err);
 
                 }
-            );                
+            );
         }
 
         // $scope.updateCompany = function(){

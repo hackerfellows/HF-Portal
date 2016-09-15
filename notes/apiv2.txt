@@ -8,20 +8,24 @@ All other calls need user level authentication
 /api/v2/fellows
 fellows
     /
-	GET:	get all acceptef fellows' profile information
+	GET:	get all accepted fellows' profile information
 
     /unaccepted
-	GET:	get all unaccepted fellows' application info
+	GET:+	get all unaccepted fellows' application info
 
     /profile/:user_id
 	GET:	get one fellow's profile information
-	PUT:	udpate one fellow's profile information
+		(flaw - can get unaccepted user's information by guessing user_id)
+	PUT:$	udpate one fellow's profile information
 		if updating tags, do not trust return data -
 		make a GET call afterwards, weird async stuff
 
     /application/:user_id
-	GET:	get one fellow's application
-	PUT:	update one fellow's application
+	GET:$	get one fellow's application
+	PUT:$	update one fellow's application
+
+    /applicatoin/submit/:user_id
+	PUT:$	updates one fellow's application and sets application flag to applied
 
 
 /api/v2/companies
@@ -30,17 +34,20 @@ fellows
 	GET:	get all accepted companies' profile information
 
     /unaccepted
-	GET:	get all unaccepted companies' application info
+	GET:+	get all unaccepted companies' application info
 
     /profile/:user_id
 	GET:	get one company's profile information
-	PUT:	udpate one company's profile information
+	PUT:$	udpate one company's profile information
 		if updating tags, do not trust return data -
 		make a GET call afterwards, weird async stuff
 
     /application/:user_id
-	GET:	get one company's application
-	PUT:	update one company's application
+	GET:$	get one company's application
+	PUT:$	update one company's application
+
+    /applicatoin/submit/:user_id
+	PUT:$	updates one company's application and sets application flag to applied
 
 
 /api/v2/tags
@@ -77,7 +84,7 @@ no one knows what these do right now, probably for profile stuff
 	DEL:+	deletes a user
 
     /flags/
-	PUT:	set single flag for all fellows
+	PUT:+	set single flag for all fellows
 		flags are: application, profile, vote, accepted, enabled
 		values are: 0, 1
 		example:
@@ -87,6 +94,6 @@ no one knows what these do right now, probably for profile stuff
 		}
 
     /flags/:user_id
-	GET:	See all flags for that user
-	PUT:	set single flag for one fellow
+	GET:+	See all flags for that user
+	PUT:+	set single flag for one fellow
 		see /set_flag for flags, values, and example

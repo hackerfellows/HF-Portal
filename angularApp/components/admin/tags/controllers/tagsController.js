@@ -37,7 +37,7 @@
         $scope.editTag = function( tag ){
 
             // show modal with tag
-           
+
             var modalInstance = $uibModal.open({
                 backdrop: false,
                 templateUrl: 'components/admin/tags/partials/edit-tag-form.html',
@@ -52,7 +52,7 @@
 
             });
 
-            
+
             // show success/failure
             return false;
         };
@@ -77,12 +77,12 @@
     }
 
 
-  
+
     angular
         .module('app.tags.controllers')
         .controller('EditTagsModalInstanceController', EditTagsModalInstanceController);
 
-    console.log("before modal inject call"); 
+    console.log("before modal inject call");
     EditTagsModalInstanceController.$inject = ['$scope', '$uibModalInstance', 'tag', 'Tags', '$uibModal' ];
     console.log("after modal inject call");
     function EditTagsModalInstanceController ($scope, $uibModalInstance, tag, Tags) {
@@ -109,5 +109,5 @@
             $uibModalInstance.dismiss('cancel');
         };
     }
-   
+
 })();

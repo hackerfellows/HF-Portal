@@ -125,7 +125,7 @@
   angular
     .module('app.tags.services', []);
   //End admin-tags
- 
+
   //admin-users
   angular
     .module('app.adminUsers', [

@@ -11,9 +11,9 @@
 
 
      function Placeholder($http) {
-       console.log("in admin service"); 
-       
+       console.log("in admin service");
+
        return 0;
-       
+
      }
 })();

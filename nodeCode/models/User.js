@@ -7,17 +7,20 @@
             userType:   { type: DataTypes.STRING, allowNull: false },
             password:     { type: DataTypes.STRING, allowNull: false },
 
-            application_flag: { type: DataTypes.INTEGER, defaultValue: 0 },
-            profile_flag: { type: DataTypes.INTEGER, defaultValue: 0 },
-            vote_flag: { type: DataTypes.INTEGER, defaultValue: 0 },
-            accepted: {
-                type: DataTypes.INTEGER,
-                 defaultValue: 0
-            },
-            enabled: {
+            application_past_due: { type: DataTypes.INTEGER, defaultValue: 0 },
+            vote_enabled: { type: DataTypes.INTEGER, defaultValue: 0 },
+            application_state: { type: DataTypes.INTEGER, defaultValue: 0 },
+               /* 4 application states:
+                *   IN_PROGRESS 0,
+                *   APPLIED 1,
+                *   ACCEPTED 2,
+                *   REJECTED 3
+                */
+            profile_enabled: {
                 type: DataTypes.INTEGER,
                 defaultValue: 1
             }
+             
 
         },
         {

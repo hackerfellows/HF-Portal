@@ -7,74 +7,249 @@
     <div class="modal-body box-modal" ng-init="init()" ng-show='isApplicantFellow'>
         <div class="form-group">
             <label>First Name</label>
-            <input type="text" ng-model="applicant.first_name" name="first_name" class="form-control" />
+            <input type="text" ng-model="applicant.first_name" ng-readonly="true" name="first_name" class="form-control" />
         </div>
 
         <div class="form-group">
             <label>Last Name</label>
-            <input type="text" ng-model="applicant.last_name" name="last_name" class="form-control" />
+            <input type="text" ng-model="applicant.last_name" ng-readonly="true" name="last_name" class="form-control" />
         </div>
 
         <div class="form-group">
             <label>Email</label>
-            <input type="text" ng-model="applicant.email" name="email" class="form-control" />
+            <input type="text" ng-model="applicant.email" ng-readonly="true" name="email" class="form-control" />
         </div>
 
         <div class="form-group">
             <label>University</label>
-            <input type="text" ng-model="applicant.university" name="school" class="form-control" />
+            <input type="text" ng-model="applicant.university" ng-readonly="true" name="school" class="form-control" />
         </div>
 
         <div class="form-group">
             <label>Bio</label>
-            <input type="text" ng-model="applicant.bio" name="bio" class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label>Answer</label>
-            <input type="text" ng-model="applicant.answer" name="answer" class="form-control" />
+            <textarea type="text" ng-model="applicant.bio" ng-readonly="true" name="bio" class="form-control" rows="3"/>
         </div>
 
         <div class="form-group">
             <label>Major</label>
-            <input type="text" ng-model="applicant.major" name="major" class="form-control" />
-        </div>
-
-    </div>
-    <div class="modal-body box-modal" ng-init="init()" ng-show="isApplicantCompany">
-        <div class="form-group">
-            <label>Company Name</label>
-            <input type="text" ng-model="applicant.name" name="name" class="form-control" />
+            <input type="text" ng-model="applicant.major" ng-readonly="true" name="major" class="form-control" />
         </div>
 
         <div class="form-group">
-            <label>Primary Contact</label>
-            <input type="text" ng-model="applicant.primary_contact" name="contanct" class="form-control" />
+            <label>Graduation</label>
+            <input type="text" ng-model="applicant.graduation" ng-readonly="true" name="graduation" class="form-control" />
         </div>
 
         <div class="form-group">
-            <label>Size</label>
-            <input type="text" ng-model="applicant.company_size" name="size" class="form-control" />
+            <label>GPA</label>
+            <input type="text" ng-model="applicant.gpa" ng-readonly="true" name="gpa" class="form-control" />
         </div>
 
         <div class="form-group">
-            <label>Industry</label>
-            <input type="text" ng-model="applicant.industry" name="industry" class="form-control" />
+            <label>Hometown</label>
+            <input type="text" ng-model="applicant.hometown" ng-readonly="true" name="hometown" class="form-control" />
         </div>
 
         <div class="form-group">
-            <label>Location</label>
-            <input type="text" ng-model="applicant.location" name="location" class="form-control" />
+            <label>Phone</label>
+            <input type="text" ng-model="applicant.phone" ng-readonly="true" name="phone" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Resident USA</label>
+            <input type="text" ng-model="applicant.residentUSA" ng-readonly="true" name="residentUSA" class="form-control" />
         </div>
 
         <div class="form-group">
             <label>Description</label>
-            <input type="text" ng-model="applicant.description" name="description" class="form-control" />
+            <textarea type="text" ng-model="applicant.description" ng-readonly="true" name="description" class="form-control" rows="3" />
         </div>
-        
+
+        <div class="form-group">
+            <label>Dream Job</label>
+            <textarea type="text" ng-model="applicant.dreamjob" ng-readonly="true" name="dreamjob" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Resume URL</label>
+            <input type="text" ng-model="applicant.resumeURL" ng-readonly="true" name="resumeURL" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Cool Things</label>
+            <textarea type="text" ng-model="applicant.coolthings" ng-readonly="true" name="coolthings" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Why HF?</label>
+            <textarea type="text" ng-model="applicant.whyHF" ng-readonly="true" name="whyHF" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Developer Type</label>
+            <input type="text" ng-model="applicant.developer_type" ng-readonly="true" name="developer_type" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Dev. Skills </label>
+            <input type="text" ng-model="applicant.devskills" ng-readonly="true" name="devskills" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Michigan Impact </label>
+            <textarea type="text" ng-model="applicant.MIimpact" ng-readonly="true" name="MIimpact" class="form-control" rows="3" />
+        </div>
+
+        <div class="form-group">
+            <label>Referral </label>
+            <input type="text" ng-model="applicant.referral" ng-readonly="true" name="referral" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Achievements</label>
+            <textarea type="text" ng-model="applicant.achievements" ng-readonly="true" name="achievements" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Involvements</label>
+            <textarea type="text" ng-model="applicant.involvements" ng-readonly="true" name="involvements" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Github</label>
+            <input type="text" ng-model="applicant.git_hub" ng-readonly="true" name="git_hub" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Comments</label>
+            <textarea type="text" ng-model="applicant.comments" ng-readonly="true" name="comments" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Interests</label>
+            <textarea type="text" ng-model="applicant.interests" ng-readonly="true" name="interests" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Portfolio</label>
+            <input type="text" ng-model="applicant.portfolio" ng-readonly="true" name="portfolio" class="form-control" />
+        </div>
+    </div>
+
+
+    <div class="modal-body box-modal" ng-init="init()" ng-show="isApplicantCompany">
+        <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" ng-model="applicant.name" ng-readonly="true" name="name" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Primary Contact</label>
+            <input type="text" ng-model="applicant.primary_contact" ng-readonly="true" name="contanct" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Size</label>
+            <input type="text" ng-model="applicant.company_size" ng-readonly="true" name="size" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Industry</label>
+            <input type="text" ng-model="applicant.industry" ng-readonly="true" name="industry" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Map URL</label>
+            <input type="text" ng-model="applicant.map_url" ng-readonly="true" name="map_url" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea type="text" ng-model="applicant.description" ng-readonly="true" name="description" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" ng-model="applicant.city" ng-readonly="true" name="city" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Bio</label>
+            <textarea type="text" ng-model="applicant.bio" ng-readonly="true" name="bio" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Developer Type</label>
+            <input type="text" ng-model="applicant.developer_type" ng-readonly="true" name="developer_type" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Website URL</label>
+            <input type="text" ng-model="applicant.website_url" ng-readonly="true" name="website_url" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Contanct Email</label>
+            <input type="text" ng-model="applicant.contact_email" ng-readonly="true" name="contact_email" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Contact Phone</label>
+            <input type="text" ng-model="applicant.contact_phone" ng-readonly="true" name="contact_phone" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Logo URL</label>
+            <input type="text" ng-model="applicant.logo_url" ng-readonly="true" name="logo_url" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <input type="text" ng-model="applicant.age" ng-readonly="true" name="age" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Value Prop.</label>
+            <textarea type="text" ng-model="applicant.value_prop" ng-readonly="true" name="value_prop" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Why HF?</label>
+            <textarea type="text" ng-model="applicant.whyHF" ng-readonly="true" name="whyHF" class="form-control" rows="3"/>
+        </div>
+
+        <div class="form-group">
+            <label>Dev Needs</label>
+            <input type="text" ng-model="applicant.devneeds0" ng-readonly="true" name="devneeds0" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Dev Needs</label>
+            <input type="text" ng-model="applicant.devneeds1" ng-readonly="true" name="devneeds1" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Dev Needs</label>
+            <input type="text" ng-model="applicant.devneeds2" ng-readonly="true" name="devneeds2" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Dev Needs</label>
+            <input type="text" ng-model="applicant.devneeds3" ng-readonly="true" name="devneeds3" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Dev Needs</label>
+            <input type="text" ng-model="applicant.devneeds4" ng-readonly="true" name="devneeds4" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Dev Needs</label>
+            <input type="text" ng-model="applicant.devneeds5" ng-readonly="true" name="devneeds5" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Ideal Dev</label>
+            <textarea type="text" ng-model="applicant.ideal_dev" ng-readonly="true" name="ideal_dev" class="form-control" rows="3"/>
+        </div>
     </div>
 
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="cancel()">Back</button>
     </div>
-

@@ -31,7 +31,7 @@
             {   first_name: "a",
                 last_name: "b",
                 email: "c"
-            },  
+            },
             {   first_name: "a",
                 last_name: "b",
                 email: "c"
@@ -53,9 +53,9 @@
          */
         function all(){
 
-                    
 
-           
+
+
             return temp;
         }
 

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="assets/css/votes.css" type="text/css"/>
 <div class="profile votes">
 
   <h1>Your Top Fellows:</h1>
@@ -12,16 +13,13 @@
       <table class="table table-striped" >
         <tr ng-repeat="vote in votes">
           <td>
-            <a class="name" ng-href="/#/fellows/{{ vote.Votee.fellow.id }}/{{ helpers.slugify(
-            vote.Votee.fellow.first_name + 
-            ' ' +
-            vote.Votee.fellow.last_name + 
-            )}}">
-              {{ vote.Votee.fellow.name }}
+            <a class="name" ng-href="/#/fellows/{{ vote.Votee.fellow.id }}/{{ helpers.slugify(vote.Votee.fellow.first_name + ' ' + vote.Votee.fellow.last_name )}}">
+              {{ vote.Votee.fellow.first_name }}
+              {{ vote.Votee.fellow.last_name }}
             </a>
           </td>
           <td>
-            <a class="btn btn-xs label-danger" ng-click="removeVote(vote)"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+            <a class="btn btn-xs label-danger remove-vote" ng-click="removeVote(vote)"><span class="glyphicon glyphicon-remove"></span> </a>
           </td>
         </tr>
       </table>

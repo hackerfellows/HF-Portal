@@ -37,6 +37,8 @@
 
         initFormData();
 
+        $scope.required = true;
+
         function initFormData() {
             Entities.getApplication(User.getCurrentUser(), "fellows").then(function(thing) {
                 $scope.fellow = thing.data.data;
@@ -45,8 +47,16 @@
             });
         }
 
-        $scope.apply = function(fellow) {
+        $scope.save = function(fellow) {
+            $scope.required = false;
             Entities.updateApplication(fellow, "fellows");
+            showToastSuccess("Progress saved for future submission");
+        };
+
+        $scope.apply = function(fellow) {
+            $scope.required = true;
+            Entities.submitApplication(fellow, "fellows");
+            // TODO: set Application submitted flag
             showToastSuccess("Application submitted");
         };
         $scope.cancel = function(fellow) {

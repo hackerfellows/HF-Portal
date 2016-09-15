@@ -1,6 +1,6 @@
 /*  File name:      profileGridTileDirective.js
     Author:         Jessica Wu, Michael Baldwin
-    Description:    Declares the profile grid tile directive to be used in 
+    Description:    Declares the profile grid tile directive to be used in
                     profileGrid.html
 */
 
