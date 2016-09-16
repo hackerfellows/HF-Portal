@@ -1,14 +1,9 @@
 # HF-Portal
-[Hacker Fellows](http://www.hackerfellows.com/#/) 2016 Portal
-Hacker Fellows is a one-year fellowship program where recent computer science 
-college graduates work as a developer at a Michigan start-up. Hacker Fellows 
-connects fellows to startups and the portal facilitates this matchmaking 
-process between fellows and startups.
+[Hacker Fellows](http://www.hackerfellows.com) 2016 Portal
 
-## Project Status
-- [Trello Board](https://trello.com/b/Zb5nsiKY/hacker-fellows-final-project#)
+## About
+Hacker Fellows is a fellowship program that connects recent computer science 
+college graduates to Michigan startups. The Hacker Fellows Portal helps facilitate 
+the matchmaking process between fellows and startups.
 
-## Contributing
-- [Getting Started](notes/GettingStarted.md)
-- [File Structure](notes/FileLayout.md)
-- [Running the Application](notes/Running.md)
+## [Project Status](https://github.com/hackerfellows/HF-Portal/projects)
